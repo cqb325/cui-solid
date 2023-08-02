@@ -1,0 +1,37 @@
+.cm-breadcrumb {
+    color: var(--cui-color-text-0);
+    display: flex;
+    align-items: center;
+    .cm-breadcrumb-wrap {
+        display: inline-flex;
+        align-items: center;
+    }
+    .cm-breadcrumb-item {
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+            color: var(--cui-color-primary-hover);
+        }
+    }
+    a{
+        color: var(--cui-color-text-0);
+      cursor: pointer;
+    }
+    .cm-breadcrumb-item a {
+        display: inline-flex;
+        align-items: center;
+    }
+    .cm-breadcrumb-separator{
+      margin: 0 8px;
+      color: #d9d9d9;
+      height: 100%;
+    }
+    & > span:last-child{
+        .cm-breadcrumb-item {
+            font-weight: 700;
+        }
+        .cm-breadcrumb-separator {
+            display: none;
+        }
+    }
+  }

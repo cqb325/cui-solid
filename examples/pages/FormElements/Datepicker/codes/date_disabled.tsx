@@ -1,0 +1,1 @@
+export default `<Datepicker disabled/>`

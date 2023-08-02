@@ -1,0 +1,198 @@
+#cm-notice-portal {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.cm-notification-box{
+    position: fixed;
+    z-index: 1500;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cm-notification-top-right{
+    right: 24px;
+    top: 24px;
+}
+.cm-notification-bottom-right{
+    right: 24px;
+    bottom: 24px;
+}
+
+.cm-notification-bottom-left{
+    left: 24px;
+    bottom: 24px;
+}
+.cm-notification-top-left{
+    left: 24px;
+    top: 24px;
+}
+
+.cm-notification-item{
+    border-radius: var(--cui-border-radius-small);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    background: #fff;
+    line-height: 1.5;
+    position: relative;
+    opacity: 0;
+    transition: all 0.25s linear;
+    &.cm-notification-item-open {
+        opacity: 1;
+    }
+    &.cm-notification-item-close{
+        overflow: hidden;
+    }
+}
+.cm-notification-item-open{
+    .cm-notification-item-wrap {
+        padding: 16px;
+        max-height: 100vh;
+    }
+}
+.cm-notification-item-wrap{
+    max-height: 0;
+    display: flex;
+    transition: all 0.25s linear;
+}
+.cm-notification-head{
+    font-size: 13px;
+    color: rgba(0,0,0,.85);
+    margin-bottom: 4px;
+    line-height: 20px;
+    display: inline-block;
+    font-weight: 700;
+}
+.cm-notification-body{
+    font-size: 12px;
+}
+.cm-notification-close{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.cm-notification-bottom-right,
+.cm-notification-top-right{
+    .cm-notification-item{
+        right: -325px;
+        &.cm-notification-item-open{
+            right: 0;
+        }
+        &.cm-notification-item-close{
+            transform: translate(0, -50px);
+            opacity: 0;
+            .cm-notification-item-wrap{
+                max-height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+}
+
+.cm-notification-bottom-left,
+.cm-notification-top-left{
+    .cm-notification-item{
+        left: -325px;
+        &.cm-notification-item-open{
+            left: 0;
+        }
+        &.cm-notification-item-close{
+            transform: translate(0, -50px);
+            opacity: 0;
+            .cm-notification-item-wrap{
+                max-height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+}
+
+.cm-notification-bottom-left,
+.cm-notification-bottom-right {
+    .cm-notification-item {
+        &.cm-notification-item-close{
+            transform: translate(0, 50px);
+        }
+    }
+}
+
+
+.cm-notification-icon{
+    width: 40px;
+    position: absolute;
+    font-size: 24px;
+    color: var(--cui-primary-color);
+    .cm-icon-check-circle{
+        color: var(--cui-success-color);
+    }
+    .cm-icon-alert-circle{
+        color: var(--cui-warning-color);
+    }
+    .cm-icon-x-circle{
+        color: var(--cui-error-color);
+    }
+    .cm-icon{
+        font-size: 30px!important;
+    }
+}
+.cm-notification-item-width-icon {
+    .cm-notification-content{
+        padding-left: 40px;
+    }
+}
+
+.cm-notification-btn-wrap{
+    margin-top: 5px;
+    display: block;
+    text-align: right;
+}
+
+.cm-notification-item-info{
+    background: rgb(var(--cui-blue-0));
+    box-shadow: 0 0 2px 1px rgba(var(--cui-blue-5), 0.5);
+    .cm-notification-head,
+    .cm-notification-item-wrap,
+    .cm-icon{
+        color: var(--cui-primary-color);
+    }
+}
+.cm-notification-item-success{
+    background: rgb(var(--cui-green-0));
+    box-shadow: 0 0 2px 1px rgba(var(--cui-green-5), 0.5);
+    .cm-notification-head,
+    .cm-notification-item-wrap,
+    .cm-icon{
+        color: var(--cui-success-color);
+    }
+}
+.cm-notification-item-warning{
+    background: rgb(var(--cui-yellow-0));
+    box-shadow: 0 0 2px 1px rgba(var(--cui-yellow-5), 0.5);
+
+    .cm-notification-head,
+    .cm-notification-item-wrap,
+    .cm-icon{
+        color: var(--cui-warning-color);
+    }
+}
+.cm-notification-item-error{
+    background: rgb(var(--cui-red-0));
+    box-shadow: 0 0 2px 1px rgba(var(--cui-red-5), 0.5);
+    .cm-notification-head,
+    .cm-notification-item-wrap,
+    .cm-icon{
+        color: var(--cui-error-color);
+    }
+}
+
+.cm-notification-content{
+    flex: 1;
+}

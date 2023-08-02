@@ -1,0 +1,24 @@
+type SelectOptions = {
+    name?: string;
+    value?: any;
+    disabled?: boolean;
+    size?: 'small' | 'large';
+    clearable?: boolean;
+    prefix?: any;
+    style?: any;
+    data?: Array<any>;
+    textField?: string;
+    valueField?: string;
+    class?: any;
+    classList?: any;
+    filter?: boolean;
+    renderOption?: Function;
+    ref?: any;
+    emptyOption?: any;
+    onChange?: Function;
+    onSearch?: Function;
+    transfer?: boolean;
+    align?: 'bottomLeft' | 'bottomRight';
+};
+export declare function AutoComplete(props: SelectOptions): import("solid-js").JSX.Element;
+export {};

@@ -1,0 +1,60 @@
+.cm-form-inline {
+    display: inline-block;
+}
+.cm-form-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 24px;
+    .cm-tooltip {
+        flex: 1;
+        display: flex;
+        .cm-tooltip-rel {
+            flex: 1;
+        }
+    }
+}
+.cm-form-item-inline {
+    display: inline-flex;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    .cm-form-label {
+        align-self: baseline;
+    }
+}
+.cm-form-item-required {
+    .cm-form-label {
+        &::before {
+            content: "*";
+            display: inline-block;
+            margin-right: 4px;
+            font-family: SimSun;
+            color: var(--cui-error-color);
+        }
+    }    
+}
+.cm-form-label{
+    display: flex;
+    height: 0;
+    align-self: baseline;
+    line-height: 0px;
+    justify-content: end;
+    margin-right: 5px;
+}
+.cm-form-item-element {
+    flex: 1;
+    position: relative;
+}
+.cm-form-item-error-tip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    line-height: 1;
+    padding-top: 2px;
+    color: var(--cui-error-color);
+    font-size: 12px;
+}
+&.cm-form-item-error{
+    .cm-input-wrapper{
+        border-color: var(--cui-error-color)!important;
+    }
+}

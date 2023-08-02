@@ -1,0 +1,34 @@
+import { JSXElement } from "solid-js";
+type DatepickerProps = {
+    classList?: any;
+    class?: any;
+    style?: any;
+    disabled?: boolean;
+    theme?: 'light' | 'dark';
+    size?: 'small' | 'large';
+    clearable?: boolean;
+    type?: 'dateRange' | 'monthRange' | 'month' | 'dateTime' | 'dateTimeRange';
+    align?: 'bottomLeft' | 'bottomRight';
+    format?: string;
+    value?: string | Date | string[] | Date[] | Function[];
+    prepend?: string | JSXElement;
+    header?: string | JSXElement | string[] | JSXElement[];
+    footer?: string | JSXElement | string[] | JSXElement[];
+    seperator?: string;
+    transfer?: boolean;
+    trigger?: Function;
+    disabledDate?: Function;
+    onChange?: Function;
+    maxRange?: number;
+    shortCuts?: Function | JSXElement;
+    revers?: boolean;
+    stick?: boolean;
+};
+export type DatepickerStore = {
+    currentMonth: Date[];
+    range: Date[];
+    hoverDate?: Date;
+};
+export declare function Datepicker(props: DatepickerProps): import("solid-js").JSX.Element;
+export declare const useDatepickerContext: () => unknown;
+export {};

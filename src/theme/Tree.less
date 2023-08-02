@@ -1,0 +1,125 @@
+.cm-tree {
+    line-height: 1.5;
+}
+.cm-tree-nodes,
+.cm-tree-item{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.cm-tree-item{
+    white-space: nowrap;
+    margin: 5px 0;
+}
+.cm-tree > .cm-tree-nodes{
+    display: block;
+    max-height: none;
+}
+.cm-tree-nodes{
+    display: none;
+    // max-height: 0px;
+    overflow-y: hidden;
+    transition: all 0.25s ease-in-out;
+}
+.cm-tree-item-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cm-tree-title{
+    flex: 1;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cm-tree-text{
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 2px;
+    color: var(--cui-color-text-1);
+    transition: all 0.25s ease-in-out;
+    &:hover{
+        background: var(--cui-color-fill-1);
+    }
+}
+.cm-tree-patch {
+    flex: 1;
+}
+.cm-tree-title.disabled {
+    .cm-tree-text{
+        color: var(--cui-color-disabled-text);
+        &:hover{
+            background: transparent;
+        }
+    }
+}
+.cm-tree-item-file,
+.cm-tree-item-folder{
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    display: inline-block;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center 40%;
+}
+.cm-tree-item-folder{
+    background-image: url('./imgs/folderClosed.gif');
+}
+.cm-tree-item-file{
+    background-image: url('./imgs/leaf.gif');
+}
+.cm-tree-arrow{
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    display: inline-block;
+    background-color: transparent;
+    // background-image: url('./imgs/arrow_right.svg');
+    // background-size: 100%;
+    // background-repeat: no-repeat;
+    // background-position: center 40%;
+    transition: all 0.25s ease-in-out;
+    svg {
+        width: 12px;
+        height: 12px;
+        fill: var(--cui-color-text-1);
+    }
+    &.hide{
+        visibility: hidden;
+    }
+}
+.cm-tree-item-open{
+    >.cm-tree-item-content{
+        .cm-tree-item-folder {
+            background-image: url('./imgs/folderOpen.gif');
+        }
+        .cm-tree-arrow{
+            transform: rotate(90deg);
+            // background-image: url('./arrow_down.svg');
+        }
+    }
+    >.cm-tree-nodes{
+        display: block;
+    }
+}
+.cm-tree-nodes-visible.cm-tree-nodes{
+    display: block;
+}
+// .cm-tree-nodes-open.cm-tree-nodes{
+    
+// }
+
+.cm-tree-item-selected{
+    >.cm-tree-item-content{
+        .cm-tree-text{
+            background: var(--cui-color-fill-1);
+        }
+    }
+}
+.cm-tree {
+    .cm-checkbox{
+        margin-right: 0;
+    }
+}

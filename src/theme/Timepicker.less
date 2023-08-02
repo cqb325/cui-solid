@@ -1,0 +1,161 @@
+.cm-time-picker {
+    display: inline-flex;
+    width: 100%;
+    &:focus-within,
+    &:hover {
+        .cm-field-value {
+            border-color: var(--cui-color-primary);
+            -webkit-box-shadow: 0 0 0 2px rgb(45 140 240 / 20%);
+            box-shadow: 0 0 0 2px rgb(45 140 240 / 20%);
+        }
+        .cm-field-disabled {
+            border-color: var(--cui-color-disabled-border);
+            background-color: var(--cui-color-disabled-bg);
+            box-shadow: none;
+            color: var(--cui-color-disabled-text);
+        }
+    }
+}
+
+.cm-time-picker-wrap {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--cui-color-bg-3);
+}
+.cm-time-picker-pane:first-child {
+    .cm-time-picker-cell:last-child {
+        border-right: 1px solid var(--cui-default-border);
+    }
+}
+.cm-time-picker-options{
+    display: inline-flex;
+    flex-direction: row;
+    &:after{
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.cm-time-picker-cell{
+    width: 56px;
+    max-height: 182px;
+    float: left;
+    overflow: hidden;
+    border-left: 1px solid var(--cui-default-border);
+    position: relative;
+    scroll-behavior: smooth;
+    ul{
+        width: 100%;
+        margin: 0;
+        padding: 0 0 156px;
+        list-style: none;
+        li{
+            width: 100%;
+            height: 26px;
+            line-height: 26px;
+            margin: 0;
+            box-sizing: content-box;
+            text-align: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            list-style: none;
+            transition: background .2s ease-in-out;
+        }
+    }
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    &:hover{
+        overflow-y: auto;
+    }
+}
+.cm-time-picker-cell ul li:hover{
+    background: var(--cui-color-fill-0);
+}
+.cm-time-picker-cell:first-child{
+    border-left: 0;
+    border-radius: var(--cui-border-radius-small) 0 0 var(--cui-border-radius-small);
+}
+.cm-time-picker-item-active{
+    // color: var(--cui-primary-color-active);
+    background: var(--cui-color-primary-light-hover);
+}
+.cm-time-picker-item-disabled{
+    color: var(--cui-color-disabled-text);
+    cursor: not-allowed!important;
+    background: transparent!important;
+}
+
+.cm-time-picker-clearable:hover{
+    .cm-time-picker-clear{
+        display: inline-block;
+    }
+    .cm-time-picker-cert{
+        display: none;
+      }
+}
+.cm-time-picker-text-placeholder{
+    color: var(--cui-color-disabled-text);
+}
+
+.cm-time-picker-prepend{
+    padding: 4px 8px;
+    font-size: inherit;
+    font-weight: 400;
+    color: var(--cui-color-text-1);
+    text-align: center;
+    background-color: var(--cui-color-fill-1);
+    border-radius: var(--cui-border-radius-small);
+    white-space: nowrap;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-left: -6px;
+}
+
+.cm-time-picker-disabled{
+    &:focus-within .cm-time-picker-value,
+    &:hover .cm-time-picker-value,
+    .cm-time-picker-value{
+        border-color: var(--cui-color-disabled-border);
+        background-color: #f3f3f3;
+        opacity: 1;
+        cursor: not-allowed;
+        color: #ccc;
+    }
+    .cm-time-picker-value:focus{
+        border-color: var(--cui-color-disabled-border);
+    }
+}
+.cm-time-picker-footer,
+.cm-time-picker-header {
+    padding: 10px;
+}
+.cm-time-picker-header {
+    border-bottom: 1px solid var(--cui-default-border);
+    text-align: center;
+}
+.cm-time-picker-footer {
+    border-top: 1px solid var(--cui-default-border);
+}
+.cm-time-picker-small {
+    .cm-time-picker-value {
+        height: 24px;
+        .cm-time-picker-text {
+            font-size: 12px;
+        }
+    }
+}
+.cm-time-picker-large {
+    .cm-time-picker-value {
+        height: 40px;
+        .cm-time-picker-text {
+            height: 40px;
+            line-height: 40px;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+export type TreeProps = {
+    classList?: any;
+    class?: string;
+    style?: any;
+    data?: any[];
+    onSelect?: Function;
+    opened?: any[];
+    selected?: string | number | Function[];
+    ref?: any;
+    gutter?: number;
+    value?: any[];
+    multi?: boolean;
+    directory?: boolean;
+    onChange?: Function;
+    loadData?: Function;
+    onContextMenu?: Function;
+    contextMenu?: any;
+    onSelectMenu?: Function;
+    checkRelation?: 'related' | 'unRelated';
+};
+export declare function Tree(props: TreeProps): import("solid-js").JSX.Element;
+export declare const useTreeContext: () => unknown;

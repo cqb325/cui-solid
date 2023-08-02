@@ -1,0 +1,24 @@
+.cm-loading-bar {
+    width: 100%;
+    height: 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    display: none;
+}
+.cm-loading-bar-inner {
+    -webkit-transition: width .2s linear;
+    transition: width .2s linear;
+    height: 100%;
+}
+.cm-loading-bar-show {
+    display: block;
+}
+.cm-loading-bar-status-success {
+    background-color: var(--cui-primary-color);
+}
+.cm-loading-bar-status-error {
+    background-color: var(--cui-error-color);
+}

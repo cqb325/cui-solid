@@ -1,0 +1,54 @@
+.cm-button{
+    box-shadow:  3px 3px 6px #d9d9d9,-3px -3px 6px #ffffff;
+    border-color: transparent;
+    &:focus,
+    &:hover {
+        border-color: transparent;
+    }
+    &[disabled] {
+        box-shadow: none;
+    }
+    &:active {
+        &[disabled] {
+            background: var(--cui-disabled-bg-border);
+            border-color: var(--cui-default-border) !important;
+            box-shadow: none;
+        }
+        box-shadow: inset 3px 3px 6px #d9d9d9,inset -3px -3px 6px #ffffff;
+    }
+    &.cm-button-primary {
+        &:active {
+            &[disabled] {
+                background: var(--cui-disabled-bg-border);
+                border-color: var(--cui-default-border) !important;
+                box-shadow: none;
+            }
+            background: #1890ff;
+            box-shadow: inset 3px 3px 6px #147ad9,inset -3px -3px 6px #1ca6ff;
+        }
+    }
+    &.cm-button-success {
+        &:active {
+            background: #52c41a;
+            box-shadow: inset 3px 3px 6px #46a716,inset -3px -3px 6px #5ee11e;
+        }
+    }
+    &.cm-button-error {
+        &:active {
+            background: #ff4d4f;
+            box-shadow: inset 3px 3px 6px #d94143,inset -3px -3px 6px #ff595b;
+        }
+    }
+    &.cm-button-warning {
+        &:active {
+            background: #faad14;
+            box-shadow: inset 3px 3px 6px #d59311,inset -3px -3px 6px #ffc717;
+        }
+    }
+    &.cm-button-ghost {
+        box-shadow: none;
+        &:active {
+            box-shadow: none;
+        }
+    }
+}

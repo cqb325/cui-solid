@@ -1,0 +1,280 @@
+.cm-carousel {
+    display: flex;
+    position: relative;
+}
+.cm-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #dedede;
+    background-color: rgba(var(--cui-grey-8), 0.3);
+    cursor: pointer;
+    transition: all 0.2s linear;
+    display: none;
+    z-index: 10;
+    &:hover {
+        background-color: rgba(var(--cui-grey-8), 0.6);
+        color: #fff;
+    }
+    &[x-placement=left] {
+        left: 20px;
+    }
+    &[x-placement=right] {
+        right: 20px;
+    }
+}
+.cm-carousel {
+    &:hover {
+        .cm-carousel-arrow-hover {
+            display: inline-flex;
+        }
+    }
+    .cm-carousel-arrow-always {
+        display: inline-flex;
+    }
+}
+.cm-carousel-list {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+.cm-carousel-dots {
+    position: absolute;
+    list-style: none;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 8px;
+    z-index: 10;
+    left: 50%;
+    bottom: 32px;
+    transform: translate(-50%, 0);
+    margin: 0;
+    padding: 0;
+}
+.cm-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: rgba(var(--cui-grey-3), 1);
+}
+.cm-carousel-dot-active {
+    background-color: rgba(var(--cui-grey-8), 1);
+}
+.cm-carousel-dots-line {
+    .cm-carousel-dot {
+        width: 20px;
+        height: 6px;
+        border-radius: 8px;
+    }
+    .cm-carousel-dot-active {
+        width: 25px;
+        background-color: rgba(var(--cui-grey-8), 1);
+    }
+}
+.cm-carousel-dots-columnar {
+    align-items: flex-end;
+    .cm-carousel-dot {
+        width: 6px;
+        height: 16px;
+        border-radius: 8px;
+    }
+    .cm-carousel-dot-active {
+        height: 24px;
+        background-color: rgba(var(--cui-grey-8), 1);
+    }
+}
+.cm-carousel-dots-left {
+    left: 40px;
+    transform: translate(0, 0);
+}
+.cm-carousel-dots-right {
+    left: auto;
+    right: 40px;
+    transform: translate(0, 0);
+}
+.cm-carousel-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: block;
+    visibility: hidden;
+}
+.cm-carousel-item-active-fade {
+    visibility: visible;
+    opacity: 0;
+    animation: carousel-item-fade-in;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-duration: 1s;
+    z-index: 1;
+}
+.cm-carousel-item-active-init {
+    visibility: visible;
+    animation-duration: 0ms;
+}
+.cm-carousel-item-active {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    visibility: visible;
+    animation: carousel-item-keyframe-slide-in;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-duration: 300ms;
+    z-index: 1;
+}
+.cm-carousel-item-active-next {
+    visibility: visible;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    animation: carousel-item-keyframe-slide-out;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-duration: 300ms;
+}
+.cm-carousel-item-active-reverse {
+    visibility: visible;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    animation: carousel-item-keyframe-slide-in-reverse;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-duration: 300ms;
+}
+.cm-carousel-item-active-reverse-next {
+    visibility: visible;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    animation: carousel-item-keyframe-slide-out-reverse;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-duration: 300ms;
+}
+
+@-webkit-keyframes carousel-item-keyframe-slide-in {
+    0% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%)
+    }
+
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0)
+    }
+}
+
+@keyframes carousel-item-keyframe-slide-in {
+    0% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+
+@-webkit-keyframes carousel-item-keyframe-slide-in-reverse {
+    0% {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%)
+    }
+
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0)
+    }
+}
+
+@keyframes carousel-item-keyframe-slide-in-reverse {
+    0% {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    to {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes carousel-item-keyframe-slide-out {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    to {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        visibility: hidden;
+    }
+}
+
+@keyframes carousel-item-keyframe-slide-out {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    to {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        visibility: hidden;
+    }
+}
+@-webkit-keyframes carousel-item-keyframe-slide-out-reverse {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    to {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        visibility: hidden;
+    }
+}
+
+@keyframes carousel-item-keyframe-slide-out-reverse {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    to {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        visibility: hidden;
+    }
+}
+@-webkit-keyframes carousel-item-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes carousel-item-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

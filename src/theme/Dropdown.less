@@ -1,0 +1,181 @@
+#cm-dropdown-portal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+}
+.cm-dropdown {
+    display: inline-block;
+    line-height: initial;
+    position: absolute;
+    padding: 0;
+    opacity: 0;
+    z-index: -999;
+    pointer-events: none;
+    border-radius: var(--cui-border-radius-small);
+    transition: all 0.2s linear;
+    box-shadow: 0 0 1px rgba(0,0,0,0.3),0 4px 14px rgba(0,0,0,0.1);
+    > .cm-dropdown-list {
+        position: relative;
+    }
+    &.cm-dropdown-open {
+        opacity: 1;
+        pointer-events: all;
+        z-index: 1500;
+    }
+}
+
+.cm-dropdown-rel {
+    display: inline-flex;
+}
+.cm-dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: var(--cui-color-bg-3);
+    min-width: 130px;
+    border-radius: var(--cui-border-radius-small);
+    .cm-dropdown-list {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        box-shadow: 0 0 1px rgba(0,0,0,0.3),0 4px 14px rgba(0,0,0,0.1);
+        z-index: -1;
+        opacity: 0;
+        margin-left: 2px;
+        transition: all 0.2s linear;
+    }
+    .cm-divider {
+        margin: 1px 0;
+    }
+}
+.cm-dropdown-item-open {
+    > .cm-dropdown-list {
+        z-index: 1;
+        opacity: 1;
+    }
+}
+.cm-dropdown-item {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 16px;
+    clear: both;
+    color: var(--cui-color-text-0);
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    &:hover {
+        background-color: var(--cui-color-fill-0);
+        >.cm-dropdown-list {
+            z-index: 1;
+            opacity: 1;
+        }
+    }
+}
+.cm-dropdown-item-disabled {
+    color: var(--cui-color-disabled-text);
+    // background-color: var(--cui-disabled-bg-border);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.cm-dropdown-item-divided {
+    margin-top: 10px;
+    &::before {
+        content: ' ';
+        height: 1px;
+        border-top: 1px solid rgba(var(--cui-grey-1));
+        display: block;
+        margin: 0 -16px;
+        background-color: #fff;
+        position: absolute;
+        width: 100%;
+        top: -5px;
+    }
+}
+
+.cm-dropdown[x-placement=bottom] {
+    transform: translate(-50%, 0);
+    margin-top: 3px;
+}
+.cm-dropdown[x-placement=bottomLeft] {
+    margin-top: 3px;
+}
+.cm-dropdown[x-placement=bottomRight] {
+    transform: translate(-100%, 0);
+    margin-top: 3px;
+}
+.cm-dropdown[x-placement=top] {
+    transform: translate(-50%, -100%);
+    margin-top: -3px;
+}
+.cm-dropdown[x-placement=topLeft] {
+    transform: translate(0, -100%);
+    margin-top: -3px;
+}
+.cm-dropdown[x-placement=topRight] {
+    transform: translate(-100%, -100%);
+    margin-top: -3px;
+}
+.cm-popover-inner[x-placement=left] {
+    transform: translate(-100%, -50%);
+    margin-left: -3px;
+}
+.cm-popover-inner[x-placement=right] {
+    transform: translate(0, -50%);
+    margin-left: 3px;
+}
+.cm-popover-inner[x-placement=rightTop] {
+    transform: translate(0, 0);
+    margin-left: 3px;
+}
+.cm-popover-inner[x-placement=leftTop] {
+    transform: translate(-100%, 0);
+    margin-left: -3px;
+}
+.cm-dropdown[x-placement^=top] {
+    margin-top: -8px;
+}
+.cm-dropdown[x-placement^=bottom] {
+    margin-top: 8px;
+}
+.cm-popover-with-arrow[x-placement^=right] {
+    margin-left: 8px;
+}
+.cm-popover-with-arrow[x-placement^=left] {
+    margin-left: -8px;
+}
+.cm-dropdown-light {
+    .cm-dropdown-list{
+        background-color: #fff;
+    }
+}
+.cm-dropdown-dark {
+    .cm-dropdown-list{
+        background-color: rgb(var(--cui-grey-8));
+    }
+    .cm-dropdown-item{
+        color: #efefef;
+        &:hover {
+            background-color: rgba(var(--cui-grey-5), 0.5);
+        }
+    }
+    .cm-dropdown-item-disabled{
+        background-color: rgb(var(--cui-grey-6));
+        color: #999;
+    }
+    .cm-dropdown-item-divided{
+        &::before{
+            border-top-color: rgba(var(--cui-grey-6));
+            background-color: rgba(var(--cui-grey-9), 1);
+        }
+    }
+}

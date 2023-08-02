@@ -1,0 +1,113 @@
+.cm-slider{
+  position: relative;
+  margin: 8px 6px;
+  padding: 4px 0;
+  height: 12px;
+  width: 100%;
+  list-style: none;
+
+  &.cm-slider-hover,
+  &:hover{
+    .cm-slider-rail {
+      background-color: #e1e1e1;
+    }
+  }
+
+  &.cm-slider-disabled{
+    .cm-slider-track{
+      background-color: rgba(0, 0, 0, 0.25) !important;
+    }
+    .cm-slider-handle{
+      border-color: rgba(0, 0, 0, 0.25) !important;
+      background-color: #fff;
+      cursor: not-allowed;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+  
+}
+.cm-slider-rail{
+  position: absolute;
+  left: 0;
+  right: 7px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #f5f5f5;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.cm-slider-track{
+  position: absolute;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--cui-color-primary);
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+.cm-slider-handle-drag {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -8px;
+}
+.cm-slider-handle{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  cursor: pointer;
+  outline: none;
+  border-radius: 50%;
+  border: solid 2px transparent;
+  background-color: #fff;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.3);
+  &:focus {
+    border-color: var(--cui-color-primary);
+  }
+}
+.cm-slider-marks{
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 7px;
+}
+.cm-slider-mark{
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  transform: translate(-50%);
+}
+.cm-slider-steps{
+  position: absolute;
+  left: 0;
+  right: 7px;
+  height: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+.cm-slider-step{
+  position: absolute;
+  display: inline-block;
+  margin-left: -2px;
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  vertical-align: middle;
+  &.cm-slider-step-active{
+    border-color: #8cc8ff;
+  }
+}
+
+.cm-form-group-slider{
+    width: 100%;
+    .cm-tooltip-helper{
+        width: 100%;
+        vertical-align: middle;
+    }
+}

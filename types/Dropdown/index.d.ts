@@ -1,0 +1,21 @@
+export * from './DropdownMenu';
+export * from './DropdownItem';
+export declare const useDropdownConext: () => unknown;
+type DropdownProps = {
+    trigger?: 'hover' | 'click' | 'contextMenu' | 'custom';
+    align?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'right' | 'left' | 'rightTop' | 'leftTop';
+    classList?: any;
+    class?: any;
+    style?: any;
+    onSelect?: Function;
+    children: any;
+    menu?: any;
+    visible?: boolean | Function[];
+    transfer?: boolean;
+    theme?: 'dark' | 'light';
+    disabled?: boolean;
+    revers?: boolean;
+    handler?: string;
+    onBeforeDrop?: Function;
+};
+export declare function Dropdown(props: DropdownProps): import("solid-js").JSX.Element;

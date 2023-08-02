@@ -1,0 +1,109 @@
+.cm-list{
+    color: var(--cui-color-text-0);
+}
+.cm-list-foot,
+.cm-list-head,
+.cm-list-item{
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.cm-list-item{
+    display: flex;
+    flex-direction: row;
+}
+.cm-list-border .cm-list-head,
+.cm-list-border .cm-list-item{
+    padding-left: 12px;
+    padding-right: 12px;
+    border-bottom: 1px solid var(--cui-color-border);
+}
+.cm-list-border .cm-list-foot {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.cm-list-border .cm-list-item:last-child{
+    border-bottom: none;
+}
+
+.cm-list-border{
+    border-radius: var(--cui-border-radius-small);
+    border: 1px solid var(--cui-color-border);
+}
+
+.cm-list-large{
+    .cm-list-foot,
+    .cm-list-head,
+    .cm-list-item{
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+}
+
+.cm-list-small{
+    .cm-list-foot,
+    .cm-list-head,
+    .cm-list-item{
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+
+.cm-list-item-main{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.cm-list-item-meta{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+.cm-list-item-avatar{
+    margin-right: 16px;
+}
+.cm-list-item-body{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+}
+.cm-list-item-desc{
+    color: var(--cui-color-text-0);
+}
+.cm-list-item-content{
+    flex: 1;
+    margin-top: 5px;
+}
+.cm-list-item-desc{
+    display: flex;
+    flex: 0;
+    justify-content: flex-start;
+}
+.cm-list-item-addon{
+    margin-left: 48px;
+    padding: 0;
+    flex: 0 0 auto;
+    list-style: none;
+    align-items: center;
+    display: flex;
+    li{
+        display: inline-block;
+        padding: 0 8px;
+        cursor: pointer;
+        position: relative;
+        user-select: none;
+        &:after{
+            display: block;
+            position: absolute;
+            content: '';
+            top: 5px;
+            right: 0;
+            width: 100%;
+            height: 12px;
+            border-right: 1px solid #e8e8e8;
+        }
+        &:last-child:after{
+            border-right: none;
+        }
+    }
+}

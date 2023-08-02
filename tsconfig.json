@@ -1,0 +1,23 @@
+{
+  "include": ["src/**/*.tsx", "examples/**/*.tsx"],
+  // "include": ["src/**/*.tsx"],
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "types",
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "types": ["vite/client"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+    }
+  },
+  "exclude": ["node_modules", "**/*d.ts"]
+}

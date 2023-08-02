@@ -1,0 +1,72 @@
+.cm-avatar {
+    font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--cui-grey-2),1);
+    color: rgba(var(--cui-white),1);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    width: var(--height-control-default);
+    height: var(--height-control-default);
+    border-radius: 50%;
+    & > * {
+        line-height: var(--height-control-default);
+    }
+    &.cm-avatar-img{
+        img{
+            border-style: none;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+    &.cm-avatar-large{
+        width: var(--height-control-large);
+        height: var(--height-control-large);
+        line-height: var(--height-control-large);
+        border-radius: 50%;
+        > * {
+            line-height: var(--height-control-large);
+        }
+        &.cm-avatar-icon{
+            font-size: 24px;
+        }
+    }
+    &.cm-avatar-small{
+        width: var(--height-control-small);
+        height: var(--height-control-small);
+        line-height: var(--height-control-small);
+        border-radius: 50%;
+        & > * {
+            line-height: var(--height-control-small);
+        }
+        &.cm-avatar-icon{
+            svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    &.cm-avatar-square{
+        border-radius: var(--cui-border-radius-small);
+    }
+
+    .cm-avatar-string{
+        display: inline-flex;
+    }
+}
+.cm-avatar-hover {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}

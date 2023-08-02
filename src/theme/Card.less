@@ -1,0 +1,43 @@
+.cm-card {
+    background: var(--cui-color-bg-1);
+    border-radius: var(--cui-border-radius-medium);
+    font-size: 12px;
+    position: relative;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+
+    &.cm-card-bordered {
+        border: 1px solid var(--cui-default-border);
+    }
+
+    .cm-card-head {
+        border-bottom: 1px solid var(--cui-default-border);
+        padding: 14px;
+    }
+
+    .cm-card-head-title {
+        font-size: 14px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
+        margin: 0;
+        line-height: inherit;
+        font-weight: 400;
+    }
+
+    .cm-card-body {
+        padding: 15px;
+    }
+
+    &.cm-card-rised {
+        &:hover {
+            box-shadow: var(--cui-shadow-elevated);
+            z-index: 1;
+        }
+    }
+    .cm-card-footer {
+        border-top: 1px solid var(--cui-default-border);
+        padding: 10px 15px;
+    }
+}

@@ -1,0 +1,103 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+#root {
+    width: 100%;
+    height: 100%;
+}
+.sys-header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 48px;
+    line-height: 48px;
+    z-index: 14;
+    padding: 0 30px;
+    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+    background: #2173dc;
+    background: -webkit-gradient(linear,left top,right top,from(#1d42ab),color-stop(#2173dc),to(#1e93ff));
+    background: linear-gradient(90deg,#1d42ab,#2173dc,#1e93ff);
+    color: #fff;
+}
+.sys-bottom {
+    background: #f5f7f9;
+}
+.sys-nav {
+    padding-top: 48px;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow: auto;
+    background: var(--cui-color-bg-1);
+    box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+    z-index: 1;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+.sys-main {
+    padding-left: 200px;
+    min-height: 100vh;
+}
+.sys-ctx {
+    padding-top: 48px;
+}
+.sys-ctx-main {
+    padding: 16px;
+}
+.sys-ctx-main-left {
+    padding: 16px;
+    background: #fff;
+    flex: 1;
+}
+.sys-ctx-main-right {
+    width: 170px;
+    padding-left: 16px;
+    position: relative;
+}
+.sys-side-nav{
+    width: 170px;
+}
+
+.cm-demo-code {
+    margin-top: 20px;
+    .cm-icon {
+        cursor: pointer;
+    }
+}
+.cm-demo-code-wrap {
+    display: none!important;
+    &.cm-demo-code-wrap-open {
+        display: flex!important;
+    }
+}
+pre code {
+    font-size: 14px;
+    background-color: #f6f8fa!important;
+    white-space: pre-wrap;
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+.sys-anchor {
+    background-color: var(--cui-white-color);
+}
+
+
+body[theme-mod='dark'] {
+    .sys-bottom {
+        background: #16161a;
+    }
+    .sys-ctx-main-left {
+        background: #16161a;
+    }
+    .sys-anchor {
+        background-color: rgb(var(--cui-grey-1));
+    }
+    color: var(--cui-white-color)
+}

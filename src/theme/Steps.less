@@ -1,0 +1,189 @@
+.cm-steps {
+    font-size: 0;
+    width: 100%;
+    line-height: 1.5;
+    display: flex;
+}
+
+.cm-steps-item {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    &:not(:first-child) .cm-step-head {
+        padding-left: 10px;
+        margin-left: -10px;
+    }
+
+    &:last-child {
+        width: fit-content;
+        flex: none;
+        .cm-step-title {
+            &::after {
+                content: none;
+            }
+        }
+        .cm-step-head {
+            &::after {
+                content: none;
+            }
+        }
+    }
+}
+
+.cm-steps-status-done {
+    .cm-step-title {
+        &::after {
+            border-bottom-color: rgb(var(--cui-blue-4));
+            opacity: 1;
+            transform: translateY(-50%) scale(1, 1);
+        }
+    }
+
+    .cm-step-head-inner {
+        border-color: rgb(var(--cui-blue-4));
+        background-color: #fff;
+        color: rgb(var(--cui-blue-4));
+    }
+}
+
+.cm-steps-status-active {
+    .cm-step-head-inner {
+        border-color: rgb(var(--cui-blue-4));
+        background: rgb(var(--cui-blue-4));
+        color: #fff;
+    }
+
+    .cm-step-title {
+        color: var(--cui-color-text-1);
+    }
+}
+.cm-steps-status-active,
+.cm-steps-status-done{
+    .cm-step-head {
+        color: rgb(var(--cui-blue-4));
+    }
+}
+.cm-steps-status-error {
+    .cm-step-head {
+        color: rgb(var(--cui-red-5));
+    }
+}
+.cm-steps-status-warning {
+    .cm-step-head {
+        color: rgb(var(--cui-yellow-6));
+    }
+}
+.cm-steps-status-wait {
+    .cm-step-head {
+        color: rgb(var(--cui-grey-5));
+    }
+}
+
+.cm-step-head,
+.cm-step-main {
+    position: relative;
+}
+.cm-step-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cm-step-title {
+    height: 20px;
+    font-size: 14px;
+    color: var(--cui-color-text-2);
+    font-weight: bold;
+    display: inline-flex;
+    flex-direction: row;
+    &::after {
+        display: block;
+        content: " ";
+        flex: 1;
+        opacity: 0;
+        -webkit-transition: all 0.6s;
+        transition: all 0.6s;
+        transform-origin: left center;
+        border-bottom: 1px solid var(--cui-color-border);
+        transform: translateY(-50%) scale(0, 1);
+        clip-path: inset(0 10px);
+    }
+}
+
+.cm-step-description {
+    font-size: 12px;
+    color: var(--cui-color-text-3);
+}
+
+.cm-step-head-inner {
+    display: block;
+    border: 1px solid var(--cui-color-border);
+    width: 26px;
+    height: 26px;
+    border-radius: 26px;
+    font-size: 14px;
+    color: var(--cui-color-text-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+&.cm-steps-small {
+    .cm-step-head-inner {
+        width: 18px;
+        height: 18px;
+        border-radius: 18px;
+        font-size: 12px;
+    }
+    .cm-step-title {
+        font-size: 13px;
+    }
+}
+
+&.cm-steps-vertical {
+    flex-direction: column;
+    .cm-steps-item {
+        display: inline-flex;
+        min-height: 62px;
+    }
+
+    .cm-step-main {
+        display: block;
+    }
+
+    .cm-step-description {
+        padding-bottom: 12px;
+    }
+    .cm-step-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &::after {
+            display: block;
+            content: " ";
+            flex: 1;
+            opacity: 0;
+            width: 1px;
+            -webkit-transition: all 0.6s;
+            transition: all 0.6s;
+            transform-origin: center 0%;
+            border-left: 1px solid var(--cui-color-border);
+            transform: translateX(-50%) scale(1, 0);
+            clip-path: inset(5px 0);
+        }
+    }
+    .cm-steps-status-done {
+        .cm-step-head {
+            &::after {
+                border-left-color: rgb(var(--cui-blue-4));
+                opacity: 1;
+                transform: translateX(-50%) scale(1, 1);
+            }
+        }
+    }
+}
