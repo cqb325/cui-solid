@@ -1,0 +1,26 @@
+.colorful-stripe {
+    background: linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
+    background-blend-mode: screen;
+    -webkit-animation: colorfulStripeChange 5s infinite alternate linear;
+            animation: colorfulStripeChange 5s infinite alternate linear;
+  }
+  @-webkit-keyframes colorfulStripeChange {
+    100% {
+      -webkit-filter: hue-rotate(360deg);
+              filter: hue-rotate(360deg);
+    }
+  }
+  @keyframes colorfulStripeChange {
+    100% {
+      -webkit-filter: hue-rotate(360deg);
+              filter: hue-rotate(360deg);
+    }
+  }
+.cm-demo-nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    font-size: 18px;
+}

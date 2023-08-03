@@ -1,1 +1,1 @@
-export default function createModel(props: any, field: string, defaultValue: any): Function[];
+export default function createModel<T>(props: any, field: string, defaultValue: T): Function[];

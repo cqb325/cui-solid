@@ -57,6 +57,7 @@ export * from './Menu';
 export * from './Message';
 export * from './Modal';
 export * from './Notice';
+export * from './PageFooter';
 export * from './Pagination';
 export * from './Popover';
 export * from './Progress';

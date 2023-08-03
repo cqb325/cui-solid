@@ -1,4 +1,4 @@
-type SpaceOptions = {
+export interface SpaceOptions {
     dir?: 'v' | 'h';
     wrap?: boolean;
     inline?: boolean;
@@ -11,6 +11,5 @@ type SpaceOptions = {
     style?: any;
     id?: string;
     title?: string;
-};
+}
 export declare const Space: (props: SpaceOptions) => import("solid-js").JSX.Element;
-export {};

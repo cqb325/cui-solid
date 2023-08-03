@@ -75,6 +75,7 @@ export const menuData = [
             {name: 'Exception', title: 'Exception 异常页面', path: 'exception', component: lazy(() => import('./pages/view/Exception'))},
             {name: 'QRCode', title: 'QRCode 二维码', path: 'qrcode', component: lazy(() => import('./pages/view/QRCode'))},
             {name: 'Drawer', title: 'Drawer 抽屉', path: 'drawer', component: lazy(() => import('./pages/view/Drawer'))},
+            {name: 'PageFooter', title: 'PageFooter 页底', path: 'pagefooter', component: lazy(() => import('./pages/view/PageFooter'))},
         ]
     },
     {

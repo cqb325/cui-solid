@@ -1,7 +1,11 @@
 import { Show } from "solid-js";
 import { Progress } from "../Progress";
+import { useClassList } from "../utils/useProps";
 
 export interface WordCountProps {
+    classList?: any;
+    class?: string;
+    style?: any;
     total: number;
     value: string;
     prefix?: any;
@@ -27,7 +31,8 @@ export function WordCount (props: WordCountProps) {
         return Math.min(val.length / props.total * 100, 100);
     }
     const radius = props.radius ?? 10;
-    return <div class="cm-word-count">
+    const classList = () => useClassList(props, 'cm-word-count');
+    return <div classList={classList()} style={props.style}>
         <Show when={props.circle} fallback={<>
             <span classList={{"cm-word-count-prefix": true, 'cm-word-count-overflow': overflow()}}>
                 {overflow() ? props.prefixOverflow : props.prefix}

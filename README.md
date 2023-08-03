@@ -17,6 +17,11 @@ CUI-SOLID
 ## Docs
 [cui-solid-doc](https://cqb325.gitee.io/cui-solid-doc "cui-solid-doc")
 
+## Repository
+
+[Gitee](https://gitee.com/cqb325/cui-solid "Gitee")
+[Github](https://github.com/cqb325/cui-solid "Github")
+
 ## Install
 
     # npm
@@ -28,6 +33,7 @@ CUI-SOLID
     v0.1.13
     1、添加IndexList索引列表组件
     2、添加WordCount数字统计组件
+    3、添加PageFooter页脚组件
 
     v0.1.12
     1、Form 增加 checkField 单字段验证

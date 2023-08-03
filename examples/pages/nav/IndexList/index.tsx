@@ -1,5 +1,9 @@
-import { Card, Checkbox, IndexList, Space, Title } from "@/components";
+import { Card, Checkbox, Divider, IndexList, Paragraph, Space, Table, Text, Title } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
+import { DemoCode } from "../../common/code";
+import { propsColumns } from "../../common/columns";
+import { anchorData, codes, itemPropsData, propsData } from "./config";
+import { CompAnchor } from "../../common/CompAnchor";
 useDirective(hljs);
 export default function ContactsPage () {
     const data = [{
@@ -25,15 +29,48 @@ export default function ContactsPage () {
                 <Title heading={2}>
                     IndexList 索引列表
                 </Title>
-                <Space id="loadingbar_base" dir="v">
+                <Space id="indexlist_base" dir="v">
                     <Card bordered>
                         <div style={{height: "500px"}}>
-                            <IndexList data={data} selectable border></IndexList>
+                            <IndexList data={data}></IndexList>
                         </div>
+                        <Divider align="left"><Text type="primary">基础用法</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            基础用法
+                        </Paragraph>
+                        <DemoCode data={codes['indexlist_base']}/>
                     </Card>
                 </Space>
 
-                <Space id="loadingbar_base" dir="v">
+                <Space id="indexlist_selectable" dir="v">
+                    <Card bordered>
+                        <div style={{height: "500px"}}>
+                            <IndexList data={data} selectable onChange={(v) => {
+                                console.log(v);
+                            }}></IndexList>
+                        </div>
+                        <Divider align="left"><Text type="primary">可选择</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            添加selectable属性可以对选项进行选择
+                        </Paragraph>
+                        <DemoCode data={codes['indexlist_selectable']}/>
+                    </Card>
+                </Space>
+
+                <Space id="indexlist_border" dir="v">
+                    <Card bordered>
+                        <div style={{height: "500px"}}>
+                            <IndexList data={data} border></IndexList>
+                        </div>
+                        <Divider align="left"><Text type="primary">边框</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            添加 border 属性渲染边框
+                        </Paragraph>
+                        <DemoCode data={codes['indexlist_border']}/>
+                    </Card>
+                </Space>
+
+                <Space id="indexlist_custom" dir="v">
                     <Card bordered>
                         <div style={{height: "500px"}}>
                             <IndexList data={data} selectable renderItem={(item: any, active: boolean) => {
@@ -45,9 +82,29 @@ export default function ContactsPage () {
                                 console.log(v);
                             }}></IndexList>
                         </div>
+                        <Divider align="left"><Text type="primary">自定义渲染</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            通过 renderItem 方法可以自定义选项的渲染方式
+                        </Paragraph>
+                        <DemoCode data={codes['indexlist_custom']}/>
                     </Card>
+                </Space>
+
+                <Space dir="v" size={24} id="comp_api">
+                    <Title type="primary" heading={3}>API</Title>
+                    <Space id='comp_props' dir="v">
+                        <Title type="primary" heading={4}>IndexList Props</Title>
+                        <Table columns={propsColumns} data={propsData} border size='small' />
+                    </Space>
+
+                    <Space id='comp_item_props' dir="v">
+                        <Title type="primary" heading={4}>data Props</Title>
+                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                    </Space>
                 </Space>
             </Space>
         </div>
+
+        <CompAnchor data={anchorData}/>
     </>
 }

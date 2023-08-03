@@ -1,17 +1,17 @@
 import { useClassList, useStyle } from "../utils/useProps";
 
-type SpaceOptions = {
-    dir?: 'v' | 'h',
-    wrap?: boolean,
-    inline?: boolean,
-    size?: number,
-    align?: 'center'|'start'|'end'|'baseline',
-    justify?: 'center'|'start'|'end',
-    classList?: any,
-    class?: string,
-    children?: any,
-    style?: any,
-    id?: string,
+export interface SpaceOptions {
+    dir?: 'v' | 'h'
+    wrap?: boolean
+    inline?: boolean
+    size?: number
+    align?: 'center'|'start'|'end'|'baseline'
+    justify?: 'center'|'start'|'end'
+    classList?: any
+    class?: string
+    children?: any
+    style?: any
+    id?: string
     title?: string
 }
 export const Space = (props: SpaceOptions) => {

@@ -4,6 +4,9 @@ import createModel from "../utils/createModel";
 import { createStore } from "solid-js/store";
 
 export interface IndexListProps {
+    classList?: any;
+    class?: string;
+    style?: any;
     data: any[];
     selectable?: boolean;
     promote?: boolean;
@@ -146,7 +149,7 @@ export function IndexList(props: IndexListProps){
         'cm-index-list-promote-show': showPromote()
     })
 
-    return <div classList={classList()}>
+    return <div classList={classList()} style={props.style}>
         <div class="cm-index-list-list" ref={wrap} onScroll={handleScroll}>
             <For each={store.list}>
                 {(item: any) => {
