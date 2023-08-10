@@ -37,6 +37,7 @@ export const menuData = [
             {name: 'space', title: 'Space 间隔', path: 'space', component: lazy(() => import('./pages/layout/Space'))},
             {name: 'list', title: 'List 列表', path: 'list', component: lazy(() => import('./pages/layout/List'))},
             {name: 'split', title: 'Split 面板分割', path: 'split', component: lazy(() => import('./pages/layout/Split'))},
+            {name: 'skeleton', title: 'Skeleton 骨架屏', path: 'skeleton', component: lazy(() => import('./pages/layout/Skeleton'))},
         ]
     },
     {

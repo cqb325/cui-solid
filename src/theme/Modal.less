@@ -24,12 +24,13 @@
         display: flex;
         z-index: 5000;
         .cm-draggable {
+            pointer-events: all;
             opacity: 1;
         }
     }
     .cm-draggable {
         position: absolute;
-        pointer-events: all;
+        pointer-events: none;
         transition: opacity 0.2s ease-in-out;
         opacity: 0;
     }

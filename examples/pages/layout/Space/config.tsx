@@ -16,7 +16,7 @@ export const eventsData = [
 ]
 
 export const anchorData = [
-    {id: 'list_base', text: '基础用法'},
+    {id: 'space_base', text: '基础用法'},
     {id: 'space_vertical', text: '垂直间距'},
     {id: 'space_size', text: '间距大小'},
     {id: 'space_align', text: '对齐方式'},

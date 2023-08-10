@@ -30,6 +30,11 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.14
+    1、修改anchor-link样式
+    2、修改dropdown样式和动画采用useTransition
+    3、添加Skeleton骨架屏组件
+
     v0.1.13
     1、添加IndexList索引列表组件
     2、添加WordCount数字统计组件

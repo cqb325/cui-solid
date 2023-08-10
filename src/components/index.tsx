@@ -63,6 +63,7 @@ export * from './Popover';
 export * from './Progress';
 export * from './QRCode';
 export * from './Row';
+export * from './Skeleton';
 export * from './Spin';
 export * from './Split';
 export * from './Steps';

@@ -1,4 +1,4 @@
-import { createContext, onCleanup, onMount, Show, useContext } from "solid-js";
+import { createComputed, createContext, createSignal, onCleanup, onMount, Show, useContext } from "solid-js";
 import { Portal } from "solid-js/web";
 import { useClassList } from "../utils/useProps";
 import createModel from "../utils/createModel";
@@ -6,6 +6,7 @@ import usePortal from "../utils/usePortal";
 import useAlignPostion from "../utils/useAlignPostion";
 import { useClickOutside } from "../utils/useClickOutside";
 import usezIndex from "../utils/usezIndex";
+import { useTransition } from "../utils/useTransition";
 
 export * from './DropdownMenu';
 export * from './DropdownItem';
@@ -34,6 +35,7 @@ type DropdownProps = {
 
 export function Dropdown(props: DropdownProps){
     const [visible, setVisible] = createModel(props, 'visible', false);
+    const [opened, setOpened] = createSignal(visible());
     let targetEle: any;
     let target: any;
     let trigger = props.trigger || 'hover';
@@ -43,9 +45,31 @@ export function Dropdown(props: DropdownProps){
     const zindex = usezIndex();
     const revers = props.revers ?? true;
     const classList = () => useClassList(props, 'cm-dropdown', {
-        'cm-dropdown-open': visible(),
+        // 'cm-dropdown-open': visible(),
         [`cm-dropdown-${props.theme}`]: props.theme,
     });
+
+    const transition = useTransition({
+        el: ()=> wrap,
+        startClass: 'cm-dropdown-visible',
+        activeClass: 'cm-dropdown-open',
+        onLeave: () => {
+            setOpened(false);
+        },
+        onEnter: () => {
+            setOpened(true);
+        }
+    })
+
+    createComputed(() => {
+        const v = visible();
+        if (v) {
+            transition.enter();
+            // props.onShow && props.onShow();
+        } else {
+            transition.leave();
+        }
+    })
 
     // 防抖
     const clearDelayTimer = () => {
@@ -107,7 +131,7 @@ export function Dropdown(props: DropdownProps){
 
     
     const posStyle = () => {
-        visible()
+        opened()
         if (target && target.nextElementSibling) {
             let te = target.nextElementSibling;
             if (props.handler) {

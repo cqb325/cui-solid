@@ -6,16 +6,17 @@
     height: 0;
 }
 .cm-dropdown {
-    display: inline-block;
     line-height: initial;
     position: absolute;
     padding: 0;
     opacity: 0;
     z-index: -999;
+    display: none;
     pointer-events: none;
     border-radius: var(--cui-border-radius-small);
-    transition: all 0.2s linear;
+    transition: opacity 0.2s linear, z-index 0.2s linear;
     box-shadow: 0 0 1px rgba(0,0,0,0.3),0 4px 14px rgba(0,0,0,0.1);
+    will-change: opacity, z-index;
     > .cm-dropdown-list {
         position: relative;
     }
@@ -24,6 +25,9 @@
         pointer-events: all;
         z-index: 1500;
     }
+}
+.cm-dropdown-visible {
+    display: inline-block;
 }
 
 .cm-dropdown-rel {
