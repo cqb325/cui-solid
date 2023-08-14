@@ -15,12 +15,23 @@ CUI-SOLID
 ![JS gzip size](https://img.badgesize.io/https:/unpkg.com/cui-solid/dist/cui.min.esm.js?label=gzip%20size%3A%20JS&compression=gzip&style=flat-square)
 ![CSS gzip size](https://img.badgesize.io/https://unpkg.com/cui-solid/dist/styles/cui.css?compression=gzip&label=gzip%20size:%20CSS&style=flat-square)
 ## Docs
-[cui-solid-doc](https://cqb325.gitee.io/cui-solid-doc "cui-solid-doc")
+[documents on gitee](https://cqb325.gitee.io/cui-solid-doc "cui-solid-doc")
+
+[documents on github](https://cqb325.github.io/cui-solid-doc "cui-solid-doc")
 
 ## Repository
 
 [Gitee](https://gitee.com/cqb325/cui-solid "Gitee")
+
 [Github](https://github.com/cqb325/cui-solid "Github")
+
+## Other Packages
+
+[solid-vue-router a router package by vue-router](https://gitee.com/cqb325/solid-vue-router "solid-vue-router")
+
+[cui-pin a pin field input component](https://gitee.com/cqb325/cui-pin "cui-pin")
+
+[cui-solid-draggable followed by react-draggable](https://gitee.com/cqb325/cui-solid-draggable "cui-solid-draggable")
 
 ## Install
 
