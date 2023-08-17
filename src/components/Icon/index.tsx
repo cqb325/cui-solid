@@ -7,6 +7,7 @@ interface IconProps extends ComponentProps<'div'> {
     size?: number,
     spin?: boolean,
     name?: string,
+    color?: string
 }
 
 export const Icon = (props: IconProps) => {

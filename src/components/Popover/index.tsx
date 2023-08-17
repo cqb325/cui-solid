@@ -6,27 +6,32 @@ import { useClassList } from "../utils/useProps";
 import { useClickOutside } from "../utils/useClickOutside";
 import createModel from "../utils/createModel";
 import usezIndex from "../utils/usezIndex";
+import { useTransition } from "../utils/useTransition";
+import { createComputed } from "solid-js";
 
-type PopoverProps = {
-    classList?: any,
-    class?: string,
-    align?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom',
-    trigger?: 'hover'|'click',
-    disabled?: boolean,
-    arrow?: boolean,
-    theme?: string,
-    hideDelay?: number,
-    onOpen?: Function,
-    children?: any,
-    content?: any,
-    visible?: any,
+export interface PopoverProps {
+    classList?: any
+    class?: string
+    align?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom'
+    trigger?: 'hover'|'click'
+    disabled?: boolean
+    arrow?: boolean
+    theme?: string
+    hideDelay?: number
+    onOpen?: Function
+    children?: any
+    content?: any
+    visible?: any
     ref?: any
 }
 
 export function Popover (props: PopoverProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
+    const [opened, setOpened] = createSignal(visible());
     const [_, update] = createSignal(createUniqueId());
     let inner: any;
+    let removeClickOutside: Function;
+    let wrap: any;
     const align = () => props.align || 'right';
     const trigger = () => props.trigger || 'hover';
     const zindex = usezIndex();
@@ -77,13 +82,34 @@ export function Popover (props: PopoverProps) {
     }
 
     const classList = () => useClassList(props, 'cm-popover-inner', {
-        'cm-popover-inner-show': visible(),
+        // 'cm-popover-inner-show': visible(),
         'cm-popover-with-arrow': props.arrow,
         [`cm-popover-${props.theme}`]: props.theme
     });
 
+    const transition = useTransition({
+        el: ()=> wrap,
+        startClass: 'cm-popover-inner-visible',
+        activeClass: 'cm-popover-inner-show',
+        onLeave: () => {
+            setOpened(false);
+        },
+        onEnter: () => {
+            setOpened(true);
+        }
+    })
+
+    createComputed(() => {
+        const v = visible();
+        if (v) {
+            transition.enter();
+        } else {
+            transition.leave();
+        }
+    })
+
     const posStyle = () => {
-        visible()
+        opened()
         _();
         if (inner && inner.nextElementSibling) {
             const pos: any = useAlignPostion(align(), inner.nextElementSibling);
@@ -94,8 +120,6 @@ export function Popover (props: PopoverProps) {
         }
     };
 
-    let removeClickOutside: Function;
-    let wrap: any;
     onMount (() => {
         if (inner.nextElementSibling) {
             if (trigger() === 'hover') {

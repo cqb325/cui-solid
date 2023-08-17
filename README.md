@@ -41,6 +41,9 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.15
+    1、修改popover采用useTransition
+    
     v0.1.14
     1、修改anchor-link样式
     2、修改dropdown样式和动画采用useTransition

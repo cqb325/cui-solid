@@ -3987,6 +3987,14 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
+solid-js@^1.7.11:
+  version "1.7.11"
+  resolved "https://registry.npmjs.org/solid-js/-/solid-js-1.7.11.tgz#c37706382bcfd563459810434b1382b550c27867"
+  integrity sha512-JkuvsHt8jqy7USsy9xJtT18aF9r2pFO+GB8JQ2XGTvtF49rGTObB46iebD25sE3qVNvIbwglXOXdALnJq9IHtQ==
+  dependencies:
+    csstype "^3.1.0"
+    seroval "^0.5.0"
+
 solid-js@^1.7.8:
   version "1.7.8"
   resolved "https://registry.npmjs.org/solid-js/-/solid-js-1.7.8.tgz#6856983e3edbcc57b0e003e6fd0c741dd8865892"
