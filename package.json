@@ -1,11 +1,19 @@
 {
   "name": "cui-solid",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "An UI component library and front-end solution based on solidjs",
   "type": "module",
   "author": "cqb325",
   "homepage": "https://cqb325.gitee.io/cui-solid-doc",
   "main": "dist/cui.min.esm.js",
+  "keywords": [
+    "cui-solid",
+    "solid-js",
+    "solid",
+    "web",
+    "library",
+    "component"
+  ],
   "repository": {
     "type": "git",
     "url": "https://gitee.com/cqb325/cui-solid"
@@ -39,7 +47,7 @@
     "less": "^4.1.3",
     "solid-js": "^1.7.11",
     "solid-testing-library": "0.5.0",
-    "solid-vue-router": "^1.0.11",
+    "solid-vue-router": "^1.0.12",
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
     "vite-plugin-solid": "^2.7.0",

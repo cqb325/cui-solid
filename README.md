@@ -41,6 +41,9 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.16
+    1、更新router依赖版本至v1.0.12
+    
     v0.1.15
     1、修改popover采用useTransition
     
