@@ -1,4 +1,4 @@
-type DividerProps = {
+declare type DividerProps = {
     classList?: any;
     class?: string;
     dir?: 'h' | 'v';

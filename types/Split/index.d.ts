@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type SplitProps = {
+declare type SplitProps = {
     classList?: any;
     class?: any;
     dir?: 'v' | 'h';

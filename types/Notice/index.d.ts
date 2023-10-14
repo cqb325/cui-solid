@@ -1,4 +1,4 @@
-export type NoticeConfig = {
+export declare type NoticeConfig = {
     dock?: 'topRight' | 'topLeft' | 'bottomLeft' | 'bottomRight';
     key?: string;
     duration?: number;

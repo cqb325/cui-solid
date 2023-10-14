@@ -1,4 +1,4 @@
-type SelectOptions = {
+declare type SelectOptions = {
     name?: string;
     value?: any;
     disabled?: boolean;

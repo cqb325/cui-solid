@@ -129,7 +129,42 @@ export function Dropdown(props: DropdownProps){
         }
     }
 
-    
+    const getOffsetWidth = (align: string, rect: any) => {
+        if (align === 'bottomRight' || align === 'topRight') {
+            return 0;
+        }
+        if (align === 'top' || align === 'bottom') {
+            return rect.width / 2;
+        }
+        if (align === 'topLeft' || align === 'bottomLeft') {
+            return rect.width;
+        }
+        if (align === 'left' || align === 'leftTop' || align === 'leftBottom') {
+            return 0;
+        }
+        if (align === 'right' || align === 'rightTop' || align === 'rightBottom') {
+            return rect.width;
+        }
+    }
+
+    const getOffsetHeight = (align: string, rect: any) => {
+        if (align === 'leftBottom' || align === 'rightBottom') {
+            return 0;
+        }
+        if (align === 'top' || align === 'topLeft' || align === 'topRight') {
+            return 0;
+        }
+        if (align === 'leftTop' || align === 'rightTop') {
+            return rect.height;
+        }
+        if (align === 'left' || align === 'right') {
+            return rect.height / 2;
+        }
+        if (align === 'bottom' || align === 'bottomLeft' || align === 'bottomRight') {
+            return rect.height;
+        }
+    }
+
     const posStyle = () => {
         opened()
         if (target && target.nextElementSibling) {
@@ -154,8 +189,10 @@ export function Dropdown(props: DropdownProps){
             }
 
             const rect = wrap.getBoundingClientRect();
-            const h = originTop + rect.height;
-            const w = originLeft + rect.width;
+            const offsetWidth = getOffsetWidth(align, rect);
+            const offsetHeight = getOffsetHeight(align, rect);
+            const h = originTop + offsetHeight;
+            const w = originLeft + offsetWidth;
             
             const containerHeight = window.innerHeight || document.documentElement.clientHeight;
             const containerWidth = window.innerWidth || document.documentElement.clientWidth;

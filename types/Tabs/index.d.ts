@@ -1,5 +1,5 @@
 export * from './Tab';
-type TabsProps = {
+declare type TabsProps = {
     card?: boolean;
     style?: any;
     classList?: any;

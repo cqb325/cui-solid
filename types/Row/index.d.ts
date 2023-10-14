@@ -1,5 +1,5 @@
 export declare const Context: import("solid-js").Context<unknown>;
-type RowProps = {
+declare type RowProps = {
     classList?: any;
     class?: any;
     children?: any;

@@ -28,6 +28,8 @@ type ModalProps = {
     loading?: boolean | Function[],
     onOk?: Function,
     onCancel?: Function,
+    onClosed?: Function,
+    onClickClose?: Function,
     okText?: any,
     cancleText?: any,
     visible?: boolean | Function[],
@@ -58,7 +60,13 @@ export function Modal (props: ModalProps) {
         'cm-modal-mask-visible': visible()
     });
 
+    const onClickClose = () => {
+        props.onClickClose && props.onClickClose();
+        onClose();
+    }
+
     const onClose = () => {
+        props.onClosed && props.onClosed();
         setVisible(false);
     }
 
@@ -130,7 +138,7 @@ export function Modal (props: ModalProps) {
                 <div classList={classList()} style={props.style}>
                     <div class='cm-modal-header' data-id={`${modalId}`}>
                         { props.title ? <div class='cm-modal-title'>{props.title}</div> : null }
-                        <span class='cm-modal-close' onClick={onClose}><Icon name='x'/></span>
+                        <span class='cm-modal-close' onClick={onClickClose}><Icon name='x'/></span>
                     </div>
                     <div class='cm-modal-body' style={props.bodyStyle}>
                         {props.children}

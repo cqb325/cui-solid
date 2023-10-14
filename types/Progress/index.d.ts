@@ -2,7 +2,7 @@ export interface StrokeProps {
     percent: number;
     color: string;
 }
-type ProgressProps = {
+declare type ProgressProps = {
     classList?: any;
     class?: string;
     hidePercent?: boolean;

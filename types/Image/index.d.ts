@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type ImageProps = {
+declare type ImageProps = {
     classList?: any;
     class?: string;
     style?: any;

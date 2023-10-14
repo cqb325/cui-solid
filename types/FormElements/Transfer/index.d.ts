@@ -1,4 +1,4 @@
-type TransferProps = {
+declare type TransferProps = {
     classList?: any;
     class?: string;
     style?: any;

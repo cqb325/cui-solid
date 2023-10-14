@@ -1,4 +1,4 @@
-type RadioGroupProps = {
+declare type RadioGroupProps = {
     classList?: any;
     class?: string;
     block?: boolean;

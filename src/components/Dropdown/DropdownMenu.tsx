@@ -1,3 +1,6 @@
+import { useClassList } from "../utils/useProps"
+
 export function DropdownMenu (props: any) {
-    return <ul class='cm-dropdown-list'>{props.children}</ul>
+    const classList = () => useClassList(props, 'cm-dropdown-list');
+    return <ul classList={classList()} style={props.style}>{props.children}</ul>
 }

@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type SubMenuProps = {
+declare type SubMenuProps = {
     name?: string;
     align?: "bottom" | "right" | "bottomLeft" | "bottomRight" | "rightTop" | "left" | "leftTop";
     icon?: JSXElement;

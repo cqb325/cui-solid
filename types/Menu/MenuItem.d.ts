@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type MenuItemProps = {
+declare type MenuItemProps = {
     name?: string;
     disabled?: boolean;
     isSubmenuTitle?: boolean;

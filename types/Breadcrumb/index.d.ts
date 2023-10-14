@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type BreadcrumbProps = {
+declare type BreadcrumbProps = {
     classList?: any;
     class?: string;
     separator?: string;

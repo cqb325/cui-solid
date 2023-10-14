@@ -1,4 +1,4 @@
-type InnerCheckboxProps = {
+declare type InnerCheckboxProps = {
     classList?: any;
     class?: any;
     checked?: any;

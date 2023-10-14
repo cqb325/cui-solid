@@ -1,5 +1,5 @@
 import { CarouselItem } from "./Item";
-type CarouselProps = {
+declare type CarouselProps = {
     classList?: any;
     class?: string;
     style?: any;

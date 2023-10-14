@@ -14,7 +14,7 @@ interface QRCodeProps {
     title?: string;
     ref?: any;
 }
-type ImageSettings = {
+declare type ImageSettings = {
     src: string;
     height?: number;
     width?: number;

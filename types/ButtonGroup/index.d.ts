@@ -1,5 +1,5 @@
 import { ComponentProps } from "solid-js";
-type ButtonGroupProps = {
+declare type ButtonGroupProps = {
     classList?: any;
     class?: any;
     children?: any;

@@ -1,4 +1,4 @@
-type CardProps = {
+declare type CardProps = {
     classList?: any;
     class?: any;
     children?: any;

@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type MenuGroupProps = {
+declare type MenuGroupProps = {
     name?: string;
     icon?: JSXElement;
     title?: any;

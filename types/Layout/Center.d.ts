@@ -1,4 +1,4 @@
-type CenterProps = {
+declare type CenterProps = {
     classList?: any;
     class?: any;
     children?: any;

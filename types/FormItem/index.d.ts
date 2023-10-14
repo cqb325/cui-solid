@@ -1,8 +1,8 @@
-export type FormItemContextProps = {
+export declare type FormItemContextProps = {
     name?: string;
 };
 export declare const FormItemContext: import("solid-js").Context<FormItemContextProps | undefined>;
-type FormItemProps = {
+declare type FormItemProps = {
     classList?: any;
     class?: string;
     inline?: boolean;

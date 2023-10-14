@@ -5,6 +5,7 @@ type SelectOptions = {
     checked?: boolean,
     disabled?: boolean,
     textField: string,
+    valueField: string,
     onClick?: Function,
     style?: any,
     visible?: boolean,
@@ -18,9 +19,9 @@ export function Option (props: SelectOptions) {
         'cm-select-option-active': props.checked,
         'cm-select-option-disabled': props.data.disabled,
     });
-    const value = props.data[props.textField];
+    const value = props.data[props.valueField];
     return <Show when={props.visible} fallback={null}>
-        <li classList={classList()} style={props.style} onClick={() => props.onClick && props.onClick(value)}>
+        <li classList={classList()} style={props.style} onClick={() => props.onClick && props.onClick(value, props.data)}>
             {props.renderOption ? props.renderOption(props.data) : props.data[props.textField]}
         </li>
     </Show>;

@@ -1,5 +1,5 @@
 export declare const AccordionContext: import("solid-js").Context<unknown>;
-type AccordionProps = {
+declare type AccordionProps = {
     classList?: any;
     class?: string;
     style?: any;

@@ -1,4 +1,4 @@
-type TooltipProps = {
+declare type TooltipProps = {
     classList?: any;
     class?: string;
     align?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';

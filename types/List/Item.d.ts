@@ -1,4 +1,4 @@
-type ListItemProps = {
+declare type ListItemProps = {
     id: string | number;
     data?: any;
     style?: any;

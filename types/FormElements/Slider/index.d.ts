@@ -1,4 +1,4 @@
-type SliderProps = {
+declare type SliderProps = {
     classList?: any;
     class?: string;
     style?: any;

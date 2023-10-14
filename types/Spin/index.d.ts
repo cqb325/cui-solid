@@ -4,7 +4,7 @@ import { JSXElement } from 'solid-js';
  * @class Spin
  * @constructor
  */
-type SpinProps = {
+declare type SpinProps = {
     classList?: any;
     class?: string;
     type?: 'pulse' | 'oval' | 'gear';

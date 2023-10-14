@@ -1,4 +1,4 @@
-type DraggableProps = {
+declare type DraggableProps = {
     classList?: any;
     class?: string;
     defaultPosition?: any;

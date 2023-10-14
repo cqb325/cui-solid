@@ -1,4 +1,4 @@
-export type TreeProps = {
+export declare type TreeProps = {
     classList?: any;
     class?: string;
     style?: any;

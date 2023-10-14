@@ -94,9 +94,10 @@ export function AutoComplete (props: SelectOptions) {
         }
     });
 
-    const onOptionClick = (v: any) => {
+    const onOptionClick = (v: any, item: any) => {
         setValue(v);
-        props.onChange && props.onChange(v);
+        props.onChange && props.onChange(v, item);
+        setOpen(false);
     }
 
     const labels = () => {
@@ -142,7 +143,7 @@ export function AutoComplete (props: SelectOptions) {
                         {(item) => {
                             return <Option renderOption={props.renderOption} visible={item._show}
                                 disabled={item.disabled} data={item} checked={item._checked} 
-                                textField={textField} onClick={onOptionClick}></Option>
+                                valueField={valueField} textField={textField} onClick={onOptionClick}></Option>
                         }}
                     </For>
                 </ul>

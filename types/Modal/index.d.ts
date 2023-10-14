@@ -1,11 +1,11 @@
 import { JSXElement } from "solid-js";
-type Position = {
+declare type Position = {
     top?: string;
     bottom?: string;
     left?: string;
     right?: string;
 };
-type ModalProps = {
+declare type ModalProps = {
     bounds?: string;
     disabled?: boolean;
     style?: any;
@@ -18,6 +18,8 @@ type ModalProps = {
     loading?: boolean | Function[];
     onOk?: Function;
     onCancel?: Function;
+    onClosed?: Function;
+    onClickClose?: Function;
     okText?: any;
     cancleText?: any;
     visible?: boolean | Function[];

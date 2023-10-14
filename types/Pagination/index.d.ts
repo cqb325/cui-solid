@@ -1,4 +1,4 @@
-type PaginationProps = {
+declare type PaginationProps = {
     classList?: any;
     class?: any;
     shape?: 'normal' | 'circle';

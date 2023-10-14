@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-export type BasicProps = {
+export declare type BasicProps = {
     classList?: any;
     class?: string;
     style?: any;
@@ -12,7 +12,7 @@ export interface AvatarProps extends BasicProps {
     size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large' | number;
     shape?: 'circle' | 'square';
 }
-export type GenericProps = BasicProps & AvatarProps;
+export declare type GenericProps = BasicProps & AvatarProps;
 export declare const Avatar: (props: AvatarProps) => JSXElement;
 export declare const Image: (props: AvatarProps) => JSXElement;
 export declare const Title: (props: AvatarProps) => JSXElement;

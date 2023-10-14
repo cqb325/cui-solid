@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type CascaderProps = {
+declare type CascaderProps = {
     classList?: any;
     class?: string;
     disabled?: boolean;
@@ -18,7 +18,7 @@ type CascaderProps = {
     changeOnSelect?: boolean;
     loadData?: Function;
 };
-export type CascaderStore = {
+export declare type CascaderStore = {
     selectedValue: any[];
     columns: any[][];
 };

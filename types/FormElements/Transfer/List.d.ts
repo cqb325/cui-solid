@@ -1,4 +1,4 @@
-type TransferListProps = {
+declare type TransferListProps = {
     width?: number;
     height?: number;
     store?: any;

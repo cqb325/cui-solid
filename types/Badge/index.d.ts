@@ -1,4 +1,4 @@
-type BadgeProps = {
+declare type BadgeProps = {
     classList?: any;
     class?: string;
     count?: number;

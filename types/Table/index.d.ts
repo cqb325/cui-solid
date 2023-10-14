@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type TableProps = {
+declare type TableProps = {
     columns: any[];
     data: any[];
     height?: number;
@@ -19,7 +19,7 @@ type TableProps = {
     loading?: boolean;
     virtual?: boolean;
 };
-export type TableStore = {
+export declare type TableStore = {
     columns: ColumnProps[];
     data: any[];
     showFixedLeft: boolean;
@@ -33,7 +33,7 @@ export type TableStore = {
     startX: number;
     resizeId?: string;
 };
-export type ColumnProps = {
+export declare type ColumnProps = {
     name?: string;
     title?: string | JSXElement;
     render?: Function;

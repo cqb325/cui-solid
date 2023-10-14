@@ -1,4 +1,4 @@
-type ListProps = {
+declare type ListProps = {
     classList?: any;
     class?: string;
     border?: boolean;
@@ -10,7 +10,7 @@ type ListProps = {
     render?: Function;
     onSelect?: Function;
 };
-export type ListContextProps = {
+export declare type ListContextProps = {
     render?: Function;
     signal: Function[];
     onSelect?: Function;

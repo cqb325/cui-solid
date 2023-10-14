@@ -18,12 +18,16 @@ export const propsData = [
     {name: 'fullScreen', desc: '全屏控制', type: 'boolean | Function[]', default: ''},
     {name: 'onOk', desc: '点击确认按钮回调', type: 'Function', default: ''},
     {name: 'onCancel', desc: '点击取消按钮回调', type: 'Function', default: ''},
+    {name: 'onClosed', desc: '关闭事件', type: 'Function', default: ''},
+    {name: 'onClickClose', desc: '点击关闭按钮事件', type: 'Function', default: ''},
 ]
 
 
 export const eventsData = [
     {name: 'onOk', desc: '点击确认按钮回调', params: ''},
     {name: 'onCancel', desc: '点击取消按钮回调', params: ''},
+    {name: 'onClosed', desc: '关闭事件', params: ''},
+    {name: 'onClickClose', desc: '点击关闭按钮事件', params: ''},
 ]
 
 

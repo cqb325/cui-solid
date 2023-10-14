@@ -1,5 +1,5 @@
 import { TableStore } from '.';
-type HeadProps = {
+declare type HeadProps = {
     data: TableStore;
     sticky?: boolean;
 };

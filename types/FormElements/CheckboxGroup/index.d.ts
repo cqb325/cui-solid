@@ -1,5 +1,5 @@
 export declare const CheckboxGroupContext: import("solid-js").Context<unknown>;
-type CheckboxGroupProps = {
+declare type CheckboxGroupProps = {
     classList?: any;
     class?: string;
     block?: boolean;

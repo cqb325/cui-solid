@@ -1,4 +1,4 @@
-type RateItemProps = {
+declare type RateItemProps = {
     onMouseEnter?: Function;
     onMouseEnterHalf?: Function;
     onClickHalfStar?: Function;

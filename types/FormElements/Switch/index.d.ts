@@ -1,4 +1,4 @@
-type SwitchProps = {
+declare type SwitchProps = {
     size?: 'small' | 'default' | 'large';
     disabled?: boolean;
     style?: any;

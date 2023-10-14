@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-type TimelineItemProps = {
+declare type TimelineItemProps = {
     children?: any;
     classList?: any;
     class?: string;

@@ -91,6 +91,8 @@ export function Body (props: BodyProps) {
     }
 
     createEffect(() => {
+        // 数据改变也需要重刷
+        props.data.data;
         const hh = props.data.headerSize.height;
         if (props.virtual) {
             const scrollElHeight = props.height ?? document.documentElement.clientHeight;

@@ -1,4 +1,4 @@
-type SpinnerProps = {
+declare type SpinnerProps = {
     classList?: any;
     class?: string;
     size?: 'small' | 'default' | 'large';
