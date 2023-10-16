@@ -1,4 +1,4 @@
-declare type RateProps = {
+type RateProps = {
     classList?: any;
     class?: string;
     disabled?: boolean;

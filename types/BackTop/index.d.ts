@@ -1,4 +1,4 @@
-declare type BackTopProps = {
+type BackTopProps = {
     classList?: any;
     class?: string;
     style?: any;

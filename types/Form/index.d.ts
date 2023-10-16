@@ -1,12 +1,12 @@
 import { JSXElement } from "solid-js";
 export declare const FormContext: import("solid-js").Context<FormContextOptions | undefined>;
-export declare type FormContextOptions = {
+export type FormContextOptions = {
     labelWidth?: number;
     inline?: boolean;
     form: any;
     onChange: Function;
 };
-declare type FormProps = {
+type FormProps = {
     classList?: any;
     class?: string;
     children?: JSXElement;

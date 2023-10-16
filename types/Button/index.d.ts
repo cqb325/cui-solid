@@ -1,5 +1,5 @@
 import { ComponentProps } from "solid-js";
-export declare type ButtonProps = {
+export type ButtonProps = {
     classList?: any;
     class?: string;
     link?: string;

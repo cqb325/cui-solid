@@ -1,5 +1,5 @@
 import { TreeProps } from "../../Tree";
-declare type TreeSelectProps = {
+type TreeSelectProps = {
     classList?: any;
     class?: string;
     style?: any;

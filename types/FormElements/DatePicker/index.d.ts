@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-declare type DatepickerProps = {
+type DatepickerProps = {
     classList?: any;
     class?: any;
     style?: any;
@@ -24,7 +24,7 @@ declare type DatepickerProps = {
     revers?: boolean;
     stick?: boolean;
 };
-export declare type DatepickerStore = {
+export type DatepickerStore = {
     currentMonth: Date[];
     range: Date[];
     hoverDate?: Date;

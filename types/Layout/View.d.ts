@@ -1,5 +1,5 @@
 import { JSX } from "solid-js";
-declare type ViewProps = {
+type ViewProps = {
     classList?: any;
     class?: any;
     children?: any;

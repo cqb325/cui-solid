@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-declare type AvatarListProps = {
+type AvatarListProps = {
     classList?: any;
     class?: string;
     size?: 'small' | 'large';

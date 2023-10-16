@@ -1,5 +1,5 @@
 import { TimelineItem } from "./TimelineItem";
-declare type TimelineProps = {
+type TimelineProps = {
     children?: any;
     classList?: any;
     class?: string;

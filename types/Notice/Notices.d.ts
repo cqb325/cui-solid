@@ -1,5 +1,5 @@
 import { JSX } from "solid-js";
-declare type NoticesProps = {
+type NoticesProps = {
     data?: any;
     onClose?: Function;
     docker?: string;

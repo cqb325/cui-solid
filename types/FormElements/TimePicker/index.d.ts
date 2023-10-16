@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-declare type TimePickerProps = {
+type TimePickerProps = {
     classList?: any;
     class?: any;
     type?: 'timeRange';

@@ -1,5 +1,5 @@
 import { ComponentProps } from "solid-js";
-export declare type ParagraphProps = {
+export type ParagraphProps = {
     type?: 'default' | 'secondary' | 'warning' | 'error' | 'success' | 'primary';
     disabled?: boolean;
     link?: string;

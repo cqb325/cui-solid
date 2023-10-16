@@ -1,6 +1,6 @@
 export * from './Option';
 export * from './OptionGroup';
-declare type SelectOptions = {
+type SelectOptions = {
     name?: string;
     value?: any;
     disabled?: boolean;

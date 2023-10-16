@@ -1,4 +1,4 @@
-declare type CollapaseProps = {
+type CollapaseProps = {
     open?: boolean;
     onOpen?: Function;
     style?: any;

@@ -1,4 +1,4 @@
-declare type TagProps = {
+type TagProps = {
     classList?: any;
     class?: string;
     theme?: 'primary' | 'danger' | 'warning' | 'success' | 'info' | 'magenta' | 'red' | 'volcano' | 'orange' | 'gold' | 'yellow' | 'lime' | 'green' | 'cyan' | 'blue' | 'geekblue' | 'purple';

@@ -1,5 +1,5 @@
 import { TableStore } from '.';
-declare type ColgroupProps = {
+type ColgroupProps = {
     data: TableStore;
 };
 export declare function Colgroup(props: ColgroupProps): import("solid-js").JSX.Element;

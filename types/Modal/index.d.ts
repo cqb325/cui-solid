@@ -1,11 +1,11 @@
 import { JSXElement } from "solid-js";
-declare type Position = {
+type Position = {
     top?: string;
     bottom?: string;
     left?: string;
     right?: string;
 };
-declare type ModalProps = {
+type ModalProps = {
     bounds?: string;
     disabled?: boolean;
     style?: any;

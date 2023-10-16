@@ -1,5 +1,5 @@
 import { AnchorLink } from './AnchorLink';
-declare type AnchorProps = {
+type AnchorProps = {
     children?: any;
     classList?: any;
     class?: string;

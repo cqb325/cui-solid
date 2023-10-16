@@ -1,7 +1,7 @@
 export * from './DropdownMenu';
 export * from './DropdownItem';
 export declare const useDropdownConext: () => unknown;
-declare type DropdownProps = {
+type DropdownProps = {
     trigger?: 'hover' | 'click' | 'contextMenu' | 'custom';
     align?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'right' | 'left' | 'rightTop' | 'leftTop';
     classList?: any;

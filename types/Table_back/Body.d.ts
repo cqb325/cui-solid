@@ -1,8 +1,8 @@
 import { TableStore } from '.';
-declare type BodyProps = {
+type BodyProps = {
     data: TableStore;
 };
-declare type RowProps = {
+type RowProps = {
     store: TableStore;
     data: any;
     index: number;

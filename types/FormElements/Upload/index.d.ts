@@ -1,4 +1,4 @@
-declare type UploadProps = {
+type UploadProps = {
     multiple?: boolean;
     webkitdirectory?: boolean;
     accept?: string;

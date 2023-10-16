@@ -1,4 +1,4 @@
-declare type ColProps = {
+type ColProps = {
     classList?: any;
     class?: any;
     children?: any;

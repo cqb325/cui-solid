@@ -1,8 +1,8 @@
-export declare type ControlPosition = {
+export type ControlPosition = {
     x: number;
     y: number;
 };
-export declare type DraggableData = {
+export type DraggableData = {
     node: HTMLElement;
     x: number;
     y: number;

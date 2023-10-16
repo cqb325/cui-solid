@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-declare type AccordionItemProps = {
+type AccordionItemProps = {
     name?: string;
     style?: any;
     title?: any;

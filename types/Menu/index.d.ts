@@ -1,7 +1,7 @@
 export * from "./MenuItem";
 export * from "./SubMenu";
 export * from "./MenuGroup";
-declare type MenuProps = {
+type MenuProps = {
     classList?: any;
     class?: string;
     style?: any;

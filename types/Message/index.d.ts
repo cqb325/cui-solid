@@ -1,4 +1,4 @@
-declare type MessageProps = {
+type MessageProps = {
     key?: string;
     duration?: number;
     type?: 'info' | 'success' | 'warning' | 'error';

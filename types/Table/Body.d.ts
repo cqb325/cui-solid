@@ -1,11 +1,11 @@
 import { TableStore } from '.';
-declare type BodyProps = {
+type BodyProps = {
     data: TableStore;
     onScroll: Function;
     height?: number;
     virtual?: boolean;
 };
-declare type RowProps = {
+type RowProps = {
     store: TableStore;
     data: any;
     index: number;

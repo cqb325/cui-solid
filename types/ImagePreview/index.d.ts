@@ -1,4 +1,4 @@
-declare type ImagePreviewProps = {
+type ImagePreviewProps = {
     classList?: any;
     class?: string;
     style?: any;

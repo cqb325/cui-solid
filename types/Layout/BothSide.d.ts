@@ -1,5 +1,5 @@
 import { JSX } from "solid-js";
-declare type BothSideProps = {
+type BothSideProps = {
     classList?: any;
     class?: any;
     children?: any;

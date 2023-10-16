@@ -1,4 +1,4 @@
-export declare type CheckboxProps = {
+export type CheckboxProps = {
     classList?: any;
     class?: any;
     checked?: any;
