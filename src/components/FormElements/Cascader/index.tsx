@@ -24,6 +24,7 @@ type CascaderProps = {
     onChange?: Function,
     trigger?:'click'|'hover',
     changeOnSelect?: boolean,
+    placeholder?: string,
     loadData?: Function
 }
 
@@ -162,7 +163,7 @@ export function Cascader (props: CascaderProps) {
                     </div>}>
                 {/* <Value prepend={props.prepend} text={text()} clearable={props.clearable} value={props.value} seperator={seperator}/> */}
                 <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        disabled={props.disabled} size={props.size} />
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} />
             </Dropdown>
         </div>
     </CascaderContext.Provider>

@@ -22,6 +22,7 @@ type TreeSelectProps = {
     size?: 'small'|'large',
     showMax?: number,
     valueClosable?: boolean,
+    placeholder?: string,
     showMore?: boolean
 } & TreeProps;
 

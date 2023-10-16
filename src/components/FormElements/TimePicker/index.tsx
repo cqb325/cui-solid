@@ -29,6 +29,7 @@ type TimePickerProps = {
     seperator?: string,
     transfer?: boolean,
     trigger?: Function,
+    placeholder?: string,
     onChange?: Function
 }
 
@@ -167,7 +168,7 @@ export function Timepicker (props: TimePickerProps) {
                     {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
                         clearable={props.clearable} type={props.type} seperator={seperator}/> */}
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        disabled={props.disabled} size={props.size} icon={<Icon name='clock'/>}/>
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name='clock'/>}/>
                 </Show>
             </Dropdown>
         </div>

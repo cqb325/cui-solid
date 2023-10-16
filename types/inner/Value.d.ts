@@ -10,6 +10,7 @@ export interface ValueProps {
     size?: 'small' | 'large';
     multi?: boolean;
     showMax?: number;
+    placeholder?: string;
     valueClosable?: boolean;
     onClose?(item: TagConfig, e: any): void;
     onInput?(e: any): void;

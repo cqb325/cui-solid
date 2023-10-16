@@ -22,6 +22,7 @@ export const propsData = [
     {name: 'shortCuts', desc: '快捷选择区域', type: 'Function|JSXElement', default: ''},
     {name: 'revers', desc: '超出后下拉是否翻转', type: 'boolean', default: 'true'},
     {name: 'stick', desc: 'daterange的月份是否粘连', type: 'boolean', default: ''},
+    {name: 'placeholder', desc: 'placeholder', type: 'string', default: ''},
     {name: 'onChange', desc: '值改变事件', type: 'Function', default: ''},
 ]
 

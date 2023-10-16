@@ -12,6 +12,7 @@ export interface ValueProps {
     size?: 'small'|'large'
     multi?: boolean
     showMax?: number
+    placeholder?: string
     valueClosable?: boolean,
     onClose?(item: TagConfig, e: any): void,
     onInput?(e: any): void,
@@ -60,8 +61,8 @@ export function Value (props: ValueProps) {
             <Match when={!props.multi}>
                 <div class='cm-field-text'>
                     {
-                        props.filter ? <input class="cm-select-input" value={props.text} onInput={props.onInput}/>
-                        : props.text
+                        props.filter ? <input class="cm-select-input" value={props.text} placeholder={props.placeholder} onInput={props.onInput}/>
+                        : props.text ? props.text : <span class="cm-field-placeholder">{props.placeholder??''}</span>
                     }
                 </div>
             </Match>

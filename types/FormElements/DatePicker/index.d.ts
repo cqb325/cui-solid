@@ -22,6 +22,7 @@ type DatepickerProps = {
     maxRange?: number;
     shortCuts?: Function | JSXElement;
     revers?: boolean;
+    placeholder?: string;
     stick?: boolean;
 };
 export type DatepickerStore = {

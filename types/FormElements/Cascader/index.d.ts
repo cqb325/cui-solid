@@ -16,6 +16,7 @@ type CascaderProps = {
     onChange?: Function;
     trigger?: 'click' | 'hover';
     changeOnSelect?: boolean;
+    placeholder?: string;
     loadData?: Function;
 };
 export type CascaderStore = {

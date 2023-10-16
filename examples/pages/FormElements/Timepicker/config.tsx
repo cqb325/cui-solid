@@ -18,6 +18,7 @@ export const propsData = [
     {name: 'footer', desc: '底部内容', type: 'JSXElement', default: ''},
     {name: 'seperator', desc: 'timeRange的分隔符', type: 'string', default: '~'},
     {name: 'transfer', desc: '下拉内容使用Portal渲染', type: 'boolean', default: ''},
+    {name: 'placeholder', desc: 'placeholder', type: 'string', default: ''},
     {name: 'onChange', desc: '值改变事件', type: 'Function', default: ''},
     {name: 'theme', desc: '主题 light|dark', type: 'string', default: 'light'},
 ]

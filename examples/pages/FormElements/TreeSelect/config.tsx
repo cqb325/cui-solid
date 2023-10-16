@@ -16,6 +16,7 @@ export const propsData = [
     {name: 'checkRelation', desc: '选择框的级联关系 related|unRelated ', type: 'string', default: 'related'},
     {name: 'align', desc: '下拉的位置 bottomLeft|bottomRight ', type: 'string', default: 'bottomLeft'},
     {name: 'valueClosable', desc: '值可关闭 ', type: 'boolean', default: ''},
+    {name: 'placeholder', desc: 'placeholder', type: 'string', default: ''},
     {name: 'showMore', desc: '是否鼠标滑过显示隐藏的值 ', type: 'boolean', default: ''},
     {name: 'onChange', desc: '复选框选中事件', type: 'Function', default: ''},
 ]

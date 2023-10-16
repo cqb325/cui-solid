@@ -7,6 +7,7 @@ export const propsData = [
     {name: 'disabled', desc: '禁用', type: 'boolean', default: ''},
     {name: 'size', desc: '尺寸 small | large', type: 'string', default: ''},
     {name: 'clearable', desc: '可清空', type: 'boolean', default: ''},
+    {name: 'placeholder', desc: 'placeholder', type: 'string', default: ''},
     {name: 'multi', desc: '多选', type: 'boolean', default: ''},
     {name: 'prefix', desc: '前缀', type: 'string|JSXElement', default: ''},
     {name: 'data', desc: '传入的数据', type: 'Array', default: ''},

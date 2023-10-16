@@ -13,6 +13,7 @@ type TreeSelectProps = {
     size?: 'small' | 'large';
     showMax?: number;
     valueClosable?: boolean;
+    placeholder?: string;
     showMore?: boolean;
 } & TreeProps;
 export declare function TreeSelect(props: TreeSelectProps): import("solid-js").JSX.Element;

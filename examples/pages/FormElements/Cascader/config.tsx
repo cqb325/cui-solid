@@ -9,6 +9,7 @@ export const propsData = [
     {name: 'align', desc: '下拉位置bottomLeft|bottomRight', type: 'string', default: 'bottomRight'},
     {name: 'prepend', desc: '前缀', type: 'JSXElement', default: ''},
     {name: 'value', desc: '值，可控属性', type: 'Function[]', default: ''},
+    {name: 'placeholder', desc: 'placeholder', type: 'string', default: ''},
     {name: 'seperator', desc: '分隔符', type: 'string', default: '/'},
     {name: 'transfer', desc: '下拉内容使用Portal渲染', type: 'boolean', default: ''},
     {name: 'revers', desc: '是否需要翻转', type: 'boolean', default: 'true'},

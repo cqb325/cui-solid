@@ -37,6 +37,7 @@ type DatepickerProps = {
     maxRange?: number,
     shortCuts?: Function | JSXElement,
     revers?: boolean
+    placeholder?: string
     // daterange的月份是否粘连
     stick?: boolean
 }
@@ -359,7 +360,7 @@ export function Datepicker (props: DatepickerProps) {
                 </div>}>
                 <Show when={!props.trigger} fallback={props.trigger && props.trigger()}>
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        disabled={props.disabled} size={props.size} icon={<Icon name='calendar1'/>}/>
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name='calendar1'/>}/>
                     {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
                         clearable={props.clearable} type={props.type} seperator={seperator}/> */}
                 </Show>

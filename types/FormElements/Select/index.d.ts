@@ -9,6 +9,7 @@ type SelectOptions = {
     multi?: boolean;
     prefix?: any;
     style?: any;
+    placeholder?: string;
     data?: Array<any>;
     textField?: string;
     valueField?: string;

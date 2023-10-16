@@ -12,6 +12,7 @@ type SelectOptions = {
     class?: any;
     classList?: any;
     filter?: boolean;
+    placeholder?: string;
     renderOption?: Function;
     ref?: any;
     emptyOption?: any;

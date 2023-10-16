@@ -20,6 +20,7 @@ type TimePickerProps = {
     seperator?: string;
     transfer?: boolean;
     trigger?: Function;
+    placeholder?: string;
     onChange?: Function;
 };
 export declare function Timepicker(props: TimePickerProps): import("solid-js").JSX.Element;

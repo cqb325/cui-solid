@@ -25,7 +25,7 @@ export default function RatePage () {
                 
                 <Space id="auto_base" dir="v">
                     <Card bordered>
-                        <AutoComplete data={data()} onSearch={(v: any) => {
+                        <AutoComplete data={data()} placeholder='查询' onSearch={(v: any) => {
                             const arr: any = [];
                             arr.push(v);
                             arr.push(v+v);

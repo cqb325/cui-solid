@@ -23,6 +23,7 @@ type SelectOptions = {
     multi?: boolean,
     prefix?: any,
     style?: any,
+    placeholder?: string,
     data?: Array<any>,
     textField?: string,
     valueField?: string,
@@ -241,7 +242,7 @@ export function Select (props: SelectOptions) {
             </div>
         </div>}>
             <Value text={labels()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
-                valueClosable={props.valueClosable} clearable={props.clearable} onClear={onClear} 
+                valueClosable={props.valueClosable} clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
                 prepend={props.prefix} size={props.size} icon={<Icon name='chevron-down' class="cm-select-cert"/>} onClose={onValueClose}/>
         </Dropdown>
         

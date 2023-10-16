@@ -24,6 +24,7 @@ type SelectOptions = {
     class?: any,
     classList?: any,
     filter?: boolean,
+    placeholder?: string,
     renderOption?: Function,
     ref?: any,
     emptyOption?: any,
@@ -151,7 +152,7 @@ export function AutoComplete (props: SelectOptions) {
         </Collapase>
     </div>}>
         <Value text={labels()} disabled={props.disabled} filter onInput={onFilter}
-                clearable={props.clearable} onClear={onClear} 
+                clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
                 prepend={props.prefix} size={props.size} icon={<Icon name='chevron-down' class="cm-select-cert"/>} />
     </Dropdown>
     </div>
