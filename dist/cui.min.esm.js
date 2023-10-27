@@ -4743,7 +4743,7 @@ function BM(M) {
   }, y = () => {
     g.onChange && g.onChange(""), j("");
   }, O = (w) => {
-    w.keyCode === 13 && g.onEnter && g.onEnter(T), g.onKeyUp && g.onKeyUp(w);
+    w.keyCode === 13 && g.onEnter && g.onEnter(T()), g.onKeyUp && g.onKeyUp(w);
   }, t = (w) => {
     w.keyCode === 13 && (j(w.target.value), g.onChange && g.onChange(w.target.value)), g.onKeyDown && g.onKeyDown(w);
   };
@@ -4881,10 +4881,13 @@ function SA(M) {
 }
 q(["click"]);
 function eA(M) {
-  const [I, g] = TM(M, ["enterButton", "onEnter"]), D = I.enterButton ? null : E(H, {
+  const [I, g] = TM(M, ["enterButton", "onEnter", "onSearch"]), D = I.enterButton ? null : E(H, {
     name: "search",
     style: {
       cursor: "pointer"
+    },
+    get onClick() {
+      return I.onSearch;
     }
   });
   let N = null;

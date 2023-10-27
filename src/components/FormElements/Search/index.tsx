@@ -5,11 +5,12 @@ import { InputProps } from "../Input/input";
 
 interface SearchProps extends InputProps {
     enterButton?: any,
+    onSearch?: any,
 }
 
 export function Search (props: SearchProps) {
-    const [local, others] = splitProps(props, ['enterButton', 'onEnter']);
-    const suffix = !local.enterButton ? <Icon name='search' style={{cursor: 'pointer'}}/> : null;
+    const [local, others] = splitProps(props, ['enterButton', 'onEnter', 'onSearch']);
+    const suffix = !local.enterButton ? <Icon name='search' style={{cursor: 'pointer'}} onClick={local.onSearch}/> : null;
     let append = null;
     if (local.enterButton) {
         append = typeof local.enterButton === 'string' ? local.enterButton : <Icon name='search'/>;

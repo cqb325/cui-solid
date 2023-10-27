@@ -723,11 +723,6 @@
   resolved "https://registry.npmmirror.com/@types/node/-/node-18.14.0.tgz#94c47b9217bbac49d4a67a967fdcdeed89ebb7d0"
   integrity sha512-5EWrvLmglK+imbCJY0+INViFWUHg1AHel1sq4ZVSfdcNqGy9Edv3UB9IIzzg+xPaUcAgZYcfVs2fBcwDeZzU0A==
 
-"@types/node@^20.3.2":
-  version "20.3.2"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.3.2.tgz#fa6a90f2600e052a03c18b8cb3fd83dd4e599898"
-  integrity sha512-vOBLVQeCQfIcF/2Y7eKFTqrMnizK5lRNQ7ykML/5RuwVXVWxYkgwS7xbt4B6fKCUPgbSL5FSsjHQpaGQP/dQmw==
-
 "@types/stack-utils@^2.0.0":
   version "2.0.1"
   resolved "https://registry.npmmirror.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
@@ -1408,13 +1403,10 @@ csstype@^3.1.0:
   resolved "https://registry.npmmirror.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
-cui-virtual-list@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/cui-virtual-list/-/cui-virtual-list-1.0.6.tgz#5d33f8ef69f41ce16a6d54db28776f1270fcb483"
-  integrity sha512-Q6NRZFhn23ROt68U7WImCI+f7HRi2SBHOnq6/sD9eBq8kQo/W8c6Ngo1m/36oIK5CnMeZFHRZE3QpglVBaemcA==
-  dependencies:
-    "@types/node" "^20.3.2"
-    solid-js "^1.8.1"
+cui-virtual-list@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/cui-virtual-list/-/cui-virtual-list-1.0.7.tgz#43eb2bd9a02ac0141c63df2b1e24d587c20daf07"
+  integrity sha512-h0kdQlu60FMQU9NIscEmq6KAvUwIaxSxl+9aROGJpleOiNweA7aWB5jVIzTIRo+hbpuD3/l1Q2uAf75NDRV10Q==
 
 d@1, d@^1.0.1:
   version "1.0.1"
@@ -3923,15 +3915,10 @@ semver@^6.3.0:
   resolved "https://registry.npmmirror.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
-seroval@^0.10.4:
-  version "0.10.4"
-  resolved "https://registry.npmjs.org/seroval/-/seroval-0.10.4.tgz#7c47761d7651b2471bcdb44906213df4114bb1d0"
-  integrity sha512-TdaE9JkoATjKu+vjwllieX8zWyBTUVxbgWDnOsDJFfmKbM7vLSukuCXuD3pO3kkCtX4daywOW8ps2VCdPhS8/w==
-
-seroval@^0.5.0:
-  version "0.5.1"
-  resolved "https://registry.npmjs.org/seroval/-/seroval-0.5.1.tgz#e6d17365cdaaae7e50815c7e0bcd7102facdadf3"
-  integrity sha512-ZfhQVB59hmIauJG5Ydynupy8KHyr5imGNtdDhbZG68Ufh1Ynkv9KOYOAABf71oVbQxJ8VkWnMHAjEHE7fWkH5g==
+seroval@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npmjs.org/seroval/-/seroval-0.12.0.tgz#dbf96b81db7c916c57deff0d3e33bf3f7a62ab94"
+  integrity sha512-5qvk9WRORhvOdHVtDv6KEKrTDbG8O9nODDdETfQcJ0u9iaZJ6mAASg/nQgPzqtuV9cqln9msE7WNmD+sJomrIw==
 
 set-blocking@^2.0.0:
   version "2.0.0"
@@ -3992,21 +3979,13 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-solid-js@^1.7.11:
-  version "1.7.11"
-  resolved "https://registry.npmjs.org/solid-js/-/solid-js-1.7.11.tgz#c37706382bcfd563459810434b1382b550c27867"
-  integrity sha512-JkuvsHt8jqy7USsy9xJtT18aF9r2pFO+GB8JQ2XGTvtF49rGTObB46iebD25sE3qVNvIbwglXOXdALnJq9IHtQ==
+solid-js@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.npmjs.org/solid-js/-/solid-js-1.8.4.tgz#ba1bcdf92fd09eb61928b5425306d48439daa92a"
+  integrity sha512-l8tZCa0nA1iyFR+yTZi4cKNktX3UfwT3FbdzDAtNwp40EtabVRf3t0EUN3C3Kokkh7c7nBx8ak/0GZV+KFVSxQ==
   dependencies:
     csstype "^3.1.0"
-    seroval "^0.5.0"
-
-solid-js@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.npmjs.org/solid-js/-/solid-js-1.8.1.tgz#0568041f6dfca099ae48b94b2de1711974d25694"
-  integrity sha512-HU4tB/vWY5/0P9GzbvePjK1aucNqUcF1XlAirZBjKkrkWG8XNIN9HSjscTC/nbl3A6JWjrW+OLcPEvWxsMhdng==
-  dependencies:
-    csstype "^3.1.0"
-    seroval "^0.10.4"
+    seroval "^0.12.0"
 
 solid-refresh@^0.5.0:
   version "0.5.3"
@@ -4024,12 +4003,10 @@ solid-testing-library@0.5.0:
   dependencies:
     "@testing-library/dom" "^8.19.0"
 
-solid-vue-router@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.npmjs.org/solid-vue-router/-/solid-vue-router-1.0.12.tgz#747508816ddbb7a17d8e8b642211d32782dc9506"
-  integrity sha512-O/VZIhJb4l+KO9mPA3tjR5++Qoz3cZMc4yf7zH09cQpVeAD97fCfB6jKblc0QCiVPEiajkvpUKiY2wRUQkQlZQ==
-  dependencies:
-    solid-js "^1.7.11"
+solid-vue-router@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.npmjs.org/solid-vue-router/-/solid-vue-router-1.0.14.tgz#0c70be1efdb2b5a8445355097196f2a9e3d3044b"
+  integrity sha512-6VOvnfcAuqGzp4yT8ASXB/maodjSLSwq7zLMLbWudUefVpWxyfG+DKP7lw8gZR/RbgtmgnUf3wxHjGL1KWlgHQ==
 
 source-map-js@^1.0.2:
   version "1.0.2"

@@ -88,7 +88,7 @@ export function InnerInput (props: InputProps) {
     const _onKeyUp = (e: any) => {
         if (e.keyCode === 13) {
             if (local.onEnter) {
-                local.onEnter(_value);
+                local.onEnter(_value());
             }
         }
         local.onKeyUp && local.onKeyUp(e);

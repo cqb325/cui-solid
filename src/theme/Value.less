@@ -143,5 +143,16 @@
     line-height: 30px;
 }
 .cm-field-placeholder {
-    color: #999;
+    color: var(--cui-color-disabled-text);
+}
+.cm-select-input {
+    &::-webkit-input-placeholder {
+        color: var(--cui-color-disabled-text);
+    }
+    &:-moz-placeholder{
+        color: var(--cui-color-disabled-text);
+    }
+    &::-ms-input-placeholder{
+        color: var(--cui-color-disabled-text);
+    }
 }
