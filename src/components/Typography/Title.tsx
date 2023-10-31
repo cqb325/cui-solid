@@ -4,7 +4,7 @@ import { useClassList } from "../utils/useProps";
 
 export function Title (props: ParagraphProps) {
     const heading = () => props.heading || 1;
-    const classList = () => useClassList(props, 'cm-typograghy-title', `cm-typograghy-h${heading}`);
+    const classList = () => useClassList(props, 'cm-typograghy-title', `cm-typograghy-h${heading()}`);
     const options = [
         () => <h1 classList={classList()} style={props.style}>{props.children}</h1>,
         () => <h2 classList={classList()} style={props.style}>{props.children}</h2>,

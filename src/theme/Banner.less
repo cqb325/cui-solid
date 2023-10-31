@@ -1,0 +1,97 @@
+.cm-banner {
+    padding: 12px;
+    color: var(--cui-color-text-0);
+}
+
+.cm-banner-body {
+    display: flex;
+    flex-direction: row;
+}
+.cm-banner-content {
+    display: flex;
+    flex: 1 1;
+    align-items: top;
+}
+
+.cm-banner-icon {
+    display: flex;
+    margin-right: 12px;
+}
+.cm-banner-desc {
+    font-size: 14px;
+    line-height: 20px;
+}
+.cm-banner-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    margin-left: 12px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--cui-color-fill-0);
+        border: 0 solid transparent;
+        transition: background-color 0.2s ease-in;
+    }
+}
+.cm-banner-full {
+    .cm-banner-content {
+        justify-content: center;
+    }
+    .cm-banner-content-body,
+    .cm-banner-icon {
+        display: flex;
+        align-items: center;
+    }
+    .cm-banner-desc {
+        margin: 0;
+    }
+}
+.cm-banner-title {
+    font-size: 14px;
+}
+.cm-banner-desc {
+    margin-top: 2px;
+}
+.cm-banner-not-full {
+    border-radius: var(--cui-border-radius-small);
+    .cm-banner-desc {
+        color: var(--cui-color-text-0);
+    }
+}
+.cm-banner-extra {
+    margin-top: 8px;
+}
+.cm-banner-info {
+    background-color: var(--cui-info-color-light-default);
+    color: var(--cui-info-color);
+    &.cm-banner-bordered {
+        border: 1px solid var(--cui-info-color-disabled);
+    }
+}
+
+.cm-banner-warning {
+    background-color: var(--cui-warning-color-light-default);
+    color: var(--cui-warning-color);
+    &.cm-banner-bordered {
+        border: 1px solid var(--cui-warning-color-disabled);
+    }
+}
+
+.cm-banner-success {
+    background-color: var(--cui-success-color-light-default);
+    color: var(--cui-success-color);
+    &.cm-banner-bordered {
+        border: 1px solid var(--cui-success-color-disabled);
+    }
+}
+
+.cm-banner-error {
+    background-color: var(--cui-error-color-light-default);
+    color: var(--cui-error-color);
+    &.cm-banner-bordered {
+        border: 1px solid var(--cui-error-color-disabled);
+    }
+}

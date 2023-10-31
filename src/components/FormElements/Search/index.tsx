@@ -13,7 +13,7 @@ export function Search (props: SearchProps) {
     const suffix = !local.enterButton ? <Icon name='search' style={{cursor: 'pointer'}} onClick={local.onSearch}/> : null;
     let append = null;
     if (local.enterButton) {
-        append = typeof local.enterButton === 'string' ? local.enterButton : <Icon name='search'/>;
+        append = typeof local.enterButton === 'string' ? local.enterButton : <Icon name='search' onClick={local.onSearch}/>;
     }
     return <InnerInput onEnter={local.onEnter} suffix={suffix} append={append} {...others}/>
 }

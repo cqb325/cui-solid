@@ -77,6 +77,7 @@ export const menuData = [
             {name: 'QRCode', title: 'QRCode 二维码', path: 'qrcode', component: lazy(() => import('./pages/view/QRCode'))},
             {name: 'Drawer', title: 'Drawer 抽屉', path: 'drawer', component: lazy(() => import('./pages/view/Drawer'))},
             {name: 'PageFooter', title: 'PageFooter 页底', path: 'pagefooter', component: lazy(() => import('./pages/view/PageFooter'))},
+            {name: 'Banner', title: 'Banner 通知横幅', path: 'banner', component: lazy(() => import('./pages/view/Banner'))},
         ]
     },
     {

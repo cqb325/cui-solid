@@ -4,6 +4,7 @@ export * from './Avatar';
 export * from './AvatarList';
 export * from './BackTop';
 export * from './Badge';
+export * from './Banner';
 export * from './Breadcrumb';
 export * from './Button';
 export * from './ButtonGroup';
