@@ -11,6 +11,7 @@ export const useSlots = (_children: JSXElement) => {
 	const [slots, setSlots] = createStore<any>({default: []})
 	createComputed(
 		on(parts, () => {
+			setSlots('default', []);
 			for (const part of parts.toArray() as unknown as SlotProps[]) {
 				if (!part.name) {
 					setSlots('default', [...slots.default, () => part])

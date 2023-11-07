@@ -41,6 +41,10 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+
+    v0.1.23
+    1、List取消使用Slots
+    
     v0.1.21
     1、新增Banner组件
 

@@ -13,7 +13,6 @@ import { Text } from "@/components/Typography/Text";
 import { Table } from "@/components/Table";
 import { anchorData, codes, itemPropsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
-import { Slot } from "@/components/inner/Slot";
 import { propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
@@ -35,13 +34,7 @@ function ListDemo () {
                     <Card bordered>
                         <List border onSelect={(item: any) => {
                             console.log(item);
-                        }}>
-                            <Slot name="head">
-                                Header
-                            </Slot>
-                            <Slot name="foot">
-                                Footer
-                            </Slot>
+                        }} head='Header' foot='Footer'>
                             <For each={data}>
                                 {(item) => {
                                     return <List.Item id={item.id} desc={item.desc} content={item.content} data={item}></List.Item>
@@ -62,13 +55,7 @@ function ListDemo () {
                     <Card bordered>
                         <List border size='small' onSelect={(item: any) => {
                             console.log(item);
-                        }}>
-                            <Slot name="head">
-                                Header
-                            </Slot>
-                            <Slot name="foot">
-                                Footer
-                            </Slot>
+                        }} head='Header' foot='Footer'>
                             <For each={data}>
                                 {(item) => {
                                     return <List.Item id={item.id} desc={item.desc} data={item}></List.Item>

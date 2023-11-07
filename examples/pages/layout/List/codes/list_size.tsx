@@ -6,13 +6,7 @@ export default `const data = [
 
 <List border size='small' onSelect={(item: any) => {
     console.log(item);
-}}>
-    <Slot name="head">
-        Header
-    </Slot>
-    <Slot name="foot">
-        Footer
-    </Slot>
+}} head='Header' foot='Footer'>
     <For each={data}>
         {(item) => {
             return <List.Item id={item.id} desc={item.desc} data={item}></List.Item>

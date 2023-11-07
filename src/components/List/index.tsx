@@ -1,8 +1,7 @@
-import { Show, createContext, useContext } from "solid-js";
+import { createContext, useContext } from "solid-js";
 import createModel from "../utils/createModel";
 import { useClassList } from "../utils/useProps";
 import { Item } from "./Item";
-import { useSlots } from "../utils/useSlots";
 
 type ListProps = {
     classList?: any,
@@ -33,27 +32,19 @@ export function List (props: ListProps) {
 
     const [activeKey, setActiveKey] = createModel(props, 'activeKey', '');
 
-    const slots = useSlots(props.children);
-
     return <ListContext.Provider value={{
         render: props.render,
         signal: [activeKey, setActiveKey],
         onSelect: props.onSelect
     }}>
         <div classList={classList()} style={props.style}>
-            <Show when={slots.head}>
-                <div class='cm-list-head'>{slots.head}</div>
-            </Show>
             {
                 props.head ? <div class='cm-list-head'>{props.head}</div> : null
             }
-            {slots.default}
+            {props.children}
             {
                 props.foot ? <div class='cm-list-foot'>{props.foot}</div> : null
             }
-            <Show when={slots.foot}>
-                <div class='cm-list-foot'>{slots.foot}</div>
-            </Show>
         </div>
     </ListContext.Provider>;
 }

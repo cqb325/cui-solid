@@ -7,13 +7,7 @@ const data = [
 
 <List border onSelect={(item: any) => {
     console.log(item);
-}}>
-    <Slot name="head">
-        Header
-    </Slot>
-    <Slot name="foot">
-        Footer
-    </Slot>
+}} head='Header' foot='Footer'>
     <For each={data}>
         {(item) => {
             return <List.Item id={item.id} desc={item.desc} content={item.content} data={item}></List.Item>
