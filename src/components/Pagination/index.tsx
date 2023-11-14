@@ -4,7 +4,7 @@ import { PagePrev } from "./PagePrev";
 import { PageNext } from "./PageNext";
 import { PageItem } from "./PageItem";
 import { useClassList } from "../utils/useProps";
-import { createEffect, createSignal, For, Show } from "solid-js";
+import { createEffect, createSignal, For, Match, Show, Switch } from "solid-js";
 
 const pages = [
     {value: 10, label: '10条/页'},
@@ -13,22 +13,25 @@ const pages = [
     {value: 100, label: '100条/页'}
 ];
 
-type PaginationProps = {
-    classList?: any,
-    class?: any,
-    shape?: 'normal'|'circle',
-    size?: 'small'|'large',
-    current: number,
-    total: number,
-    pageSize: number,
-    onChange?: Function,
-    onChangePageSize?: Function,
-    displayedPages?: number,
-    showNums?: boolean,
-    style?: any,
-    showTotal?: boolean,
-    showPage?: boolean,
-    showJumper?: boolean,
+export interface PaginationProps {
+    classList?: any
+    class?: any
+    shape?: 'normal'|'circle'
+    size?: 'small'|'large'
+    current: number
+    total: number
+    pageSize: number
+    onChange?: Function
+    onChangePageSize?: Function
+    innerNear?: number
+    displayedPages?: number
+    startEndShowNum?: number
+    showNums?: boolean
+    mini?: boolean
+    style?: any
+    showTotal?: boolean
+    showPage?: boolean
+    showJumper?: boolean
     pages?: any[]
 }
 
@@ -41,7 +44,8 @@ export function Pagination(props: PaginationProps) {
     const current = () => props.current;
     const total = () => props.total ?? 0;
     const pageSize = () => props.pageSize ?? 10;
-    const displayedPages = props.displayedPages ?? 5;
+    const innerNear = props.innerNear ?? 2;
+    const startEndShowNum = props.startEndShowNum ?? 2;
     const showNums = props.showNums ?? true;
     const showTotal = props.showTotal ?? true;
     const ps = props.pages ?? pages;
@@ -125,13 +129,9 @@ export function Pagination(props: PaginationProps) {
      */
     function _getInner () {
         const pages = _calcPage();
-        const half = displayedPages / 2;
-        return {
-            start: Math.ceil(current() > half
-                ? Math.max(Math.min(current() - half, (pages - displayedPages)), 0)
-                : 0),
-            end: Math.ceil(current() > half ? Math.min(current() + half, pages) : Math.min(half, pages))
-        };
+        const start = current () > startEndShowNum + innerNear + 1 ? current() - innerNear : startEndShowNum + 1;
+        const end = current() + innerNear + startEndShowNum >= pages ? pages - startEndShowNum : current() + innerNear;
+        return {start, end};
     }
 
     function rednderItems () {
@@ -141,79 +141,77 @@ export function Pagination(props: PaginationProps) {
         const pages = _calcPage();
         const pagerList = [];
         const interval = _getInner();
-        if (pages <= 9) {
-            for (let i = 0; i < pages; i++) {
-                const active = current() === i + 1;
-                pagerList.push((<PageItem key={i + 1} onClick={_handleChange.bind(null, i + 1)}
-                    active={active} currentIndex={i + 1} />));
-            }
-        } else {
-            const edges = 2;
-            const end = Math.min(edges, interval.start);
-            for (let i = 0; i < end; i++) {
-                pagerList.push(<PageItem key={i + 1} onClick={_handleChange.bind(null, i + 1)}
-                    currentIndex={i + 1} />);
-            }
-            if (edges < interval.start && (interval.start - edges !== 1)) {
-                pagerList.push(<li class='cm-pagination-num cm-pagination-ellipse'><span class='ellipse'>•••</span></li>);
-            } else if (interval.start - edges === 1) {
-                pagerList.push(<PageItem key={edges + 1} onClick={_handleChange.bind(null, edges + 1)}
-                    currentIndex={edges + 1} />);
-            }
+        
+        const cur = current();
+        for (let i = 1; i <= startEndShowNum; i++) {
+            let active = cur === i;
+            pagerList.push(<PageItem active={active} onClick={_handleChange.bind(null, i)} currentIndex={i} />);
+        }
 
-            for (let j = interval.start; j < interval.end; j++) {
-                const active = current() === j + 1;
-                pagerList.push(<PageItem key={j + 1} onClick={_handleChange.bind(null, j + 1)}
-                    currentIndex={j + 1} active={active} />);
-            }
+        if(cur > startEndShowNum + innerNear + 1){
+            pagerList.push(<li class='cm-pagination-num cm-pagination-ellipse'><span class='ellipse'>•••</span></li>);
+        }
+        let start = interval.start;
+        const end = interval.end;
 
-            if (interval.end < pages && edges > 0) {
-                if (pages - edges > interval.end && (pages - edges - interval.end !== 1)) {
-                    pagerList.push(<li class='cm-pagination-num cm-pagination-ellipse'><span class='ellipse'>•••</span></li>);
-                } else if (pages - edges - interval.end === 1) {
-                    pagerList.push(<PageItem key={interval.end + 1}
-                        onClick={_handleChange.bind(null, interval.end + 1)}
-                        currentIndex={interval.end + 1} />);
-                }
-                const begin = Math.max(pages - edges, interval.end);
-                for (let k = begin; k < pages; k++) {
-                    pagerList.push(<PageItem key={k + 1} onClick={_handleChange.bind(null, k + 1)}
-                        currentIndex={k + 1} />);
-                }
-            }
+        for (;start <= end; start++) {
+            let active = cur === start;
+            pagerList.push(<PageItem onClick={_handleChange.bind(null, start)} currentIndex={start} active={active} />);
+        }
+
+        if(cur + innerNear + startEndShowNum < pages){
+            pagerList.push(<li class='cm-pagination-num cm-pagination-ellipse'><span class='ellipse'>•••</span></li>);
+        }
+
+        for (let i = pages - startEndShowNum + 1; i <= pages; i++) {
+            let active = cur === i;
+            pagerList.push(<PageItem active={active} onClick={_handleChange.bind(null, i)} currentIndex={i} />);
         }
         return pagerList;
     }
 
     return <div classList={classList()} style={props.style}>
-        <Show when={showTotal}>
-            <span class='cm-pagination-text mr-5'>共{total()}条</span>
-        </Show>
-        <ul class='cm-pagination-num-list'>
-            <PagePrev current={current} onClick={prev} />
-            {rednderItems()}
-            <PageNext current={current} onClick={next} disabled={current() === _calcPage()} />
-        </ul>
-        <Show when={showPage}>
-            <span class='cm-pagination-sizer'>
-                <Select value={pageSize()} size={props.size} onChange={onChangePageSize}
-                    data={ps} style={{width: '80px'}}>
-                    <For each={pages}>
-                        {(item: any) => {
-                            return <Option label={item.label} value={item.value}></Option>
-                        }}
-                    </For>
-                </Select>
-            </span>
-        </Show>
-        <Show when={showJumper}>
-            <span class='cm-pagination-jumper'>
-                <span class='cm-pagination-text'>跳至</span>
-                <InnerInput style={{ width: props.size === 'small' ? '30px' : '50px' }} class='mr-5'
-                    value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
-                <span class='cm-pagination-text'>页</span>
-            </span>
-        </Show>
+        <Switch>
+            <Match when={props.mini}>
+                <ul class='cm-pagination-num-list'>
+                    <PagePrev current={current} onClick={prev} />
+                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class='mr-5'
+                            value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
+                        <span class="cm-pagination-mini-pages">/ {_calcPage()}</span>
+                    <PageNext current={current} onClick={next} disabled={current() === _calcPage()} />
+                </ul>
+            </Match>
+            <Match when={!props.mini}>
+                <Show when={showTotal}>
+                    <span class='cm-pagination-text mr-5'>共{total()}条</span>
+                </Show>
+                <ul class='cm-pagination-num-list'>
+                    <PagePrev current={current} onClick={prev} />
+                    {rednderItems()}
+                    <PageNext current={current} onClick={next} disabled={current() === _calcPage()} />
+                </ul>
+                <Show when={showPage}>
+                    <span class='cm-pagination-sizer'>
+                        <Select value={pageSize()} size={props.size} onChange={onChangePageSize}
+                            data={ps}>
+                            <For each={pages}>
+                                {(item: any) => {
+                                    return <Option label={item.label} value={item.value}></Option>
+                                }}
+                            </For>
+                        </Select>
+                    </span>
+                </Show>
+                <Show when={showJumper}>
+                    <span class='cm-pagination-jumper'>
+                        <span class='cm-pagination-text'>跳至</span>
+                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class='mr-5'
+                            value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
+                        <span class='cm-pagination-text'>页</span>
+                    </span>
+                </Show>
+            </Match>
+        </Switch>
     </div>
 }
 

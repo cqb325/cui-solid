@@ -8,6 +8,9 @@ export const propsData = [
     {name: 'total', desc: '总数据量', type: 'number', default: ''},
     {name: 'pageSize', desc: '每页数据量', type: 'number', default: ''},
     {name: 'pages', desc: '每页数据量选项', type: 'Array', default: ''},
+    {name: 'mini', desc: '最小化只有跳转和总页数和前一页后一页', type: 'Boolean', default: ''},
+    {name: 'innerNear', desc: '中间当前页的前后页数', type: 'number', default: '2'},
+    {name: 'startEndShowNum', desc: '前后最少显示的页数', type: 'number', default: '2'},
     {name: 'showJumper', desc: '是否显示跳转', type: 'boolean', default: 'true'},
     {name: 'showPage', desc: '是否显示页数选择', type: 'boolean', default: 'true'},
     {name: 'showTotal', desc: '是否显示总数', type: 'boolean', default: 'true'},
@@ -37,6 +40,7 @@ export const anchorData = [
 import pagination_base from "./codes/pagination_base"
 import pagination_small from "./codes/pagination_small"
 import pagination_hide from "./codes/pagination_hide"
+import pagination_mini from "./codes/pagination_mini"
 import pagination_min from "./codes/pagination_min"
 import pagination_circle from "./codes/pagination_circle"
 import pagination_pages from "./codes/pagination_pages"
@@ -45,6 +49,7 @@ export const codes = {
     pagination_small,
     pagination_hide,
     pagination_min,
+    pagination_mini,
     pagination_circle,
     pagination_pages,
 }

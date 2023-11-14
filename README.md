@@ -42,6 +42,12 @@ CUI-SOLID
 
 ## changeLog
 
+    v0.1.25
+    1、Pagination重构分页显示规则并添加mini型
+
+    v0.1.24
+    1、Pagination添加innerDisplayedPages属性
+
     v0.1.23
     1、List取消使用Slots
     

@@ -60,6 +60,21 @@ export default function PaginationPage () {
                     </Card>
                 </Space>
 
+                <Space id="pagination_mini" dir="v">
+                    <Card bordered>
+                        <Pagination mini size='small' current={page1.current} pageSize={page1.pageSize} total={1000} onChange={(page: number) => {
+                            setPage1('current', page);
+                        }} onChangePageSize={(size: number) => {
+                            setPage1('pageSize', size);
+                        }}/>
+                        <Divider align="left"><Text type="primary">迷你型</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            设置 <Text code>mini</Text> 属性可以设置迷你型分页
+                        </Paragraph>
+                        <DemoCode data={codes['pagination_mini']}/>
+                    </Card>
+                </Space>
+
 
                 <Space id="pagination_hide" dir="v">
                     <Card bordered>
