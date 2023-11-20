@@ -29,24 +29,22 @@ export default defineConfig({
         entry: path.resolve(__dirname, './src/components/index.tsx'),
         name: 'CUI'
     },
-    polyfillDynamicImport: false,
     rollupOptions: {
       context: 'globalThis',
       preserveEntrySignatures: 'strict',
-      external: ['solid-js', 'countup.js', 'tinycolor2'],
+      external: ['solid-js', 'solid-js/web', 'solid-js/store', 'countup.js', 'tinycolor2', 'cui-virtual-list', 'dayjs'],
       output: [
-          {
-              format: 'es',
-              exports: 'named',
-              sourcemap: false,
-              entryFileNames: 'cui.min.esm.js',
-              chunkFileNames: '[name].js',
-              assetFileNames: '[name].[ext]',
-              namespaceToStringTag: true,
-              inlineDynamicImports: false,
-              manualChunks: undefined,
-          }
-      ]
+        {
+          format: 'es',
+          exports: 'named',
+          sourcemap: false,
+          entryFileNames: 'cui.min.esm.js',
+          chunkFileNames: '[name].js',
+          assetFileNames: '[name].[ext]',
+          inlineDynamicImports: false,
+          manualChunks: undefined,
+      }
+    ]
   }
   },
   resolve: {

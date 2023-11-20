@@ -42,6 +42,10 @@ CUI-SOLID
 
 ## changeLog
 
+    v0.1.26
+    1、修改Exception减少打包尺寸
+    2、Dropdown 定位和样式修改
+    
     v0.1.25
     1、Pagination重构分页显示规则并添加mini型
 

@@ -2,6 +2,7 @@
 
 export const propsData = [
     {name: 'type', desc: '类型 404|403|500|empty|fail|deny', type: 'Object', default: ''},
+    {name: 'typeImage', desc: '自定义图片', type: 'JSXElement', default: ''},
     {name: 'desc', desc: '描述文案', type: 'string', default: ''},
     {name: 'showDesc', desc: '显示描述文案', type: 'boolean', default: 'true'},
     {name: 'link', desc: '按钮地址', type: 'string', default: ''},

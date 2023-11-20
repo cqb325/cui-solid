@@ -1,12 +1,7 @@
 import { Match, Show, Switch } from "solid-js";
 import { Image } from "../Image";
+import { typeImages } from "./typeImages";
 import { useClassList } from "../utils/useProps"
-import img500 from './500.svg';
-import imgEmpty from './empty.svg';
-import img404 from './404.svg';
-import img403 from './403.svg';
-import imgFail from './fail.svg';
-import imgDeny from './deny.svg';
 import { Text } from "../Typography/Text";
 import { Button } from "../Button";
 
@@ -14,6 +9,7 @@ type ExceptionProps = {
     classList?: any,
     class?: string,
     type?: '404'|'403'|'500'|'empty'|'fail'|'deny',
+    typeImage?: any,
     desc?: string,
     showDesc?: boolean,
     link?: string,
@@ -28,26 +24,11 @@ export function Exception(props: ExceptionProps) {
     
     return <div classList={classList()}>
         <div class="cm-exception-img">
-            <Switch>
-                <Match when={props.type === '403'}>
-                    <Image src={img403} />
-                </Match>
-                <Match when={props.type === '404'}>
-                    <Image src={img404} />
-                </Match>
-                <Match when={props.type === '500'}>
-                    <Image src={img500} />
-                </Match>
-                <Match when={props.type === 'empty'}>
-                    <Image src={imgEmpty}/>
-                </Match>
-                <Match when={props.type === 'fail'}>
-                    <Image src={imgFail}/>
-                </Match>
-                <Match when={props.type === 'deny'}>
-                    <Image src={imgDeny}/>
-                </Match>
-            </Switch>
+            <Show when={props.typeImage} fallback={
+                <Image src={typeImages(props.type)} />
+            }>
+                <Image src={props.typeImage} />
+            </Show>
         </div>
         <div class="cm-exception-info">
             <Show when={showDesc}>

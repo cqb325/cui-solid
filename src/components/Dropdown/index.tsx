@@ -176,6 +176,9 @@ export function Dropdown(props: DropdownProps){
                 return;
             }
             const parent = te.offsetParent;
+            if (!parent) {
+                return;
+            }
             const parentPos = parent.getBoundingClientRect();
             const pos: any = useAlignPostion(align, te);
             const originTop = pos.top;
@@ -200,10 +203,23 @@ export function Dropdown(props: DropdownProps){
             
             if (revers) {
                 if (h > containerHeight) {
-                    pos.top = pos.top - rect.height - targetRect.height - 12;
+                    if (align === 'bottom' || align === 'bottomLeft' || align === 'bottomRight') {
+                        pos.top = pos.top - rect.height - targetRect.height - 12;
+                    } else if (align === 'left' || align === 'right') {
+                        pos.top = pos.top - (rect.height - targetRect.height) / 2;
+                    } else if (align === 'leftTop' || align === 'rightTop') {
+                        pos.top = pos.top - (rect.height - targetRect.height);
+                    }
                 }
+                // align 为 top bottom topLeft bottomLeft right rightTop rightBottom 存在该情况
                 if (w > containerWidth - 5) {
-                    pos.left = pos.left - rect.width + targetRect.width;
+                    if (align === 'bottom') {
+                        pos.left = pos.left - (rect.width - targetRect.width) / 2;
+                    } else if (align === 'bottomLeft') {
+                        pos.left = pos.left - rect.width + targetRect.width;
+                    } else if (align === 'right' || align === 'rightTop') {
+                        pos.left = pos.left - rect.width - targetRect.width;
+                    }
                 }
             }
             pos.top = pos.top + 'px'
