@@ -65,7 +65,7 @@ export function Menu (props: MenuProps) {
             }
         } else {
             // 顶级菜单项 横向的时候， 设置打开项 可以关闭已打开的subMenu
-            if (dir() === 'h') {
+            if (dir() === 'h' || store.min) {
                 setOpen(name);
             }
         }

@@ -1,13 +1,21 @@
-import { Captcha, Card, Divider, Email, Mobile, Paragraph, Password, Popover, Progress, Space, Table, Text, Title, UserName } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { Login, Submit } from "@/components";
 import { createSignal } from "solid-js";
-import { message } from "@/components";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { anchorData, captchaPropsData, codes, eventsData, passwordPropsData, propsData, usernamePropsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 useDirective(hljs);
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { Captcha, Email, Login, Mobile, Password, Submit, UserName } from "@/components/Login";
+import { message } from "@/components/Message";
+import { Popover } from "@/components/Popover";
+import { Progress } from "@/components/Progress";
 
 export default function LoginPage () {
     const [strong, setStrong] = createSignal('强');

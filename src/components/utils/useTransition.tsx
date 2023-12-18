@@ -24,12 +24,11 @@ export function useTransition (props: UseTransitionProps) {
     const { el } = props;
     
     const endTransition = (e: Event) => {
-        const target = props.target ? props.target() : el();
-        if (e.target === target) {
-            el().removeEventListener("transitionend", endTransition);
+        if (e.target && el().contains(e.target as Node)) {
             el().classList.remove(props.startClass);
             props.onLeave && props.onLeave();
         }
+        el().removeEventListener("transitionend", endTransition);
     }
 
     onCleanup(() => {
@@ -39,6 +38,8 @@ export function useTransition (props: UseTransitionProps) {
         enter () {
             if (el()) {
                 el().classList.add(props.startClass);
+                // 确保移除了事件
+                el().removeEventListener("transitionend", endTransition);
                 nextFrame(() => {
                     el().classList.add(props.activeClass);
                     props.onEnter && props.onEnter();

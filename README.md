@@ -41,6 +41,11 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.27
+    1、修改menu dark模式下的style
+    2、修复Drawer close mask 遮盖问题
+    3、useTransition修复监听未注销问题
+    4、修复Progress值溢出问题
 
     v0.1.26
     1、修改Exception减少打包尺寸

@@ -1,4 +1,3 @@
-import { Button, Card, Divider, Drawer, Paragraph, RadioGroup, Space, Table, Text, Title } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { createSignal } from "solid-js";
@@ -6,6 +5,16 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { CompAnchor } from "../../common/CompAnchor";
 useDirective(hljs);
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { Drawer } from "@/components/Drawer";
+import { RadioGroup } from "@/components/FormElements/RadioGroup";
 
 export default function DrawerPage () {
     const [visible, setVisible] = createSignal(false);

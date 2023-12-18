@@ -3,11 +3,17 @@ import { JSXElement } from "solid-js";
 import { hljs, useDirective } from "../../common/hljs";
 useDirective(hljs);
 import './style.less'
-import { Card, Divider, Paragraph, Space, Table, Text, Title } from "@/components";
 import { DemoCode } from "../../common/code";
 import { anchorData, codes, propsData } from "./config";
 import { propsColumns } from "../../common/columns";
 import { CompAnchor } from "../../common/CompAnchor";
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Divider } from "@/components/Divider";
+import { Text } from "@/components/Typography/Text";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Table } from "@/components/Table";
 
 export const ListItem = (props: any) : JSXElement => {
     const style = {...props.style}

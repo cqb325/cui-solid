@@ -1,10 +1,19 @@
-import { Card, Divider, Paragraph, Space, Text, Title, Steps, Button, Icon, Table } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { createSignal } from "solid-js";
 import { propsColumns } from "../../common/columns";
 import { anchorData, codes, itempropsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Steps } from "@/components/Steps";
+import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { Icon } from "@/components/Icon";
 useDirective(hljs);
 
 export default function StepsPage () {

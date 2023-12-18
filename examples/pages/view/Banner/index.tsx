@@ -1,10 +1,19 @@
-import { Banner, Button, Card, Divider, Paragraph, Slot, Space, Table, Text, Title } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 useDirective(hljs);
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { Banner } from "@/components/Banner";
+import { Slot } from "@/components/inner/Slot";
 
 export default function BannerPage () {
     return <>

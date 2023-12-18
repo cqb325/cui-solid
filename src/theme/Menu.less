@@ -252,6 +252,18 @@
     >.cm-menu-item{
         background-color: rgb(var(--cui-grey-8));
     }
+    &.cm-menu-h {
+        .cm-menu-submenu{
+            >.cm-menu-item {
+                background: var(--cui-color-bg-2);
+            }
+        }
+        >.cm-menu-submenu{
+            >.cm-menu-item {
+                background-color: rgb(var(--cui-grey-8));
+            }
+        }
+    }
     .cm-menu-submenu{
         >.cm-menu-item {
             background-color: rgb(var(--cui-grey-8));
@@ -264,20 +276,25 @@
         .cm-menu-submenu-list {
             background: rgb(var(--cui-grey-8));
         }
+        .cm-menu-item {
+            &:hover {
+                background-color: transparent;
+            }
+            &.cm-menu-item-active{
+                background-color: var(--cui-primary-color);
+            }
+        }
     }
     .cm-menu-item{
-        color: #ccc;
-        &.cm-menu-item-active,
-        &:hover{
-            color: #fff;
-        }
+        color: #fefefe;
         &.cm-menu-item-active{
+            color: #fff;
             background-color: var(--cui-primary-color);
         }
     }
     .cm-menu-group>.cm-menu-item{
         cursor: default;
-        color: #999;
+        color: #999999;
     }
     &.cm-menu-h {
         >.cm-menu-submenu {
@@ -285,7 +302,6 @@
             &.cm-menu-submenu-open,
             &:hover {
                 background-color: var(--cui-primary-color);
-                color: #fff;
                 border-bottom: 2px solid transparent;
                 >.cm-menu-item {
                     color: #fff;
@@ -297,7 +313,7 @@
             &.cm-menu-item-active,
             &:hover {
                 background-color: var(--cui-primary-color);
-                color: #fff;
+                // color: #fff;
                 border-bottom: 2px solid transparent;
             }
         }

@@ -1,10 +1,23 @@
-import { Avatar, Button, Card, Col, Divider, Image, Paragraph, Row, Skeleton, Space, Switch, Table, Text, Title } from "@/components";
 import { createSignal } from "solid-js";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { CompAnchor } from "../../common/CompAnchor";
 import { anchorData, avatarPropsData, codes, itemPropsData, paragraphPropsData, propsData } from "./config";
 import { propsColumns } from "../../common/columns";
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Switch } from "@/components/FormElements/Switch";
+import { Skeleton } from "@/components/Skeleton";
+import { Avatar } from "@/components/Avatar";
+import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
+import { Text } from "@/components/Typography/Text";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Row } from "@/components/Row";
+import { Col } from "@/components/Col";
+import { Table } from "@/components/Table";
+import { Image } from "@/components/Image";
 useDirective(hljs);
 
 export default function SkeletonPage () {

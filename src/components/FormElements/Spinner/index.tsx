@@ -14,6 +14,7 @@ type SpinnerProps = {
     min?: number,
     step?: number,
     loop?: boolean,
+    placeholder?: string,
     onChange?: Function,
     onPlus?: Function,
     onSub?: Function,
@@ -126,7 +127,7 @@ export function Spinner (props: SpinnerProps) {
     }
 
     return <div classList={classList()} style={props.style}>
-        <InnerInput size={props.size} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]} 
+        <InnerInput size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]} 
             onChange={_onChange} onKeyDown={_onKeyDown} append={
                 <>
                     <span class='cm-spinner-plus' onClick={plus}>

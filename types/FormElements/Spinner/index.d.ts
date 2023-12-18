@@ -9,6 +9,7 @@ type SpinnerProps = {
     min?: number;
     step?: number;
     loop?: boolean;
+    placeholder?: string;
     onChange?: Function;
     onPlus?: Function;
     onSub?: Function;

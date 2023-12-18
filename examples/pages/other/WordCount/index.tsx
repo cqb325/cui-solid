@@ -1,4 +1,3 @@
-import { Card, Divider, Input, Paragraph, Space, Table, Text, Title } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { WordCount } from "@/components/WordCount";
 import { createSignal } from "solid-js";
@@ -7,6 +6,14 @@ import { propsColumns } from "../../common/columns";
 import { CompAnchor } from "../../common/CompAnchor";
 import { anchorData, codes, propsData } from "./config";
 useDirective(hljs);
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { Input } from "@/components/FormElements/Input";
 
 export default function WordCountPage () {
     const [value, setValue] = createSignal('');

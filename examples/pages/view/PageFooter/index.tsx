@@ -1,5 +1,3 @@
-import { Card, Divider, Floor, FooterNavigation, FooterNavigations, Icon, Paragraph, QRCode, Space, Table, Text, Title } from "@/components";
-import { PageFooter } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import img from '../../../assets/images/logo.svg';
@@ -8,6 +6,16 @@ import { anchorData, codes, navigationLinkPropsData, navigationPropsData, propsD
 import { CompAnchor } from "../../common/CompAnchor";
 import { propsColumns } from "../../common/columns";
 useDirective(hljs);
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { Icon } from "@/components/Icon";
+import { Floor, FooterNavigation, FooterNavigations, PageFooter } from "@/components/PageFooter";
+import { QRCode } from "@/components/QRCode";
 
 export default function PageFooterPage() {
     return <>

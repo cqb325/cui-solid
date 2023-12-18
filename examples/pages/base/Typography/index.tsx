@@ -11,8 +11,8 @@ import { Table } from "@/components/Table";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { RadioGroup } from "@/components";
 import { createSignal } from "solid-js";
+import { RadioGroup } from "@/components/FormElements/RadioGroup";
 useDirective(hljs);
 
 function TextDemo () {

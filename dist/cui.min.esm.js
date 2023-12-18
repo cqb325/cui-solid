@@ -1688,14 +1688,13 @@ function Et(e) {
   const {
     el: t
   } = e, n = (r) => {
-    const i = e.target ? e.target() : t();
-    r.target === i && (t().removeEventListener("transitionend", n), t().classList.remove(e.startClass), e.onLeave && e.onLeave());
+    r.target && t().contains(r.target) && (t().classList.remove(e.startClass), e.onLeave && e.onLeave()), t().removeEventListener("transitionend", n);
   };
   return re(() => {
     t() && t().removeEventListener("transitionend", n);
   }), {
     enter() {
-      t() && (t().classList.add(e.startClass), wl(() => {
+      t() && (t().classList.add(e.startClass), t().removeEventListener("transitionend", n), wl(() => {
         t().classList.add(e.activeClass), e.onEnter && e.onEnter();
       }));
     },
@@ -4080,6 +4079,9 @@ function hc(e) {
     return m(h, f(ge, {
       get size() {
         return e.size;
+      },
+      get placeholder() {
+        return e.placeholder;
       },
       get disabled() {
         return e.disabled;
@@ -6934,33 +6936,33 @@ function Qt(e) {
 }
 const pt = /* @__PURE__ */ b('<span class="cm-progress-info">'), Ha = /* @__PURE__ */ b('<div class="cm-progress-bar">'), Va = /* @__PURE__ */ b('<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle stroke="#f3f3f3" fill-opacity="0"></circle><path class="cm-progress-bar-path" stroke-linecap="round" fill-opacity="0">'), Ua = /* @__PURE__ */ b('<div><div class="cm-progress-outer"><div class="cm-progress-inner">');
 function Rn(e) {
-  const t = () => e.value ?? 0, n = e.strokeWidth ?? 10, r = e.type ?? "line", i = () => e.radius ?? 60, l = () => e.max ?? 100;
-  let s = () => t() === 100 ? "finished" : e.status ?? "normal";
+  const t = () => e.max ?? 100, n = () => e.value && e.value < 0 ? 0 : e.value && e.value >= t() ? t() : e.value ?? 0, r = e.strokeWidth ?? 10, i = e.type ?? "line", l = () => e.radius ?? 60;
+  let s = () => n() === 100 ? "finished" : e.status ?? "normal";
   const c = () => V(e, "cm-progress", {
     "cm-progress-hide-info": e.hidePercent,
     [`cm-progress-${s()}`]: !!s(),
-    [`cm-progress-${r}`]: !!r
-  }), o = () => `${t()}%`, a = () => {
-    const C = s(), k = r === "line" ? 12 : 24;
-    return e.infoRender ? e.infoRender(C, t()) : C === "finished" ? f(q, {
+    [`cm-progress-${i}`]: !!i
+  }), o = () => `${n()}%`, a = () => {
+    const C = s(), k = i === "line" ? 12 : 24;
+    return e.infoRender ? e.infoRender(C, n()) : C === "finished" ? f(q, {
       name: "check-circle",
       size: k
     }) : C === "error" ? f(q, {
       name: "x-circle",
       size: k
-    }) : `${t()}%`;
+    }) : `${n()}%`;
   }, d = () => {
     const C = {
       width: o(),
-      height: `${n}px`
+      height: `${r}px`
     };
     if (e.strokeColor && (typeof e.strokeColor == "string" && (C["background-color"] = e.strokeColor), e.strokeColor instanceof Array)) {
       const k = e.strokeColor.length, S = e.strokeColor.map((L, T) => L + " " + T / k * 100 + "%");
       C["background-image"] = `linear-gradient(to right, ${S.join(",")})`;
     }
     return C;
-  }, u = 2 * Math.PI, h = () => (Math.sin(u) * i()).toFixed(2), v = () => -(Math.cos(u) * i()).toFixed(2), y = () => i() + n / 2, g = () => ["M", 0, -i(), "A", i(), i(), 0, 1, 1, h(), -v(), "A", i(), i(), 0, 1, 1, h(), v()], x = () => {
-    const C = () => t() / l(), k = () => u * i(), L = {
+  }, u = 2 * Math.PI, h = () => (Math.sin(u) * l()).toFixed(2), v = () => -(Math.cos(u) * l()).toFixed(2), y = () => l() + r / 2, g = () => ["M", 0, -l(), "A", l(), l(), 0, 1, 1, h(), -v(), "A", l(), l(), 0, 1, 1, h(), v()], x = () => {
+    const C = () => n() / t(), k = () => u * l(), L = {
       "stroke-dashoffset": `${(() => k() * (1 - C()))()}`,
       "stroke-dasharray": k()
     };
@@ -6976,7 +6978,7 @@ function Rn(e) {
     return m(S, f($e, {
       get children() {
         return [f(Q, {
-          when: r === "line",
+          when: i === "line",
           get children() {
             const L = Ha();
             return m(L, f(H, {
@@ -6985,16 +6987,16 @@ function Rn(e) {
               },
               get children() {
                 const T = pt();
-                return m(T, () => `${t()}%`), T;
+                return m(T, () => `${n()}%`), T;
               }
             })), D((T) => Y(L, d(), T)), L;
           }
         }), f(Q, {
-          when: r === "circle",
+          when: i === "circle",
           get children() {
             const L = Va(), T = L.firstChild, P = T.nextSibling;
-            return L.style.setProperty("display", "block"), G(T, "stroke-width", n), G(P, "stroke-width", n), D((w) => {
-              const $ = 2 * i() + n + "px", _ = 2 * i() + n + "px", M = y(), R = y(), E = i(), z = g().join(" "), B = `translate(${y()},${y()})`, I = x();
+            return L.style.setProperty("display", "block"), G(T, "stroke-width", r), G(P, "stroke-width", r), D((w) => {
+              const $ = 2 * l() + r + "px", _ = 2 * l() + r + "px", M = y(), R = y(), E = l(), z = g().join(" "), B = `translate(${y()},${y()})`, I = x();
               return $ !== w._v$ && ((w._v$ = $) != null ? L.style.setProperty("width", $) : L.style.removeProperty("width")), _ !== w._v$2 && ((w._v$2 = _) != null ? L.style.setProperty("height", _) : L.style.removeProperty("height")), M !== w._v$3 && G(T, "cx", w._v$3 = M), R !== w._v$4 && G(T, "cy", w._v$4 = R), E !== w._v$5 && G(T, "r", w._v$5 = E), z !== w._v$6 && G(P, "d", w._v$6 = z), B !== w._v$7 && G(P, "transform", w._v$7 = B), w._v$8 = Y(P, I, w._v$8), w;
             }, {
               _v$: void 0,
@@ -8282,7 +8284,7 @@ function Vu(e) {
       for (; x; )
         d.openKeys[x.name] || y(x.name), x = x.parent;
     else
-      l() === "h" && y(g);
+      (l() === "h" || d.min) && y(g);
   }, [d, u] = le({
     openKeys: {},
     activeName: e.activeName,

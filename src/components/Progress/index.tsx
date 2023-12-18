@@ -23,11 +23,19 @@ type ProgressProps = {
 }
 
 export function Progress (props: ProgressProps) {
-    const value = () => props.value ?? 0;
+    const max = () => props.max ?? 100;
+    const value = () => {
+        if(props.value && props.value < 0) {
+            return 0;
+        }
+        if(props.value && props.value >= max()) {
+            return max();
+        }
+        return props.value ?? 0;
+    };
     const strokeWidth = props.strokeWidth ?? 10;
     const type = props.type ?? 'line';
     const radius = () => props.radius ?? 60;
-    const max = () => props.max ?? 100;
     let status = () => {
         if (value() === 100) {
             return 'finished';

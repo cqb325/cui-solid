@@ -1,9 +1,17 @@
-import { Card, Checkbox, Divider, IndexList, Paragraph, Space, Table, Text, Title } from "@/components";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { propsColumns } from "../../common/columns";
 import { anchorData, codes, itemPropsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
+import { Space } from "@/components/Layout";
+import { Title } from "@/components/Typography/Title";
+import { Card } from "@/components/Card";
+import { Divider } from "@/components/Divider";
+import { Paragraph } from "@/components/Typography/Paragraph";
+import { Text } from "@/components/Typography/Text";
+import { Table } from "@/components/Table";
+import { IndexList } from "@/components/IndexList";
+import { Checkbox } from "@/components/FormElements/Checkbox";
 useDirective(hljs);
 export default function ContactsPage () {
     const data = [{

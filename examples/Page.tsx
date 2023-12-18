@@ -7,7 +7,9 @@ import logo from  './assets/images/logo.svg';
 import { Image } from '@/components/Image';
 import { Text } from '@/components/Typography/Text';
 import { RouterView, useRouter, useRoute, RouteRecordName } from 'solid-vue-router';
-import { Button, Dropdown, DropdownItem, DropdownMenu, Icon, Popover, Tooltip } from '@/components';
+import { Dropdown, DropdownItem, DropdownMenu } from '@/components/Dropdown';
+import { Icon } from '@/components/Icon';
+import { Popover } from '@/components/Popover';
 
 export const Page = (props: any) => {
     const router = useRouter();
