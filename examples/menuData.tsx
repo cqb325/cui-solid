@@ -78,6 +78,7 @@ export const menuData = [
             {name: 'Drawer', title: 'Drawer 抽屉', path: 'drawer', component: lazy(() => import('./pages/view/Drawer'))},
             {name: 'PageFooter', title: 'PageFooter 页底', path: 'pagefooter', component: lazy(() => import('./pages/view/PageFooter'))},
             {name: 'Banner', title: 'Banner 通知横幅', path: 'banner', component: lazy(() => import('./pages/view/Banner'))},
+            {name: 'SideBySide', title: 'SideBySide 对比', path: 'sidebyside', component: lazy(() => import('./pages/view/SideBySide'))},
         ]
     },
     {

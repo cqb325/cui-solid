@@ -41,6 +41,9 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.28
+    1、新增SideBySide组件
+
     v0.1.27
     1、修改menu dark模式下的style
     2、修复Drawer close mask 遮盖问题
