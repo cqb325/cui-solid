@@ -37,22 +37,6 @@ function Message (props: any) {
         'cm-message-background': data.background
     });
 
-    function whichTransitionEvent(){
-        const el: any = document.createElement('surface');
-        const transitions: any = {
-            'transition':'transitionend',
-            'OTransition':'oTransitionEnd',
-            'MozTransition':'transitionend',
-            'WebkitTransition':'webkitTransitionEnd'
-        };
-
-        for(let t in transitions){
-            if( el.style[t] !== undefined ){
-                return transitions[t];
-            }
-        }
-    }
-
     onMount(() => {
         // 设置效果
         setTimeout(() => {
@@ -73,22 +57,17 @@ function Message (props: any) {
     const hide = () => {
         // 隐藏效果
         setVisible(false);
-        if (wrap) {
-            const transitionEvent = whichTransitionEvent();
-            // 动效完成之后进行销毁
-            wrap.addEventListener(transitionEvent, () => {
-                close()
-            });
-        }
     }
 
     const close = () => {
-        props.onClose(data);
-        data.onClose && data.onClose();
+        if (!visible()) {
+            props.onClose(data);
+            data.onClose && data.onClose();
+        }
     }
 
     const style = () => ({...data.style, 'z-index': usezIndex()})
-    return <div classList={classList()} style={style()} ref={wrap}>
+    return <div classList={classList()} style={style()} ref={wrap} onTransitionEnd={close}>
         <div class='cm-message-inner'>
             {
                 data.loading ? <Loading /> : <Icon name={getIcon(data.type)} class='cm-message-icon' size={16}/>

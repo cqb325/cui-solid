@@ -41,6 +41,10 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+
+    v0.1.29
+    1、修复Modal实例方式调用增加dom的bug
+
     v0.1.28
     1、新增SideBySide组件
 

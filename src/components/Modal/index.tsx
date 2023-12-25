@@ -162,12 +162,11 @@ export interface ModalConfig extends ModalProps{
 }
 
 function ModalFun () {
-    const [dispose, setDispose] = createSignal(true);
     const [visible, setVisible] = createSignal(true);
+    let disposeFn: Function;
     return {
         open (config: ModalConfig) {
             setVisible(true);
-            setDispose(true);
             let icon = '';
             if (config.status === 'success') {
                 icon = 'check-circle'
@@ -187,14 +186,15 @@ function ModalFun () {
             const close = (v: boolean) => {
                 setVisible(v);
                 setTimeout(() => {
-                    setDispose(v);
+                    disposeFn?.()
                 }, 250)
             }
             config.style = {'min-width': '24vw', ...config.style};
             config.visible = [visible, close];
             config.defaultPosition = {top: '200px', ...config.defaultPosition};
-            const ele = usePortal('cm-modal-portal', 'cm-modal-portal');
-            render(() => <Show when={dispose()}><Modal {...config} class="cm-modal-instance">
+            const ele = usePortal('cm-modal-portal-instance', 'cm-modal-portal');
+            
+            const disposeFn = render(() => <Modal {...config} class="cm-modal-instance">
                 <div class="cm-modal-left">
                     <div class='cm-modal-icon'>
                         <Icon name={icon} size={24}/>
@@ -203,7 +203,7 @@ function ModalFun () {
                 <div class="cm-modal-right">
                     {config.content}
                 </div>
-            </Modal></Show>, ele);
+            </Modal>, ele);
         },
         success (config: ModalConfig) {
             config.status = 'success';
@@ -228,7 +228,7 @@ function ModalFun () {
         remove () {
             setVisible(false);
             setTimeout(() => {
-                setDispose(false);
+                disposeFn?.()
             }, 250)
         }
     }
