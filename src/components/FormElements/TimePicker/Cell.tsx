@@ -1,5 +1,6 @@
 import { createEffect, For } from "solid-js";
 import { useTimepickerContext } from ".";
+import { useDatepickerContext } from "../DatePicker";
 
 export function Cell (props: any) {
     const arr = [];
@@ -8,6 +9,7 @@ export function Cell (props: any) {
         i += props.step || 1;
     }
     const ctx: any = useTimepickerContext();
+    const ctx2: any = useDatepickerContext();
     const onClick = (num: number, disabled: boolean) => {
         if (disabled) {
             return;
@@ -18,7 +20,9 @@ export function Cell (props: any) {
     let wrap: any;
 
     createEffect(() => {
-        if (wrap) {
+        const v = ctx?.visible();
+        const v2 = ctx2?.visible();
+        if (wrap && (v || v2)) {
             wrap.scrollTop = 26 * (props.value / (props.step || 1));
         }
     });

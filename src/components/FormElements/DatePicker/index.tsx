@@ -101,14 +101,23 @@ export function Datepicker (props: DatepickerProps) {
                     currentMonth = [prev, next];
                 }
             } else {
-                if (typeof val[0] === 'string') {
-                    val[0] = dayjs(val[0]).toDate();
+                let prev: Date = new Date(); let next: Date = new Date();
+                if (val instanceof Array) {
+                    if (typeof val[0] === 'string') {
+                        val[0] = dayjs(val[0]).toDate();
+                    }
+                    if (typeof val[1] === 'string') {
+                        val[1] = dayjs(val[1]).toDate();
+                    }
+
+                    prev = val[0] === undefined ? new Date() : (val[0] ? new Date(val[0]) : new Date());
+                    next = val[1] === undefined ? new Date() : (val[1] ? new Date(val[1]) : new Date());
                 }
-                if (typeof val[1] === 'string') {
-                    val[1] = dayjs(val[1]).toDate();
+                if (type=== 'month' && val instanceof Date) {
+                    prev = val;
+                    next = new Date(val);
                 }
-                const prev = val[0] === undefined ? new Date() : (val[0] ? new Date(val[0]) : new Date(val));
-                let next = val[1] === undefined ? new Date() : (val[1] ? new Date(val[1]) : new Date());
+                
                 if (dayjs(prev).format('YYYY-MM') === dayjs(next).format('YYYY-MM')) {
                     next.setMonth(next.getMonth() + 1);
                 }
@@ -159,7 +168,7 @@ export function Datepicker (props: DatepickerProps) {
         if (type === 'dateTime' || type === 'dateTimeRange') {
             let val = v();
             if (type === 'dateTimeRange') {
-                val = val ? val[store.range.length === 1 ? 1 : 0] : store.currentMonth[store.range.length === 1 ? 1 : 0];
+                val = val && val.length ? val[store.range.length === 1 ? 1 : 0] : store.currentMonth[store.range.length === 1 ? 1 : 0];
             } else {
                 val = val ? val : store.currentMonth[store.range.length === 1 ? 1 : 0];
             }
@@ -328,7 +337,7 @@ export function Datepicker (props: DatepickerProps) {
     })
 
     return <DatepickerContext.Provider value={{onSelectDate, onMouseOver,
-        disabledDate: props.disabledDate, onSelectTime}}>
+        disabledDate: props.disabledDate, onSelectTime, visible}}>
         <div classList={classList()} style={props.style}>
             <Dropdown visible={[visible, setVisible]} transfer={props.transfer} align={align} revers={props.revers} 
                 trigger='click' disabled={props.disabled} menu={<div class='cm-date-picker-wrap'>

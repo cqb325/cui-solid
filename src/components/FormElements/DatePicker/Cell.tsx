@@ -12,9 +12,9 @@ export function Cell (props: any) {
     let wrap: any;
 
     createEffect(() => {
-        if (wrap) {
+        if (wrap && ctx?.visible()) {
             const start = props.data[0]
-            const v = props.value ? props.value : (props.type === 'year' ? new Date().getFullYear() : props.value);
+            const v = props.value ? props.value : (props.type === 'year' ? new Date().getFullYear() : new Date().getMonth() + 1);
             wrap.scrollTop = 26 * (v - start);
         }
     });

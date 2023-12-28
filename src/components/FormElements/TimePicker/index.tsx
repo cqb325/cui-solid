@@ -39,6 +39,7 @@ export function Timepicker (props: TimePickerProps) {
     const [value, setValue] = createField(props, props.type === 'timeRange' ? [] : '');
     // 内部value，防止类似form调用的setValue后重复执行effect
     const [v, setV]: any[] = createSignal(value());
+    const [visible, setVisible] = createSignal(false);
     const align = props.align ?? 'bottomLeft';
     const format = props.format ?? 'HH:mm:ss';
     const seperator = props.seperator || '~';
@@ -152,10 +153,10 @@ export function Timepicker (props: TimePickerProps) {
         return '';
     }
     
-    return <TimepickerContext.Provider value={{onSelect, disabledTime: props.disabledTime}}>
+    return <TimepickerContext.Provider value={{onSelect, disabledTime: props.disabledTime, visible}}>
         <div classList={classList()} x-placement={align} tabIndex='1'>
             <Dropdown transfer={props.transfer} align={align} trigger='click' 
-                disabled={props.disabled} menu={<div class='cm-time-picker-wrap'>
+                disabled={props.disabled} visible={[visible, setVisible]} menu={<div class='cm-time-picker-wrap'>
                 <Show when={props.type === 'timeRange'} fallback={
                     <TimePane value={v()} format={format} minuteStep={props.minuteStep} secondStep={props.secondStep}
                         hourStep={props.hourStep} header={header} footer={props.footer}/>

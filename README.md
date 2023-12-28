@@ -41,6 +41,9 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.30
+    1、修复Timepicker和DatePicker无法显示初始化值问题
+    2、修复Month选择错误问题
 
     v0.1.29
     1、修复Modal实例方式调用增加dom的bug

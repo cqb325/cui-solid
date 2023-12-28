@@ -164,7 +164,7 @@ export default function DatepickerPage () {
                 <Space id="date_shortcut" dir="v">
                     <Card bordered>
                         <Datepicker clearable value={[value, setValue]} stick shortCuts={<Space dir="v">
-                            <Button type="link" onClick={() => {
+                            <Button type="text" onClick={() => {
                                 const now = new Date();
                                 const start = new Date();
                                 start.setDate(start.getDate() - 6);
