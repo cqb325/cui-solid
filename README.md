@@ -41,6 +41,11 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.31
+    1、修复Notice 和 Messages 在Modal中被遮盖问题
+    2、Upload添加自定义getFileUrl属性
+    3、Modal添加hasCloseIcon属性
+
     v0.1.30
     1、修复Timepicker和DatePicker无法显示初始化值问题
     2、修复Month选择错误问题

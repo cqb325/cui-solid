@@ -25,6 +25,7 @@ type UploadProps = {
     defaultFileList?: any[];
     type?: 'select' | 'drag';
     paste?: boolean;
+    getFileUrl?: Function;
     ref?: any;
     listType?: 'picture';
 };

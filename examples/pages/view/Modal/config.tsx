@@ -14,6 +14,7 @@ export const propsData = [
     {name: 'defaultPosition', desc: '默认位置', type: 'Position{left: string, top: string}', default: ''},
     {name: 'mask', desc: '显示mask', type: 'boolean', default: 'true'},
     {name: 'maskClosable', desc: '点击mask关闭', type: 'boolean', default: 'true'},
+    {name: 'hasCloseIcon', desc: '是否显示关闭按钮', type: 'boolean', default: 'true'},
     {name: 'resetPostion', desc: '重新打开对话框进行位置重置', type: 'boolean', default: ''},
     {name: 'fullScreen', desc: '全屏控制', type: 'boolean | Function[]', default: ''},
     {name: 'onOk', desc: '点击确认按钮回调', type: 'Function', default: ''},

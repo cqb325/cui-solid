@@ -3,6 +3,7 @@ import { render } from "solid-js/web";
 import usePortal from "../utils/usePortal";
 import { Messages } from "./Message";
 import { createUniqueId } from "solid-js";
+import usezIndex from "../utils/usezIndex";
 
 type MessageProps = {
     key?: string,
@@ -19,7 +20,7 @@ type MessageProps = {
 
 function Message () {
     const [store, setStore] = createStore({list: []} as any);
-    const ele = usePortal('cm-message-portal', 'cm-messages-wrap');
+    const ele: any = usePortal('cm-message-portal', 'cm-messages-wrap');
     const onClose = (item: any) => {
         const items = store.list.filter((aitem: any) => {
             return aitem.key !== item.key;
@@ -58,6 +59,7 @@ function Message () {
                     list.push(config);
                 }),
             );
+            ele.style.zIndex = usezIndex();
         },
         info (config: string | MessageProps) {
             this.open(config, 'info');

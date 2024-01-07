@@ -42,41 +42,43 @@ export function List (props: any) {
                 <Text type="primary" class="cm-upload-clear" onClick={props.onClear}>清空</Text>
             </div>
         </Show>
-        <For each={props.files}>
-            {(file: any) => {
-                return <li class="cm-upload-file-card">
-                    <div class="cm-upload-file-preview">
-                        <Show when={file.url} fallback={<Icon name={format(file)} size={20} />}>
-                            <img class="cm-upload-file-preview-img" src={file.url} alt='' onClick={() => {
-                                props.onPreview && props.onPreview(file)
-                            }}/>
-                        </Show>
-                    </div>
-                    <div class="cm-upload-file-card-body">
-                        <div class="cm-upload-file-card-info">
-                            <span class="cm-upload-file-card-info-name" title={file.name}>{file.name}</span>
-                            <span>{formatSize(file.size)}</span>
+        <div class="cm-upload-files">
+            <For each={props.files}>
+                {(file: any) => {
+                    return <li class="cm-upload-file-card">
+                        <div class="cm-upload-file-preview">
+                            <Show when={file.url} fallback={<Icon name={format(file)} size={20} />}>
+                                <img class="cm-upload-file-preview-img" src={file.url} alt='' onClick={() => {
+                                    props.onPreview && props.onPreview(file)
+                                }}/>
+                            </Show>
                         </div>
-                        <Show when={file.showProgress && file.percentage !== 100}>
-                            <Progress strokeWidth={4} value={file.percentage} hidePercent/>
-                        </Show>
-                        <Show when={file.status === 'fail'}>
-                            <div class="cm-upload-error">
-                                <Icon name='alert-circle' size={12} />
-                                <Text type="error" size='small' class="cm-upload-error-text">上传失败</Text>
-                                <Text type="primary" class="cm-upload-retry" size='small' onClick={() => {
-                                    props.onRetry && props.onRetry(file);
-                                }}>重试</Text>
+                        <div class="cm-upload-file-card-body">
+                            <div class="cm-upload-file-card-info">
+                                <span class="cm-upload-file-card-info-name" title={file.name}>{file.name}</span>
+                                <span>{formatSize(file.size)}</span>
                             </div>
-                        </Show>
-                    </div>
-                    <div class="cm-upload-file-control">
-                        <Button size='small' ghost icon={<Icon name="x"/>} onClick={() => {
-                            props.onRemove && props.onRemove(file);
-                        }}></Button>
-                    </div>
-                </li>
-            }}
-        </For>
+                            <Show when={file.showProgress && file.percentage !== 100}>
+                                <Progress strokeWidth={4} value={file.percentage} hidePercent/>
+                            </Show>
+                            <Show when={file.status === 'fail'}>
+                                <div class="cm-upload-error">
+                                    <Icon name='alert-circle' size={12} />
+                                    <Text type="error" size='small' class="cm-upload-error-text">上传失败</Text>
+                                    <Text type="primary" class="cm-upload-retry" size='small' onClick={() => {
+                                        props.onRetry && props.onRetry(file);
+                                    }}>重试</Text>
+                                </div>
+                            </Show>
+                        </div>
+                        <div class="cm-upload-file-control">
+                            <Button size='small' ghost icon={<Icon name="x"/>} onClick={() => {
+                                props.onRemove && props.onRemove(file);
+                            }}></Button>
+                        </div>
+                    </li>
+                }}
+            </For>
+        </div>
     </ul>
 }

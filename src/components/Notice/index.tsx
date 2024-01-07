@@ -1,9 +1,10 @@
-import { createRoot, createUniqueId } from "solid-js";
+import { createUniqueId } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import { render } from "solid-js/web";
 import { Icon } from "../Icon";
 import usePortal from "../utils/usePortal";
 import { Notices } from "./Notices";
+import usezIndex from "../utils/usezIndex";
 
 export type NoticeConfig = {
     dock?: 'topRight'|'topLeft'|'bottomLeft'|'bottomRight',
@@ -42,7 +43,7 @@ function Notice () {
         })
         setStore(dock, arr);
     }
-    const ele = usePortal('cm-notice-portal', 'cm-notices-wrap');
+    const ele: any = usePortal('cm-notice-portal', 'cm-notices-wrap');
     render(() => <Notices data={store} onClose={onClose}/>, ele);
     return {
         open (config: NoticeConfig) {
@@ -59,6 +60,7 @@ function Notice () {
             setStore(config.dock, produce((list: any) => {
                 list.push(config);
             }));
+            ele.style.zIndex = usezIndex();
         },
         info (config: NoticeConfig) {
             config.icon = 'info';

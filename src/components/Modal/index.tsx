@@ -37,6 +37,7 @@ type ModalProps = {
     mask?: boolean,
     maskClosable?: boolean,
     resetPostion?: boolean,
+    hasCloseIcon?: boolean
     fullScreen?: boolean
 }
 
@@ -122,6 +123,7 @@ export function Modal (props: ModalProps) {
 
     const id = 'cm-modal-portal';
     const footer = props.footer ?? true;
+    const hasCloseIcon = props.hasCloseIcon ?? true;
     const modalId = createUniqueId();
     const okText = props.okText || '确 定';
     const cancleText = props.cancleText || '取 消';
@@ -138,7 +140,9 @@ export function Modal (props: ModalProps) {
                 <div classList={classList()} style={props.style}>
                     <div class='cm-modal-header' data-id={`${modalId}`}>
                         { props.title ? <div class='cm-modal-title'>{props.title}</div> : null }
-                        <span class='cm-modal-close' onClick={onClickClose}><Icon name='x'/></span>
+                        <Show when={hasCloseIcon}>
+                            <span class='cm-modal-close' onClick={onClickClose}><Icon name='x'/></span>
+                        </Show>
                     </div>
                     <div class='cm-modal-body' style={props.bodyStyle}>
                         {props.children}

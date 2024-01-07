@@ -33,6 +33,7 @@ type UploadProps = {
     defaultFileList?: any[],
     type?: 'select'|'drag',
     paste?: boolean,
+    getFileUrl?: Function,
     ref?: any,
     listType?: 'picture'
 }
@@ -182,7 +183,7 @@ export function Upload (props: UploadProps) {
             setStore('fileList', (item: any) => item.uid === file.uid, produce((item: any) => {
                 item.status = 'finished';
                 item.response = res;
-                item.url = res.url;
+                item.url = props.getFileUrl && props.getFileUrl(res, item);
             }));
             props.onSuccess && props.onSuccess(res, _file, store.fileList);
             setTimeout(() => {
@@ -216,6 +217,9 @@ export function Upload (props: UploadProps) {
     }
 
     const clearFiles = () => {
+        store.fileList.forEach(file => {
+            props.onRemove && props.onRemove(file, store.fileList);
+        })
         fileMap = {};
         setStore('fileList', []);
     }

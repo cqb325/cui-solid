@@ -27,6 +27,7 @@ type ModalProps = {
     mask?: boolean;
     maskClosable?: boolean;
     resetPostion?: boolean;
+    hasCloseIcon?: boolean;
     fullScreen?: boolean;
 };
 export declare function Modal(props: ModalProps): import("solid-js").JSX.Element;

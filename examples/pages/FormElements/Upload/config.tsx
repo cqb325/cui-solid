@@ -17,6 +17,7 @@ export const propsData = [
     {name: 'type', desc: '上传控件的类型， select|drag', type: 'string', default: 'select'},
     {name: 'paste', desc: '是否支持粘贴上传文件', type: 'boolean', default: ''},
     {name: 'ref', desc: '组件引用', type: 'any', default: ''},
+    {name: 'getFileUrl', desc: '自定义预览的url地址', type: 'Function', default: ''},
     {name: 'listType', desc: '列表的类型 picture', type: 'boolean', default: ''},
     {name: 'onProgress', desc: '文件上传时的钩子，返回字段为 event, file, fileList', type: 'Function', default: ''},
     {name: 'onSuccess', desc: '文件上传成功时的钩子，返回字段为 response, file, fileList', type: 'Function', default: ''},
