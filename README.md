@@ -41,6 +41,12 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.33
+    1、修复Modal溢出出现滚动条问题
+
+    v0.1.32
+    1、修改Upload clearFiles和手动clear的逻辑
+
     v0.1.31
     1、修复Notice 和 Messages 在Modal中被遮盖问题
     2、Upload添加自定义getFileUrl属性

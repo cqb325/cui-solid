@@ -22,6 +22,7 @@ type UploadProps = {
     onPreview?: Function;
     onFormatError?: Function;
     onExceededSize?: Function;
+    onClear?: Function;
     defaultFileList?: any[];
     type?: 'select' | 'drag';
     paste?: boolean;

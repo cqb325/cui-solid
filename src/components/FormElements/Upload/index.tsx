@@ -1,7 +1,7 @@
 import { Show, createEffect, createSignal, createUniqueId } from "solid-js";
 import { useClassList } from "../../utils/useProps"
 import ajax from './ajax';
-import { createStore, produce } from "solid-js/store";
+import { createStore, produce, unwrap } from "solid-js/store";
 import { List } from "./List";
 import { PictureList } from "./PictureList";
 import { ImagePreview } from "../../ImagePreview";
@@ -30,6 +30,7 @@ type UploadProps = {
     onPreview?: Function,
     onFormatError?: Function,
     onExceededSize?: Function,
+    onClear?: Function,
     defaultFileList?: any[],
     type?: 'select'|'drag',
     paste?: boolean,
@@ -217,11 +218,13 @@ export function Upload (props: UploadProps) {
     }
 
     const clearFiles = () => {
-        store.fileList.forEach(file => {
-            props.onRemove && props.onRemove(file, store.fileList);
-        })
+        // store.fileList.forEach(file => {
+        //     props.onRemove && props.onRemove(file, store.fileList);
+        // })
+        const oldFileList = unwrap(store.fileList);
         fileMap = {};
         setStore('fileList', []);
+        props.onClear && props.onClear(oldFileList);
     }
 
     const handleClick = () => {
@@ -286,7 +289,10 @@ export function Upload (props: UploadProps) {
     }
     let input: any;
     props.ref && props.ref({
-        clearFiles,
+        clearFiles: () => {
+            fileMap = {};
+            setStore('fileList', []);
+        },
         getFileList
     })
     return <div classList={classList()} style={props.style}>

@@ -5,7 +5,7 @@ import { useClassList } from "../utils/useProps";
 import { Draggable } from "../Draggable";
 import { Icon } from "../Icon";
 import { Button } from "../Button";
-import { JSXElement, createEffect, createSignal, createUniqueId } from "solid-js";
+import { JSXElement, createEffect, createSignal, createUniqueId, untrack } from "solid-js";
 import usezIndex from "../utils/usezIndex";
 
 type Position = {
@@ -47,6 +47,8 @@ export function Modal (props: ModalProps) {
     let draggable: any;
     const [visible, setVisible] = createModel(props, 'visible', false);
     const [loading, setLoading] = createSignal(false);
+    let setOverflow = false;
+    let originOverflow = '';
     const classList = () => useClassList(props, 'cm-modal');
     const zindex = usezIndex();
 
@@ -91,8 +93,28 @@ export function Modal (props: ModalProps) {
         const show = visible();
         if (!show) {
             setLoading(false);
+            if (setOverflow) {
+                document.body.style.overflow = originOverflow;
+                setOverflow = false;
+            }
         } else {
             if(wrap) {
+                const wrapH = wrap.getBoundingClientRect().height;
+                const contentH = wrap.children[0].getBoundingClientRect().height;
+                // 超出显示内容
+                if (contentH > wrapH) {
+                    wrap.style.overflow = 'auto';
+                    wrap.children[0].style.top = 0;
+                    const bodyStyle = window.getComputedStyle(document.body, null);
+                    originOverflow = bodyStyle.overflow;
+                    if (originOverflow !== 'hidden') {
+                        document.body.style.overflow = 'hidden';
+                        setOverflow = true;
+                    }
+                } else {
+                    wrap.style.overflow = 'none';
+                    setOverflow = false;
+                }
                 setTimeout(() => {
                     wrap.focus();
                 }, 300);
