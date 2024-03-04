@@ -18,7 +18,11 @@ router.beforeEach(async (to, from) => {
 
 router.afterEach(async (to, from) => {
     loadingBar.finish();
+    setTimeout(() => {
+        document.documentElement.scrollTop = 0;
+    }, 200);
+    
 })
 
-render(() => <Page/>, document.getElementById('root'));
+render(() => <Page/>, document.getElementById('root') as HTMLElement);
 // render(() => <Router><Page/></Router>, document.getElementById('root'));

@@ -1,7 +1,8 @@
 import useValidation from '../utils/useValidation';
-import { JSXElement, createContext, createSignal, useContext } from 'solid-js';
+import { JSXElement, Show, createContext, createSignal, useContext } from 'solid-js';
 import { FormContext, FormContextOptions } from '../Form';
 import { useClassList } from '../utils/useProps';
+import { Popover } from '../Popover';
 
 export type FormItemContextProps = {
     name?: string
@@ -18,7 +19,9 @@ type FormItemProps = {
     label?: string,
     style?: any,
     rules?: {[key: string]: any},
-    messages?: {[key: string]: string}
+    messages?: {[key: string]: string},
+    errorTransfer?: boolean,
+    errorAlign?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom',
 }
 
 export function FormItem (props: FormItemProps) {
@@ -26,6 +29,8 @@ export function FormItem (props: FormItemProps) {
     const ctx: FormContextOptions|undefined = useContext<FormContextOptions|undefined>(FormContext);
     const validation:any = useValidation();
     let itemRef: any;
+    const errorTransfer = props.errorTransfer ?? ctx?.errorTransfer ?? false;
+    const errorAlign = props.errorAlign ?? ctx?.errorAlign ?? 'right';
 
     const name = props.name;
     let isRequired = false;
@@ -98,10 +103,18 @@ export function FormItem (props: FormItemProps) {
     return <FormItemContext.Provider value={{name: props.name}}>
         <div classList={clazzName()} style={props.style}>
             <label class='cm-form-label' style={{width: ctx?.labelWidth + 'px', ...props.labelStyle}}>{props.label}</label>
-            <div class='cm-form-item-element' ref={itemRef}>
-                {props.children}
-                <div class='cm-form-item-error-tip'>{error()}</div>
-            </div>
+            <Show when={errorTransfer} fallback={
+                <div class='cm-form-item-element' ref={itemRef}>
+                    {props.children}
+                    <div class='cm-form-item-error-tip'>{error()}</div>
+                </div>
+            }>
+                <Popover class='cm-form-item-error-popover' arrow align={errorAlign} disabled={!error()} content={error()}>
+                    <div class='cm-form-item-element' ref={itemRef}>
+                        {props.children}
+                    </div>
+                </Popover>
+            </Show>
         </div>
     </FormItemContext.Provider>
 }

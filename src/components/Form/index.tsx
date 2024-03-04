@@ -7,6 +7,8 @@ export type FormContextOptions = {
     labelWidth?: number,
     inline?: boolean,
     form: any,
+    errorTransfer?: boolean,
+    errorAlign?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom',
     onChange: Function
 }
 
@@ -18,12 +20,16 @@ type FormProps = {
     labelWidth?: number,
     form?: any,
     inline?: boolean,
+    errorTransfer?: boolean,
+    errorAlign?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom',
     onChange?: Function,
     onBeforeSubmit?: Function,
     autocomplete?: string
 }
 
 export function Form (props: FormProps) {
+    const errorTransfer = props.errorTransfer ?? false;
+    const errorAlign = props.errorAlign ?? 'right';
     const classList = () => useClassList(props, 'cm-form', {
         'cm-form-inline': props.inline
     });
@@ -39,6 +45,8 @@ export function Form (props: FormProps) {
         labelWidth: local.labelWidth,
         inline: local.inline,
         form: local.form,
+        errorTransfer,
+        errorAlign,
         onChange: _onChange
     };
 

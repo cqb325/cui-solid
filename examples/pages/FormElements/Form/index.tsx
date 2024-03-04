@@ -18,7 +18,9 @@ import { Col } from "@/components/Col";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { anchorData, codes } from "./config";
+import { anchorData, codes, itemPropsData, propsData } from "./config";
+import { Table } from "@/components";
+import { propsColumns } from "../../../pages/common/columns";
 useDirective(hljs);
 
 function FormPage () {
@@ -200,6 +202,23 @@ function FormPage () {
                 </Space>
 
 
+                <Space id="form_error_transfer" dir="v">
+                    <Card bordered>
+                        <Form form={form2} errorTransfer errorAlign="right">
+                            <FormItem name='value' label="校验值：" rules={{required: true, mobile: true}}>
+                                <Input type='text'/>
+                            </FormItem>
+                        </Form>
+                        <Divider align="left"><Text type="primary">错误提示位置</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                        Form 和 FormItem 组件支持指定位置显示错误信息, 设置errorTransfer，将使用popover显示错误信息
+                        errorAlign可以设置错误提示的位置，默认是right
+                        </Paragraph>
+                        <DemoCode data={codes['form_dynamic_rule']}/>
+                    </Card>
+                </Space>
+
+
                 <Space id="form_fields" dir="v">
                     <Card bordered>
                         <Form form={form} labelWidth={100} onChange={(name: string, v: any) => {
@@ -282,7 +301,7 @@ function FormPage () {
                                 <Col grid={0.33}>
                                     <FormItem label='地市：' name='city'>
                                         <Space dir="h" align="center">
-                                            <Input type='select' data={cityData} clearable>
+                                            <Input type='select' clearable>
                                                 <Option label="北京" value="1"></Option>
                                                 <Option label="上海" value="2"></Option>
                                                 <Option label="深圳" value="3"></Option>
@@ -479,6 +498,18 @@ function FormPage () {
                         </Paragraph>
                         <DemoCode data={codes['form_fields']}/>
                     </Card>
+                </Space>
+
+                <Space dir="v" size={24} id="comp_api">
+                    <Title type="primary" heading={3}>API</Title>
+                    <Space id='comp_props' dir="v">
+                        <Title type="primary" heading={4}>Form Props</Title>
+                        <Table columns={propsColumns} data={propsData} border size='small' />
+                    </Space>
+                    <Space id='comp_item_props' dir="v">
+                        <Title type="primary" heading={4}>FormItem Props</Title>
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
+                    </Space>
                 </Space>
             </Space>
         </div>

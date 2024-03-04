@@ -41,6 +41,10 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.35
+    1、修复Select单选不显示问题
+    2、Form添加浮动显示错误信息方式
+    
     v0.1.34
     1、Select支持远程过滤和默认值
     2、badge添加offset属性

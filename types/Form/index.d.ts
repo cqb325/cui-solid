@@ -4,6 +4,8 @@ export type FormContextOptions = {
     labelWidth?: number;
     inline?: boolean;
     form: any;
+    errorTransfer?: boolean;
+    errorAlign?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
     onChange: Function;
 };
 type FormProps = {
@@ -14,6 +16,8 @@ type FormProps = {
     labelWidth?: number;
     form?: any;
     inline?: boolean;
+    errorTransfer?: boolean;
+    errorAlign?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
     onChange?: Function;
     onBeforeSubmit?: Function;
     autocomplete?: string;

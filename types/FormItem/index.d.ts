@@ -17,6 +17,8 @@ type FormItemProps = {
     messages?: {
         [key: string]: string;
     };
+    errorTransfer?: boolean;
+    errorAlign?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 };
 export declare function FormItem(props: FormItemProps): import("solid-js").JSX.Element;
 export declare const useFormItem: () => FormItemContextProps | undefined;

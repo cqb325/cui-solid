@@ -154,8 +154,6 @@ export function Select (props: SelectOptions) {
 
     // 点击更新setValue 并触发onChange事件
     const onOptionClick = (v: any, option: any) => {
-        console.log(11);
-        
         if (dataMap[v]) {
             if (dataMap[v].items && dataMap[v].items.length) {
                 return;
@@ -180,13 +178,13 @@ export function Select (props: SelectOptions) {
             props.onChange && props.onChange(val, option);
         } else {
             isClickChanging = true;
+            arr = [option]
             setValue(v);
             setQuery(option[textField]);
             setShowLabels([...arr]);
             Promise.resolve().then(() => {
                 isClickChanging = false;
             });
-            arr = [option]
             setOpen(false);
             props.onChange && props.onChange(v, option);
         }

@@ -6,6 +6,8 @@ export const propsData = [
     {name: 'form', desc: '表单绑定', type: 'Object', default: ''},
     {name: 'inline', desc: '内联模式', type: 'boolean', default: ''},
     {name: 'autocomplete', desc: '自动填充选项', type: 'string', default: ''},
+    {name: 'errorTransfer', desc: '使用popover显示错误提示', type: 'boolean', default: 'false'},
+    {name: 'errorAlign', desc: '设置popover的显示位置', type: 'string', default: 'right'},
     {name: 'onChange', desc: '表单项改变事件', type: 'Function', default: ''},
 ]
 
@@ -17,6 +19,8 @@ export const itemPropsData = [
     {name: 'labelStyle', desc: 'label样式', type: 'Object', default: ''},
     {name: 'label', desc: '表单项文本', type: 'string', default: ''},
     {name: 'name', desc: '表单项名称', type: 'string', default: ''},
+    {name: 'errorTransfer', desc: '使用popover显示错误提示', type: 'boolean', default: 'false'},
+    {name: 'errorAlign', desc: '设置popover的显示位置', type: 'string', default: 'right'},
 ]
 
 
