@@ -16,6 +16,7 @@ type TagProps = {
     style?: any,
     children?: any,
     closable?: boolean,
+    border?: boolean,
     visible?: boolean | Function[]
 }
 
@@ -24,6 +25,7 @@ export function Tag (props: TagProps) {
     const classList = () => useClassList(props, 'cm-tag', {
         [`cm-tag-${props.theme}`]: props.theme,
         'cm-tag-has-badge': value() !== '',
+        'cm-tag-border': props.border,
         'cm-tag-circle': !value() && props.circle,
         [`cm-tag-${props.size}`]: props.size,
         'cm-tag-has-avatar': props.avatar
@@ -51,8 +53,8 @@ export function Tag (props: TagProps) {
 
     return <Show when={visible()} fallback={null}>
         <div classList={classList()} style={props.style}>
+            {props.avatar}
             <div class='cm-tag-content'>
-                {props.avatar}
                 <div class='cm-tag-text'>{props.children}</div>
                 {
                     props.closable 

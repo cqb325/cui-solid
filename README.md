@@ -41,6 +41,12 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.34
+    1、Select支持远程过滤和默认值
+    2、badge添加offset属性
+    3、popover支持confirm
+    4、Tag默认无border添加border属性
+    
     v0.1.33
     1、修复Modal溢出出现滚动条问题
 

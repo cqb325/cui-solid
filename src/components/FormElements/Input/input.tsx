@@ -28,6 +28,7 @@ export interface InputProps {
     onKeyUp?(e: any): void
     onInput?(value: any, e: any): void
     trigger?: string
+    ref?: any
     notCreateFiled?: boolean
 }
 
@@ -44,7 +45,6 @@ export function InnerInput (props: InputProps) {
     });
     const [local, others] = splitProps(props, ['classList', 'class', 'name', 'style', 'disabled', 'size', 'type', 'append', 'prepend', 'prefix', 'suffix', 'suffixStyle', 'prefixStyle',
         'clearable', 'value', 'onChange', 'onEnter', 'onKeyDown', 'onKeyUp', 'onInput', 'trigger']);
-    let ref: any;
     const inputStyle: any = {};
     if (local.suffixStyle && local.suffixStyle.width) {
         inputStyle['padding-right'] = local.suffixStyle.width + 'px';
@@ -111,7 +111,7 @@ export function InnerInput (props: InputProps) {
         {
             local.prepend ? <div class='cm-input-group-prepend'>{local.prepend}</div> : null
         }
-        <input class='cm-input' ref={ref} {...others} value={_value()} 
+        <input class='cm-input' ref={props.ref} {...others} value={_value()} 
             onChange={_onChange} onInput={_onInput} onBlur={onBlurChange} disabled={local.disabled}
             style={inputStyle} onKeyDown={_onKeyDown} onKeyUp={_onKeyUp} type={local.type}/>
         {

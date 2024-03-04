@@ -13,7 +13,7 @@ import { Col } from "@/components/Col";
 import { Table } from "@/components/Table";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { anchorData, codes, eventsData, optionPropsData, propsData } from "./config";
-import { Option, OptionGroup } from "@/components/FormElements/Select";
+import { Option, OptionGroup, Select } from "@/components/FormElements/Select";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
@@ -24,6 +24,26 @@ export default function SelectPage () {
 
     let select;
     const largeArray = new Array(1000).fill(0).map((_, index) => ({value: index, num: 1 + Math.round(Math.random() * 20) }))
+    const [filteredData, setFilteredData] = createSignal<any[]>([]);
+    const [filteredData2, setFilteredData2] = createSignal<any[]>([]);
+    const [loading, setLoading] = createSignal<boolean>(false);
+    const [val1, setVal1] = createSignal<string>('val1');
+    const [val2, setVal2] = createSignal<string[]>(['val1']);
+    const remoteQuery = (query: string) => {
+        console.log(query);
+        setLoading(true)
+        const arr = new Array(10).fill(0).map((_, index) => ({value: query + index, label: query + index}))
+        setFilteredData(arr);
+        setLoading(false)
+    }
+    const remoteQuery2 = (query: string) => {
+        console.log(query);
+        setLoading(true)
+        const arr = new Array(10).fill(0).map((_, index) => ({value: query + index, label: query + index}))
+        setFilteredData2(arr);
+        setLoading(false)
+    }
+
     return <>
         <div class='sys-ctx-main-left' use:hljs={''}>
             <Space dir="v" size={32}>
@@ -200,18 +220,72 @@ export default function SelectPage () {
 
                 <Space id="select_filter" dir="v">
                     <Card bordered>
-                        <Input type='select' clearable filter>
-                            <Option value={1} label="北京"></Option>
-                            <Option value={2} label="上海"></Option>
-                            <Option value={3} label="杭州"></Option>
-                            <Option value={4} label="武汉"></Option>
-                            <Option value={5} label="天津"></Option>
-                        </Input>
+                        <Space>
+                            <Select clearable filter >
+                                <Option value={1} label="北京"></Option>
+                                <Option value={2} label="上海"></Option>
+                                <Option value={3} label="杭州"></Option>
+                                <Option value={4} label="武汉"></Option>
+                                <Option value={5} label="天津"></Option>
+                            </Select>
+                            <Select clearable filter multi>
+                                <Option value={1} label="北京"></Option>
+                                <Option value={2} label="上海"></Option>
+                                <Option value={3} label="杭州"></Option>
+                                <Option value={4} label="武汉"></Option>
+                                <Option value={5} label="天津"></Option>
+                            </Select>
+                        </Space>
                         <Divider align="left"><Text type="primary">过滤</Text></Divider>
                         <Paragraph type="secondary" spacing='extended'>
                             设置 filter 支持过滤选择
                         </Paragraph>
                         <DemoCode data={codes['select_filter']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="select_remote" dir="v">
+                    <Card bordered>
+                        <Space>
+                            <Select clearable filter remoteMethod={remoteQuery} loading={loading()}>
+                                {filteredData().map(item => {
+                                    return <Option value={item.value} label={item.label}></Option>
+                                })}
+                            </Select>
+                            <Select clearable filter multi remoteMethod={remoteQuery2} loading={loading()}>
+                                {filteredData2().map(item => {
+                                    return <Option value={item.value} label={item.label}></Option>
+                                })}
+                            </Select>
+                        </Space>
+                        <Divider align="left"><Text type="primary">远程过滤</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            远程过滤，通过remoteMethod进行查询，重置选项，loading属性，切换加载状态
+                        </Paragraph>
+                        <DemoCode data={codes['select_remote']}/>
+                    </Card>
+                </Space>
+
+                <Space id="select_default_labels" dir="v">
+                    <Card bordered>
+                        <Space>
+                            <Select clearable filter remoteMethod={remoteQuery} loading={loading()} value={[val1, setVal1]} defaultLabel="默认值">
+                                {filteredData().map(item => {
+                                    return <Option value={item.value} label={item.label}></Option>
+                                })}
+                            </Select>
+                            <Select clearable filter multi remoteMethod={remoteQuery2} loading={loading()} value={[val2, setVal2]} defaultLabel={['值1']}>
+                                {filteredData2().map(item => {
+                                    return <Option value={item.value} label={item.label}></Option>
+                                })}
+                            </Select>
+                        </Space>
+                        <Divider align="left"><Text type="primary">过滤</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            远程过滤支持默认值和默认label，通过属性defaultLabel设置
+                        </Paragraph>
+                        <DemoCode data={codes['select_default_labels']}/>
                     </Card>
                 </Space>
 

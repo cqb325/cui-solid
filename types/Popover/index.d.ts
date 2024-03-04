@@ -12,5 +12,11 @@ export interface PopoverProps {
     content?: any;
     visible?: any;
     ref?: any;
+    confirm?: boolean;
+    okText?: any;
+    cancleText?: any;
+    style?: any;
+    onOk?: Function;
+    onCancel?: Function;
 }
 export declare function Popover(props: PopoverProps): import("solid-js").JSX.Element;

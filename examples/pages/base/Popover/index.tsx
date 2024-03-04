@@ -14,6 +14,7 @@ import { propsColumns } from "../../common/columns";
 
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Icon, Input } from "@/components";
 useDirective(hljs);
 
 export default function PopoverPage () {
@@ -111,7 +112,7 @@ export default function PopoverPage () {
                     <Card bordered>
                         <Space dir="v">
                             <div>
-                                <Popover visible={[visible, setVisible]} content={<div>
+                                <Popover visible={[visible, setVisible]} theme='light' content={<div>
                                     <div>content!content!content!</div>
                                     <div>content!content!content!</div>
                                     <div>content!content!content!</div>
@@ -122,6 +123,22 @@ export default function PopoverPage () {
                                 </div>} arrow trigger="click">
                                     <span>Click</span>
                                 </Popover>
+                                
+                                <div>
+                                <Popover theme='light' align='topRight' content={<Space dir='v' style={{width: '150px'}}>
+                                    <div><Icon name='help-circle' color="var(--cui-warning-color)"/> <Text>确认用户信息</Text></div>
+                                    <div>是否确认删除该信息</div>
+                                </Space>} arrow confirm onOk={() => {
+                                    console.log(1);
+                                    return new Promise((resolve) => {
+                                        setTimeout(() => {
+                                            resolve(false);
+                                        }, 2000)
+                                    });
+                                }}>
+                                    <span>confirm</span>
+                                </Popover>
+                                </div>
                             </div>
                         </Space>
                         <Divider align="left"><Text type="primary">可控</Text></Divider>

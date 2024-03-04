@@ -38,6 +38,7 @@ export function AutoComplete (props: SelectOptions) {
     const [open, setOpen] = createSignal(false);
     const align = props.align ?? 'bottomLeft';
     const [value, setValue] = createField(props, '');
+    const [query, setQuery] = createSignal('');
 
     const classList = () => useClassList(props, 'cm-select', 'cm-autocomplete', {
         'cm-select-disabled': props.disabled,
@@ -50,6 +51,7 @@ export function AutoComplete (props: SelectOptions) {
     let wrap: any;
     const textField = 'label';
     const valueField = props.valueField || 'value';
+    let isClickChanging = false;
 
     let newData: any[] = [];
     if (props.data) {
@@ -95,8 +97,23 @@ export function AutoComplete (props: SelectOptions) {
         }
     });
 
+    createEffect(() => {
+        const queryStr = query();
+        if (isClickChanging) {
+            return;
+        }
+        if (queryStr.length) {
+            props.onSearch && props.onSearch(queryStr);
+        }
+    })
+
     const onOptionClick = (v: any, item: any) => {
         setValue(v);
+        isClickChanging = true;
+        setQuery(item[textField]);
+        queueMicrotask(() => {
+            isClickChanging = false; // 防止触发查询
+        })
         props.onChange && props.onChange(v, item);
         setOpen(false);
     }
@@ -118,12 +135,6 @@ export function AutoComplete (props: SelectOptions) {
         e.stopPropagation && e.stopPropagation();
         props.onChange && props.onChange('');
         setValue('');
-    }
-
-    const onFilter = (e: any) => {
-        if (e.target.value.length) {
-            props.onSearch && props.onSearch(e.target.value);
-        }
     }
 
     const onBeforeDrop = () => {
@@ -151,7 +162,7 @@ export function AutoComplete (props: SelectOptions) {
             </div>
         </Collapase>
     </div>}>
-        <Value text={labels()} disabled={props.disabled} filter onInput={onFilter}
+        <Value text={labels()} disabled={props.disabled} filter query={[query, setQuery]}
                 clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
                 prepend={props.prefix} size={props.size} icon={<Icon name='chevron-down' class="cm-select-cert"/>} />
     </Dropdown>

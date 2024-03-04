@@ -5,6 +5,13 @@
     height: 20px;
     cursor: pointer;
     align-self: center;
+    &.cm-tag-border {
+        .cm-tag-content {
+            border-style: solid;
+            border-width: 1px;
+            border-color: rgba(var(--cui-grey-6), 0.1);
+        }
+    }
 
     &.cm-tag-has-badge{
         &:hover{
@@ -171,8 +178,9 @@
         width: 20px;
         height: 20px;
         position: absolute;
-        top: -1px;
-        left: -1px;
+        top: 0;
+        left: 0;
+        z-index: 2;
         border-radius: var(--cui-border-radius-small) 0 0 var(--cui-border-radius-small);
         > * {
             line-height: 16px;
@@ -198,8 +206,8 @@
     z-index: 1;
     padding: 2px 8px;
     border-radius: var(--cui-border-radius-small);
-    border: 1px solid rgba(var(--cui-grey-5), 0.15);
-    background: rgba(var(--cui-grey-5), 0.15);
+    // border: 1px solid rgba(var(--cui-grey-6), 0.15);
+    background: rgba(var(--cui-grey-5), 0.1);
     font-size: 12px;
     -webkit-transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);

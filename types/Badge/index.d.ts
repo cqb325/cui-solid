@@ -6,6 +6,7 @@ type BadgeProps = {
     overflowCount?: number;
     text?: string;
     children?: any;
+    offset?: number[];
     status?: 'success' | 'error' | 'processing' | 'warning' | 'default';
     color?: string | 'blue' | 'green' | 'red' | 'yellow' | 'pink' | 'magenta' | 'volcano' | 'orange' | 'gold' | 'lime' | 'cyan' | 'geekblue' | 'purple';
     type?: 'primary' | 'success' | 'normal' | 'info' | 'error' | 'warning';

@@ -11,6 +11,7 @@ type TagProps = {
     style?: any;
     children?: any;
     closable?: boolean;
+    border?: boolean;
     visible?: boolean | Function[];
 };
 export declare function Tag(props: TagProps): import("solid-js").JSX.Element;

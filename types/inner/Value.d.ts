@@ -15,6 +15,8 @@ export interface ValueProps {
     onClose?(item: TagConfig, e: any): void;
     onInput?(e: any): void;
     filter?: boolean;
+    query?: [Function, Function];
     showMore?: boolean;
+    onDeleteLastValue?: Function;
 }
 export declare function Value(props: ValueProps): import("solid-js").JSX.Element;

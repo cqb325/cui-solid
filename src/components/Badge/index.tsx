@@ -9,6 +9,7 @@ type BadgeProps = {
     overflowCount?: number,
     text?: string,
     children?: any,
+    offset?: number[],
     status?: 'success'|'error'|'processing'|'warning'|'default',
     color?: string | 'blue'|'green'|'red'|'yellow'|'pink'|'magenta'|'volcano'|'orange'|'gold'|'lime'|'cyan'|'geekblue'|'purple',
     type?: 'primary'|'success'|'normal'|'info'|'error'|'warning'
@@ -27,6 +28,16 @@ export function Badge(props: BadgeProps) {
     const classList = () => useClassList(props, 'cm-badge', {
         'cm-badge-status': props.status
     });
+
+    const styles = () => {
+        const style: any = {};
+        if (props.offset && props.offset.length === 2) {
+            style['margin-top'] = `${props.offset[0]}px`;
+            style['margin-right'] = `${props.offset[1]}px`;
+        }
+        return style;
+    };
+    
     const showCount = () => {
         return props.count && props.count > overflowCount ? Math.min(overflowCount, props.count) + '+' : props.count;
     }
@@ -55,10 +66,10 @@ export function Badge(props: BadgeProps) {
             </>
         }>
             <Show when={props.count !== undefined || props.text !== undefined}>
-                <sup classList={countClass()}>{showCount()}{props.text}</sup>
+                <sup classList={countClass()} style={styles()}>{showCount()}{props.text}</sup>
             </Show>
             <Show when={props.dot !== undefined}>
-                <sup class="cm-badge-dot"></sup>
+                <sup class="cm-badge-dot" style={styles()}></sup>
             </Show>
         </Show>
     </span>

@@ -8,6 +8,8 @@ import createModel from "../utils/createModel";
 import usezIndex from "../utils/usezIndex";
 import { useTransition } from "../utils/useTransition";
 import { createComputed } from "solid-js";
+import { Button } from "../Button";
+import { Space } from "../Layout";
 
 export interface PopoverProps {
     classList?: any
@@ -23,17 +25,24 @@ export interface PopoverProps {
     content?: any
     visible?: any
     ref?: any
+    confirm?: boolean
+    okText?: any
+    cancleText?: any
+    style?: any
+    onOk?: Function,
+    onCancel?: Function,
 }
 
 export function Popover (props: PopoverProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
     const [opened, setOpened] = createSignal(visible());
     const [_, update] = createSignal(createUniqueId());
+    const [buttonLoading, setButtonLoading] = createSignal(false);
     let inner: any;
     let removeClickOutside: Function;
     let wrap: any;
     const align = () => props.align || 'right';
-    const trigger = () => props.trigger || 'hover';
+    const trigger = () => props.confirm ? 'click' : props.trigger || 'hover';
     const zindex = usezIndex();
 
     let timer: any = null;
@@ -84,6 +93,7 @@ export function Popover (props: PopoverProps) {
     const classList = () => useClassList(props, 'cm-popover-inner', {
         // 'cm-popover-inner-show': visible(),
         'cm-popover-with-arrow': props.arrow,
+        'cm-popover-confirm': props.confirm,
         [`cm-popover-${props.theme}`]: props.theme
     });
 
@@ -116,9 +126,28 @@ export function Popover (props: PopoverProps) {
             pos.top = pos.top + document.documentElement.scrollTop + 'px';
             pos.left = pos.left + document.documentElement.scrollLeft + 'px';
             pos['z-index'] = zindex;
+            Object.assign(pos, props.style || {});
             return pos;
         }
     };
+
+    const onOk = async () => {
+        if (props.onOk) {
+            setButtonLoading(true);
+            const ret = await props.onOk();
+            setButtonLoading(false);
+            if (ret === undefined || ret === true) {
+                setVisible(false);
+                props.onOpen && props.onOpen(false);
+            }
+        }
+    }
+
+    const onCancel = () => {
+        props.onCancel && props.onCancel();
+        setVisible(false);
+        props.onOpen && props.onOpen(false);
+    }
 
     onMount (() => {
         if (inner.nextElementSibling) {
@@ -155,12 +184,23 @@ export function Popover (props: PopoverProps) {
             update(createUniqueId());
         }
     });
+
+    const okText = props.okText ?? '确 定';
+    const cancleText = props.cancleText ?? '取 消';
     return <>
         <span style={{display: 'none'}} ref={inner}></span>
         {props.children}
         <Portal mount={usePortal(id, id)}>
             <div ref={wrap} style={posStyle()} x-placement={align()} classList={classList()}>
-                {props.content}
+                <div class="cm-popover-body">
+                    {props.content}
+                </div>
+                {
+                    props.confirm ? <Space class="cm-popover-tools" justify="end">
+                        <Button type='default' size='small' onClick={onCancel}>{cancleText}</Button>
+                        <Button type='primary' size='small' onClick={onOk} loading={buttonLoading()}>{okText}</Button>
+                    </Space> : null
+                }
                 {
                     props.arrow ? <svg width="24" height="8" xmlns="http://www.w3.org/2000/svg" class="cm-popover-icon-arrow">
                         <path d="M0.5 0L1.5 0C1.5 4, 3 5.5, 5 7.5S8,10 8,12S7 14.5, 5 16.5S1.5,20 1.5,24L0.5 24L0.5 0z" fill="rgba(var(--semi-blue-4),1)" opacity="1"></path>

@@ -30,13 +30,14 @@ export default function TagPage () {
                     <Card bordered>
                         <Space dir="h">
                             <Tag>标签一</Tag>
-                            <Tag>标签二</Tag>
+                            <Tag border>标签二</Tag>
                             <Tag closable>标签三</Tag>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing='extended'>
                             简单的展示，添加属性closable可以关闭标签。<br/>
-                            点击关闭标签时，会触发 onClose 事件。
+                            点击关闭标签时，会触发 onClose 事件。<br/>
+                            border 可以设置边框
                         </Paragraph>
                         <DemoCode data={codes['tag_base']}/>
                     </Card>
@@ -48,7 +49,7 @@ export default function TagPage () {
                             <Tag>标签一</Tag>
                             <Tag value={10}>Value</Tag>
                             <Tag theme='primary' circle>Circle</Tag>
-                            <Tag theme='primary' avatar={<Avatar>U</Avatar>}>Avatar</Tag>
+                            <Tag theme='primary' border avatar={<Avatar>U</Avatar>}>Avatar</Tag>
                         </Space>
                         <Divider align="left"><Text type="primary">标签类型</Text></Divider>
                         <Paragraph type="secondary" spacing='extended'>

@@ -1,6 +1,7 @@
 import { JSXElement, Match, Show, Switch } from "solid-js";
 import { Icon } from "../Icon";
 import { TagConfig, TagGroup } from "../TagGroup";
+import { InnerInput } from "../FormElements/Input/input";
 
 export interface ValueProps {
     onClear?: Function
@@ -17,10 +18,14 @@ export interface ValueProps {
     onClose?(item: TagConfig, e: any): void,
     onInput?(e: any): void,
     filter?: boolean,
-    showMore?: boolean
+    query?: [Function, Function]
+    showMore?: boolean,
+    onDeleteLastValue?: Function
 }
 
 export function Value (props: ValueProps) {
+    const [query, setQuery] = props.query ?? [() => {}, () => {}];
+    let filterInput: any;
     const onClear = (e: any) => {
         e.stopImmediatePropagation && e.stopImmediatePropagation();
         e.preventDefault && e.preventDefault();
@@ -34,6 +39,11 @@ export function Value (props: ValueProps) {
         [`cm-field-value-${props.size}`]: !!props.size,
     })
     const text = () => {
+        Promise.resolve().then(() => {
+            if (props.filter && filterInput) {
+                filterInput.focus();
+            }
+        })
         if (props.multi && props.text && props.text instanceof Array) {
             return props.text.map((item: any, index: number) => {
                 return {id: item.id, title: item.title};
@@ -41,8 +51,31 @@ export function Value (props: ValueProps) {
         }
         return [];
     };
+
+    const inputStyle = () => {
+        const str = props.filter ? query() : '';
+        return {
+            width: str !== undefined ? str.length * 12 + 20 + 'px' : '100%',
+        }
+    }
+
+    const onValueClick = () => {
+        if (props.filter && filterInput) {
+            filterInput.focus();
+        }
+    }
+
+    const onFilterKeyDown = (e: any) => {
+        const queryStr = query();
+        if (e.key === 'Backspace' || e.code === 'Backspace'
+        || e.key === 'Delete' || e.code === 'Delete') {
+            if (queryStr.length === 0) {
+                props.onDeleteLastValue && props.onDeleteLastValue();
+            }
+        }
+    }
     
-    return <div classList={classList()} tabIndex="1">
+    return <div classList={classList()} tabIndex="1" onClick={onValueClick}>
         <input type="hidden"></input>
         {/* 文字对齐辅助 */}
         <span style={{width: '0px', "font-size": '12px', visibility: 'hidden', 'line-height': 'initial'}}>A</span>
@@ -56,14 +89,23 @@ export function Value (props: ValueProps) {
                 <div class="cm-field-selection">
                     <TagGroup data={text()} closable={props.valueClosable} max={props.showMax} showMore={props.showMore} onClose={props.onClose}
                         size={props.size === 'small' ? 'small' : 'large'}/>
+                    { 
+                        props.filter
+                        ? <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class='cm-select-filter' 
+                            trigger='input' size={props.size} value={[query, setQuery]} onKeyDown={onFilterKeyDown}/>
+                        : null
+                    }
                 </div>
             </Match>
             <Match when={!props.multi}>
                 <div class='cm-field-text'>
-                    {
-                        props.filter ? <input class="cm-select-input" value={props.text} placeholder={props.placeholder} onInput={props.onInput}/>
-                        : props.text ? props.text : <span class="cm-field-placeholder">{props.placeholder??''}</span>
-                    }
+                    <Show when={!props.filter}>
+                        {props.text ? props.text : <span class="cm-field-placeholder">{props.placeholder??''}</span>}
+                    </Show>
+                    <Show when={props.filter}>
+                        <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class='cm-select-filter' 
+                            trigger='input' size={props.size} value={[query, setQuery]}/>
+                    </Show>
                 </div>
             </Match>
         </Switch>

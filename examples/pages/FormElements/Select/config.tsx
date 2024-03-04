@@ -22,6 +22,10 @@ export const propsData = [
     {name: 'align', desc: '下拉内容位置 bottomLeft|bottomRight', type: 'string', default: 'bottomLeft'},
     {name: 'showMore', desc: '多选设置showMax后是否在数字上显示更多', type: 'boolean', default: ''},
     {name: 'ref', desc: '组件引用', type: 'any', default: ''},
+    {name: 'remoteMethod', desc: '远程过滤', type: 'Function', default: ''},
+    {name: 'debounceTime', desc: '防抖时间', type: 'number', default: '300'},
+    {name: 'loading', desc: '远程过滤的状态', type: 'Boolean', default: 'false'},
+    {name: 'defaultLabel', desc: '远程过滤的默认label,配合默认value使用', type: 'string|string[]', default: ''},
     {name: 'onChange', desc: '值改变事件', type: 'Function', default: ''},
 ]
 
@@ -46,6 +50,8 @@ export const anchorData = [
     {id: 'select_valueClosable', text: '值可关闭'},
     {id: 'select_group', text: '分组显示'},
     {id: 'select_filter', text: '过滤'},
+    {id: 'select_remote', text: '远程过滤'},
+    {id: 'select_default_labels', text: '远程默认值'},
     {id: 'select_renderOption', text: '自定义渲染'},
     {id: 'select_prefix', text: '前缀'},
     {id: 'select_emptyOption', text: '空选项'},
@@ -66,6 +72,8 @@ import select_showmax from "./codes/select_showmax"
 import select_valueClosable from "./codes/select_valueClosable"
 import select_group from "./codes/select_group"
 import select_filter from "./codes/select_filter"
+import select_remote from "./codes/select_remote"
+import select_default_labels from "./codes/select_default_labels"
 import select_renderOption from "./codes/select_renderOption"
 import select_prefix from "./codes/select_prefix"
 import select_emptyOption from "./codes/select_emptyOption"
@@ -81,6 +89,8 @@ export const codes = {
     select_valueClosable,
     select_group,
     select_filter,
+    select_remote,
+    select_default_labels,
     select_renderOption,
     select_prefix,
     select_emptyOption,

@@ -21,7 +21,17 @@
         min-width: 100%;
     }
 }
-
+.cm-select-filter {
+    border: none;
+    &.cm-input-wrapper:hover,
+    &.cm-input-wrapper:focus-within{
+        border-color: transparent;
+        box-shadow: none;
+    }
+    .cm-input {
+        padding: 0;
+    }
+}
 .cm-select-filter-wrap {
     border-bottom: 1px solid #d9d9d9;
     padding-bottom: 5px;

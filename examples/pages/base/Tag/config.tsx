@@ -5,6 +5,7 @@ export const propsData = [
     {name: 'circle', desc: '圆角标签', type: 'boolean', default: ''},
     {name: 'size', desc: '标签尺寸small|large', type: 'string', default: ''},
     {name: 'avatar', desc: '头像', type: 'Avatar', default: ''},
+    {name: 'border', desc: '边框', type: 'boolean', default: 'false'},
     {name: 'closable', desc: '可关闭标签', type: 'boolean', default: ''},
     {name: 'visible', desc: '可见性绑定属性', type: 'Function[]', default: ''},
     {name: 'onBeforeClose', desc: '关闭标签前置回调', type: 'Function', default: ''},

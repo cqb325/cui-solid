@@ -25,7 +25,11 @@ type SelectOptions = {
     transfer?: boolean;
     align?: 'bottomLeft' | 'bottomRight';
     showMore?: boolean;
+    loading?: boolean;
     children?: any;
+    remoteMethod?: Function;
     maxHeight?: number;
+    debounceTime?: number;
+    defaultLabel?: string | string[];
 };
 export declare function Select(props: SelectOptions): import("solid-js").JSX.Element;

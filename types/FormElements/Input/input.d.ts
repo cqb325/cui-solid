@@ -23,6 +23,7 @@ export interface InputProps {
     onKeyUp?(e: any): void;
     onInput?(value: any, e: any): void;
     trigger?: string;
+    ref?: any;
     notCreateFiled?: boolean;
 }
 export declare function InnerInput(props: InputProps): import("solid-js").JSX.Element;
