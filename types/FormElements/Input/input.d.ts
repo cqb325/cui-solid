@@ -25,5 +25,9 @@ export interface InputProps {
     trigger?: string;
     ref?: any;
     notCreateFiled?: boolean;
+    wordCount?: boolean;
+    maxLength?: number;
+    autoHeight?: boolean;
+    rows?: number;
 }
 export declare function InnerInput(props: InputProps): import("solid-js").JSX.Element;

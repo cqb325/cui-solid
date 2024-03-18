@@ -18,7 +18,7 @@ import { ColorPicker } from '../ColorPicker';
 
 export function Input (props: any) {
     return <Switch fallback={<InnerInput {...props}/>}>
-        <Match when={props.type === 'text' || !props.type || props.type === 'password'}>
+        <Match when={props.type === 'text' || !props.type || props.type === 'password' || props.type === 'textarea'}>
             <InnerInput {...props}/>
         </Match>
         <Match when={props.type === 'checkbox'}>
@@ -26,9 +26,6 @@ export function Input (props: any) {
         </Match>
         <Match when={props.type === 'radio'}>
             <RadioGroup {...props}/>
-        </Match>
-        <Match when={props.type === 'textarea'}>
-            <Textarea {...props}/>
         </Match>
         <Match when={props.type === 'switch'}>
             <MySwitch {...props}/>

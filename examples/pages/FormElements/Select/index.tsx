@@ -347,6 +347,22 @@ export default function SelectPage () {
                     </Card>
                 </Space>
 
+                <Space id="select_transfer" dir="v">
+                    <Card bordered>
+                        <Select clearable transfer>
+                            <Option value={1} label="北京"></Option>
+                            <Option value={2} label="上海"></Option>
+                            <Option value={3} label="杭州"></Option>
+                            <Option value={4} label="武汉"></Option>
+                            <Option value={5} label="天津"></Option>
+                        </Select>
+                        <Divider align="left"><Text type="primary">Transfer</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                        使用 Portal 将弹层放置于 body 内
+                        </Paragraph>
+                        <DemoCode data={codes['select_transfer']}/>
+                    </Card>
+                </Space>
 
                 <Space id="select_control" dir="v">
                     <Card bordered>

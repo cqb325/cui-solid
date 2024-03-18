@@ -98,13 +98,19 @@
     }
 }
 textarea.cm-input{
-    resize: none;
-    vertical-align: bottom;
+    resize: vertical;
+    vertical-align: bottom; 
+}
+.cm-input-auto-height {
+    textarea {
+        resize: none;
+    }
 }
 .cm-input-prefix, .cm-input-suffix {
-    width: 32px;
+    padding: 0 9px;
     text-align: center;
     z-index: 1;
+    color: var(--cui-color-text-2);
     > svg {
         width: 16px;
         height: var(--height-control-default);
@@ -123,7 +129,12 @@ textarea.cm-input{
     left: auto;
     right: 0;
 }
-
+.cm-textarea {
+    .cm-input-prefix, .cm-input-suffix {
+        position: absolute;
+        bottom: 2px;
+    }
+}
 .cm-input-group {
     display: table;
     width: 100%;

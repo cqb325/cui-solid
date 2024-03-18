@@ -14,6 +14,7 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Textarea } from "@/components";
 useDirective(hljs);
 
 function InputDemo () {
@@ -39,6 +40,17 @@ function InputDemo () {
                             Input的基础用法
                         </Paragraph>
                         <DemoCode data={codes['input_base']}/>
+                    </Card>
+                </Space>
+
+                <Space id="input_textarea" dir="v">
+                    <Card bordered>
+                        <Input type='textarea'/>
+                        <Divider align="left"><Text type="primary">文本域</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            文本域的基础用法
+                        </Paragraph>
+                        <DemoCode data={codes['input_textarea']}/>
                     </Card>
                 </Space>
 
@@ -128,6 +140,31 @@ function InputDemo () {
                             <Text code>size</Text> 属性支持 <Text code>small</Text> <Text code>large</Text> 默认尺寸中
                         </Paragraph>
                         <DemoCode data={codes['input_size']}/>
+                    </Card>
+                </Space>
+
+                <Space id="input_word_count" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Input type='text' maxLength={20} wordCount/>
+                            <Input type='textarea' maxLength={20} wordCount/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">字符计数</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            同时设置wordCount和maxLength属性，当输入内容时，会自动显示计数
+                        </Paragraph>
+                        <DemoCode data={codes['input_word_count']}/>
+                    </Card>
+                </Space>
+
+                <Space id="input_auto_height" dir="v">
+                    <Card bordered>
+                        <Input type='textarea' autoHeight/>
+                        <Divider align="left"><Text type="primary">适应高度</Text></Divider>
+                        <Paragraph type="secondary" spacing='extended'>
+                            Textarea 的高度随内容输入自动适应高度
+                        </Paragraph>
+                        <DemoCode data={codes['input_auto_height']}/>
                     </Card>
                 </Space>
 

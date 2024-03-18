@@ -1,7 +1,8 @@
-import { splitProps } from 'solid-js';
+import { Show, createSignal, splitProps } from 'solid-js';
 import {Icon} from '../../Icon';
 import { useClassList } from '../../utils/useProps';
 import createField from '../../utils/createField';
+import { WordCount } from '@/components/WordCount';
 
 export interface InputProps {
     classList?: any
@@ -30,11 +31,17 @@ export interface InputProps {
     trigger?: string
     ref?: any
     notCreateFiled?: boolean
+    wordCount?: boolean
+    maxLength?: number
+    autoHeight?: boolean
+    rows?: number
 }
 
 export function InnerInput (props: InputProps) {
     const clazzName = () => useClassList(props, 'cm-input-wrapper', {
         'cm-input-disabled': props.disabled,
+        'cm-input-auto-height': props.autoHeight,
+        'cm-textarea': props.type === 'textarea',
         'cm-input-hidden': props.type === 'hidden',
         [`cm-input-${props.size}`]: props.size,
         // 'cm-input-group': append || prepend,
@@ -54,6 +61,7 @@ export function InnerInput (props: InputProps) {
     }
 
     const [_value, setValue] = createField(props, '');
+    const [valForCount, setValForCount] = createSignal(_value());
 
     const trigger = local.trigger || 'blur';
     const _onInput = (e: any) => {
@@ -63,8 +71,29 @@ export function InnerInput (props: InputProps) {
             }
             setValue(e.target.value);
         }
+        setValForCount(e.target.value);
         local.onInput && local.onInput(e.target.value, e);
+        props.type === 'textarea' && props.autoHeight && _autoHeight(e);
     }
+
+    let initHeight: number;
+    const _autoHeight = (event: any) => {
+        const ele = event.target;
+        if (!initHeight) {
+            initHeight = ele.clientHeight;
+        }
+        if (ele.scrollHeight > initHeight) {
+            if (ele.value.split('\n').length === 1) {
+                ele.style.height = `${initHeight}px`;
+            } else {
+                ele.style.height = 'auto';
+            }
+            ele.style.overflowY = 'hidden';
+            ele.scrollTop = 0; // 防抖动
+            ele.style.height = `${ele.scrollHeight}px`;
+        }
+    }
+
     const _onChange = (e: any) => {
         // setValue(e.target.value);
     }
@@ -111,14 +140,24 @@ export function InnerInput (props: InputProps) {
         {
             local.prepend ? <div class='cm-input-group-prepend'>{local.prepend}</div> : null
         }
-        <input class='cm-input' ref={props.ref} {...others} value={_value()} 
+        <Show when={local.type === 'textarea'} fallback={
+            <input class='cm-input' ref={props.ref} {...others} value={_value()} autocomplete={props.autocomplete || 'off'}
             onChange={_onChange} onInput={_onInput} onBlur={onBlurChange} disabled={local.disabled}
             style={inputStyle} onKeyDown={_onKeyDown} onKeyUp={_onKeyUp} type={local.type}/>
+        }>
+            <textarea class='cm-input' ref={props.ref} {...others} value={_value()} spellcheck={false} autocomplete={props.autocomplete || 'off'} wrap="soft"
+            onChange={_onChange} onInput={_onInput} onBlur={onBlurChange} disabled={local.disabled}
+            style={inputStyle} onKeyDown={_onKeyDown} onKeyUp={_onKeyUp}></textarea>
+        </Show>
         {
             local.clearable && _value() ? <Icon class='cm-input-clear' name='x-circle' onClick={clear}/> : null
         }
         {
-            local.suffix ? <div class='cm-input-suffix' style={local.suffixStyle}>{local.suffix}</div> : null
+            local.suffix || (props.wordCount && props.maxLength) ? <div class='cm-input-suffix' style={local.suffixStyle}>
+                <Show when={props.wordCount && props.maxLength} fallback={local.suffix}>
+                    <WordCount total={props.maxLength!} value={valForCount()}/>
+                </Show>
+            </div> : null
         }
         {
             local.append ? <div class={`cm-input-group-append`}>{local.append}</div> : null

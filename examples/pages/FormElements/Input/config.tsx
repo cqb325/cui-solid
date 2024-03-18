@@ -5,7 +5,7 @@ export const propsData = [
     {name: 'name', desc: 'input的name属性', type: 'string', default: ''},
     {name: 'disabled', desc: '禁用', type: 'boolean', default: ''},
     {name: 'size', desc: '尺寸大小,small|default|large', type: 'string', default: 'default'},
-    {name: 'type', desc: '输入框的类型', type: 'string', default: 'text'},
+    {name: 'type', desc: '输入框的类型, text,password,textarea', type: 'string', default: 'text'},
     {name: 'append', desc: '后追加', type: 'JSXElement', default: ''},
     {name: 'prepend', desc: '前追加', type: 'JSXElement', default: ''},
     {name: 'prefix', desc: '前缀', type: 'JSXElement', default: ''},
@@ -18,6 +18,9 @@ export const propsData = [
     {name: 'value', desc: '值，可控属性', type: 'Function[]', default: ''},
     {name: 'autocomplete', desc: '自动填充选项', type: 'string', default: ''},
     {name: 'placeholder', desc: 'placeholder', type: 'string', default: ''},
+    {name: 'maxLength', desc: '原生maxLength', type: 'number', default: ''},
+    {name: 'wordCount', desc: '显示字数限制', type: 'boolean', default: ''},
+    {name: 'autoHeight', desc: '自动尺寸，对于type=textarea', type: 'boolean', default: ''},
     {name: 'onChange', desc: '值改变事件根据triggrt触发', type: 'Function', default: ''},
     {name: 'onEnter', desc: '回车按下事件', type: 'Function', default: ''},
     {name: 'onKeyDown', desc: '键盘按下事件', type: 'Function', default: ''},
@@ -36,6 +39,7 @@ export const eventsData = [
 
 export const anchorData = [
     {id: 'input_base', text: '基础用法'},
+    {id: 'input_textarea', text: '文本域'},
     {id: 'input_disabled', text: '禁用'},
     {id: 'input_placeholder', text: 'placeholder'},
     {id: 'input_clearable', text: '可清空'},
@@ -43,12 +47,16 @@ export const anchorData = [
     {id: 'input_prefix', text: '前缀后缀'},
     {id: 'input_append', text: '追加'},
     {id: 'input_size', text: '尺寸'},
+    {id: 'input_word_count', text: '字符计数'},
+    {id: 'input_auto_height', text: '适应高度'},
     {id: 'comp_api', text: 'API'},
     {id: 'comp_props', text: '属性'},
     {id: 'comp_events', text: '事件'},
 ]
 
 import input_base from './codes/input_base';
+import input_textarea from './codes/input_textarea';
+import input_word_count from './codes/input_word_count';
 import input_disabled from './codes/input_disabled';
 import input_placeholder from './codes/input_placeholder';
 import input_clearable from './codes/input_clearable';
@@ -56,8 +64,11 @@ import input_control from './codes/input_control';
 import input_prefix from './codes/input_prefix';
 import input_append from './codes/input_append';
 import input_size from './codes/input_size';
+import input_auto_height from './codes/input_auto_height';
 export const codes = {
     input_base,
+    input_textarea,
+    input_word_count,
     input_disabled,
     input_placeholder,
     input_clearable,
@@ -65,4 +76,5 @@ export const codes = {
     input_prefix,
     input_append,
     input_size,
+    input_auto_height
 };

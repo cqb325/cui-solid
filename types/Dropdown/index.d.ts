@@ -16,6 +16,7 @@ type DropdownProps = {
     disabled?: boolean;
     revers?: boolean;
     handler?: string;
+    fixWidth?: boolean;
     onBeforeDrop?: Function;
 };
 export declare function Dropdown(props: DropdownProps): import("solid-js").JSX.Element;

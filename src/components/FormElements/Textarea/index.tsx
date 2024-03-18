@@ -1,6 +1,7 @@
-import { splitProps } from "solid-js";
+import { createSignal, splitProps } from "solid-js";
 import { useClassList } from "../../utils/useProps";
 import createField from "../../utils/createField";
+import { WordCount } from "../../WordCount";
 
 export interface TextareaProps {
     classList?: any;
@@ -11,6 +12,8 @@ export interface TextareaProps {
     value?: any
     name?: string
     trigger?: 'input'|'blur'
+    wordCount?: boolean
+    maxLength?: number
     onChange?: Function
     onInput?: Function
     onKeyUp?: Function
@@ -25,6 +28,7 @@ export function Textarea (props: TextareaProps) {
         'cm-input-auto-height': local.autoHeight
     });
     const [_value, setValue] = createField(props, '');
+    const [valForCount, setValForCount] = createSignal(_value());
     const trigger = local.trigger || 'blur';
     const _onChange = (e: any) => {
         // setValue(e.target.value);
@@ -44,6 +48,7 @@ export function Textarea (props: TextareaProps) {
                 local.onChange(e.target.value);
             }
         }
+        setValForCount(e.target.value);
         if (local.onInput) { local.onInput(e.target.value, e); }
         local.autoHeight && _autoHeight(e);
     };
@@ -77,5 +82,10 @@ export function Textarea (props: TextareaProps) {
         <textarea class='cm-input' {...others} value={_value()} spellcheck={false} autocomplete="off" wrap="soft"
                 onChange={_onChange} onInput={_onInput} onKeyUp={_onKeyUp} onBlur={onBlurChange}
             ></textarea>
+        {
+            props.wordCount && props.maxLength ? <div class='cm-input-suffix'>
+                <WordCount total={props.maxLength} value={valForCount()}/>
+            </div> : null
+        }
     </div>
 }

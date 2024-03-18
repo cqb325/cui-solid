@@ -8,6 +8,7 @@ export const propsData = [
     {name: 'menu', desc: '下拉菜单内容', type: 'any', default: ''},
     {name: 'visible', desc: '菜单显隐绑定属性', type: 'Function[]', default: ''},
     {name: 'transfer', desc: '是否将弹层放置于 body 内，在overflow 为 hidden的容器内效果更友好', type: 'boolean', default: ''},
+    {name: 'fixWidth', desc: '是否在使用transfer时打开弹框后弹框固定宽度至出发元素宽度，在select中使用', type: 'boolean', default: ''},
     {name: 'theme', desc: '主题色 dark|light', type: 'string', default: 'light'},
     {name: 'disabled', desc: '禁用状态', type: 'boolean', default: ''},
     {name: 'revers', desc: '超出范围反向显示', type: 'boolean', default: ''},

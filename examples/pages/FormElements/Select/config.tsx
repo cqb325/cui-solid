@@ -55,6 +55,7 @@ export const anchorData = [
     {id: 'select_renderOption', text: '自定义渲染'},
     {id: 'select_prefix', text: '前缀'},
     {id: 'select_emptyOption', text: '空选项'},
+    {id: 'select_transfer', text: 'Transfer'},
     {id: 'select_control', text: '可控'},
     {id: 'select_largelist', text: '超大列表'},
     {id: 'comp_api', text: 'API'},
@@ -77,6 +78,7 @@ import select_default_labels from "./codes/select_default_labels"
 import select_renderOption from "./codes/select_renderOption"
 import select_prefix from "./codes/select_prefix"
 import select_emptyOption from "./codes/select_emptyOption"
+import select_transfer from "./codes/select_transfer"
 import select_control from "./codes/select_control"
 import select_largelist from "./codes/select_largelist"
 export const codes = {
@@ -94,6 +96,7 @@ export const codes = {
     select_renderOption,
     select_prefix,
     select_emptyOption,
+    select_transfer,
     select_control,
     select_largelist,
 }

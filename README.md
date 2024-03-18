@@ -41,6 +41,9 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.36
+    1、修复Select 使用transfer不显示问题
+
     v0.1.35
     1、修复Select单选不显示问题
     2、Form添加浮动显示错误信息方式

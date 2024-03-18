@@ -30,6 +30,7 @@ type DropdownProps = {
     disabled?: boolean,
     revers?: boolean,
     handler?: string,
+    fixWidth?: boolean,
     onBeforeDrop?: Function
 }
 
@@ -184,8 +185,10 @@ export function Dropdown(props: DropdownProps){
             const originTop = pos.top;
             const originLeft = pos.left;
             if (props.transfer) {
+                const targetReact = te.getBoundingClientRect();
                 pos.top = pos.top + document.documentElement.scrollTop;
                 pos.left = pos.left + document.documentElement.scrollLeft;
+                props.fixWidth ? pos['min-width'] = targetReact.width + 'px' : false;
             } else {
                 pos.top = pos.top + parent.scrollTop - parentPos.top;
                 pos.left = pos.left + parent.scrollLeft - parentPos.left;

@@ -145,7 +145,7 @@ export function AutoComplete (props: SelectOptions) {
     }
 
     return <div classList={classList()} style={props.style} ref={wrap}>
-    <Dropdown transfer={props.transfer} align={align} disabled={props.disabled} trigger='click' visible={[open, setOpen]}
+    <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger='click' visible={[open, setOpen]}
     onBeforeDrop={onBeforeDrop}
         menu={<div class='cm-select-options-wrap'>
         <Collapase open={open()}>

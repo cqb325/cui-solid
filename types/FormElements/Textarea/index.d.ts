@@ -7,6 +7,8 @@ export interface TextareaProps {
     value?: any;
     name?: string;
     trigger?: 'input' | 'blur';
+    wordCount?: boolean;
+    maxLength?: number;
     onChange?: Function;
     onInput?: Function;
     onKeyUp?: Function;

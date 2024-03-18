@@ -156,7 +156,7 @@ export function TreeSelect (props: TreeSelectProps) {
     props.ref && props.ref({...tree});
 
     return <div classList={classList()} style={props.style} tabIndex='1'>
-        <Dropdown transfer={props.transfer} align={align} disabled={props.disabled} trigger='click' menu={<div class='cm-tree-select-wrap'>
+        <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger='click' menu={<div class='cm-tree-select-wrap'>
             <Tree data={props.data} multi={props.multi} onSelect={onSelect} onChange={onTreeChange} ref={tree} value={value()}
                 selected={props.multi ? '' : [value, setValue]} checkRelation={props.checkRelation}/>
         </div>}>
