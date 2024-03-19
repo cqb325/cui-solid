@@ -270,7 +270,7 @@ function FormPage() {
                       required: true,
                       asyncValidator: (_rule: any, value: string) => {
                         return new Promise<void>((resolve, reject) => {
-                          if (value !== form.p) {
+                          if (value !== form3.p) {
                             reject('密码不一致'); // reject with error message
                           } else {
                             resolve();
