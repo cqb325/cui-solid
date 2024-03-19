@@ -54,6 +54,7 @@
     "vitest": "0.25.1"
   },
   "dependencies": {
+    "async-validator": "^4.2.5",
     "countup.js": "^2.6.2",
     "cui-virtual-list": "^1.0.7",
     "dayjs": "^1.11.7",
