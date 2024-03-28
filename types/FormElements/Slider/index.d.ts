@@ -1,3 +1,4 @@
+import type { Signal } from "solid-js";
 type SliderProps = {
     classList?: any;
     class?: string;
@@ -6,11 +7,11 @@ type SliderProps = {
     min?: number;
     max?: number;
     step?: number;
-    value?: number | number[] | Function[];
+    value?: number | number[] | Signal<any>;
     disabled?: boolean;
-    tipFormatter?: Function;
+    tipFormatter?: (value: any) => any;
     marks?: any;
-    onChange?: Function;
+    onChange?: (value: any) => void;
 };
 export declare function Slider(props: SliderProps): import("solid-js").JSX.Element;
 export {};

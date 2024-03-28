@@ -6,7 +6,7 @@ interface CountDownProps {
     suffix?: any;
     value?: string | number | Date;
     format?: string;
-    onEnd?: Function;
+    onEnd?: () => void;
 }
 export declare function CountDown(props: CountDownProps): import("solid-js").JSX.Element;
 export {};

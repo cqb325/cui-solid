@@ -1,13 +1,14 @@
-import { Accessor, For, Match, Show, Switch, createEffect, createSignal } from "solid-js"
+import type { Accessor} from "solid-js";
+import { For, Match, Show, Switch, createEffect, createSignal } from "solid-js"
 import { Cell } from "./Cell";
 import { useTableContext } from ".";
-import { TableStore, ColumnProps } from '.';
+import type { TableStore, ColumnProps } from '.';
 import { Colgroup } from "./Colgroup";
 import { VirtualListCore } from "cui-virtual-list";
 
 type BodyProps = {
     data: TableStore,
-    onScroll: Function,
+    onScroll: (scrollLeft: number, clientWidth: number, scrollWidth: number) => void,
     height?: number,
     virtual?: boolean
 }
@@ -44,7 +45,7 @@ export function Row (props: RowProps) {
         <Switch>
             {/* expand展开的内容 */}
             <Match when={props.data._type === 'expandChildren'}>
-                <Cell type='td' data={props.data} column={props.data.column} index={props.index} 
+                <Cell type="td" data={props.data} column={props.data.column} index={props.index}
                     showFixedLeft={props.store.showFixedLeft}
                     showFixedRight={props.store.showFixedRight} colSpan={props.store.columns.length}/>
             </Match>
@@ -59,7 +60,7 @@ export function Row (props: RowProps) {
                             }
                         }
                         return <Show when={rowSpan && colSpan} fallback={null}>
-                            <Cell type='td' data={props.data} column={column} index={props.index} colIndex={columnIndex()}
+                            <Cell type="td" data={props.data} column={column} index={props.index} colIndex={columnIndex()}
                             showFixedLeft={props.store.showFixedLeft}
                             showFixedRight={props.store.showFixedRight} rowSpan={rowSpan} colSpan={colSpan}/>
                         </Show>
@@ -126,13 +127,13 @@ export function Body (props: BodyProps) {
                             <tr>
                                 <For each={props.data.columns}>
                                     {(col: ColumnProps, index: Accessor<number>) => {
-                                        return <Cell column={col} type='th' placeholder colIndex={index()} checkedAll={props.data.checkedAll}/>
+                                        return <Cell column={col} type="th" placeholder colIndex={index()} checkedAll={props.data.checkedAll}/>
                                     }}
                                 </For>
                             </tr>
                         </thead>
                         <tbody ref={bodyElement}>
-                            <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement} 
+                            <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement}
                                 items={props.data.data} itemEstimatedSize={30} maxHeight={height() || props.height}>
                                 {(params: any) => {
                                     const rowData = params.item;
@@ -153,14 +154,14 @@ export function Body (props: BodyProps) {
                         <tr>
                             <For each={props.data.columns}>
                                 {(col: ColumnProps, index: Accessor<number>) => {
-                                    return <Cell column={col} type='th' placeholder colIndex={index()} checkedAll={props.data.checkedAll}/>
+                                    return <Cell column={col} type="th" placeholder colIndex={index()} checkedAll={props.data.checkedAll}/>
                                 }}
                             </For>
                         </tr>
                     </thead>
                     <tbody>
                         <For each={props.data.data}>
-                            {(rowData: any, index: Function) => {
+                            {(rowData: any, index: Accessor<number>) => {
                                 return <Row data={rowData} index={index()} store={props.data} />
                             }}
                         </For>

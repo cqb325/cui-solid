@@ -1,6 +1,7 @@
-import { Accessor, For } from "solid-js";
+import type { Accessor} from "solid-js";
+import { For } from "solid-js";
 
-import { TableStore, ColumnProps } from '.';
+import type { TableStore, ColumnProps } from '.';
 
 type ColgroupProps = {
     data: TableStore

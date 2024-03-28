@@ -1,4 +1,4 @@
-function getError(action: string, option: any, xhr: XMLHttpRequest) {
+function getError (action: string, option: any, xhr: XMLHttpRequest) {
     const msg = `fail to post ${action} ${xhr.status}'`;
     const err: any = new Error(msg);
     err.status = xhr.status;
@@ -7,7 +7,7 @@ function getError(action: string, option: any, xhr: XMLHttpRequest) {
     return err;
 }
 
-function getBody(xhr: XMLHttpRequest) {
+function getBody (xhr: XMLHttpRequest) {
     const text = xhr.responseText || xhr.response;
     if (!text) {
         return text;
@@ -20,7 +20,7 @@ function getBody(xhr: XMLHttpRequest) {
     }
 }
 
-export default function upload(option: any) {
+export default function upload (option: any) {
     if (typeof XMLHttpRequest === 'undefined') {
         return;
     }
@@ -29,7 +29,7 @@ export default function upload(option: any) {
     const action = option.action;
 
     if (xhr.upload) {
-        xhr.upload.onprogress = function progress(e: any) {
+        xhr.upload.onprogress = function progress (e: any) {
             if (e.total > 0) {
                 e.percent = e.loaded / e.total * 100;
             }
@@ -47,11 +47,11 @@ export default function upload(option: any) {
 
     formData.append(option.filename, option.file);
 
-    xhr.onerror = function error(e) {
+    xhr.onerror = function error (e) {
         option.onError(e);
     };
 
-    xhr.onload = function onload() {
+    xhr.onload = function onload () {
         if (xhr.status < 200 || xhr.status >= 300) {
             return option.onError(getError(action, option, xhr), getBody(xhr));
         }
@@ -71,8 +71,8 @@ export default function upload(option: any) {
     //   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     // }
 
-    for (let item in headers) {
-        if (headers.hasOwnProperty(item) && headers[item] !== null) {
+    for (const item in headers) {
+        if (Object.prototype.hasOwnProperty.call(headers, item) && headers[item] !== null) {
             xhr.setRequestHeader(item, headers[item]);
         }
     }

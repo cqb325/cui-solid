@@ -1,3 +1,4 @@
+import type { Signal } from 'solid-js';
 type TagProps = {
     classList?: any;
     class?: string;
@@ -6,13 +7,13 @@ type TagProps = {
     circle?: boolean;
     size?: 'small' | 'large';
     avatar?: any;
-    onBeforeClose?: Function;
-    onClose?: Function;
+    onBeforeClose?: (e: any) => boolean;
+    onClose?: (e: any) => void;
     style?: any;
     children?: any;
     closable?: boolean;
     border?: boolean;
-    visible?: boolean | Function[];
+    visible?: boolean | Signal<boolean>;
 };
 export declare function Tag(props: TagProps): import("solid-js").JSX.Element;
 export {};

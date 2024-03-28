@@ -13,10 +13,10 @@ import { hljs, useDirective } from "../../common/hljs";
 import { anchorData, codes, propsData } from "./config";
 useDirective(hljs);
 
-export default function CountDownPage() {
+export default function CountDownPage () {
     const start = Date.now() + 3900000;
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     CountDown 倒计时
@@ -25,10 +25,10 @@ export default function CountDownPage() {
                     <Card bordered>
                         <Space dir="h" size={100}>
                             <CountDown value={start} />
-                            <CountDown value={start} format="HH时mm分ss秒" prefix='剩余时间：'/>
+                            <CountDown value={start} format="HH时mm分ss秒" prefix="剩余时间："/>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         简单的倒计时组件使用, format可以格式化时间格式。
                         </Paragraph>
                         <DemoCode data={codes['countdown_base']}/>
@@ -37,9 +37,9 @@ export default function CountDownPage() {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>CountDown Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

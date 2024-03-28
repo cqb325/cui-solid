@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 export interface InnerStepProps {
     title?: JSXElement | string;
     description?: JSXElement | string;

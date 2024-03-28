@@ -27,7 +27,7 @@ function InputDemo () {
     // const [daterange, setDateRange] = useState('2022-01-01~2022-01-08');
     const [nameData, setNameData] = createSignal([]);
     return <>
-        <div class='sys-ctx-main-left'>
+        <div class="sys-ctx-main-left">
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Input 输入框
@@ -36,7 +36,7 @@ function InputDemo () {
                     <Card bordered>
                         <Input />
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             Input的基础用法
                         </Paragraph>
                         <DemoCode data={codes['input_base']}/>
@@ -45,9 +45,9 @@ function InputDemo () {
 
                 <Space id="input_textarea" dir="v">
                     <Card bordered>
-                        <Input type='textarea'/>
+                        <Input type="textarea"/>
                         <Divider align="left"><Text type="primary">文本域</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             文本域的基础用法
                         </Paragraph>
                         <DemoCode data={codes['input_textarea']}/>
@@ -56,9 +56,9 @@ function InputDemo () {
 
                 <Space id="input_disabled" dir="v">
                     <Card bordered>
-                        <Input disabled value='disabled'/>
+                        <Input disabled value="disabled"/>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 disabled 可以禁用 Input
                         </Paragraph>
                         <DemoCode data={codes['input_disabled']}/>
@@ -68,9 +68,9 @@ function InputDemo () {
 
                 <Space id="input_placeholder" dir="v">
                     <Card bordered>
-                        <Input placeholder='请输入xxx'/>
+                        <Input placeholder="请输入xxx"/>
                         <Divider align="left"><Text type="primary">placeholder</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 placeholder 的样例
                         </Paragraph>
                         <DemoCode data={codes['input_placeholder']}/>
@@ -80,9 +80,9 @@ function InputDemo () {
 
                 <Space id="input_clearable" dir="v">
                     <Card bordered>
-                        <Input value='1' clearable/>
+                        <Input value="1" clearable/>
                         <Divider align="left"><Text type="primary">可清空</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 clearable 属性， 有值时可以进行清空
                         </Paragraph>
                         <DemoCode data={codes['input_clearable']}/>
@@ -99,7 +99,7 @@ function InputDemo () {
                             }}>Add</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">可控</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>value</Text> 属性是可控属性
                         </Paragraph>
                         <DemoCode data={codes['input_control']}/>
@@ -108,9 +108,9 @@ function InputDemo () {
 
                 <Space id="input_prefix" dir="v">
                     <Card bordered>
-                        <Input name='count' prefix='￥' suffix='元'/>
+                        <Input name="count" prefix="￥" suffix="元"/>
                         <Divider align="left"><Text type="primary">前缀后缀</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用<Text code>prefix</Text> 可以给Input添加前缀， 使用<Text code>suffix</Text>属性可添加后缀
                         </Paragraph>
                         <DemoCode data={codes['input_prefix']}/>
@@ -120,9 +120,9 @@ function InputDemo () {
 
                 <Space id="input_append" dir="v">
                     <Card bordered>
-                        <Input prepend={<Icon name='user'/>} append={<Icon name='search1'/>}/>
+                        <Input prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
                         <Divider align="left"><Text type="primary">追加</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用<Text code>prepend</Text> 可添加前追加， 使用<Text code>append</Text>属性可添加后追加
                         </Paragraph>
                         <DemoCode data={codes['input_append']}/>
@@ -133,10 +133,10 @@ function InputDemo () {
                 <Space id="input_size" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Input clearable size='large'/><Input clearable/><Input clearable size='small'/>
+                            <Input clearable size="large"/><Input clearable/><Input clearable size="small"/>
                         </Space>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>size</Text> 属性支持 <Text code>small</Text> <Text code>large</Text> 默认尺寸中
                         </Paragraph>
                         <DemoCode data={codes['input_size']}/>
@@ -146,11 +146,11 @@ function InputDemo () {
                 <Space id="input_word_count" dir="v">
                     <Card bordered>
                         <Space dir="v">
-                            <Input type='text' maxLength={20} wordCount/>
-                            <Input type='textarea' maxLength={20} wordCount/>
+                            <Input type="text" maxLength={20} wordCount/>
+                            <Input type="textarea" maxLength={20} wordCount/>
                         </Space>
                         <Divider align="left"><Text type="primary">字符计数</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             同时设置wordCount和maxLength属性，当输入内容时，会自动显示计数
                         </Paragraph>
                         <DemoCode data={codes['input_word_count']}/>
@@ -159,9 +159,9 @@ function InputDemo () {
 
                 <Space id="input_auto_height" dir="v">
                     <Card bordered>
-                        <Input type='textarea' autoHeight/>
+                        <Input type="textarea" autoHeight/>
                         <Divider align="left"><Text type="primary">适应高度</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             Textarea 的高度随内容输入自动适应高度
                         </Paragraph>
                         <DemoCode data={codes['input_auto_height']}/>
@@ -215,7 +215,7 @@ function InputDemo () {
                         <Input type='spinner' value={[spinner, setSpinner]} onChange={(v: number) => {
                             console.log(v);
                         }}/>
-                    
+
                         <Button onClick={() => {
                             setSpinner(10);
                         }}>更新</Button>
@@ -231,7 +231,7 @@ function InputDemo () {
                     <Space dir="v">
                         <Input type='autocomplete' data={nameData()} onSearch={(v: any) => {
                             console.log(1);
-                            
+
                             const arr: any = [];
                             arr.push(v);
                             arr.push(v+v);
@@ -244,18 +244,18 @@ function InputDemo () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Input Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Input Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        <Space dir='v'>
+        <Space dir="v">
             {/* <Space dir="h">
                 <Input type='time'/>
                 <Input type='time' format='HH:mm:ss' value={time} onChange={(v) => {

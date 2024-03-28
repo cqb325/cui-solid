@@ -27,7 +27,7 @@ export default function TabsPage () {
     let index = 1;
 
     return <>
-        <div class='sys-ctx-main-left' style={{width: 0}} use:hljs={''}>
+        <div class="sys-ctx-main-left" style={{width: 0}} use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Tabs 标签页
@@ -35,13 +35,13 @@ export default function TabsPage () {
                 <Space id="tabs_base" dir="v">
                     <Card bordered>
                         <Tabs activeName="tab1">
-                            <Tab title='标签一' name='tab1'>标签一的内容</Tab>
-                            <Tab title='标签二' name='tab2'>标签二的内容</Tab>
-                            <Tab title='标签三' name='tab3'>标签三的内容</Tab>
+                            <Tab title="标签一" name="tab1">标签一的内容</Tab>
+                            <Tab title="标签二" name="tab2">标签二的内容</Tab>
+                            <Tab title="标签三" name="tab3">标签三的内容</Tab>
                         </Tabs>
 
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             Tabs的activeName与Tab的name对应，用于标识当前激活的是哪一项
                         </Paragraph>
                         <DemoCode data={codes['tabs_base']}/>
@@ -52,13 +52,13 @@ export default function TabsPage () {
                 <Space id="tabs_disabled" dir="v">
                     <Card bordered>
                         <Tabs activeName="tab1">
-                            <Tab title='标签一' name='tab1'>标签一的内容</Tab>
-                            <Tab title='标签二' disabled name='tab2'>标签二的内容</Tab>
-                            <Tab title='标签三' name='tab3'>标签三的内容</Tab>
+                            <Tab title="标签一" name="tab1">标签一的内容</Tab>
+                            <Tab title="标签二" disabled name="tab2">标签二的内容</Tab>
+                            <Tab title="标签三" name="tab3">标签三的内容</Tab>
                         </Tabs>
 
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>disabled</Text> 可以禁用某一项
                         </Paragraph>
                         <DemoCode data={codes['tabs_disabled']}/>
@@ -69,13 +69,13 @@ export default function TabsPage () {
                 <Space id="tabs_duration" dir="v">
                     <Card bordered>
                         <Tabs activeName="tab1" duration={0}>
-                            <Tab title='标签一' name='tab1'>标签一的内容</Tab>
-                            <Tab title='标签二' name='tab2'>标签二的内容</Tab>
-                            <Tab title='标签三' name='tab3'>标签三的内容</Tab>
+                            <Tab title="标签一" name="tab1">标签一的内容</Tab>
+                            <Tab title="标签二" name="tab2">标签二的内容</Tab>
+                            <Tab title="标签三" name="tab3">标签三的内容</Tab>
                         </Tabs>
 
                         <Divider align="left"><Text type="primary">动画时间</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>duration</Text> 可以修改动画时间
                         </Paragraph>
                         <DemoCode data={codes['tabs_duration']}/>
@@ -86,13 +86,13 @@ export default function TabsPage () {
                 <Space id="tabs_icon" dir="v">
                     <Card bordered>
                         <Tabs activeName="tab1">
-                            <Tab title='标签一' name='tab1' icon={<Icon name='codesandbox'/>}>标签一的内容</Tab>
-                            <Tab title='标签二' name='tab2' icon={<Icon name='command'/>}>标签二的内容</Tab>
-                            <Tab title='标签三' name='tab3' icon={<Icon name='support'/>}>标签三的内容</Tab>
+                            <Tab title="标签一" name="tab1" icon={<Icon name="codesandbox"/>}>标签一的内容</Tab>
+                            <Tab title="标签二" name="tab2" icon={<Icon name="command"/>}>标签二的内容</Tab>
+                            <Tab title="标签三" name="tab3" icon={<Icon name="support"/>}>标签三的内容</Tab>
                         </Tabs>
 
                         <Divider align="left"><Text type="primary">图标</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>icon</Text> 可以给Tab添加图标
                         </Paragraph>
                         <DemoCode data={codes['tabs_icon']}/>
@@ -103,13 +103,13 @@ export default function TabsPage () {
                 <Space id="tabs_card" dir="v">
                     <Card bordered>
                         <Tabs activeName="tab1" card>
-                            <Tab title='标签一' name='tab1'>标签一的内容</Tab>
-                            <Tab title='标签二' name='tab2'>标签二的内容</Tab>
-                            <Tab title='标签三' name='tab3'>标签三的内容</Tab>
+                            <Tab title="标签一" name="tab1">标签一的内容</Tab>
+                            <Tab title="标签二" name="tab2">标签二的内容</Tab>
+                            <Tab title="标签三" name="tab3">标签三的内容</Tab>
                         </Tabs>
 
                         <Divider align="left"><Text type="primary">卡片</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置属性 <Text code>type</Text> 为 <Text code>card</Text> 可以显示卡片样式，常用于容器顶部。
                         </Paragraph>
                         <DemoCode data={codes['tabs_card']}/>
@@ -119,14 +119,14 @@ export default function TabsPage () {
 
                 <Space id="tabs_extra" dir="v">
                     <Card bordered>
-                        <Tabs activeName="tab1" extra={<Button size='small'>添加</Button>}>
-                            <Tab title='标签一' name='tab1'>标签一的内容</Tab>
-                            <Tab title='标签二' name='tab2'>标签二的内容</Tab>
-                            <Tab title='标签三' name='tab3'>标签三的内容</Tab>
+                        <Tabs activeName="tab1" extra={<Button size="small">添加</Button>}>
+                            <Tab title="标签一" name="tab1">标签一的内容</Tab>
+                            <Tab title="标签二" name="tab2">标签二的内容</Tab>
+                            <Tab title="标签三" name="tab3">标签三的内容</Tab>
                         </Tabs>
 
                         <Divider align="left"><Text type="primary">附加内容</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>extra</Text> 可以在页签右边添加附加操作
                         </Paragraph>
                         <DemoCode data={codes['tabs_extra']}/>
@@ -143,7 +143,7 @@ export default function TabsPage () {
                                 }}
                             </For>
                         </Tabs>
-                        <Button type='primary' onClick={() => {
+                        <Button type="primary" onClick={() => {
                             const i = index ++;
                             setData([...data(), {
                                 title: `Title_${i}`,
@@ -153,7 +153,7 @@ export default function TabsPage () {
                         }}>添加</Button>
 
                         <Divider align="left"><Text type="primary">动态tab</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             Tab添加 closeable 属性可以支持关闭Tab页。
                         </Paragraph>
                         <DemoCode data={codes['tabs_danymic']}/>
@@ -163,19 +163,19 @@ export default function TabsPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Tabs Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_tab_props' dir="v">
+                    <Space id="comp_tab_props" dir="v">
                         <Title type="primary" heading={4}>Tab Props</Title>
-                        <Table columns={propsColumns} data={tabpropsData} border size='small' />
+                        <Table columns={propsColumns} data={tabpropsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Tabs Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

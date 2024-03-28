@@ -1,3 +1,4 @@
+import type { Signal } from "solid-js";
 type ListProps = {
     classList?: any;
     class?: string;
@@ -7,13 +8,11 @@ type ListProps = {
     head?: any;
     foot?: any;
     children?: any;
-    render?: Function;
-    onSelect?: Function;
+    onSelect?: (item: any) => void;
 };
 export type ListContextProps = {
-    render?: Function;
-    signal: Function[];
-    onSelect?: Function;
+    signal: Signal<any>;
+    onSelect?: (item: any) => void;
 };
 export declare function List(props: ListProps): import("solid-js").JSX.Element;
 export declare namespace List {

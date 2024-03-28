@@ -7,7 +7,7 @@ type RadioGroupProps = {
     style?: any;
     children?: any;
     disabled?: boolean;
-    onChange?: Function;
+    onChange?: (v: any) => void;
     data?: any;
     type?: 'radio' | 'checkbox';
     textField?: string;

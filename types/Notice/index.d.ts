@@ -8,7 +8,7 @@ export type NoticeConfig = {
     theme?: 'success' | 'warning' | 'error' | 'info';
     btn?: any;
     style?: any;
-    onClose?: Function;
+    onClose?: () => void;
 };
 export declare const notice: {
     open(config: NoticeConfig): void;

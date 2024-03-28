@@ -20,7 +20,7 @@ export default function DropdownPage () {
     const [visible, setVisible] = createSignal(false);
 
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Dropdown 下拉菜单
@@ -31,9 +31,9 @@ export default function DropdownPage () {
                             <DropdownItem>驴打滚</DropdownItem>
                             <DropdownItem>炸酱面</DropdownItem>
                             <DropdownItem disabled>豆汁儿</DropdownItem>
-                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                 <DropdownMenu>
-                                    <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                    <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                     <DropdownItem>焖炉烤鸭</DropdownItem>
                                 </DropdownMenu>
                             </DropdownItem>
@@ -43,7 +43,7 @@ export default function DropdownPage () {
                             <Text>下拉菜单</Text>
                         </Dropdown>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             需要配合 DropdownMenu 和 DropdownItem 两个组件来使用。<br />
                             选中菜单项触发 <Text code>onSelect</Text> 事件
                         </Paragraph>
@@ -59,9 +59,9 @@ export default function DropdownPage () {
                                 <DropdownItem>驴打滚</DropdownItem>
                                 <DropdownItem>炸酱面</DropdownItem>
                                 <DropdownItem disabled>豆汁儿</DropdownItem>
-                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                     <DropdownMenu>
-                                        <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                        <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                         <DropdownItem>焖炉烤鸭</DropdownItem>
                                     </DropdownMenu>
                                 </DropdownItem>
@@ -77,9 +77,9 @@ export default function DropdownPage () {
                                 <DropdownItem>驴打滚</DropdownItem>
                                 <DropdownItem>炸酱面</DropdownItem>
                                 <DropdownItem disabled>豆汁儿</DropdownItem>
-                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                     <DropdownMenu>
-                                        <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                        <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                         <DropdownItem>焖炉烤鸭</DropdownItem>
                                     </DropdownMenu>
                                 </DropdownItem>
@@ -90,11 +90,11 @@ export default function DropdownPage () {
                             </Dropdown>
 
 
-                            <Dropdown trigger="custom" align="bottom" 
+                            <Dropdown trigger="custom" align="bottom"
                                 visible={[visible, setVisible]}
                                 menu={<div style={{width: '150px', padding: '20px', background: '#fff'}}>
                                 <div>dropdown内容</div>
-                                <Button type='primary' onClick={() => {
+                                <Button type="primary" onClick={() => {
                                     setVisible(false)
                                 }}>关闭</Button>
                             </div>} onSelect={(name: string) => {
@@ -105,7 +105,7 @@ export default function DropdownPage () {
                         </Space>
 
                         <Divider align="left"><Text type="primary">触发条件</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         通过设置属性 <Text code>trigger</Text> 可以更改触发方式，可选项为 <Text code>click</Text> 、 <Text code>hover(默认)</Text>、 <Text code>contextMenu</Text> 或 <Text code>custom(自定义)</Text>。<br/>
                         触发方式设置为 <Text code>custom</Text> 自定义时，需手动设置 <Text code>visible</Text> 属性来控制下拉框的显示。
                         </Paragraph>
@@ -120,9 +120,9 @@ export default function DropdownPage () {
                             <DropdownItem>驴打滚</DropdownItem>
                             <DropdownItem>炸酱面</DropdownItem>
                             <DropdownItem disabled>豆汁儿</DropdownItem>
-                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                 <DropdownMenu>
-                                    <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                    <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                     <DropdownItem>焖炉烤鸭</DropdownItem>
                                 </DropdownMenu>
                             </DropdownItem>
@@ -132,7 +132,7 @@ export default function DropdownPage () {
                             <Text>暗色菜单</Text>
                         </Dropdown>
                         <Divider align="left"><Text type="primary">主题</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过 theme 属性可以设置暗色下拉菜单 dark。
                         </Paragraph>
                         <DemoCode data={codes['dropdown_theme']}/>
@@ -146,9 +146,9 @@ export default function DropdownPage () {
                             <DropdownItem>驴打滚</DropdownItem>
                             <DropdownItem>炸酱面</DropdownItem>
                             <DropdownItem disabled>豆汁儿</DropdownItem>
-                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                 <DropdownMenu>
-                                    <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                    <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                     <DropdownItem>焖炉烤鸭</DropdownItem>
                                 </DropdownMenu>
                             </DropdownItem>
@@ -158,7 +158,7 @@ export default function DropdownPage () {
                             <Text>下拉菜单</Text>
                         </Dropdown>
                         <Divider align="left"><Text type="primary">Transfer</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>transfer</Text> 属性可以让下拉菜单渲染到Body节点下
                         </Paragraph>
                         <DemoCode data={codes['dropdown_transfer']}/>
@@ -173,9 +173,9 @@ export default function DropdownPage () {
                                 <DropdownItem>驴打滚</DropdownItem>
                                 <DropdownItem>炸酱面</DropdownItem>
                                 <DropdownItem disabled>豆汁儿</DropdownItem>
-                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                     <DropdownMenu>
-                                        <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                        <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                         <DropdownItem>焖炉烤鸭</DropdownItem>
                                     </DropdownMenu>
                                 </DropdownItem>
@@ -189,9 +189,9 @@ export default function DropdownPage () {
                                 <DropdownItem>驴打滚</DropdownItem>
                                 <DropdownItem>炸酱面</DropdownItem>
                                 <DropdownItem disabled>豆汁儿</DropdownItem>
-                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                                <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                     <DropdownMenu>
-                                        <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                        <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                         <DropdownItem>焖炉烤鸭</DropdownItem>
                                     </DropdownMenu>
                                 </DropdownItem>
@@ -202,7 +202,7 @@ export default function DropdownPage () {
                             </Dropdown>
                         </Space>
                         <Divider align="left"><Text type="primary">位置</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             align属性支持12个方位， 最常用的是bottom/bottomLeft/bottomRight, 默认为bottom
                         </Paragraph>
                         <DemoCode data={codes['dropdown_align']}/>
@@ -216,9 +216,9 @@ export default function DropdownPage () {
                             <DropdownItem>驴打滚</DropdownItem>
                             <DropdownItem>炸酱面</DropdownItem>
                             <DropdownItem disabled>豆汁儿</DropdownItem>
-                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right"></Icon>
+                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
                                 <DropdownMenu>
-                                    <DropdownItem name='挂炉烤鸭'>挂炉烤鸭</DropdownItem>
+                                    <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
                                     <DropdownItem>焖炉烤鸭</DropdownItem>
                                 </DropdownMenu>
                             </DropdownItem>
@@ -228,7 +228,7 @@ export default function DropdownPage () {
                             <Text>下拉菜单</Text>
                         </Dropdown>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>disabled</Text> 属性可以禁用菜单
                         </Paragraph>
                         <DemoCode data={codes['dropdown_disabled']}/>
@@ -238,14 +238,14 @@ export default function DropdownPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Dropdown Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_item_props' dir="v">
+                    <Space id="comp_item_props" dir="v">
                         <Title type="primary" heading={4}>DropdownItem Props</Title>
-                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

@@ -2,7 +2,6 @@ type ListItemProps = {
     id: string | number;
     data?: any;
     style?: any;
-    render?: Function;
     actions?: any;
     avatar?: any;
     content?: any;

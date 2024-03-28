@@ -2,8 +2,9 @@ import { createStore, produce } from "solid-js/store";
 import { useClassList } from "../utils/useProps";
 import { Head } from "./Head";
 import { Body } from "./Body";
-import { JSXElement, Show, createContext, createEffect, useContext } from "solid-js";
-import { showHideChildren, sortHandler, addRemoveExpand, 
+import type { JSXElement} from "solid-js";
+import { Show, createContext, createEffect, useContext } from "solid-js";
+import { showHideChildren, sortHandler, addRemoveExpand,
     onResizeStart, onResizeMove, onResizeEnd, initColumns, updateScrollFixed, initData } from "./utils";
 import { Spin } from "../Spin";
 
@@ -19,13 +20,13 @@ type TableProps = {
     border?: boolean,
     stripe?: boolean,
     highlight?: boolean,
-    onRowSelect?: Function,
-    onRowChecked?: Function,
-    onCheckedAll?: Function,
-    onSort?: Function,
+    onRowSelect?: (row: any, preRow: any) => void,
+    onRowChecked?: (row: any, checked: boolean) => void,
+    onCheckedAll?: (rows: any[]) => void,
+    onSort?: (column: any, sortType: any) => void,
     ref?: any,
     size?: 'small',
-    spanMethod?: Function,
+    spanMethod?: (data: any, column: any, index: number, columnIndex: number) => any,
     loading?: boolean,
     virtual?: boolean
 }
@@ -48,7 +49,7 @@ export type TableStore = {
 export type ColumnProps = {
     name?: string,
     title?: string | JSXElement,
-    render?: Function,
+    render?: (value: any, column: any, row: any) => any,
     type?: string,
     width?: string,
     _width?: number,
@@ -91,8 +92,8 @@ export function Table (props: TableProps) {
         setStore('showFixedLeft', false);
         setStore('showFixedRight', true);
     });
-    
-    const [store, setStore] = createStore({
+
+    const [store, setStore] = createStore<TableStore>({
         columns: [],
         data: [],
         showFixedLeft: false,
@@ -108,7 +109,7 @@ export function Table (props: TableProps) {
             height: 48
         },
         headerLeft: 0,
-    } as TableStore);
+    });
 
     // 滚动条滚动更新固定列
     const onScroll = (e: any) => {
@@ -145,7 +146,7 @@ export function Table (props: TableProps) {
         if (checkedNum >= total) {
             status = true;
         }
-        
+
         setStore('checkedAll', status);
         props.onRowChecked && props.onRowChecked(row, checked);
     }
@@ -232,7 +233,7 @@ export function Table (props: TableProps) {
     }
 
     props.ref && props.ref({
-        clearSelect(){
+        clearSelect (){
             setStore('data', item => item._highlight, produce((item: any) => item._highlight = false))
         },
         checkAll (checked: boolean) {
@@ -251,17 +252,17 @@ export function Table (props: TableProps) {
         // 'flex-direction': 'column'
     });
     const isSticky = () => !!props.height;
-    
-    return <TableContext.Provider value={{onSelectRow, onRowChecked, onHeadChecked, onSort, 
+
+    return <TableContext.Provider value={{onSelectRow, onRowChecked, onHeadChecked, onSort,
         onShowChildren, onExpand, onDragStart, highlight: props.highlight, border: props.border,
         spanMethod: props.spanMethod}}>
         <div classList={classList()}>
-            <div class="cm-table-resize-helper" style={resizeStyle()}></div>
-            <div class="cm-table-loading"></div>
+            <div class="cm-table-resize-helper" style={resizeStyle()} />
+            <div class="cm-table-loading" />
             <Show when={props.loading} fallback={null}>
-                <Spin></Spin>
+                <Spin />
             </Show>
-            <div class='cm-table' style={style()} >
+            <div class="cm-table" style={style()} >
                 <Head data={store} sticky={isSticky()} onInitColumnWidth={onInitColumnWidth} onResizeHeader={onResizeHeader} virtual={props.virtual}/>
                 <Body data={store} onScroll={onScrollBody} height={props.height} virtual={props.virtual}/>
             </div>

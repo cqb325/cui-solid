@@ -14,10 +14,10 @@ import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 useDirective(hljs);
 
-export default function SplitPage() {
-    
+export default function SplitPage () {
+
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Split 面板分割
@@ -31,7 +31,7 @@ export default function SplitPage() {
                             </Split>
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             左右分割用法。
                         </Paragraph>
                         <DemoCode data={codes['split_base']}/>
@@ -42,13 +42,13 @@ export default function SplitPage() {
                 <Space id="split_h" dir="v">
                     <Card bordered>
                         <div style={{height: '300px', border: '1px solid #ccc'}}>
-                            <Split dir='h' split={0.3}>
+                            <Split dir="h" split={0.3}>
                                 <Slot name="prev"><div>TOP</div></Slot>
                                 <Slot name="next"><div>BOTTOM</div></Slot>
                             </Split>
                         </div>
                         <Divider align="left"><Text type="primary">上下分割</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             上下分割用法。
                         </Paragraph>
                         <DemoCode data={codes['split_h']}/>
@@ -61,7 +61,7 @@ export default function SplitPage() {
                         <div style={{height: '300px', border: '1px solid #ccc'}}>
                             <Split split={0.5}>
                                 <Slot name="prev">
-                                    <Split dir='h' split={0.3}>
+                                    <Split dir="h" split={0.3}>
                                         <Slot name="prev"><div>TOP</div></Slot>
                                         <Slot name="next"><div>BOTTOM</div></Slot>
                                     </Split>
@@ -70,7 +70,7 @@ export default function SplitPage() {
                             </Split>
                         </div>
                         <Divider align="left"><Text type="primary">嵌套</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             嵌套使用。
                         </Paragraph>
                         <DemoCode data={codes['split_insert']}/>
@@ -80,19 +80,19 @@ export default function SplitPage() {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Split Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_slots' dir="v">
+                    <Space id="comp_slots" dir="v">
                         <Title type="primary" heading={4}>Split slots</Title>
-                        <Table columns={slotsColumns} data={slotsData} border size='small' />
+                        <Table columns={slotsColumns} data={slotsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>
 }

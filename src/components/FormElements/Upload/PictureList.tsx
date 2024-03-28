@@ -1,6 +1,5 @@
 import { For } from "solid-js";
 import { Icon } from "../../Icon";
-import { Image } from "../../Image";
 
 export function PictureList (props: any) {
     return <ul class="cm-upload-list cm-upload-picture-list">

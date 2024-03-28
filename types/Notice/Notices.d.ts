@@ -1,7 +1,7 @@
-import { JSX } from "solid-js";
+import type { JSX } from "solid-js";
 type NoticesProps = {
     data?: any;
-    onClose?: Function;
+    onClose?: (key: any, dock: any) => void;
     docker?: string;
 };
 export declare function NoticeBox(props: NoticesProps): JSX.Element;

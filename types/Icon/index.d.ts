@@ -1,4 +1,4 @@
-import { ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
 interface IconProps extends ComponentProps<'div'> {
     classList?: any;
     class?: string;

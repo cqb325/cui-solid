@@ -1,10 +1,12 @@
-import { JSXElement, Match, Show, Switch } from "solid-js";
+import type { JSXElement, Signal} from "solid-js";
+import { Match, Show, Switch } from "solid-js";
 import { Icon } from "../Icon";
-import { TagConfig, TagGroup } from "../TagGroup";
+import type { TagConfig} from "../TagGroup";
+import { TagGroup } from "../TagGroup";
 import { InnerInput } from "../FormElements/Input/input";
 
 export interface ValueProps {
-    onClear?: Function
+    onClear?: (e?: any) => void
     prepend?: any
     text?: string | Array<any>
     clearable?: boolean
@@ -18,19 +20,19 @@ export interface ValueProps {
     onClose?(item: TagConfig, e: any): void,
     onInput?(e: any): void,
     filter?: boolean,
-    query?: [Function, Function]
+    query?: Signal<any>
     showMore?: boolean,
-    onDeleteLastValue?: Function
+    onDeleteLastValue?: () => void
 }
 
 export function Value (props: ValueProps) {
-    const [query, setQuery] = props.query ?? [() => {}, () => {}];
+    const [query, setQuery] = props.query ?? [() => '', () => {}];
     let filterInput: any;
     const onClear = (e: any) => {
         e.stopImmediatePropagation && e.stopImmediatePropagation();
         e.preventDefault && e.preventDefault();
         e.stopPropagation && e.stopPropagation();
-        props.onClear && props.onClear();
+        props.onClear && props.onClear(e);
     }
     const classList = () => ({
         'cm-field-value': true,
@@ -74,9 +76,9 @@ export function Value (props: ValueProps) {
             }
         }
     }
-    
+
     return <div classList={classList()} tabIndex="1" onClick={onValueClick}>
-        <input type="hidden"></input>
+        <input type="hidden" />
         {/* 文字对齐辅助 */}
         <span style={{width: '0px', "font-size": '12px', visibility: 'hidden', 'line-height': 'initial'}}>A</span>
         <Show when={props.prepend}>
@@ -89,22 +91,22 @@ export function Value (props: ValueProps) {
                 <div class="cm-field-selection">
                     <TagGroup data={text()} closable={props.valueClosable} max={props.showMax} showMore={props.showMore} onClose={props.onClose}
                         size={props.size === 'small' ? 'small' : 'large'}/>
-                    { 
+                    {
                         props.filter
-                        ? <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class='cm-select-filter' 
-                            trigger='input' size={props.size} value={[query, setQuery]} onKeyDown={onFilterKeyDown}/>
+                        ? <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class="cm-select-filter"
+                            trigger="input" size={props.size} value={[query, setQuery]} onKeyDown={onFilterKeyDown}/>
                         : null
                     }
                 </div>
             </Match>
             <Match when={!props.multi}>
-                <div class='cm-field-text'>
+                <div class="cm-field-text">
                     <Show when={!props.filter}>
                         {props.text ? props.text : <span class="cm-field-placeholder">{props.placeholder??''}</span>}
                     </Show>
                     <Show when={props.filter}>
-                        <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class='cm-select-filter' 
-                            trigger='input' size={props.size} value={[query, setQuery]}/>
+                        <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class="cm-select-filter"
+                            trigger="input" size={props.size} value={[query, setQuery]}/>
                     </Show>
                 </div>
             </Match>
@@ -113,7 +115,7 @@ export function Value (props: ValueProps) {
             {props.icon}
         </span>
         <Show when={props.clearable && props.text && props.text !== ''}>
-            <Icon name='x-circle' class='cm-field-clear' onClick={onClear}/>
+            <Icon name="x-circle" class="cm-field-clear" onClick={onClear}/>
         </Show>
     </div>
 }

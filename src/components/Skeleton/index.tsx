@@ -1,4 +1,5 @@
-import { JSXElement, Show } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { Show } from "solid-js";
 import { useClassList, useStyle } from "../utils/useProps"
 import { Avatar, Image, Title, Button, Paragraph, Item } from "./Item";
 

@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement, Signal } from "solid-js";
 type DatepickerProps = {
     classList?: any;
     class?: any;
@@ -10,17 +10,17 @@ type DatepickerProps = {
     type?: 'dateRange' | 'monthRange' | 'month' | 'dateTime' | 'dateTimeRange';
     align?: 'bottomLeft' | 'bottomRight';
     format?: string;
-    value?: string | Date | string[] | Date[] | Function[];
+    value?: string | Date | string[] | Date[] | Signal<any>;
     prepend?: string | JSXElement;
     header?: string | JSXElement | string[] | JSXElement[];
     footer?: string | JSXElement | string[] | JSXElement[];
     seperator?: string;
     transfer?: boolean;
-    trigger?: Function;
-    disabledDate?: Function;
-    onChange?: Function;
+    trigger?: () => any;
+    disabledDate?: (day: Date) => boolean;
+    onChange?: (value: any) => void;
     maxRange?: number;
-    shortCuts?: Function | JSXElement;
+    shortCuts?: (() => any) | JSXElement;
     revers?: boolean;
     placeholder?: string;
     stick?: boolean;

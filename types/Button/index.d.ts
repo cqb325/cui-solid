@@ -1,4 +1,4 @@
-import { ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
 export type ButtonProps = {
     classList?: any;
     class?: string;
@@ -14,6 +14,6 @@ export type ButtonProps = {
     icon?: any;
     iconAlign?: 'left' | 'right';
     ref?: any;
-    onClick?: Function;
+    onClick?: (e: any) => void;
 } & ComponentProps<any>;
 export declare const Button: (props: ButtonProps) => import("solid-js").JSX.Element;

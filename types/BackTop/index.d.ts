@@ -7,7 +7,7 @@ type BackTopProps = {
     children?: any;
     height?: number;
     duration?: number;
-    onClick?: Function;
+    onClick?: () => void;
 };
 export declare function BackTop(props: BackTopProps): import("solid-js").JSX.Element;
 export {};

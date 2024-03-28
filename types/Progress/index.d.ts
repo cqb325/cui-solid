@@ -10,7 +10,7 @@ type ProgressProps = {
     value?: number;
     strokeWidth?: number;
     textInside?: boolean;
-    infoRender?: Function;
+    infoRender?: (status: any, value: any) => any;
     strokeColor?: string | string[] | StrokeProps[];
     type?: 'line' | 'circle';
     radius?: number;

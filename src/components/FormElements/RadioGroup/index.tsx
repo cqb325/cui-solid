@@ -1,4 +1,4 @@
-import { createSignal, createEffect, Show, onMount } from "solid-js";
+import { createSignal, createEffect, Show, onMount, For } from "solid-js";
 import { useClassList } from "../../utils/useProps";
 import { InnerCheckbox } from "../../inner/Checkbox";
 import createField from "../../utils/createField";
@@ -12,7 +12,7 @@ type RadioGroupProps = {
     style?: any,
     children?: any,
     disabled?: boolean,
-    onChange?: Function,
+    onChange?: (v: any) => void,
     data?: any,
     type?: 'radio' | 'checkbox',
     textField?: string,
@@ -25,7 +25,7 @@ export function RadioGroup (props: RadioGroupProps) {
         'cm-radio-group-stack': props.block,
         'cm-radio-group-stick': props.stick,
     });
-    
+
     const [value, setValue] = createField(props, '');
     const [thumbStyle, setThumbStyle] = createSignal({});
     let wrap: any;
@@ -54,9 +54,9 @@ export function RadioGroup (props: RadioGroupProps) {
             const checked = val === item[valueField];
             checked ? currentIndex = i : false;
         }
-        
+
         const eles = wrap.querySelectorAll('.cm-radio');
-        
+
         const ele = eles[currentIndex];
         if (!ele) {
             return;
@@ -74,13 +74,11 @@ export function RadioGroup (props: RadioGroupProps) {
 
     return <div classList={classList()} style={props.style} ref={wrap}>
         <Show when={props.stick}>
-            <div class='cm-radio-group-thumb' style={thumbStyle()}></div>
+            <div class="cm-radio-group-thumb" style={thumbStyle()} />
         </Show>
-        {
-            props.data.map((item: any) => {
-                return <InnerCheckbox disabled={props.disabled || item.disabled} class='cm-radio' type={props.type || 'radio'} inner value={item[valueField]} checked={checked(item)} label={item[textField]} onChange={_onChange}></InnerCheckbox>
-            })
-        }
+        <For each={props.data}>{(item: any) => {
+                return <InnerCheckbox disabled={props.disabled || item.disabled} class="cm-radio" type={props.type || 'radio'} inner value={item[valueField]} checked={checked(item)} label={item[textField]} onChange={_onChange} />
+            }}</For>
     </div>
 }
 

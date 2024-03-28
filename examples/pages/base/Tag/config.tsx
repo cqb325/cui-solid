@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'style', desc: '自定义样式', type: 'Object', default: ''},
     {name: 'theme', desc: '内置样式primary|danger|warning|success|info|magenta|red|volcano|orange|gold|yellow|lime|green|cyan|blue|geekblue|purple', type: 'string', default: 'default'},

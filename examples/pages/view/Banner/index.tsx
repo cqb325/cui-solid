@@ -17,7 +17,7 @@ import { Slot } from "@/components/inner/Slot";
 
 export default function BannerPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Banner 通知横幅
@@ -39,7 +39,7 @@ export default function BannerPage () {
                             </Banner>
                         </Space>
                         <Divider align="left"><Text type="primary">基本用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基本用法,支持4种类型：info、warning、error、success。默认为 info。
                         </Paragraph>
                         <DemoCode data={codes['banner_base']}/>
@@ -68,7 +68,7 @@ export default function BannerPage () {
                             </Banner>
                         </Space>
                         <Divider align="left"><Text type="primary">非全屏模式</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         可以设置 fullMode={false} 使用非全屏模式的 banner 样式。 通过 bordered 属性可以设置边框。
                         </Paragraph>
                         <DemoCode data={codes['banner_fullmode']}/>
@@ -98,7 +98,7 @@ export default function BannerPage () {
                         </Space>
 
                         <Divider align="left"><Text type="primary">自定义内容</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过指定Slot name="extra" 指定额外内容
                         </Paragraph>
                         <DemoCode data={codes['banner_custom']}/>
@@ -107,15 +107,15 @@ export default function BannerPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Banner Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    
 
-                    <Space id='comp_events' dir="v">
+
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

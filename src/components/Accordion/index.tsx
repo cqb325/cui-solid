@@ -11,7 +11,7 @@ type AccordionProps = {
     style?: any,
     children?: any,
     multi?: boolean,
-    onSelect?: Function,
+    onSelect?: (name: string, open: boolean, ids: any[]) => any,
     activeKey?: any,
     flex?: boolean
 }

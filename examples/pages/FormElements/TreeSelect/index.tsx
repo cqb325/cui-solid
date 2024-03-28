@@ -80,7 +80,7 @@ export default function TreeSelectPage () {
     }
 
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     TreeSelect 树选择
@@ -89,7 +89,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect data={data1}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         基础用法
                         </Paragraph>
                         <DemoCode data={codes['tree_base']}/>
@@ -100,7 +100,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect data={data1} disabled/>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         使用 disabled 进行禁用
                         </Paragraph>
                         <DemoCode data={codes['tree_disabled']}/>
@@ -111,17 +111,17 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <Row>
                             <Col grid={0.33}>
-                                <TreeSelect data={data1} size='small'/>
+                                <TreeSelect data={data1} size="small"/>
                             </Col>
                             <Col grid={0.33}>
                                 <TreeSelect data={data1}/>
                             </Col>
                             <Col grid={0.33}>
-                                <TreeSelect data={data1} size='large'/>
+                                <TreeSelect data={data1} size="large"/>
                             </Col>
                         </Row>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         size 支持 small large
                         </Paragraph>
                         <DemoCode data={codes['tree_size']}/>
@@ -133,7 +133,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect data={data1} clearable/>
                         <Divider align="left"><Text type="primary">可清空</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         clearable 可清空选择数据
                         </Paragraph>
                         <DemoCode data={codes['tree_clearable']}/>
@@ -143,9 +143,9 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_prepend" dir="v">
                     <Card bordered>
-                        <TreeSelect prepend={<Icon name='tag'/>} data={data1} clearable/>
+                        <TreeSelect prepend={<Icon name="tag"/>} data={data1} clearable/>
                         <Divider align="left"><Text type="primary">前缀</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         使用 prepend 可添加前缀
                         </Paragraph>
                         <DemoCode data={codes['tree_prepend']}/>
@@ -157,7 +157,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect multi data={data1} clearable/>
                         <Divider align="left"><Text type="primary">多选</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         使用 multi 为多选模式, 多选默认级联选择
                         </Paragraph>
                         <DemoCode data={codes['tree_multi']}/>
@@ -169,7 +169,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect multi data={data1} clearable checkRelation="unRelated" />
                         <Divider align="left"><Text type="primary">多选非级联</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         checkRelation 支持 unRelated (非级联) 和 related (级联) 默认 related
                         </Paragraph>
                         <DemoCode data={codes['tree_relation']}/>
@@ -182,7 +182,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect multi data={data1} clearable checkRelation="unRelated" showMax={2}/>
                         <Divider align="left"><Text type="primary">显示个数</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         showMax 可以设置最多显示的个数
                         </Paragraph>
                         <DemoCode data={codes['tree_showMax']}/>
@@ -194,7 +194,7 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <TreeSelect multi data={data1} valueClosable clearable checkRelation="unRelated" />
                         <Divider align="left"><Text type="primary">值可关闭</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         valueClosable 支持 选择的值可以进行关闭
                         </Paragraph>
                         <DemoCode data={codes['tree_valueClosable']}/>
@@ -205,15 +205,15 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <Space dir="v">
                             <div>Leaf:</div>
-                            <TreeSelect multi data={data1} clearable mode='Leaf' />
+                            <TreeSelect multi data={data1} clearable mode="Leaf" />
                             <div>Shallow:</div>
-                            <TreeSelect multi data={data1} clearable mode='Shallow' />
+                            <TreeSelect multi data={data1} clearable mode="Shallow" />
                             <div>All:</div>
-                            <TreeSelect multi data={data1} clearable mode='All' />
+                            <TreeSelect multi data={data1} clearable mode="All" />
                         </Space>
                         <Divider align="left"><Text type="primary">选择模式</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
-                        mode 支持 All 、 Half、 Leaf、 Shallow 默认为 Half 
+                        <Paragraph type="secondary" spacing="extended">
+                        mode 支持 All 、 Half、 Leaf、 Shallow 默认为 Half
                         </Paragraph>
                         <DemoCode data={codes['tree_mode']}/>
                     </Card>
@@ -222,14 +222,14 @@ export default function TreeSelectPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>TreeSelect Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

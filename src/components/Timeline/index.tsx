@@ -9,7 +9,7 @@ type TimelineProps = {
     mode?: 'left'|'right'|'alternate'|'center'
 }
 
-export function Timeline(props: TimelineProps) {
+export function Timeline (props: TimelineProps) {
     const classList = () => useClassList(props, 'cm-timeline', {
         [`cm-timeline-${props.mode}`]: props.mode
     })

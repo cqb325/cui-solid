@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'align', desc: '位置top|bottom|left|right|topLeft|topRight|bottomLeft|bottomRight|leftTop|leftBottom|rightTop|rightBottom', type: 'string', default: 'right'},
     {name: 'trigger', desc: '触发条件 hover|click', type: 'string', default: 'hover'},

@@ -1,4 +1,5 @@
-import { ColumnProps, TableStore } from '.';
+import type { SetStoreFunction } from "solid-js/store";
+import type { ColumnProps, TableStore } from '.';
 /**
  * 初始化表头
  * 添加默认id确定最后一个flex
@@ -11,13 +12,13 @@ export declare function initColumns(columns: ColumnProps[]): {
 /**
  * 滚动条滚动后更新固定列的样式
  */
-export declare function updateScrollFixed(maxFixedLeft: number, minFixedRight: number, setStore: Function, scrollLeft: number, clientWidth: number, scrollWidth: number): void;
+export declare function updateScrollFixed(maxFixedLeft: number, minFixedRight: number, setStore: SetStoreFunction<TableStore>, scrollLeft: number, clientWidth: number, scrollWidth: number): void;
 /**
  * 初始化表格数据
  * @param data
  */
 export declare function initData(data: any[]): any[];
-export declare function sortData(setStore: Function, store: TableStore, column: ColumnProps): void;
+export declare function sortData(setStore: SetStoreFunction<TableStore>, store: TableStore, column: ColumnProps): void;
 export declare function _buildTreeData(data: any[], target: any[], level: number, show: boolean): void;
 /**
  * 树形数据重构
@@ -30,21 +31,21 @@ export declare function buildTreeData(data: any[]): any[];
  * @param setStore
  * @param row
  */
-export declare function showHideChildren(setStore: Function, row: any): void;
+export declare function showHideChildren(setStore: SetStoreFunction<TableStore>, row: any): void;
 /**
  * 排序信息
  * @param setStore
  * @param column
  * @param sortType
  */
-export declare function sortHandler(setStore: Function, store: TableStore, column: ColumnProps, sortType: string): void;
+export declare function sortHandler(setStore: SetStoreFunction<TableStore>, store: TableStore, column: ColumnProps, sortType: string): void;
 /**
  * 添加或删除展开收缩的数据
  * @param setStore
  * @param column
  * @param row
  */
-export declare function addRemoveExpand(setStore: Function, column: ColumnProps, row: any): void;
-export declare const onResizeStart: (setStore: Function, column: ColumnProps, e: any) => false | undefined;
-export declare const onResizeMove: (store: any, setStore: Function, e: any) => void;
-export declare const onResizeEnd: (store: TableStore, setStore: Function) => void;
+export declare function addRemoveExpand(setStore: SetStoreFunction<TableStore>, column: ColumnProps, row: any): void;
+export declare const onResizeStart: (setStore: SetStoreFunction<TableStore>, column: ColumnProps, e: any) => false | undefined;
+export declare const onResizeMove: (store: any, setStore: SetStoreFunction<TableStore>, e: any) => void;
+export declare const onResizeEnd: (store: TableStore, setStore: SetStoreFunction<TableStore>) => void;

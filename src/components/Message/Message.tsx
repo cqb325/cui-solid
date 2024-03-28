@@ -46,7 +46,7 @@ function Message (props: any) {
         if (duration === undefined || duration === null) {
             duration = 4;
         }
-        
+
         if (duration) {
             setTimeout(() => {
                 hide();
@@ -68,16 +68,16 @@ function Message (props: any) {
 
     const style = () => ({...data.style, 'z-index': usezIndex()})
     return <div classList={classList()} style={style()} ref={wrap} onTransitionEnd={close}>
-        <div class='cm-message-inner'>
+        <div class="cm-message-inner">
             {
-                data.loading ? <Loading /> : <Icon name={getIcon(data.type)} class='cm-message-icon' size={16}/>
+                data.loading ? <Loading /> : <Icon name={getIcon(data.type)} class="cm-message-icon" size={16}/>
             }
-            <div class='cm-message-content'>
+            <div class="cm-message-content">
                 {data.content}
             </div>
             {
-                data.closeable ? <div class='cm-message-close'>
-                    <Icon name='x' class='cm-message-close-icon' size={14} onClick={hide}/>
+                data.closeable ? <div class="cm-message-close">
+                    <Icon name="x" class="cm-message-close-icon" size={14} onClick={hide}/>
                 </div> : null
             }
         </div>

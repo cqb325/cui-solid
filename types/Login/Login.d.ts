@@ -1,5 +1,5 @@
-import { JSXElement } from "solid-js";
-import { useFormProps } from "../utils/useForm";
+import type { JSXElement } from "solid-js";
+import type { useFormProps } from "../utils/useForm";
 export interface LoginProps {
     classList?: any;
     class?: string;

@@ -1,4 +1,5 @@
-import { createEffect, createSignal, JSXElement, onMount, Show } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { MenuItem } from "./MenuItem";
 import { useMenuContext } from ".";
@@ -17,8 +18,8 @@ export function SubMenu (props: SubMenuProps) {
         console.warn("SubMenu need name prop");
     }
     const [min, setMin] = createSignal(false);
-    let ctx: any = useMenuContext();
-    let open = () => {
+    const ctx: any = useMenuContext();
+    const open = () => {
         let isOpen = false;
         if (ctx && ctx.store.openKeys && props.name) {
             isOpen = ctx.store.openKeys[props.name];
@@ -60,19 +61,19 @@ export function SubMenu (props: SubMenuProps) {
             setTimeout(() => {
                 const parentPadding = self.parentElement.getAttribute('x-padding');
                 const padding = parseInt(parentPadding) + 16;
-                
+
                 self.setAttribute('x-padding', parentPadding);
                 listEle.setAttribute('x-padding', padding);
             });
         }
     });
-    
+
     onMount(() => {
         // 获取上级的padding
         const parentPadding = self.parentElement.getAttribute('x-padding');
         // 子菜单增加padding
         const padding = parseInt(parentPadding) + 16;
-        
+
         self.setAttribute('x-padding', parentPadding);
         listEle.setAttribute('x-padding', padding);
 

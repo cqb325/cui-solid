@@ -1,9 +1,11 @@
-import { For, JSXElement, children, createEffect, onCleanup, onMount, untrack } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { For, children, createEffect, onCleanup, onMount, untrack } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useClassList } from "../utils/useProps"
 import { scrollTop } from "../utils/utils";
 
-import { AnchorLink, AnchorLinkProps } from './AnchorLink';
+import type { AnchorLinkProps } from './AnchorLink';
+import { AnchorLink } from './AnchorLink';
 
 type AnchorProps = {
     children?: any,
@@ -30,7 +32,7 @@ type AnchorStore = {
 
 export function Anchor (props: AnchorProps) {
     const classList = () => useClassList(props, 'cm-anchor');
-    
+
     const links = children(() => props.children)
 	const evaluatedLinks = () => links.toArray() as unknown as AnchorLinkProps[]
 
@@ -51,10 +53,10 @@ export function Anchor (props: AnchorProps) {
     let scrollContainer: any = null;
     let scrollElement: any = null;
     let wrapperTop = 0;
-    let bounds: number = props.bounds || 5;
+    const bounds: number = props.bounds || 5;
     let titlesOffsetArr: any = [];
-    let mode = props.mode ?? 'hash';
-    let showInk = props.showInk ?? false;
+    const mode = props.mode ?? 'hash';
+    const showInk = props.showInk ?? false;
 
     const handleHashChange = () => {
         let sharpLinkMatch: any;
@@ -62,7 +64,7 @@ export function Anchor (props: AnchorProps) {
             const url = window.location.href;
             sharpLinkMatch = /#([^#]+)$/.exec(url);
         } else {
-            let path = window.location.href;
+            const path = window.location.href;
             const search = path.includes('?') ? path.split('?')[1] : '';
             const params = new URLSearchParams(search);
             const has = params.has('_to');
@@ -81,8 +83,8 @@ export function Anchor (props: AnchorProps) {
                 getCurrentScrollAtTitleId(scrollTop);
             }, 10)
             return;
-        };
-        
+        }
+
         setStore('currentLink', sharpLinkMatch[0]);
         setStore('currentId', sharpLinkMatch[1]);
     }
@@ -109,7 +111,7 @@ export function Anchor (props: AnchorProps) {
         }
         if (!anchor) return;
         const offsetTop = anchor.offsetTop - wrapperTop - offset;
-        
+
         setStore('animating', true);
         scrollTop(scrollContainer, scrollElement.scrollTop, offsetTop, 600, () => {
             setStore('animating', false);
@@ -119,12 +121,12 @@ export function Anchor (props: AnchorProps) {
     createEffect(() => {
         store.currentLink;
         const currentLinkElementA: any = document.querySelector(`a[data-href="${store.currentLink}"]`)?.parentElement;
-        
+
         if (!currentLinkElementA) return;
         const elementATop = currentLinkElementA.offsetTop;
         const elementAHeight = currentLinkElementA.getBoundingClientRect().height;
         const offset = elementAHeight / 4;
-        
+
         const top = (elementATop < 0 ? (props.offsetTop || 0) : elementATop);
         untrack(() => {
             setStore('inkTop', top + offset / 2);
@@ -139,16 +141,16 @@ export function Anchor (props: AnchorProps) {
 
     const getCurrentScrollAtTitleId = (scrollTop: number) => {
         let i = -1;
-        let len = titlesOffsetArr.length;
+        const len = titlesOffsetArr.length;
         let titleItem = {
             link: '#',
             offset: 0
         };
-        
+
         scrollTop += bounds;
         while (++i < len) {
-            let currentEle = titlesOffsetArr[i];
-            let nextEle = titlesOffsetArr[i + 1];
+            const currentEle = titlesOffsetArr[i];
+            const nextEle = titlesOffsetArr[i + 1];
             if (scrollTop >= currentEle.offset && scrollTop < ((nextEle && nextEle.offset) || Infinity)) {
                 titleItem = titlesOffsetArr[i];
                 break;
@@ -182,11 +184,11 @@ export function Anchor (props: AnchorProps) {
             const idArr = links.map(link => {
                 return link.split('#')[1];
             });
-            
+
             if (!scrollElement) {
                 getContainer();
             }
-            
+
             const arr: any = [];
             idArr.forEach(id => {
                 const titleEle = document.getElementById(id);
@@ -195,7 +197,7 @@ export function Anchor (props: AnchorProps) {
                     offset: titleEle.offsetTop - scrollElement.offsetTop
                 });
             });
-    
+
             titlesOffsetArr = arr;
         });
     });
@@ -210,7 +212,7 @@ export function Anchor (props: AnchorProps) {
         if (mode === 'hash') {
             window.location.hash = href;
         } else {
-            let path = window.location.href;
+            const path = window.location.href;
             const search = path.includes('?') ? path.split('?')[1] : '';
             const index = location.hash.indexOf('?');
             const hash = index > -1 ? location.hash.substring(0, index) : location.hash;
@@ -222,7 +224,7 @@ export function Anchor (props: AnchorProps) {
 
     onMount(() => {
         init();
-        let timer = setInterval(() => {
+        const timer = setInterval(() => {
             const links = store.links.map(item => {
                 return item.href;
             });
@@ -254,7 +256,7 @@ export function Anchor (props: AnchorProps) {
             return <For each={arr}>
                 {(link: AnchorLinkProps) => {
                     return <div class="cm-anchor-link">
-                        <a class="cm-anchor-link-title" href={link.href} data-scroll-offset={props.scrollOffset || 0} data-href={link.href} 
+                        <a class="cm-anchor-link-title" href={link.href} data-scroll-offset={props.scrollOffset || 0} data-href={link.href}
                             onClick={(e: any) => {
                                 gotoAnchor(link.href, e);
                             }} title={link.title as string}>{ link.title }</a>
@@ -273,7 +275,7 @@ export function Anchor (props: AnchorProps) {
         <div class="cm-anchor-wrapper">
             <div class="cm-anchor-inner">
                 <div class={"cm-anchor-ink " + (showInk ? 'cm-anchor-show' : '')}>
-                    <span class="cm-anchor-ink-ball" style={{top: `${store.inkTop}px`, height: `${store.inkHeight}px`}}></span>
+                    <span class="cm-anchor-ink-ball" style={{top: `${store.inkTop}px`, height: `${store.inkHeight}px`}} />
                 </div>
                 {renderLinks(store.links)}
             </div>

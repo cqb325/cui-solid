@@ -8,8 +8,8 @@ type TabsProps = {
     activeName?: string;
     ref?: any;
     extra?: any;
-    onTabClick?: Function;
-    onRemove?: Function;
+    onTabClick?: (item: any) => void;
+    onRemove?: (name: string) => void;
     duration?: number;
 };
 export declare function Tabs(props: TabsProps): import("solid-js").JSX.Element;

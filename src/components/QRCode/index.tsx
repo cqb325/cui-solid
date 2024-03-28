@@ -49,7 +49,7 @@ const DEFAULT_MARGIN_SIZE = 0;
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>;
 type Excavation = { x: number; y: number; w: number; h: number };
 
-function generatePath(modules: Modules, margin: number = 0): string {
+function generatePath (modules: Modules, margin: number = 0): string {
     const ops: Array<string> = [];
     modules.forEach(function (row, y) {
         let start: number | null = null;
@@ -92,14 +92,14 @@ function generatePath(modules: Modules, margin: number = 0): string {
     return ops.join('');
 }
 
-function getMarginSize(includeMargin: boolean, marginSize?: number): number {
+function getMarginSize (includeMargin: boolean, marginSize?: number): number {
     if (marginSize != null) {
         return Math.floor(marginSize);
     }
     return includeMargin ? SPEC_MARGIN_SIZE : DEFAULT_MARGIN_SIZE;
 }
 
-function getImageSettings(
+function getImageSettings (
     cells: Modules,
     size: number,
     margin: number,
@@ -130,17 +130,17 @@ function getImageSettings(
 
     let excavation = null;
     if (imageSettings.excavate) {
-        let floorX = Math.floor(x);
-        let floorY = Math.floor(y);
-        let ceilW = Math.ceil(w + x - floorX);
-        let ceilH = Math.ceil(h + y - floorY);
+        const floorX = Math.floor(x);
+        const floorY = Math.floor(y);
+        const ceilW = Math.ceil(w + x - floorX);
+        const ceilH = Math.ceil(h + y - floorY);
         excavation = { x: floorX, y: floorY, w: ceilW, h: ceilH };
     }
 
     return { x, y, h, w, excavation };
 }
 
-function excavateModules(modules: Modules, excavation: Excavation): Modules {
+function excavateModules (modules: Modules, excavation: Excavation): Modules {
     return modules.slice().map((row, y) => {
         if (y < excavation.y || y >= excavation.y + excavation.h) {
             return row;
@@ -164,8 +164,8 @@ const SUPPORTS_PATH2D = (function () {
 })();
 
 
-export function QRCodeCanvas(props: any) {
-    let {
+export function QRCodeCanvas (props: any) {
+    const {
         value,
         size = DEFAULT_SIZE,
         level = DEFAULT_LEVEL,
@@ -175,10 +175,10 @@ export function QRCodeCanvas(props: any) {
         marginSize,
         style,
         icon,
-        imageSettings,
         ref,
         ...otherProps
     } = props;
+    let { imageSettings } = props;
     imageSettings = imageSettings ?? icon ? {
         excavate: true
     } : undefined

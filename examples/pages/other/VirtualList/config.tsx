@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'height', desc: '固定高度', type: 'number', default: ''},
     {name: 'maxHeight', desc: '最大高度', type: 'number', default: ''},

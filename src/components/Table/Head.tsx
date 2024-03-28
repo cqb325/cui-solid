@@ -1,24 +1,25 @@
-import { Accessor, For, createComputed, createEffect, onCleanup, onMount } from "solid-js"
+import type { Accessor} from "solid-js";
+import { For, createComputed, createEffect, onCleanup, onMount } from "solid-js"
 import { Cell } from "./Cell";
 
-import { TableStore, ColumnProps } from '.';
+import type { TableStore, ColumnProps } from '.';
 import { Colgroup } from "./Colgroup";
 
 type HeadProps = {
     data: TableStore,
     sticky?: boolean,
-    onInitColumnWidth: Function,
-    onResizeHeader: Function,
+    onInitColumnWidth: (idx: number, width: number) => void,
+    onResizeHeader: (width: number, height: number) => void,
     virtual?: boolean
 }
 
-export function Head(props: HeadProps) {
+export function Head (props: HeadProps) {
     let thead: any;
     let headerWrap: any;
     const onWrapEntry = (entry: ResizeObserverEntry) => {
         const el = entry.target;
         const index = el.getAttribute("data-index");
-        
+
         if (index) {
             const idx = parseInt(index);
             if (el) {
@@ -37,7 +38,7 @@ export function Head(props: HeadProps) {
             setTimeout(() => {
                 const rect = el.getBoundingClientRect();
                 const parentRect = el.closest(".cm-table-body")!.getBoundingClientRect();
-                
+
                 if (rect.height > parentRect.height) {
                     headerWrap.style.overflowY = 'scroll';
                 } else {
@@ -109,7 +110,7 @@ export function Head(props: HeadProps) {
                 <tr>
                     <For each={props.data.columns}>
                         {(col: ColumnProps, index: Accessor<number>) => {
-                            return <Cell column={col} type='th' showFixedLeft={props.data.showFixedLeft} colIndex={index()}
+                            return <Cell column={col} type="th" showFixedLeft={props.data.showFixedLeft} colIndex={index()}
                             showFixedRight={props.data.showFixedRight} checkedAll={props.data.checkedAll} ref={(el: Element) => {
                                 Promise.resolve().then(() => {
                                     props.onInitColumnWidth(index(), el.getBoundingClientRect().width);

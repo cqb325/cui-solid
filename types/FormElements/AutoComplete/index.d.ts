@@ -13,11 +13,11 @@ type SelectOptions = {
     classList?: any;
     filter?: boolean;
     placeholder?: string;
-    renderOption?: Function;
+    renderOption?: (data: any) => any;
     ref?: any;
     emptyOption?: any;
-    onChange?: Function;
-    onSearch?: Function;
+    onChange?: (value: any, item?: any) => void;
+    onSearch?: (query: string) => void;
     transfer?: boolean;
     align?: 'bottomLeft' | 'bottomRight';
 };

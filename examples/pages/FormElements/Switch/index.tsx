@@ -18,21 +18,21 @@ useDirective(hljs);
 
 export default function SwitchPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Switch 开关
                 </Title>
                 <Space id="switch_base" dir="v">
                     <Card bordered>
-                        <Input type='switch' onChange={(v: boolean) => {
+                        <Input type="switch" onChange={(v: boolean) => {
                             message.info({
                                 content: '状态改变:' + v,
                                 duration: 1
                             });
                         }}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['switch_base']}/>
@@ -44,7 +44,7 @@ export default function SwitchPage () {
                     <Card bordered>
                         <Switch disabled/>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         disabled 进行禁用
                         </Paragraph>
                         <DemoCode data={codes['switch_disabled']}/>
@@ -55,12 +55,12 @@ export default function SwitchPage () {
                 <Space id="switch_size" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Switch size='large'/>
+                            <Switch size="large"/>
                             <Switch />
-                            <Switch size='small'/>
+                            <Switch size="small"/>
                         </Space>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         size 支持 large 和 small
                         </Paragraph>
                         <DemoCode data={codes['switch_size']}/>
@@ -71,12 +71,12 @@ export default function SwitchPage () {
                 <Space id="switch_loading" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Switch size='large' loading/>
+                            <Switch size="large" loading/>
                             <Switch loading checked/>
-                            <Switch size='small' loading/>
+                            <Switch size="small" loading/>
                         </Space>
                         <Divider align="left"><Text type="primary">加载中</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         loading 为加载中状态，不可切换
                         </Paragraph>
                         <DemoCode data={codes['switch_loading']}/>
@@ -96,7 +96,7 @@ export default function SwitchPage () {
                             }}/>
                         </Space>
                         <Divider align="left"><Text type="primary">文字和值</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         labels 传入数组 修改文案， values 数组修改值
                         </Paragraph>
                         <DemoCode data={codes['switch_label']}/>
@@ -120,7 +120,7 @@ export default function SwitchPage () {
                             }}/>
                         </Space>
                         <Divider align="left"><Text type="primary">阻止切换</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         onBeforeChange 可以在切换之前判断是否需要切换， 返回 false 阻止切换
                         </Paragraph>
                         <DemoCode data={codes['switch_before']}/>
@@ -130,11 +130,11 @@ export default function SwitchPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Rate Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>

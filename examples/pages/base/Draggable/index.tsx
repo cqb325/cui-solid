@@ -15,7 +15,7 @@ useDirective(hljs);
 
 export default function DraggablePage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Draggable 拖拽
@@ -25,12 +25,12 @@ export default function DraggablePage () {
                         <div style={{height: '200px', position: 'relative'}}>
                             <Draggable >
                                 <div style={{width: '100px', height: '100px', border: '1px solid red'}}>
-                                    <div style={{height: '30px'}} class='drag-handler'>Handler</div>
+                                    <div style={{height: '30px'}} class="drag-handler">Handler</div>
                                 </div>
                             </Draggable>
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['draggable_base']}/>
@@ -48,7 +48,7 @@ export default function DraggablePage () {
                             </Draggable>
                         </div>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             禁用拖拽
                         </Paragraph>
                         <DemoCode data={codes['draggable_disabled']}/>
@@ -79,7 +79,7 @@ export default function DraggablePage () {
                             </Draggable>
                         </div>
                         <Divider align="left"><Text type="primary">方向</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             axis默认为Both、可以限制在某X、Y轴上。<br/>
                             设置defaultPosition可初始化位置
                         </Paragraph>
@@ -97,7 +97,7 @@ export default function DraggablePage () {
                             </Draggable>
                         </div>
                         <Divider align="left"><Text type="primary">限制范围</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             bounds默认为parent, 可指定css选择器选择指定的容器
                         </Paragraph>
                         <DemoCode data={codes['draggable_bounds']}/>
@@ -115,7 +115,7 @@ export default function DraggablePage () {
                             </Draggable>
                         </div>
                         <Divider align="left"><Text type="primary">触发元素</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过设置 handle 的元素指定触发拖拽的元素
                         </Paragraph>
                         <DemoCode data={codes['draggable_handle']}/>
@@ -133,7 +133,7 @@ export default function DraggablePage () {
                             </Draggable>
                         </div>
                         <Divider align="left"><Text type="primary">最小距离</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过设置 grid 拖拽移动的最小距离
                         </Paragraph>
                         <DemoCode data={codes['draggable_grid']}/>
@@ -143,19 +143,19 @@ export default function DraggablePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Draggable Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_uidata_props' dir="v">
+                    <Space id="comp_uidata_props" dir="v">
                         <Title type="primary" heading={4}>Event uiDaua Props</Title>
-                        <Table columns={propsColumns} data={eventsParamsData} border size='small' />
+                        <Table columns={propsColumns} data={eventsParamsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

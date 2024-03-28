@@ -18,7 +18,7 @@ export const Row = (props: RowProps) => {
         [`cm-row-${props.align}`]: props.align
     });
     const newStyle = () => {
-        let half = props.gutter ? props.gutter / 2 : 0;
+        const half = props.gutter ? props.gutter / 2 : 0;
         const obj = {
             ...props.style,
         }

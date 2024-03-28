@@ -20,7 +20,7 @@ export interface PopoverProps {
     arrow?: boolean
     theme?: string
     hideDelay?: number
-    onOpen?: Function
+    onOpen?: (open: boolean) => void
     children?: any
     content?: any
     visible?: any
@@ -29,8 +29,8 @@ export interface PopoverProps {
     okText?: any
     cancleText?: any
     style?: any
-    onOk?: Function,
-    onCancel?: Function,
+    onOk?: () => void
+    onCancel?: () => void
 }
 
 export function Popover (props: PopoverProps) {
@@ -39,7 +39,7 @@ export function Popover (props: PopoverProps) {
     const [_, update] = createSignal(createUniqueId());
     const [buttonLoading, setButtonLoading] = createSignal(false);
     let inner: any;
-    let removeClickOutside: Function;
+    let removeClickOutside: () => void;
     let wrap: any;
     const align = () => props.align || 'right';
     const trigger = () => props.confirm ? 'click' : props.trigger || 'hover';
@@ -149,7 +149,7 @@ export function Popover (props: PopoverProps) {
         props.onOpen && props.onOpen(false);
     }
 
-    onMount (() => {
+    onMount(() => {
         if (inner.nextElementSibling) {
             if (trigger() === 'hover') {
                 inner.nextElementSibling.addEventListener('mouseenter', onMouseEnter, false);
@@ -164,7 +164,7 @@ export function Popover (props: PopoverProps) {
         }
     })
 
-    onCleanup (() => {
+    onCleanup(() => {
         if (inner.nextElementSibling) {
             if (trigger() === 'hover') {
                 inner.nextElementSibling.removeEventListener('mouseenter', onMouseEnter);
@@ -188,7 +188,7 @@ export function Popover (props: PopoverProps) {
     const okText = props.okText ?? '确 定';
     const cancleText = props.cancleText ?? '取 消';
     return <>
-        <span style={{display: 'none'}} ref={inner}></span>
+        <span style={{display: 'none'}} ref={inner} />
         {props.children}
         <Portal mount={usePortal(id, id)}>
             <div ref={wrap} style={posStyle()} x-placement={align()} classList={classList()}>
@@ -197,14 +197,14 @@ export function Popover (props: PopoverProps) {
                 </div>
                 {
                     props.confirm ? <Space class="cm-popover-tools" justify="end">
-                        <Button type='default' size='small' onClick={onCancel}>{cancleText}</Button>
-                        <Button type='primary' size='small' onClick={onOk} loading={buttonLoading()}>{okText}</Button>
+                        <Button type="default" size="small" onClick={onCancel}>{cancleText}</Button>
+                        <Button type="primary" size="small" onClick={onOk} loading={buttonLoading()}>{okText}</Button>
                     </Space> : null
                 }
                 {
                     props.arrow ? <svg width="24" height="8" xmlns="http://www.w3.org/2000/svg" class="cm-popover-icon-arrow">
-                        <path d="M0.5 0L1.5 0C1.5 4, 3 5.5, 5 7.5S8,10 8,12S7 14.5, 5 16.5S1.5,20 1.5,24L0.5 24L0.5 0z" fill="rgba(var(--semi-blue-4),1)" opacity="1"></path>
-                        <path d="M0 0L1 0C1 4, 2 5.5, 4 7.5S7,10 7,12S6 14.5, 4 16.5S1,20 1,24L0 24L0 0z" fill="rgba(var(--semi-blue-4),1)"></path>
+                        <path d="M0.5 0L1.5 0C1.5 4, 3 5.5, 5 7.5S8,10 8,12S7 14.5, 5 16.5S1.5,20 1.5,24L0.5 24L0.5 0z" fill="rgba(var(--semi-blue-4),1)" opacity="1" />
+                        <path d="M0 0L1 0C1 4, 2 5.5, 4 7.5S7,10 7,12S6 14.5, 4 16.5S1,20 1,24L0 24L0 0z" fill="rgba(var(--semi-blue-4),1)" />
                     </svg>
                     : null
                 }

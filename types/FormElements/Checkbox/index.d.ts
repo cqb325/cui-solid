@@ -4,7 +4,7 @@ export type CheckboxProps = {
     checked?: any;
     disabled?: boolean;
     type?: 'radio' | 'checkbox';
-    onChange?: Function;
+    onChange?: (checked: boolean, value: any) => void;
     value?: any;
     name?: string;
     label?: string;

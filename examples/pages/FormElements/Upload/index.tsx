@@ -24,14 +24,14 @@ export default function UploadPage () {
     const headers = {'x-token': '123456'};
     let upload: any;
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Upload 上传
                 </Title>
                 <Space id="upload_base" dir="v">
                     <Card bordered>
-                        <Upload action="https://cqb325.gitee.io/cui-solid-doc/" name="file" 
+                        <Upload action="https://cqb325.gitee.io/cui-solid-doc/" name="file"
                             onProgress={(e: any, file: any, fileList: any[]) => {
                                 console.log(file);
                             }} onSuccess={() => {
@@ -39,10 +39,10 @@ export default function UploadPage () {
                             }} onError={(e: any) => {
                                 console.log(e);
                             }}>
-                            <Button icon={<Icon name='upload'/>} type='primary'>Upload Files</Button>
+                            <Button icon={<Icon name="upload"/>} type="primary">Upload Files</Button>
                         </Upload>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         基础用法
                         </Paragraph>
                         <DemoCode data={codes['upload_base']}/>
@@ -53,7 +53,7 @@ export default function UploadPage () {
 
                 <Space id="upload_defaultList" dir="v">
                     <Card bordered>
-                        <Upload action="https://cqb325.gitee.io/cui-solid-doc/" name="file" accept="jpg" 
+                        <Upload action="https://cqb325.gitee.io/cui-solid-doc/" name="file" accept="jpg"
                             defaultFileList={[
                                 {
                                     name: 'test.png',
@@ -70,10 +70,10 @@ export default function UploadPage () {
                             }} onError={(e: any) => {
                                 console.log(e);
                             }}>
-                            <Button icon={<Icon name='upload'/>} type='primary'>Upload Files</Button>
+                            <Button icon={<Icon name="upload"/>} type="primary">Upload Files</Button>
                         </Upload>
                         <Divider align="left"><Text type="primary">默认列表</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         defaultFileList 可以初始化默认的列表
                         </Paragraph>
                         <DemoCode data={codes['upload_defaultList']}/>
@@ -87,13 +87,13 @@ export default function UploadPage () {
                         <Space dir="v">
                             <Upload action="https://cqb325.gitee.io/cui-solid-doc/" name="file" type="drag" data={data()} headers={headers} accept="jpg">
                                 <div class="cm-upload-drag-wrap">
-                                    <Icon name='upload' size={32}/>
+                                    <Icon name="upload" size={32}/>
                                     <p>Click or drag files here to upload</p>
                                 </div>
                             </Upload>
                         </Space>
                         <Divider align="left"><Text type="primary">拖拽</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         type="drag" 可以支持拖拽上传，
                         上传的数据使用data传入， 自定义请求头通过 headers 参数传输
                         </Paragraph>
@@ -115,11 +115,11 @@ export default function UploadPage () {
                                         url: 'https://cqb325.gitee.io/cui-solid-doc/logo.svg',
                                     }
                                 ]}>
-                                    <Icon name='plus1' size={20}/>
+                                    <Icon name="plus1" size={20}/>
                             </Upload>
                         </Space>
                         <Divider align="left"><Text type="primary">照片墙</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         listType="picture" 文件列表以照片墙的形式展示
                         </Paragraph>
                         <DemoCode data={codes['upload_pictures']}/>
@@ -145,15 +145,15 @@ export default function UploadPage () {
                             }} onError={(e: any) => {
                                 console.log(e);
                             }}>
-                                <Button icon={<Icon name='upload'/>} type='primary'>Upload Files</Button>
+                                <Button icon={<Icon name="upload"/>} type="primary">Upload Files</Button>
                         </Upload>
 
-                        <Button type='primary' onClick={() => {
+                        <Button type="primary" onClick={() => {
                             console.log(upload.getFileList());
                         }}>获取文件列表</Button>
 
                         <Divider align="left"><Text type="primary">获取列表</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         通过ref获取upload的引用， 可调用 getFileList 获取文件列表
                         </Paragraph>
                         <DemoCode data={codes['upload_getList']}/>
@@ -163,11 +163,11 @@ export default function UploadPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>TimePicker Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>

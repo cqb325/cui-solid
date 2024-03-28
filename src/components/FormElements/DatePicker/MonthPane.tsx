@@ -30,7 +30,7 @@ export function MonthPane (props: any) {
         return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].concat([]);
     }
     const month = () => {
-        if (props.type === 'date' || props.type === 'dateRange' 
+        if (props.type === 'date' || props.type === 'dateRange'
             || props.type === 'dateTime' || props.type === 'dateTimeRange') {
             const index = props.name === 'end' ? 1 : 0;
             return store.currentMonth[index] && store.currentMonth[index].getMonth && (store.currentMonth[index].getMonth() + 1);
@@ -70,12 +70,12 @@ export function MonthPane (props: any) {
     return <div class="cm-date-picker-month">
         <Show when={props.type === 'date' || props.type === 'dateRange' || props.type === 'dateTime' || props.type === 'dateTimeRange'}>
             <div class="cm-date-picker-month-header">
-                <Button type='text' onClick={onBack} ghost icon={<Icon name='chevron-left' size={16}/>}>返回选择日期</Button>
+                <Button type="text" onClick={onBack} ghost icon={<Icon name="chevron-left" size={16}/>}>返回选择日期</Button>
             </div>
         </Show>
         <div class="cm-date-picker-month-body">
-            <Cell data={years()} value={year()} day={store.currentMonth[0]} type='year' onSelect={onSelect}/>
-            <Cell data={months()} value={month()} day={store.currentMonth[0]} type='month' onSelect={onSelect}/>
+            <Cell data={years()} value={year()} day={store.currentMonth[0]} type="year" onSelect={onSelect}/>
+            <Cell data={months()} value={month()} day={store.currentMonth[0]} type="month" onSelect={onSelect}/>
         </div>
     </div>
 }

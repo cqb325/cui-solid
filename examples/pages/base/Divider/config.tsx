@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'style', desc: '自定义样式', type: 'Object', default: ''},
     {name: 'classList', desc: '自定义class', type: 'Object', default: ''},
@@ -10,7 +11,7 @@ export const propsData = [
 
 
 export const eventsData = [
-    
+
 ]
 
 export const anchorData = [

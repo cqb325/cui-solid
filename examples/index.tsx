@@ -21,7 +21,7 @@ router.afterEach(async (to, from) => {
     setTimeout(() => {
         document.documentElement.scrollTop = 0;
     }, 200);
-    
+
 })
 
 render(() => <Page/>, document.getElementById('root') as HTMLElement);

@@ -11,7 +11,7 @@ export function TimePane (props: any) {
     const second = () => {
         return props.value && props.value.getSeconds && props.value.getSeconds();
     }
-    
+
     const hasHour = () => {
         return props.format.indexOf('H') > -1;
     }
@@ -27,13 +27,13 @@ export function TimePane (props: any) {
         </Show>
         <div class="cm-time-picker-options">
             <Show when={hasHour()}>
-                <Cell max={24} type='hour' value={hour()} step={props.hourStep} name={props.name} onSelectTime={props.onSelectTime}/>
+                <Cell max={24} type="hour" value={hour()} step={props.hourStep} name={props.name} onSelectTime={props.onSelectTime}/>
             </Show>
             <Show when={hasMinute()}>
-                <Cell max={60} type='minute' value={minute()} step={props.minuteStep} name={props.name} onSelectTime={props.onSelectTime}/>
+                <Cell max={60} type="minute" value={minute()} step={props.minuteStep} name={props.name} onSelectTime={props.onSelectTime}/>
             </Show>
             <Show when={hasSecond()}>
-                <Cell max={60} type='second' value={second()} step={props.secondStep} name={props.name} onSelectTime={props.onSelectTime}/>
+                <Cell max={60} type="second" value={second()} step={props.secondStep} name={props.name} onSelectTime={props.onSelectTime}/>
             </Show>
         </div>
         <Show when={props.footer}>

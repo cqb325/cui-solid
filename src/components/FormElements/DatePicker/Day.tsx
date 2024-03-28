@@ -31,7 +31,7 @@ export function Day (props: any) {
     const ctx: any = useDatepickerContext();
     const today = clearHms(new Date());
     const isToday = props.day ? today.toLocaleDateString() === props.day.toLocaleDateString() : false;
-    const isActive = () => props.type === 'dateRange' || props.type === 'dateTimeRange' ? false : (props.value && props.value instanceof Date 
+    const isActive = () => props.type === 'dateRange' || props.type === 'dateTimeRange' ? false : (props.value && props.value instanceof Date
         && props.day ? props.value.toLocaleDateString() === props.day.toLocaleDateString() : false);
     let disabled = props.day && ctx && ctx.disabledDate && ctx.disabledDate(props.day);
     if (!(props.month && props.day && sameMonth(props.month, props.day))) {

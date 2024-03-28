@@ -16,7 +16,7 @@ useDirective(hljs);
 
 function BreadcrumbDemo () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Breadcrumb 面包屑
@@ -28,7 +28,7 @@ function BreadcrumbDemo () {
                             <Breadcrumb.Item>dashboard</Breadcrumb.Item>
                         </Breadcrumb>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             最基础的用法，通过设置link属性添加链接。
                         </Paragraph>
                         <DemoCode data={codes['breadcrumb_base']}/>
@@ -38,12 +38,12 @@ function BreadcrumbDemo () {
                 <Space id="breadcrumb_icon" dir="v">
                     <Card bordered>
                         <Breadcrumb>
-                            <Breadcrumb.Item icon={<Icon name='anchor' size={12}/>}>首页</Breadcrumb.Item>
-                            <Breadcrumb.Item icon={<Icon name='dashboard' size={12}/>} link='#/nav/breadcrumb'>面板</Breadcrumb.Item>
+                            <Breadcrumb.Item icon={<Icon name="anchor" size={12}/>}>首页</Breadcrumb.Item>
+                            <Breadcrumb.Item icon={<Icon name="dashboard" size={12}/>} link="#/nav/breadcrumb">面板</Breadcrumb.Item>
                             <Breadcrumb.Item>管理</Breadcrumb.Item>
                         </Breadcrumb>
                         <Divider align="left"><Text type="primary">带图标</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             可自定义每项的内容，比如带有一个图标
                         </Paragraph>
                         <DemoCode data={codes['breadcrumb_icon']}/>
@@ -59,8 +59,8 @@ function BreadcrumbDemo () {
                             <Breadcrumb.Item>管理</Breadcrumb.Item>
                         </Breadcrumb>
                         <Divider align="left"><Text type="primary">分隔符</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
-                            通过设置 <Text code>separator</Text> 属性来自定义分隔符，比如 <Text code>&gt;</Text> 
+                        <Paragraph type="secondary" spacing="extended">
+                            通过设置 <Text code>separator</Text> 属性来自定义分隔符，比如 <Text code>&gt;</Text>
                         </Paragraph>
                         <DemoCode data={codes['breadcrumb_sep']}/>
                     </Card>
@@ -69,14 +69,14 @@ function BreadcrumbDemo () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Breadcrumb Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_item_props' dir="v">
+                    <Space id="comp_item_props" dir="v">
                         <Title type="primary" heading={4}>Breadcrumb.Item Props</Title>
-                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

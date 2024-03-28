@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'type', desc: '类型,支持 pulse|gear', type: 'string', default: 'pulse'},
     {name: 'size', desc: '大小尺寸', type: 'string', default: ''},

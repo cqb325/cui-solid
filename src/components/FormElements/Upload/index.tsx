@@ -15,7 +15,7 @@ type UploadProps = {
     style?: any,
     disabled?: boolean
     children?: any,
-    beforeUpload?: Function,
+    beforeUpload?: (file: File) => Promise<File> | boolean,
     format?: string[],
     maxSize?: number,
     name?: string,
@@ -23,18 +23,18 @@ type UploadProps = {
     withCredentials?: boolean,
     data?: any,
     action?: string,
-    onProgress?: Function,
-    onSuccess?: Function,
-    onError?: Function,
-    onRemove?: Function,
-    onPreview?: Function,
-    onFormatError?: Function,
-    onExceededSize?: Function,
-    onClear?: Function,
+    onProgress?: (e: any, file: any, fileList: any[]) => void,
+    onSuccess?: (res: any, file: any, fileList: any[]) => void,
+    onError?: (error: any, res: any, file: any) => void,
+    onRemove?: (file: any, fileList: any[]) => void,
+    onPreview?: (file: any, fileList?: any[]) => void,
+    onFormatError?: (file: any, fileList: any[]) => void,
+    onExceededSize?: (file: any, fileList: any[]) => void,
+    onClear?: (fileList: any[]) => void,
     defaultFileList?: any[],
     type?: 'select'|'drag',
     paste?: boolean,
-    getFileUrl?: Function,
+    getFileUrl?: (res: any, file: any) => void,
     ref?: any,
     listType?: 'picture'
 }
@@ -85,12 +85,12 @@ export function Upload (props: UploadProps) {
             upload(file);
         });
     }
-    const upload = (file: File) => {
+    const upload = async (file: File) => {
         if (!props.beforeUpload) {
             return post(file);
         }
         const before = props.beforeUpload(file);
-        if (before && before.then) {
+        if (typeof before === 'object' && before.then) {
             before.then((processedFile: File) => {
                 if (Object.prototype.toString.call(processedFile) === '[object File]') {
                     post(processedFile);
@@ -109,8 +109,8 @@ export function Upload (props: UploadProps) {
     const post = (file: any) =>{
         // check format
         if (format.length) {
-            const _file_format = file.name.split('.').pop().toLocaleLowerCase();
-            const checked = format.some(item => item.toLocaleLowerCase() === _file_format);
+            const fileFormat = file.name.split('.').pop().toLocaleLowerCase();
+            const checked = format.some(item => item.toLocaleLowerCase() === fileFormat);
             if (!checked) {
                 props.onFormatError && props.onFormatError(file, fileList);
                 return false;
@@ -169,8 +169,8 @@ export function Upload (props: UploadProps) {
 
     /**
      * 上传进度
-     * @param e 
-     * @param file 
+     * @param e
+     * @param file
      */
     const handleProgress = (e: any, file: any) => {
         const _file = getFile(file);
@@ -236,7 +236,7 @@ export function Upload (props: UploadProps) {
 
     /**
      * 重试
-     * @param item 
+     * @param item
      */
     const onRetry = (item: any) => {
         const file: any = fileMap[item.uid];
@@ -297,6 +297,7 @@ export function Upload (props: UploadProps) {
     })
     return <div classList={classList()} style={props.style}>
         <input class="cm-upload-input" ref={input} type="file" onChange={handleChange} multiple={props.multiple}
+            // @ts-expect-error: 2322
             webkitdirectory={props.webkitdirectory} accept={props.accept}/>
         <Show when={props.listType === 'picture'}>
             <PictureList files={store.fileList} onRemove={handleRemove} onPreview={handlePreview} onClick={handleClick}>

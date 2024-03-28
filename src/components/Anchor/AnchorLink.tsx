@@ -1,4 +1,5 @@
-import { JSXElement, children } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { children } from "solid-js";
 
 export interface AnchorLinkProps {
     href: string

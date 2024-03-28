@@ -1,14 +1,13 @@
-import { createEffect, createSignal, For, on, onCleanup, onMount } from 'solid-js';
+import { createEffect, createSignal, For, untrack } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
 import { Collapase } from '../../inner/Collapase';
-import { useClickOutside } from '../../utils/useClickOutside';
 import { Option } from './Option';
 import { Value } from '../../inner/Value';
 import createField from "../../utils/createField";
 import { useClassList } from '../../utils/useProps';
 import { Icon } from '../../Icon';
 import { Dropdown } from '../../Dropdown';
-import { untrack } from 'solid-js/web';
+
 
 type SelectOptions = {
     name?: string,
@@ -25,11 +24,11 @@ type SelectOptions = {
     classList?: any,
     filter?: boolean,
     placeholder?: string,
-    renderOption?: Function,
+    renderOption?: (data: any) => any,
     ref?: any,
     emptyOption?: any,
-    onChange?: Function,
-    onSearch?: Function,
+    onChange?: (value: any, item?: any) => void,
+    onSearch?: (query: string) =>void,
     transfer?: boolean,
     align?: 'bottomLeft'|'bottomRight'
 }
@@ -37,7 +36,7 @@ type SelectOptions = {
 export function AutoComplete (props: SelectOptions) {
     const [open, setOpen] = createSignal(false);
     const align = props.align ?? 'bottomLeft';
-    const [value, setValue] = createField(props, '');
+    const [value, setValue] = createField<any>(props, '');
     const [query, setQuery] = createSignal('');
 
     const classList = () => useClassList(props, 'cm-select', 'cm-autocomplete', {
@@ -126,7 +125,7 @@ export function AutoComplete (props: SelectOptions) {
                 return item[valueField] === v;
             });
         })
-        
+
         return active ? active[textField] : (props.emptyOption ? props.emptyOption : '');
     }
 
@@ -145,17 +144,17 @@ export function AutoComplete (props: SelectOptions) {
     }
 
     return <div classList={classList()} style={props.style} ref={wrap}>
-    <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger='click' visible={[open, setOpen]}
+    <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
     onBeforeDrop={onBeforeDrop}
-        menu={<div class='cm-select-options-wrap'>
+        menu={<div class="cm-select-options-wrap">
         <Collapase open={open()}>
-            <div class='cm-select-options'>
-                <ul class='cm-select-option-list'>
+            <div class="cm-select-options">
+                <ul class="cm-select-option-list">
                     <For each={store.list}>
                         {(item) => {
                             return <Option renderOption={props.renderOption} visible={item._show}
-                                disabled={item.disabled} data={item} checked={item._checked} 
-                                valueField={valueField} textField={textField} onClick={onOptionClick}></Option>
+                                disabled={item.disabled} data={item} checked={item._checked}
+                                valueField={valueField} textField={textField} onClick={onOptionClick} />
                         }}
                     </For>
                 </ul>
@@ -164,7 +163,7 @@ export function AutoComplete (props: SelectOptions) {
     </div>}>
         <Value text={labels()} disabled={props.disabled} filter query={[query, setQuery]}
                 clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
-                prepend={props.prefix} size={props.size} icon={<Icon name='chevron-down' class="cm-select-cert"/>} />
+                prepend={props.prefix} size={props.size} icon={<Icon name="chevron-down" class="cm-select-cert"/>} />
     </Dropdown>
     </div>
 }

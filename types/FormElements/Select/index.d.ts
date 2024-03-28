@@ -16,10 +16,10 @@ type SelectOptions = {
     class?: any;
     classList?: any;
     filter?: boolean;
-    renderOption?: Function;
+    renderOption?: (data: any) => any;
     ref?: any;
     emptyOption?: any;
-    onChange?: Function;
+    onChange?: (value: any, option?: any) => void;
     showMax?: number;
     valueClosable?: boolean;
     transfer?: boolean;
@@ -27,7 +27,7 @@ type SelectOptions = {
     showMore?: boolean;
     loading?: boolean;
     children?: any;
-    remoteMethod?: Function;
+    remoteMethod?: (queryStr: any) => void;
     maxHeight?: number;
     debounceTime?: number;
     defaultLabel?: string | string[];

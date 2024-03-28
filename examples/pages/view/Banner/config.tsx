@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'classList', desc: '自定义Class', type: 'Object', default: ''},
     {name: 'class', desc: '自定义Class', type: 'string', default: ''},

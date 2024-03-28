@@ -127,7 +127,7 @@ export default function TreePage () {
     ]
 
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Tree 树状控件
@@ -136,7 +136,7 @@ export default function TreePage () {
                     <Card bordered>
                         <Tree data={data1}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             Tree 传入data数据展示树状组件
                         </Paragraph>
                         <DemoCode data={codes['tree_base']}/>
@@ -147,7 +147,7 @@ export default function TreePage () {
                     <Card bordered>
                         <Tree data={data2} opened={[opened, setOpened]}/>
                         <Divider align="left"><Text type="primary">默认展开</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>opened</Text> 参数控制默认打开的节点
                         </Paragraph>
                         <DemoCode data={codes['tree_opened']}/>
@@ -161,7 +161,7 @@ export default function TreePage () {
                             console.log(node);
                         }}/>
                         <Divider align="left"><Text type="primary">默认选中</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>selected</Text> 参数控制选中的节点
                         </Paragraph>
                         <DemoCode data={codes['tree_selected']}/>
@@ -172,7 +172,7 @@ export default function TreePage () {
                     <Card bordered>
                         <Tree data={data4} multi/>
                         <Divider align="left"><Text type="primary">级联多选</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置<Text code>multi</Text> 参数可以进行多选，默认级联
                         </Paragraph>
                         <DemoCode data={codes['tree_multi']}/>
@@ -182,9 +182,9 @@ export default function TreePage () {
 
                 <Space id="tree_multi_unrelate" dir="v">
                     <Card bordered>
-                        <Tree data={data5} multi checkRelation='unRelated'/>
+                        <Tree data={data5} multi checkRelation="unRelated"/>
                         <Divider align="left"><Text type="primary">非级联多选</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>checkRelation</Text> 参数可以设置多选场景下的级联情况，<Text code>unRelated</Text>非级联 <Text code>related</Text> 级联
                         </Paragraph>
                         <DemoCode data={codes['tree_multi_unrelate']}/>
@@ -196,7 +196,7 @@ export default function TreePage () {
                     <Card bordered>
                         <Tree data={data6} multi />
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             数据项添加 <Text code>disabled</Text> 参数可以禁用节点
                         </Paragraph>
                         <DemoCode data={codes['tree_disabled']}/>
@@ -208,7 +208,7 @@ export default function TreePage () {
                     <Card bordered>
                         <Tree data={data7} multi directory />
                         <Divider align="left"><Text type="primary">目录图标</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             添加<Text code>directory</Text> 参数可以显示目录图标
                         </Paragraph>
                         <DemoCode data={codes['tree_directory']}/>
@@ -229,7 +229,7 @@ export default function TreePage () {
                             });
                         }}/>
                         <Divider align="left"><Text type="primary">动态加载</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             数据项存在<Text code>loading</Text> 参数， 可通过 <Text code>loadData</Text> 方法动态加载子节点
                         </Paragraph>
                         <DemoCode data={codes['tree_loadData']}/>
@@ -242,13 +242,13 @@ export default function TreePage () {
                         <Tree data={data9} multi directory onContextMenu={(data: any) => {
                             console.log(data);
                         }} contextMenu={<DropdownMenu>
-                            <DropdownItem name='add'>添加</DropdownItem>
-                            <DropdownItem name='modity'>修改</DropdownItem>
+                            <DropdownItem name="add">添加</DropdownItem>
+                            <DropdownItem name="modity">修改</DropdownItem>
                         </DropdownMenu>} onSelectMenu={(name: string) => {
                             console.log(name);
                         }}/>
                         <Divider align="left"><Text type="primary">右键菜单</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             数据项存在<Text code>loading</Text> 参数， 可通过 <Text code>loadData</Text> 方法动态加载子节点
                         </Paragraph>
                         <DemoCode data={codes['tree_contextmenu']}/>
@@ -259,7 +259,7 @@ export default function TreePage () {
                 <Space id="tree_methods" dir="v">
                     <Card bordered>
                         <Tree data={data10} multi directory ref={tree}/>
-                        
+
                         <Space dir="v">
                             <Space dir="h">
                                 <Button onClick={() => {
@@ -267,22 +267,22 @@ export default function TreePage () {
                                 }}>勾选</Button>
                             </Space>
                             <Space>
-                                <Button type='primary' onClick={() => {
+                                <Button type="primary" onClick={() => {
                                     console.log(tree.getAllChecked());
                                 }}>AllChecked</Button>
-                                <Button type='primary' onClick={() => {
+                                <Button type="primary" onClick={() => {
                                     console.log(tree.getHalfChecked());
                                 }}>HalfChecked</Button>
-                                <Button type='primary' onClick={() => {
+                                <Button type="primary" onClick={() => {
                                     console.log(tree.getChildChecked());
                                 }}>ChildChecked</Button>
-                                <Button type='primary' onClick={() => {
+                                <Button type="primary" onClick={() => {
                                     console.log(tree.getShallowChecked());
                                 }}>Shallow</Button>
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">接口</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             数据项存在<Text code>loading</Text> 参数， 可通过 <Text code>loadData</Text> 方法动态加载子节点
                         </Paragraph>
                         <DemoCode data={codes['tree_methods']}/>
@@ -293,10 +293,10 @@ export default function TreePage () {
                 <Space id="tree_data" dir="v">
                     <Card bordered>
                         <Tree data={data11()} multi directory/>
-                        <Button type='primary' onClick={() => {
+                        <Button type="primary" onClick={() => {
                             const da = [];
                             for (let i = 0; i < 1 + Math.random() * 5; i++) {
-                                let c = [];
+                                const c = [];
                                 for (let j = 0; j < 1 + Math.random() * 5; j++) {
                                     c.push({title: `node_${i}_${j}`, id: `${i}_${j}`});
                                 }
@@ -305,7 +305,7 @@ export default function TreePage () {
                             setData11(da)
                         }}>改变数据</Button>
                         <Divider align="left"><Text type="primary">可控数据</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             数据项存在<Text code>loading</Text> 参数， 可通过 <Text code>loadData</Text> 方法动态加载子节点
                         </Paragraph>
                         <DemoCode data={codes['tree_data']}/>
@@ -315,24 +315,24 @@ export default function TreePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Tree Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
-                    </Space>
-                    
-                    <Space id='comp_dataprops' dir="v">
-                        <Title type="primary" heading={4}>数据项属性</Title>
-                        <Table columns={propsColumns} data={dataItemData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_dataprops" dir="v">
+                        <Title type="primary" heading={4}>数据项属性</Title>
+                        <Table columns={propsColumns} data={dataItemData} border size="small" />
+                    </Space>
+
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>
 }

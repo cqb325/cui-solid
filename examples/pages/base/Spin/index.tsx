@@ -18,7 +18,7 @@ useDirective(hljs);
 export default function SpinPage () {
     const [loading, setLoading] = createSignal(true);
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Spin 加载中
@@ -33,7 +33,7 @@ export default function SpinPage () {
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
-                                <Spin type="pulse"></Spin>
+                                <Spin type="pulse" />
                             </Card>
 
                             <Card title="卡片" style={{width: '300px', height: '300px', border: '1px solid #ccc', position: 'relative'}}>
@@ -43,7 +43,7 @@ export default function SpinPage () {
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
-                                <Spin type="gear"></Spin>
+                                <Spin type="gear" />
                             </Card>
 
                             <Card title="卡片" style={{width: '300px', height: '300px', border: '1px solid #ccc', position: 'relative'}}>
@@ -53,14 +53,14 @@ export default function SpinPage () {
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
-                                <Spin type="oval"></Spin>
+                                <Spin type="oval" />
                             </Card>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
-                            Spin的父组件需要设置position为 <Text code>relative/absolute/fixed</Text> 
+                        <Paragraph type="secondary" spacing="extended">
+                            Spin的父组件需要设置position为 <Text code>relative/absolute/fixed</Text>
                         </Paragraph>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             Spin的type支持 <Text code>pulse/gear/oval</Text> 默认为 pulse
                         </Paragraph>
                         <DemoCode data={codes['spin_base']}/>
@@ -78,17 +78,17 @@ export default function SpinPage () {
                                 <div>卡片内容卡片内容</div>
                                 <div>卡片内容卡片内容</div>
                                 <Show when={loading()}>
-                                    <Spin title='加载中'></Spin>
+                                    <Spin title="加载中" />
                                 </Show>
                             </Card>
                             <div>
-                                <Button type='primary' onClick={() => {
+                                <Button type="primary" onClick={() => {
                                     setLoading(!loading());
                                 }}>Toggle</Button>
                             </div>
                         </Space>
                         <Divider align="left"><Text type="primary">可控</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             可以设置title属性修改文案，默认为loading...
                         </Paragraph>
                         <DemoCode data={codes['spin_control']}/>
@@ -97,9 +97,9 @@ export default function SpinPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Spin Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

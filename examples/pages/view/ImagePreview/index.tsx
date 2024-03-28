@@ -7,14 +7,14 @@ import { Title } from "@/components/Typography/Title";
 export default function ImagePreviewPage () {
     const [visible, setVisible] = createSignal(false);
     return <>
-        <div class='sys-ctx-main-left'>
+        <div class="sys-ctx-main-left">
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     ImagePreview 图片预览
                 </Title>
                 <Space id="image_base" dir="v">
                     <Space dir="h">
-                        <Button type='primary' onClick={() => {
+                        <Button type="primary" onClick={() => {
                             setVisible(true);
                         }}>打开</Button>
                         <ImagePreview visible={[visible, setVisible]} previewList={

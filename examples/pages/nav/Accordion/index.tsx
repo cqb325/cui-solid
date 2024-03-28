@@ -29,7 +29,7 @@ function AccordionDemo () {
     // const foreceUpdate = useForceUpdate();
 
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Accordion 手风琴面板
@@ -41,11 +41,11 @@ function AccordionDemo () {
                                 <Accordion onSelect={(name: string, open: boolean, v: any) => {
                                     console.log(name, open, v);
                                 }}>
-                                    <Accordion.Item name="a1" title="Title1" icon={<Icon name='dashboard'/>}>content1</Accordion.Item>
+                                    <Accordion.Item name="a1" title="Title1" icon={<Icon name="dashboard"/>}>content1</Accordion.Item>
                                     <Accordion.Item name="a2" title={<BothSide>
                                         <span>Title2</span>
-                                        <Tag size='small' theme='success'>1234</Tag>
-                                    </BothSide>} icon={<Icon name='cog'/>}>
+                                        <Tag size="small" theme="success">1234</Tag>
+                                    </BothSide>} icon={<Icon name="cog"/>}>
                                         <p>content2</p>
                                         <p>content2</p>
                                         <p>content2</p>
@@ -54,13 +54,13 @@ function AccordionDemo () {
                                 </Accordion>
                             </View>
                             <VView style={centerStyle}>
-                                <View class='layout-demo-header' size="64px" style={centerStyle}></View>
-                                <View style={centerStyle}></View>
-                                <View class='layout-demo-header' size="64px" style={centerStyle}></View>
+                                <View class="layout-demo-header" size="64px" style={centerStyle} />
+                                <View style={centerStyle} />
+                                <View class="layout-demo-header" size="64px" style={centerStyle} />
                             </VView>
                         </HView>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['accordion_base']}/>
@@ -76,14 +76,14 @@ function AccordionDemo () {
                                     <Accordion activeKey={[activeKey, setActiveKey]} multi onSelect={(name: string, open: boolean, v: any) => {
                                         console.log(name, open, v);
                                     }}>
-                                        <Accordion.Item name="a1" title="Title1" icon={<Icon name='dashboard'/>}>content1</Accordion.Item>
-                                        <Accordion.Item name="a2" title="Title2" icon={<Icon name='cog'/>}>
+                                        <Accordion.Item name="a1" title="Title1" icon={<Icon name="dashboard"/>}>content1</Accordion.Item>
+                                        <Accordion.Item name="a2" title="Title2" icon={<Icon name="cog"/>}>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                         </Accordion.Item>
-                                        <Accordion.Item name="a3" title="Title3" icon={<Icon name='flag'/>}>
+                                        <Accordion.Item name="a3" title="Title3" icon={<Icon name="flag"/>}>
                                             <p>content3</p>
                                             <p>content3</p>
                                             <p>content3</p>
@@ -92,18 +92,18 @@ function AccordionDemo () {
                                     </Accordion>
                                 </View>
                                 <VView style={centerStyle}>
-                                    <View class='layout-demo-header' size="64px" style={centerStyle}></View>
+                                    <View class="layout-demo-header" size="64px" style={centerStyle} />
                                     <View style={centerStyle}>
                                         <Button onClick={() => {
                                             setActiveKey(['a1']);
                                         }}>更新</Button>
                                     </View>
-                                    <View class='layout-demo-header' size="64px" style={centerStyle}></View>
+                                    <View class="layout-demo-header" size="64px" style={centerStyle} />
                                 </VView>
                             </HView>
                         </VView>
                         <Divider align="left"><Text type="primary">多选</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>multi</Text> 属性可以展开多个面板<br/>
                             <Text code>activeKey</Text> 属性为可控展开面板属性
                         </Paragraph>
@@ -117,17 +117,17 @@ function AccordionDemo () {
                         <VView size="300px">
                             <HView class="components-layout-demo" size="450px">
                                 <View size="250px" style={{'text-align': 'initial'}} class="layout-demo-sider">
-                                    <Accordion activeKey='a1' flex onSelect={(name: string, open: boolean, v: any) => {
+                                    <Accordion activeKey="a1" flex onSelect={(name: string, open: boolean, v: any) => {
                                         console.log(name, open, v);
                                     }}>
-                                        <Accordion.Item name="a1" title="Title1" icon={<Icon name='dashboard'/>}>content1</Accordion.Item>
-                                        <Accordion.Item name="a2" title="Title2" icon={<Icon name='cog'/>}>
+                                        <Accordion.Item name="a1" title="Title1" icon={<Icon name="dashboard"/>}>content1</Accordion.Item>
+                                        <Accordion.Item name="a2" title="Title2" icon={<Icon name="cog"/>}>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                         </Accordion.Item>
-                                        <Accordion.Item name="a3" title="Title3" icon={<Icon name='flag'/>}>
+                                        <Accordion.Item name="a3" title="Title3" icon={<Icon name="flag"/>}>
                                             <p>content3</p>
                                             <p>content3</p>
                                             <p>content3</p>
@@ -136,14 +136,14 @@ function AccordionDemo () {
                                     </Accordion>
                                 </View>
                                 <VView style={centerStyle}>
-                                    <View class='layout-demo-header' size="64px" style={centerStyle}></View>
-                                    <View style={centerStyle}></View>
-                                    <View class='layout-demo-header' size="64px" style={centerStyle}></View>
+                                    <View class="layout-demo-header" size="64px" style={centerStyle} />
+                                    <View style={centerStyle} />
+                                    <View class="layout-demo-header" size="64px" style={centerStyle} />
                                 </VView>
                             </HView>
                         </VView>
                         <Divider align="left"><Text type="primary">占满容器</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>flex</Text> 属性可以将手风琴占满容器
                         </Paragraph>
                         <DemoCode data={codes['accordion_flex']}/>
@@ -153,19 +153,19 @@ function AccordionDemo () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Accordion Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_item_props' dir="v">
+                    <Space id="comp_item_props" dir="v">
                         <Title type="primary" heading={4}>Accordion.Item Props</Title>
-                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>
 }

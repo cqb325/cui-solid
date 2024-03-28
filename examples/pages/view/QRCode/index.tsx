@@ -21,7 +21,7 @@ export default function QRCodePage () {
     let qrcode: any;
     const [src, setSrc] = createSignal('https://www.baidu.com');
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     QRCode 二维码
@@ -35,7 +35,7 @@ export default function QRCodePage () {
                             <Input value={[src, setSrc]} />
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法 。
                         </Paragraph>
                         <DemoCode data={codes['qrcode_base']}/>
@@ -46,7 +46,7 @@ export default function QRCodePage () {
                     <Card bordered>
                         <QRCode icon={img} value={src()} />
                         <Divider align="left"><Text type="primary">带图标</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用icon 可以让二维码带图标 。
                         </Paragraph>
                         <DemoCode data={codes['qrcode_img']}/>
@@ -61,7 +61,7 @@ export default function QRCodePage () {
                             <QRCode value={src()} color="#1890ff" bgColor="#ededed"/>
                         </Space>
                         <Divider align="left"><Text type="primary">自定义颜色</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 color 可以自定义二维码颜色，bgColor 可以修改背景颜色 。
                         </Paragraph>
                         <DemoCode data={codes['qrcode_color']}/>
@@ -78,7 +78,7 @@ export default function QRCodePage () {
                             <QRCode value="https://gitee.com/cqb325/cui-solid/blob/master/src/assets/images/logo.svg" level="H"/>
                         </Space>
                         <Divider align="left"><Text type="primary">纠错比例</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过设置 level 调整不同的容错等级。
                         </Paragraph>
                         <DemoCode data={codes['qrcode_level']}/>
@@ -92,7 +92,7 @@ export default function QRCodePage () {
                             qrcode.download();
                         }}>下载</Button>
                         <Divider align="left"><Text type="primary">纠错比例</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过设置 level 调整不同的容错等级。
                         </Paragraph>
                         <DemoCode data={codes['qrcode_download']}/>
@@ -101,9 +101,9 @@ export default function QRCodePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>QRCode Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

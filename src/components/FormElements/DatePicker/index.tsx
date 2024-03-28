@@ -1,4 +1,5 @@
-import { JSXElement, Match, Show, Switch, createContext, createEffect, useContext, createSignal, createMemo } from "solid-js";
+import type { JSXElement, Signal} from "solid-js";
+import { Match, Show, Switch, createContext, createEffect, useContext, createSignal, createMemo, untrack } from "solid-js";
 import { Dropdown } from "../../Dropdown";
 import { useClassList } from "../../utils/useProps"
 import { Value } from "../../inner/Value";
@@ -12,7 +13,7 @@ import { DateTimeRangePane } from "./DateTimeRangePane";
 import dayjs from "dayjs";
 import createField from "../../utils/createField";
 import { Icon } from "../../Icon";
-import { untrack } from "solid-js/web";
+
 
 type DatepickerProps = {
     classList?: any,
@@ -25,17 +26,17 @@ type DatepickerProps = {
     type?: 'dateRange'|'monthRange'|'month'|'dateTime'|'dateTimeRange',
     align?: 'bottomLeft'|'bottomRight',
     format?: string,
-    value?: string | Date | string[] | Date[] | Function[],
+    value?: string | Date | string[] | Date[] | Signal<any>,
     prepend?: string | JSXElement,
     header?: string | JSXElement | string[] | JSXElement[],
     footer?: string | JSXElement | string[] | JSXElement[],
     seperator?: string,
     transfer?: boolean,
-    trigger?: Function,
-    disabledDate?: Function,
-    onChange?: Function,
+    trigger?: () => any,
+    disabledDate?: (day: Date) => boolean,
+    onChange?: (value: any) => void,
     maxRange?: number,
-    shortCuts?: Function | JSXElement,
+    shortCuts?: (() => any) | JSXElement,
     revers?: boolean
     placeholder?: string
     // daterange的月份是否粘连
@@ -53,7 +54,7 @@ export type DatepickerStore = {
 export function Datepicker (props: DatepickerProps) {
     const [visible, setVisible] = createSignal(false);
     const type = props.type ?? 'date';
-    const [value, setValue] = createField(props, 'value', type === 'dateRange' || type === 'dateTimeRange' ? [] : '');
+    const [value, setValue] = createField<any>(props, 'value', type === 'dateRange' || type === 'dateTimeRange' ? [] : '');
     const [v, setV] = createSignal<any>();
     let format = props.format ?? 'YYYY-MM-DD';
     if (type === 'month' || type === 'monthRange') {
@@ -65,11 +66,11 @@ export function Datepicker (props: DatepickerProps) {
     const now = new Date();
     const next = new Date();
     next.setMonth(next.getMonth() + 1);
-    const [store, setStore] = createStore({
+    const [store, setStore] = createStore<DatepickerStore>({
         currentMonth: [now, next],
         range: [],
         hoverDate: undefined
-    } as DatepickerStore);
+    });
     const align = props.align ?? 'bottomLeft';
     const seperator = props.seperator || '~';
 
@@ -88,7 +89,7 @@ export function Datepicker (props: DatepickerProps) {
                         dayjs(arr[1]).toDate(),
                     ]
                     const prev = new Date(val[0]);
-                    let next = new Date(val[1]);
+                    const next = new Date(val[1]);
                     if (dayjs(prev).format('YYYY-MM') === dayjs(next).format('YYYY-MM')) {
                         next.setMonth(next.getMonth() + 1);
                     }
@@ -96,7 +97,7 @@ export function Datepicker (props: DatepickerProps) {
                 } else {
                     val = dayjs(val).toDate();
                     const prev = new Date(val);
-                    let next = new Date(val);
+                    const next = new Date(val);
                     next.setMonth(next.getMonth() + 1);
                     currentMonth = [prev, next];
                 }
@@ -117,7 +118,7 @@ export function Datepicker (props: DatepickerProps) {
                     prev = val;
                     next = new Date(val);
                 }
-                
+
                 if (dayjs(prev).format('YYYY-MM') === dayjs(next).format('YYYY-MM')) {
                     next.setMonth(next.getMonth() + 1);
                 }
@@ -177,7 +178,7 @@ export function Datepicker (props: DatepickerProps) {
             va.setSeconds(val.getSeconds());
         }
         const now = new Date();
-        let origin = v() || (type === 'monthRange' || type === 'dateRange' || type === 'dateTimeRange' ? [now, now] : now);
+        const origin = v() || (type === 'monthRange' || type === 'dateRange' || type === 'dateTimeRange' ? [now, now] : now);
         if ((type === 'dateRange' || type === 'dateTimeRange') && !origin.length) {
             origin.push(now);
             origin.push(now);
@@ -195,7 +196,7 @@ export function Datepicker (props: DatepickerProps) {
         }
         // dateRange特殊处理
         if (type === 'dateRange' || type === 'dateTimeRange') {
-            let range = store.range;
+            const range = store.range;
             let newRange: Date[] = [];
             // 上次已经选择
             if ((range[0] && range[1]) || (!range[0] && !range[1])) {
@@ -286,9 +287,9 @@ export function Datepicker (props: DatepickerProps) {
 
     /**
      * 是超出maxRange
-     * @param start 
-     * @param current 
-     * @returns 
+     * @param start
+     * @param current
+     * @returns
      */
     const isOutRange = (start: Date, current: Date) => {
         if (props.maxRange) {
@@ -339,10 +340,10 @@ export function Datepicker (props: DatepickerProps) {
     return <DatepickerContext.Provider value={{onSelectDate, onMouseOver,
         disabledDate: props.disabledDate, onSelectTime, visible}}>
         <div classList={classList()} style={props.style}>
-            <Dropdown visible={[visible, setVisible]} transfer={props.transfer} align={align} revers={props.revers} 
-                trigger='click' disabled={props.disabled} menu={<div class='cm-date-picker-wrap'>
+            <Dropdown visible={[visible, setVisible]} transfer={props.transfer} align={align} revers={props.revers}
+                trigger="click" disabled={props.disabled} menu={<div class="cm-date-picker-wrap">
                     <Show when={props.shortCuts}>
-                        <div class='cm-date-picker-shortcuts'>
+                        <div class="cm-date-picker-shortcuts">
                             {typeof props.shortCuts === 'function' ? props.shortCuts() : props.shortCuts}
                         </div>
                     </Show>
@@ -369,7 +370,7 @@ export function Datepicker (props: DatepickerProps) {
                 </div>}>
                 <Show when={!props.trigger} fallback={props.trigger && props.trigger()}>
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name='calendar1'/>}/>
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name="calendar1"/>}/>
                     {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
                         clearable={props.clearable} type={props.type} seperator={seperator}/> */}
                 </Show>

@@ -1,4 +1,4 @@
-import { TableStore } from '.';
+import type { TableStore } from '.';
 type ColgroupProps = {
     data: TableStore;
 };

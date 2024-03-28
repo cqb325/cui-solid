@@ -32,10 +32,10 @@ export function Value (props: any) {
                 {props.prepend}
             </div>
         </Show>
-        <div class='cm-date-picker-text'>{text()}</div>
-        <Icon name='calendar1' class='cm-date-picker-cert'/>
+        <div class="cm-date-picker-text">{text()}</div>
+        <Icon name="calendar1" class="cm-date-picker-cert"/>
         <Show when={props.clearable && (props.value && props.value.length !== 0)}>
-            <Icon name='x-circle' class='cm-date-picker-clear' onClick={onClear}/>
+            <Icon name="x-circle" class="cm-date-picker-clear" onClick={onClear}/>
         </Show>
     </div>
 }

@@ -1,4 +1,4 @@
-import { ComponentProps, Show } from "solid-js";
+import { Show } from "solid-js";
 import { useClassList } from "../utils/useProps"
 
 type BadgeProps = {
@@ -17,13 +17,13 @@ type BadgeProps = {
 
 function isColor (strColor: string | undefined): boolean {
     if (strColor && (strColor.startsWith('#') || strColor.startsWith('rgb') || strColor.startsWith('hsl'))) {
-        var s = new Option().style;
+        const s = new Option().style;
         s.color = strColor as string;
         return s.color.startsWith('rgb');
     }
     return false;
 }
-export function Badge(props: BadgeProps) {
+export function Badge (props: BadgeProps) {
     const overflowCount = props.overflowCount ?? 99;
     const classList = () => useClassList(props, 'cm-badge', {
         'cm-badge-status': props.status
@@ -37,7 +37,7 @@ export function Badge(props: BadgeProps) {
         }
         return style;
     };
-    
+
     const showCount = () => {
         return props.count && props.count > overflowCount ? Math.min(overflowCount, props.count) + '+' : props.count;
     }
@@ -61,7 +61,7 @@ export function Badge(props: BadgeProps) {
         {props.children}
         <Show when={!props.status && !props.color} fallback={
             <>
-                <span classList={statusClass()} style={statusStyle()}></span>
+                <span classList={statusClass()} style={statusStyle()} />
                 <span class="cm-badge-status-text">{props.text}</span>
             </>
         }>
@@ -69,7 +69,7 @@ export function Badge(props: BadgeProps) {
                 <sup classList={countClass()} style={styles()}>{showCount()}{props.text}</sup>
             </Show>
             <Show when={props.dot !== undefined}>
-                <sup class="cm-badge-dot" style={styles()}></sup>
+                <sup class="cm-badge-dot" style={styles()} />
             </Show>
         </Show>
     </span>

@@ -1,9 +1,9 @@
 type CollapaseProps = {
     open?: boolean;
-    onOpen?: Function;
+    onOpen?: (height: number) => void;
     style?: any;
     children?: any;
-    onEnd?: Function;
+    onEnd?: (open: boolean | undefined) => void;
     classList?: any;
     class?: string;
     ref?: any;

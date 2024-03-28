@@ -17,15 +17,15 @@ useDirective(hljs);
 export default function RatePage () {
     const [data, setData] = createSignal([]);
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     AutoComplete 自动完成
                 </Title>
-                
+
                 <Space id="auto_base" dir="v">
                     <Card bordered>
-                        <AutoComplete data={data()} placeholder='查询' onSearch={(v: any) => {
+                        <AutoComplete data={data()} placeholder="查询" onSearch={(v: any) => {
                             const arr: any = [];
                             arr.push(v);
                             arr.push(v+v);
@@ -33,7 +33,7 @@ export default function RatePage () {
                             setData(arr);
                         }}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['auto_base']}/>
@@ -42,11 +42,11 @@ export default function RatePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>AutoComplete Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>

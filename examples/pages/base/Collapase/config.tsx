@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'classList', desc: '自定义class', type: 'Object', default: ''},
     {name: 'open', desc: '控制打开状态', type: 'Function[]', default: ''},

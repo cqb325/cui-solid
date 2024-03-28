@@ -1,3 +1,4 @@
+import type { Signal } from "solid-js";
 type ImagePreviewProps = {
     classList?: any;
     class?: string;
@@ -5,9 +6,9 @@ type ImagePreviewProps = {
     failInfo?: string;
     previewList: string[];
     infinite?: boolean;
-    onClose?: Function;
-    visible?: Function[];
-    onSwitch?: Function;
+    onClose?: () => void;
+    visible?: Signal<boolean>;
+    onSwitch?: (index: number) => void;
     maskClosable?: boolean;
     initIndex?: number;
 };

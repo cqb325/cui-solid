@@ -11,18 +11,18 @@ export interface UseTransitionProps {
     onLeave?(): void
 }
 
-export function nextFrame(fn: () => void) {
+export function nextFrame (fn: () => void) {
     requestAnimationFrame(() => requestAnimationFrame(fn));
 }
 
 /**
  * 简单动画指令
- * @param props 
- * @returns 
+ * @param props
+ * @returns
  */
 export function useTransition (props: UseTransitionProps) {
     const { el } = props;
-    
+
     const endTransition = (e: Event) => {
         if (e.target && el().contains(e.target as Node)) {
             el().classList.remove(props.startClass);

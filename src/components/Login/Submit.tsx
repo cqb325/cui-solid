@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from "../Button";
+import type { ButtonProps } from "../Button";
+import { Button } from "../Button";
 import { useLoginContext } from "./Login";
 
 export function Submit (props: ButtonProps) {

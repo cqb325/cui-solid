@@ -1,4 +1,4 @@
-import { UserNameProps } from "./UserName";
+import type { UserNameProps } from "./UserName";
 export interface CaptchaProps extends UserNameProps {
     action?: string;
     onGetCaptcha?(): void;

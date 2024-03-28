@@ -1,8 +1,11 @@
 import useValidation from '../utils/useValidation';
-import { JSXElement, Show, createContext, createSignal, useContext } from 'solid-js';
-import { FormContext, FormContextOptions } from '../Form';
+import type { JSXElement} from 'solid-js';
+import { Show, createContext, createSignal, useContext } from 'solid-js';
+import type { FormContextOptions } from '../Form';
+import { FormContext } from '../Form';
 import { useClassList } from '../utils/useProps';
 import { Popover } from '../Popover';
+import AsyncValidator from 'async-validator';
 
 export type FormItemContextProps = {
     name?: string
@@ -15,7 +18,7 @@ type FormItemProps = {
     inline?: boolean,
     name?: string,
     children?: any,
-    labelStyle?: Object,
+    labelStyle?: any,
     label?: string,
     style?: any,
     rules?: {[key: string]: any},
@@ -34,12 +37,12 @@ export function FormItem (props: FormItemProps) {
 
     const name = props.name;
     let isRequired = false;
-    if (name && ctx && ctx.form.getValidation && ctx.form.getValidation(name)) {
+    if (name && ctx?.form?.getValidation && ctx?.form?.getValidation(name)) {
         const rules = ctx.form.getValidation(name);
-        isRequired = rules.required;
+        isRequired = Array.isArray(rules) ? rules.some(rule => rule.required) : rules.required;
     }
     if (props.rules) {
-        isRequired = props.rules.required;
+        isRequired = Array.isArray(props.rules) ? props.rules.some(rule => rule.required) : props.rules.required;
     }
 
     const clazzName = () => useClassList(props, 'cm-form-item', {
@@ -47,6 +50,61 @@ export function FormItem (props: FormItemProps) {
         'cm-form-item-inline': props.inline || ctx?.inline,
         'cm-form-item-required': isRequired
     })
+
+    // 自带校验方式
+    const validateByDefault = async (v: any, rules: any, msgs: any) => {
+        if (rules.required) {
+            const ret = await validation['required'](v, rules.required, ctx?.form);
+            if (!ret) {
+                setError(msgs ? msgs['required'] : '');
+                return ret;
+            }
+        }
+        for (const key in rules) {
+            if (key === 'required') {
+                continue;
+            }
+            if (validation[key]) {
+                const ret = await validation[key](v, rules[key], ctx?.form);
+                if (!ret) {
+                    setError(msgs ? msgs[key] : '');
+                    return ret;
+                }
+            }
+            if (rules[key] && typeof rules[key] === 'function') {
+                const ret = await rules[key](v, ctx?.form);
+                if (!ret) {
+                    setError(msgs ? msgs[key] : '');
+                    return ret;
+                }
+            }
+        }
+        setError(null);
+        return true;
+    }
+
+    // 通过async-validator 校验
+    const validateByAsyncValidator = async (v: any, rules: any) => {
+        const descriptor = {
+            [`${name}`]: rules
+        };
+        const validator = new AsyncValidator(descriptor);
+        const model = {
+            [`${name}`]: v
+        };
+        return new Promise((resolve) => {
+            validator.validate(model, { firstFields: true }, (errors) => {
+                if (errors) {
+                    setError(errors[0].message);
+                    resolve(false);
+                } else {
+                    setError(null);
+                    resolve(true);
+                }
+            });
+        });
+    }
+
     const check = async (v: any) => {
         if (itemRef) {
             const rect = itemRef.getBoundingClientRect();
@@ -54,38 +112,15 @@ export function FormItem (props: FormItemProps) {
                 return true;
             }
         }
-        
-        if ((name && ctx && ctx.form.getValidation && ctx.form.getValidation(name)) || (ctx && props.rules)) {
+
+        if ((name && ctx && ctx.form?.getValidation && ctx.form?.getValidation(name)) || (ctx && props.rules)) {
             const rules = ctx.form.getValidation(name) || props.rules;
             const msgs = ctx.form.getMessage(name) || props.messages;
-            if (rules.required) {
-                const ret = await validation['required'](v, rules.required, ctx.form);
-                if (!ret) {
-                    setError(msgs ? msgs['required'] : '');
-                    return ret;
-                }
+            if (Array.isArray(rules)) {
+                return validateByAsyncValidator(v, rules);
+            } else {
+                return validateByDefault(v, rules, msgs);
             }
-            for (let key in rules) {
-                if (key === 'required') {
-                    continue;
-                }
-                if (validation[key]) {
-                    const ret = await validation[key](v, rules[key], ctx.form);
-                    if (!ret) {
-                        setError(msgs ? msgs[key] : '');
-                        return ret;
-                    }
-                }
-                if (rules[key] && typeof rules[key] === 'function') {
-                    const ret = await rules[key](v, ctx.form);
-                    if (!ret) {
-                        setError(msgs ? msgs[key] : '');
-                        return ret;
-                    }
-                }
-            }
-            setError(null);
-            return true;
         }
         return true;
     };
@@ -96,21 +131,21 @@ export function FormItem (props: FormItemProps) {
     const clearError = () => {
         setError(null);
     }
-    
-    props.name && ctx?.form.setCheckValid && ctx.form.setCheckValid(props.name, check);
-    props.name && ctx?.form.setClearValid && ctx.form.setClearValid(props.name, clearError);
+
+    props.name && ctx?.form?.setCheckValid && ctx.form?.setCheckValid(props.name, check);
+    props.name && ctx?.form?.setClearValid && ctx.form?.setClearValid(props.name, clearError);
 
     return <FormItemContext.Provider value={{name: props.name}}>
         <div classList={clazzName()} style={props.style}>
-            <label class='cm-form-label' style={{width: ctx?.labelWidth + 'px', ...props.labelStyle}}>{props.label}</label>
+            <label class="cm-form-label" style={{width: ctx?.labelWidth + 'px', ...props.labelStyle}}>{props.label}</label>
             <Show when={errorTransfer} fallback={
-                <div class='cm-form-item-element' ref={itemRef}>
+                <div class="cm-form-item-element" ref={itemRef}>
                     {props.children}
-                    <div class='cm-form-item-error-tip'>{error()}</div>
+                    <div class="cm-form-item-error-tip">{error()}</div>
                 </div>
             }>
-                <Popover class='cm-form-item-error-popover' arrow align={errorAlign} disabled={!error()} content={error()}>
-                    <div class='cm-form-item-element' ref={itemRef}>
+                <Popover class="cm-form-item-error-popover" arrow align={errorAlign} disabled={!error()} content={error()}>
+                    <div class="cm-form-item-element" ref={itemRef}>
                         {props.children}
                     </div>
                 </Popover>

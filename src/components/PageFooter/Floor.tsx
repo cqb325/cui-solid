@@ -12,7 +12,7 @@ export interface FloorProps {
     dividerBottom?: boolean;
 }
 
-export function Floor(props: FloorProps) {
+export function Floor (props: FloorProps) {
     const classList = () => useClassList(props, 'cm-footer-floor', {
         'cm-footer-floor-center': props.center,
         'cm-footer-floor-divider-top': props.dividerTop,

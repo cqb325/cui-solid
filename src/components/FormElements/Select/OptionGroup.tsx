@@ -1,5 +1,6 @@
-import { Accessor, JSXElement, children } from "solid-js";
-import { SelectOptionProps } from "./Option";
+import type { JSXElement} from "solid-js";
+import { children } from "solid-js";
+import type { SelectOptionProps } from "./Option";
 
 export interface SelectOptionGroupProps extends SelectOptionProps{
     group?: boolean,

@@ -1,4 +1,5 @@
-import { JSXElement, Show } from "solid-js"
+import type { JSXElement} from "solid-js";
+import { Show } from "solid-js"
 import { useClassList } from "../utils/useProps"
 import { Icon } from "../Icon"
 import { useSlots } from "../utils/useSlots"
@@ -81,7 +82,7 @@ export function Banner (props: BannerProps) {
                     </div>
                 </div>
                 <Show when={props.closeIcon !== null}>
-                    <span class='cm-banner-close' onClick={onClickClose}>{props.closeIcon ?? <Icon name='x'/>}</span>
+                    <span class="cm-banner-close" onClick={onClickClose}>{props.closeIcon ?? <Icon name="x"/>}</span>
                 </Show>
             </div>
             <Show when={slots.extra}>

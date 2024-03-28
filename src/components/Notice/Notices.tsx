@@ -1,12 +1,13 @@
-import { createSignal, For, JSX, onMount, Show } from "solid-js"
+import type { JSX} from "solid-js";
+import { createSignal, For, onMount, Show } from "solid-js"
 import { useClassList } from "../utils/useProps";
 import { Icon } from "../Icon";
-import { NoticeConfig } from ".";
+import type { NoticeConfig } from ".";
 import usezIndex from "../utils/usezIndex";
 
 type NoticesProps = {
     data?: any,
-    onClose?: Function,
+    onClose?: (key: any, dock: any) => void,
     docker?: string
 }
 
@@ -15,7 +16,7 @@ function NoticePanel (props: any) {
     const [closed, setClosed] = createSignal(false);
     let wrap: any;
     const data: NoticeConfig = props.data;
-    let { style, icon, btn, theme, title, content } = data;
+    const { style, icon, btn, theme, title, content } = data;
     const classList = () => useClassList(props, 'cm-notification-item', {
         'cm-notification-item-width-icon': icon,
         'cm-notification-item-open': visible(),
@@ -52,20 +53,20 @@ function NoticePanel (props: any) {
     }
 
     return <div classList={classList()} style={style} ref={wrap}>
-        <div class='cm-notification-item-wrap'>
-            <a class='cm-notification-close' onClick={hide}><Icon name='x' size={16}/></a>
+        <div class="cm-notification-item-wrap">
+            <a class="cm-notification-close" onClick={hide}><Icon name="x" size={16}/></a>
             <Show when={icon}>
-                <div class='cm-notification-icon'>
+                <div class="cm-notification-icon">
                     <Icon name={icon}/>
                 </div>
             </Show>
-            <div class='cm-notification-content'>
+            <div class="cm-notification-content">
                 <Show when={title}>
-                    <div class='cm-notification-head'>{title}</div>
+                    <div class="cm-notification-head">{title}</div>
                 </Show>
-                <div class='cm-notification-body'>{content}</div>
+                <div class="cm-notification-body">{content}</div>
                 <Show when={btn}>
-                    <span class='cm-notification-btn-wrap'>
+                    <span class="cm-notification-btn-wrap">
                         {btn}
                     </span>
                 </Show>
@@ -77,7 +78,7 @@ function NoticePanel (props: any) {
 export function NoticeBox (props: NoticesProps): JSX.Element {
     const data = () => props.data;
     const zindex = usezIndex();
-    
+
     return <Show when={data() && data().length}>
         <div class={`cm-notification-box cm-notification-${props.docker}`} style={{"z-index": zindex}}>
             <For each={data()}>
@@ -93,9 +94,9 @@ export function Notices (props: NoticesProps) {
     const data = () => props.data;
 
     return <div class="cm-notification">
-        <NoticeBox data={data().topLeft} docker='top-left' onClose={props.onClose}/>
-        <NoticeBox data={data().topRight} docker='top-right' onClose={props.onClose}/>
-        <NoticeBox data={data().bottomLeft} docker='bottom-left' onClose={props.onClose}/>
-        <NoticeBox data={data().bottomRight} docker='bottom-right' onClose={props.onClose}/>
+        <NoticeBox data={data().topLeft} docker="top-left" onClose={props.onClose}/>
+        <NoticeBox data={data().topRight} docker="top-right" onClose={props.onClose}/>
+        <NoticeBox data={data().bottomLeft} docker="bottom-left" onClose={props.onClose}/>
+        <NoticeBox data={data().bottomRight} docker="bottom-right" onClose={props.onClose}/>
     </div>
 }

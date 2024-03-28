@@ -28,8 +28,8 @@ export function Paragraph (props: ParagraphProps) {
     return <p style={props.style} classList={classList()} ref={ref}>
         {props.children}
         {
-            props.copyable ? (copyed() ? <span class="cm-typograghy-copyed"><Icon name='check'/></span> 
-            : <span class="cm-typograghy-copy" onClick={onCopy}><Icon name='copy'/></span>) : null
+            props.copyable ? (copyed() ? <span class="cm-typograghy-copyed"><Icon name="check"/></span>
+            : <span class="cm-typograghy-copy" onClick={onCopy}><Icon name="copy"/></span>) : null
         }
     </p>;
 }

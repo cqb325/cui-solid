@@ -1,4 +1,5 @@
-import { createContext, splitProps, ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
+import { createContext, splitProps } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
 type ButtonGroupProps = {

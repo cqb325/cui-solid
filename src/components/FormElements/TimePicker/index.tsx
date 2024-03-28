@@ -3,7 +3,8 @@ import { Value } from "../../inner/Value";
 import { TimePane } from "./TimePane";
 import { TimeRange } from "./TimeRange";
 import { Dropdown } from "../../Dropdown";
-import { createContext, createEffect, createSignal, JSXElement, Show, useContext } from "solid-js";
+import type { JSXElement, Signal} from "solid-js";
+import { createContext, createEffect, createSignal, Show, useContext } from "solid-js";
 import dayjs from "dayjs";
 import createField from "../../utils/createField";
 import { Icon } from "../../Icon";
@@ -18,9 +19,9 @@ type TimePickerProps = {
     clearable?: boolean,
     align?: 'bottomLeft'|'bottomRight',
     format?: string,
-    value?: string | Date | string[] | Date[] | Function[],
+    value?: string | Date | string[] | Date[] | Signal<any>,
     prepend?: string | JSXElement,
-    disabledTime?: Function,
+    disabledTime?: (num: number, type: string) => boolean,
     minuteStep?: number,
     secondStep?: number,
     hourStep?: number,
@@ -28,18 +29,18 @@ type TimePickerProps = {
     footer?: string | JSXElement | string[] | JSXElement[],
     seperator?: string,
     transfer?: boolean,
-    trigger?: Function,
+    trigger?: () => any,
     placeholder?: string,
-    onChange?: Function
+    onChange?: (value: any) => void
 }
 
 const TimepickerContext = createContext();
 
 export function Timepicker (props: TimePickerProps) {
-    const [value, setValue] = createField(props, props.type === 'timeRange' ? [] : '');
+    const [value, setValue] = createField<any>(props, props.type === 'timeRange' ? [] : '');
     // 内部value，防止类似form调用的setValue后重复执行effect
     const [v, setV]: any[] = createSignal(value());
-    const [visible, setVisible] = createSignal(false);
+    const [visible, setVisible] = createSignal<boolean>(false);
     const align = props.align ?? 'bottomLeft';
     const format = props.format ?? 'HH:mm:ss';
     const seperator = props.seperator || '~';
@@ -79,7 +80,7 @@ export function Timepicker (props: TimePickerProps) {
 
     const onSelect = (type: string, num: number, name: string) => {
         const now = new Date();
-        let origin = v() || (props.type === 'timeRange' ? [now, now] : now);
+        const origin = v() || (props.type === 'timeRange' ? [now, now] : now);
         if (props.type === 'timeRange' && !origin.length) {
             origin.push(now);
             origin.push(now);
@@ -152,11 +153,11 @@ export function Timepicker (props: TimePickerProps) {
         }
         return '';
     }
-    
+
     return <TimepickerContext.Provider value={{onSelect, disabledTime: props.disabledTime, visible}}>
-        <div classList={classList()} x-placement={align} tabIndex='1'>
-            <Dropdown transfer={props.transfer} align={align} trigger='click' 
-                disabled={props.disabled} visible={[visible, setVisible]} menu={<div class='cm-time-picker-wrap'>
+        <div classList={classList()} x-placement={align} tabIndex="1">
+            <Dropdown transfer={props.transfer} align={align} trigger="click"
+                disabled={props.disabled} visible={[visible, setVisible]} menu={<div class="cm-time-picker-wrap">
                 <Show when={props.type === 'timeRange'} fallback={
                     <TimePane value={v()} format={format} minuteStep={props.minuteStep} secondStep={props.secondStep}
                         hourStep={props.hourStep} header={header} footer={props.footer}/>
@@ -169,7 +170,7 @@ export function Timepicker (props: TimePickerProps) {
                     {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
                         clearable={props.clearable} type={props.type} seperator={seperator}/> */}
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name='clock'/>}/>
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name="clock"/>}/>
                 </Show>
             </Dropdown>
         </div>

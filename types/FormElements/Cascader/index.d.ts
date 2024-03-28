@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 type CascaderProps = {
     classList?: any;
     class?: string;
@@ -12,12 +12,12 @@ type CascaderProps = {
     align?: 'bottomLeft' | 'bottomRight';
     revers?: boolean;
     data: any[];
-    onSelect?: Function;
-    onChange?: Function;
+    onSelect?: (item: any) => void;
+    onChange?: (value: any) => void;
     trigger?: 'click' | 'hover';
     changeOnSelect?: boolean;
     placeholder?: string;
-    loadData?: Function;
+    loadData?: (item: any) => Promise<any>;
 };
 export type CascaderStore = {
     selectedValue: any[];

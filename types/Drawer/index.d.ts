@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement, Signal } from "solid-js";
 export interface DrawerProps {
     classList?: any;
     class?: string;
@@ -12,6 +12,6 @@ export interface DrawerProps {
     escClose?: boolean;
     onClose?(): void;
     onShow?(): void;
-    visible?: Function[];
+    visible?: Signal<any>;
 }
 export declare function Drawer(props: DrawerProps): import("solid-js").JSX.Element;

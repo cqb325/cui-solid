@@ -1,6 +1,7 @@
 import { createStore } from "solid-js/store";
 import { Icon } from "../Icon";
 import { useClassList } from "../utils/useProps"
+import type { Accessor, Signal } from "solid-js";
 import { For, createContext, createEffect, onMount, useContext, onCleanup } from "solid-js";
 import { CarouselItem } from "./Item";
 import createModel from "../utils/createModel";
@@ -16,8 +17,8 @@ type CarouselProps = {
     effect?: 'fade'|'slide',
     dotType?: 'dot'|'line'|'columnar',
     dotAlign?: 'left'|'center'|'right',
-    activeIndex?: Function[],
-    onChange?: Function
+    activeIndex?: Signal<any>,
+    onChange?: (v: any) => void
 }
 
 type CarouselStore = {
@@ -31,7 +32,7 @@ type CarouselStore = {
 
 const CarouselContext = createContext();
 
-export function Carousel(props: CarouselProps) {
+export function Carousel (props: CarouselProps) {
     const classList = () => useClassList(props, 'cm-carousel');
     const [activeIndex, setActiveIndex] = createModel(props, 'activeIndex', 0);
     const arrow = props.arrow ?? 'hover';
@@ -141,25 +142,25 @@ export function Carousel(props: CarouselProps) {
         setActiveIndex(num);
         props.onChange && props.onChange(activeIndex());
     }
-    
+
     return <CarouselContext.Provider value={{addItem, store, effect}}>
         <div classList={classList()} style={props.style} ref={wrap}>
-            <div classList={arrowClasses()} x-placement='left' onClick={onPrev}>
-                <Icon name='chevron-left' size={24}/>
+            <div classList={arrowClasses()} x-placement="left" onClick={onPrev}>
+                <Icon name="chevron-left" size={24}/>
             </div>
             <div class="cm-carousel-list" ref={list}>
                 {props.children}
             </div>
-            <div classList={arrowClasses()} x-placement='right' onClick={onNext}>
-                <Icon name='chevron-right' size={24}/>
+            <div classList={arrowClasses()} x-placement="right" onClick={onNext}>
+                <Icon name="chevron-right" size={24}/>
             </div>
             <ul classList={dotClasses()}>
                 <For each={store.data}>
-                    {(item: any, index: Function) => {
+                    {(item: any, index: Accessor<number>) => {
                         const dotClass = () => ({'cm-carousel-dot': true, 'cm-carousel-dot-active': store.activeIndex === index()})
                         return <li classList={dotClass()} onClick={() => {
                             onDotClick(index())
-                        }}></li>
+                        }} />
                     }}
                 </For>
             </ul>

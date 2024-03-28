@@ -2,7 +2,7 @@ import { Show, createSignal, splitProps } from 'solid-js';
 import {Icon} from '../../Icon';
 import { useClassList } from '../../utils/useProps';
 import createField from '../../utils/createField';
-import { WordCount } from '@/components/WordCount';
+import { WordCount } from '../../WordCount';
 
 export interface InputProps {
     classList?: any
@@ -60,7 +60,7 @@ export function InnerInput (props: InputProps) {
         inputStyle['padding-left'] = local.prefixStyle.width + 'px';
     }
 
-    const [_value, setValue] = createField(props, '');
+    const [_value, setValue] = createField<any>(props, '');
     const [valForCount, setValForCount] = createSignal(_value());
 
     const trigger = local.trigger || 'blur';
@@ -135,25 +135,25 @@ export function InnerInput (props: InputProps) {
 
     return <div classList={clazzName()} style={local.style}>
         {
-            local.prefix ? <div class='cm-input-prefix' style={local.prefixStyle}>{local.prefix}</div> : null
+            local.prefix ? <div class="cm-input-prefix" style={local.prefixStyle}>{local.prefix}</div> : null
         }
         {
-            local.prepend ? <div class='cm-input-group-prepend'>{local.prepend}</div> : null
+            local.prepend ? <div class="cm-input-group-prepend">{local.prepend}</div> : null
         }
         <Show when={local.type === 'textarea'} fallback={
-            <input class='cm-input' ref={props.ref} {...others} value={_value()} autocomplete={props.autocomplete || 'off'}
+            <input class="cm-input" ref={props.ref} {...others} value={_value()} autocomplete={props.autocomplete || 'off'}
             onChange={_onChange} onInput={_onInput} onBlur={onBlurChange} disabled={local.disabled}
             style={inputStyle} onKeyDown={_onKeyDown} onKeyUp={_onKeyUp} type={local.type}/>
         }>
-            <textarea class='cm-input' ref={props.ref} {...others} value={_value()} spellcheck={false} autocomplete={props.autocomplete || 'off'} wrap="soft"
+            <textarea class="cm-input" ref={props.ref} {...others} value={_value()} spellcheck={false} autocomplete={props.autocomplete || 'off'} wrap="soft"
             onChange={_onChange} onInput={_onInput} onBlur={onBlurChange} disabled={local.disabled}
-            style={inputStyle} onKeyDown={_onKeyDown} onKeyUp={_onKeyUp}></textarea>
+            style={inputStyle} onKeyDown={_onKeyDown} onKeyUp={_onKeyUp} />
         </Show>
         {
-            local.clearable && _value() ? <Icon class='cm-input-clear' name='x-circle' onClick={clear}/> : null
+            local.clearable && _value() ? <Icon class="cm-input-clear" name="x-circle" onClick={clear}/> : null
         }
         {
-            local.suffix || (props.wordCount && props.maxLength) ? <div class='cm-input-suffix' style={local.suffixStyle}>
+            local.suffix || (props.wordCount && props.maxLength) ? <div class="cm-input-suffix" style={local.suffixStyle}>
                 <Show when={props.wordCount && props.maxLength} fallback={local.suffix}>
                     <WordCount total={props.maxLength!} value={valForCount()}/>
                 </Show>

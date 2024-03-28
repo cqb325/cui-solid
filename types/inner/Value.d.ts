@@ -1,7 +1,7 @@
-import { JSXElement } from "solid-js";
-import { TagConfig } from "../TagGroup";
+import type { JSXElement, Signal } from "solid-js";
+import type { TagConfig } from "../TagGroup";
 export interface ValueProps {
-    onClear?: Function;
+    onClear?: (e?: any) => void;
     prepend?: any;
     text?: string | Array<any>;
     clearable?: boolean;
@@ -15,8 +15,8 @@ export interface ValueProps {
     onClose?(item: TagConfig, e: any): void;
     onInput?(e: any): void;
     filter?: boolean;
-    query?: [Function, Function];
+    query?: Signal<any>;
     showMore?: boolean;
-    onDeleteLastValue?: Function;
+    onDeleteLastValue?: () => void;
 }
 export declare function Value(props: ValueProps): import("solid-js").JSX.Element;

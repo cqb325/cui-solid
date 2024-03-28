@@ -21,8 +21,8 @@ export interface PaginationProps {
     current: number
     total: number
     pageSize: number
-    onChange?: Function
-    onChangePageSize?: Function
+    onChange?: (page: number, pageSize: number) => void
+    onChangePageSize?: (pageSize: number) => void
     innerNear?: number
     displayedPages?: number
     startEndShowNum?: number
@@ -35,7 +35,7 @@ export interface PaginationProps {
     pages?: any[]
 }
 
-export function Pagination(props: PaginationProps) {
+export function Pagination (props: PaginationProps) {
     const classList = () => useClassList(props, 'cm-pagination', {
         [`cm-pagination-${props.shape }`]: props.shape ,
         [`cm-pagination-${props.size}`]: props.size
@@ -49,7 +49,7 @@ export function Pagination(props: PaginationProps) {
     const showNums = props.showNums ?? true;
     const showTotal = props.showTotal ?? true;
     const ps = props.pages ?? pages;
-    
+
     const showJumper = props.showJumper ?? true;
     const showPage = props.showPage ?? true;
 
@@ -105,7 +105,7 @@ export function Pagination(props: PaginationProps) {
 
             setPageNum(page);
             if (props.onChange) {
-                props.onChange(page, pageSize);
+                props.onChange(page, pageSize());
             }
         }
     }
@@ -116,7 +116,7 @@ export function Pagination(props: PaginationProps) {
         if (current() > totalPages) {
             setPageNum(1);
             if (props.onChange) {
-                props.onChange(1, pageSize);
+                props.onChange(1, pageSize());
             }
         }
     }
@@ -129,7 +129,7 @@ export function Pagination(props: PaginationProps) {
      */
     function _getInner () {
         const pages = _calcPage();
-        const start = current () > startEndShowNum + innerNear + 1 ? current() - innerNear : startEndShowNum + 1;
+        const start = current() > startEndShowNum + innerNear + 1 ? current() - innerNear : startEndShowNum + 1;
         const end = current() + innerNear + startEndShowNum >= pages ? pages - startEndShowNum : current() + innerNear;
         return {start, end};
     }
@@ -141,30 +141,30 @@ export function Pagination(props: PaginationProps) {
         const pages = _calcPage();
         const pagerList = [];
         const interval = _getInner();
-        
+
         const cur = current();
         for (let i = 1; i <= startEndShowNum; i++) {
-            let active = cur === i;
+            const active = cur === i;
             pagerList.push(<PageItem active={active} onClick={_handleChange.bind(null, i)} currentIndex={i} />);
         }
 
-        if(cur > startEndShowNum + innerNear + 1){
-            pagerList.push(<li class='cm-pagination-num cm-pagination-ellipse'><span class='ellipse'>•••</span></li>);
+        if (cur > startEndShowNum + innerNear + 1){
+            pagerList.push(<li class="cm-pagination-num cm-pagination-ellipse"><span class="ellipse">•••</span></li>);
         }
         let start = interval.start;
         const end = interval.end;
 
         for (;start <= end; start++) {
-            let active = cur === start;
+            const active = cur === start;
             pagerList.push(<PageItem onClick={_handleChange.bind(null, start)} currentIndex={start} active={active} />);
         }
 
-        if(cur + innerNear + startEndShowNum < pages){
-            pagerList.push(<li class='cm-pagination-num cm-pagination-ellipse'><span class='ellipse'>•••</span></li>);
+        if (cur + innerNear + startEndShowNum < pages){
+            pagerList.push(<li class="cm-pagination-num cm-pagination-ellipse"><span class="ellipse">•••</span></li>);
         }
 
         for (let i = pages - startEndShowNum + 1; i <= pages; i++) {
-            let active = cur === i;
+            const active = cur === i;
             pagerList.push(<PageItem active={active} onClick={_handleChange.bind(null, i)} currentIndex={i} />);
         }
         return pagerList;
@@ -173,9 +173,9 @@ export function Pagination(props: PaginationProps) {
     return <div classList={classList()} style={props.style}>
         <Switch>
             <Match when={props.mini}>
-                <ul class='cm-pagination-num-list'>
+                <ul class="cm-pagination-num-list">
                     <PagePrev current={current} onClick={prev} />
-                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class='mr-5'
+                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class="mr-5"
                             value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
                         <span class="cm-pagination-mini-pages">/ {_calcPage()}</span>
                     <PageNext current={current} onClick={next} disabled={current() === _calcPage()} />
@@ -183,31 +183,31 @@ export function Pagination(props: PaginationProps) {
             </Match>
             <Match when={!props.mini}>
                 <Show when={showTotal}>
-                    <span class='cm-pagination-text mr-5'>共{total()}条</span>
+                    <span class="cm-pagination-text mr-5">共{total()}条</span>
                 </Show>
-                <ul class='cm-pagination-num-list'>
+                <ul class="cm-pagination-num-list">
                     <PagePrev current={current} onClick={prev} />
                     {rednderItems()}
                     <PageNext current={current} onClick={next} disabled={current() === _calcPage()} />
                 </ul>
                 <Show when={showPage}>
-                    <span class='cm-pagination-sizer'>
+                    <span class="cm-pagination-sizer">
                         <Select value={pageSize()} size={props.size} onChange={onChangePageSize}
                             data={ps}>
                             <For each={pages}>
                                 {(item: any) => {
-                                    return <Option label={item.label} value={item.value}></Option>
+                                    return <Option label={item.label} value={item.value} />
                                 }}
                             </For>
                         </Select>
                     </span>
                 </Show>
                 <Show when={showJumper}>
-                    <span class='cm-pagination-jumper'>
-                        <span class='cm-pagination-text'>跳至</span>
-                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class='mr-5'
+                    <span class="cm-pagination-jumper">
+                        <span class="cm-pagination-text">跳至</span>
+                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class="mr-5"
                             value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
-                        <span class='cm-pagination-text'>页</span>
+                        <span class="cm-pagination-text">页</span>
                     </span>
                 </Show>
             </Match>

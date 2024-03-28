@@ -1,6 +1,7 @@
 import { Match, Show, Switch, createEffect, onMount } from "solid-js";
 import { InnerCheckbox } from "../inner/Checkbox";
-import { useTableContext, ColumnProps } from ".";
+import type { ColumnProps } from ".";
+import { useTableContext } from ".";
 import { Icon } from "../Icon";
 
 export function Cell (props: any) {
@@ -41,7 +42,7 @@ export function Cell (props: any) {
                         }
                     }
 
-                    cell.style.position =  'sticky';
+                    cell.style.position = 'sticky';
                     cell.style.left = left + 'px';
                     cell.style.zIndex = props.type === 'th' ? 3 : 1;
                     cell.classList.add('cm-table-cell-fixed-left');
@@ -60,11 +61,11 @@ export function Cell (props: any) {
                     for (let i = colIndex + 2; i <= length; i++) {
                         const th = head.querySelector('th:nth-child('+i+')');
                         console.log(th);
-                        
+
                         w += th.getBoundingClientRect().width;
                     }
-                    
-                    cell.style.position =  'sticky';
+
+                    cell.style.position = 'sticky';
                     cell.style.right = w + 'px';
                     cell.style.zIndex = props.type === 'th' ? 3 : 1;
                     cell.classList.add('cm-table-cell-fixed-right');
@@ -124,7 +125,7 @@ export function Cell (props: any) {
                 return props.data.render ? props.data.render() : null;
             }
             if (column.type === 'expand') {
-                return <Icon name='chevron-right' class={`cm-table-expand ${props.data._expand ? 'cm-table-expand-open' : ''}`} onClick={onExpand}/>;
+                return <Icon name="chevron-right" class={`cm-table-expand ${props.data._expand ? 'cm-table-expand-open' : ''}`} onClick={onExpand}/>;
             }
             if (column.render && typeof column.render === 'function') {
                 return column.render(props.data[column.name], column, props.data);
@@ -144,13 +145,13 @@ export function Cell (props: any) {
                 <div class="cm-table-cell">
                     {text()}
                     <Show when={col.sort}>
-                        <span class='cm-table-sort'>
-                            <Icon name='chevron-up' class={col.sortType === 'asc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'asc')}/>
-                            <Icon name='chevron-down' class={col.sortType === 'desc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'desc')}/>
+                        <span class="cm-table-sort">
+                            <Icon name="chevron-up" class={col.sortType === 'asc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'asc')}/>
+                            <Icon name="chevron-down" class={col.sortType === 'desc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'desc')}/>
                         </span>
                     </Show>
                     <Show when={col.resize && col.width && ctx && ctx.border}>
-                        <span class='cm-table-resize' onMouseDown={onDragStart}></span>
+                        <span class="cm-table-resize" onMouseDown={onDragStart} />
                     </Show>
                 </div>
             </th>
@@ -159,9 +160,9 @@ export function Cell (props: any) {
             <td ref={cell} classList={cellClassList()} colSpan={props.colSpan} rowSpan={props.rowSpan}>
                 <div class="cm-table-cell">
                     <Show when={col.tree}>
-                        <span class="cm-table-tree-level" style={{"padding-left": `${props.data._level * 16}px`}}></span>
+                        <span class="cm-table-tree-level" style={{"padding-left": `${props.data._level * 16}px`}} />
                         <Show when={props.data.children && props.data.children.length} fallback={
-                            <span class="cm-table-tree-icon-empty"></span>
+                            <span class="cm-table-tree-icon-empty" />
                         }>
                             <Icon name={treeIcon()} class="cm-table-tree-icon" onClick={onShowChildren}/>
                         </Show>

@@ -8,7 +8,7 @@ type MessageProps = {
     closeable?: boolean;
     background?: any;
     loading?: boolean;
-    onClose?: Function;
+    onClose?: (item?: any) => void;
 };
 export declare const message: {
     close: (key: string) => void;

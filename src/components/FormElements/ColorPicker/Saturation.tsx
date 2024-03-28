@@ -46,10 +46,10 @@ export function Saturation (props: any) {
     const bgColorStyle = () => ({ background: `hsl(${props.value.hsv.h}, 100%, 50%)` });
     const pointerStyle = () => ({ top: `${-(props.value.hsv.v * 100) + 1 + 100}%`, left: `${props.value.hsv.s * 100}%` })
     return <div class="cm-saturation" style={bgColorStyle()} onMouseDown={handleMouseDown} ref={container}>
-        <div class="cm-saturation-white"></div>
-        <div class="cm-saturation-black"></div>
+        <div class="cm-saturation-white" />
+        <div class="cm-saturation-black" />
         <div class="cm-saturation-pointer" style={pointerStyle()}>
-            <div class="cm-saturation-circle"></div>
+            <div class="cm-saturation-circle" />
         </div>
     </div>
 }

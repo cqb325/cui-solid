@@ -23,7 +23,7 @@ export default function DrawerPage () {
     const [align, setAlign] = createSignal<'right'|'left'|'top'|'bottom'>('right');
 
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Drawer 抽屉
@@ -37,7 +37,7 @@ export default function DrawerPage () {
                             setVisible(true);
                         }}>打开</Button>
                         <Divider align="left"><Text type="primary">基本用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基本用法
                         </Paragraph>
                         <DemoCode data={codes['drawer_base']}/>
@@ -52,13 +52,13 @@ export default function DrawerPage () {
                         <Space dir="h">
                             <RadioGroup stick value={[align, setAlign]} data={[{label: 'Left', value: 'left'}, {label: 'Top', value: 'top'}, {label: 'Right', value: 'right'}, {label: 'Bottom', value: 'bottom'}]} onChange={(v: any) => {
                                 setAlign(v);
-                            }}></RadioGroup>
+                            }} />
                             <Button type="primary" onClick={() => {
                                 setVisible2(true);
                             }}>打开</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">位置</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>align</Text> 属性支持 <Text code>left</Text> <Text code>right</Text> <Text code>top</Text> <Text code>bottom</Text>
                             默认是 <Text code>right</Text>
                         </Paragraph>
@@ -75,7 +75,7 @@ export default function DrawerPage () {
                             setVisible3(true);
                         }}>打开</Button>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置<Text code>size</Text> 可以修改Drawer的尺寸
                         </Paragraph>
                         <DemoCode data={codes['drawer_size']}/>
@@ -84,15 +84,15 @@ export default function DrawerPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Drawer Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    
 
-                    <Space id='comp_events' dir="v">
+
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

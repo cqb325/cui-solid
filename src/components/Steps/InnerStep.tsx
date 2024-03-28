@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { Icon } from "../Icon";
 
@@ -15,7 +15,7 @@ export interface InnerStepProps {
 }
 
 export function InnerStep (props: InnerStepProps) {
-    let status = () : string => {
+    const status = () : string => {
         if (props.status) {
             return props.status;
         }
@@ -28,7 +28,7 @@ export function InnerStep (props: InnerStepProps) {
         }
         return ret || 'wait';
     }
-    let done = () : string => {
+    const done = () : string => {
         let ret:string = '';
         if (props.current + 1 > props.index) {
             ret = 'done';
@@ -48,27 +48,27 @@ export function InnerStep (props: InnerStepProps) {
         let ret:JSXElement = '';
         if (!props.icon) {
             if (status() === 'finished') {
-                ret = <div class='cm-step-head-inner'><Icon name='check' /></div>;
+                ret = <div class="cm-step-head-inner"><Icon name="check" /></div>;
             } else if (status() === 'error') {
-                ret = <Icon name='x-circle' size={26}/>;
+                ret = <Icon name="x-circle" size={26}/>;
             } else if (status() === 'warning') {
-                ret = <Icon name='alert-triangle' size={26}/>;
+                ret = <Icon name="alert-triangle" size={26}/>;
             } else {
-                ret = <div class='cm-step-head-inner'><span>{props.index}</span></div>;
+                ret = <div class="cm-step-head-inner"><span>{props.index}</span></div>;
             }
         } else {
             ret = props.icon;
         }
         return ret;
     }
-    
+
     return <div classList={classList()} style={props.style}>
-        <div class='cm-step-head'>
+        <div class="cm-step-head">
             {inner()}
         </div>
-        <div class='cm-step-main'>
-            <div class='cm-step-title'>{props.title}</div>
-            <div class='cm-step-description'>{props.description}</div>
+        <div class="cm-step-main">
+            <div class="cm-step-title">{props.title}</div>
+            <div class="cm-step-description">{props.description}</div>
         </div>
     </div>;
 }

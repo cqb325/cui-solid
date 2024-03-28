@@ -1,5 +1,5 @@
 import { VirtualList } from "cui-virtual-list"
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 import { hljs, useDirective } from "../../common/hljs";
 useDirective(hljs);
 import './style.less'
@@ -53,7 +53,7 @@ export const createArray = (count: number) => {
 export default function VirtualListPage () {
     const data = createArray(1000);
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Virtual List 虚拟列表
@@ -66,7 +66,7 @@ export default function VirtualListPage () {
                             </VirtualList>
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             虚拟列表的基础用法。
                         </Paragraph>
                         <DemoCode data={codes['virtual_base']}/>
@@ -81,7 +81,7 @@ export default function VirtualListPage () {
                             </VirtualList>
                         </div>
                         <Divider align="left"><Text type="primary">动态高度</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             内容动态高度
                         </Paragraph>
                         <DemoCode data={codes['countup_auto']}/>
@@ -90,9 +90,9 @@ export default function VirtualListPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>VirtualList Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

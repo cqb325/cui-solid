@@ -3,10 +3,10 @@ import { useClassList } from "../utils/useProps";
 
 type CollapaseProps = {
     open?: boolean,
-    onOpen?: Function,
+    onOpen?: (height: number) => void,
     style?: any,
     children?: any,
-    onEnd?: Function,
+    onEnd?: (open: boolean | undefined) => void,
     classList?: any,
     class?: string,
     ref?: any
@@ -15,17 +15,17 @@ type CollapaseProps = {
 export function Collapase (props: CollapaseProps) {
     const classList = () => useClassList(props, 'cm-collapase');
     let dom: any;
-    function whichTransitionEvent(){
+    function whichTransitionEvent (){
         const el: any = document.createElement('surface');
         const transitions: any = {
-            'transition':'transitionend',
-            'OTransition':'oTransitionEnd',
-            'MozTransition':'transitionend',
-            'WebkitTransition':'webkitTransitionEnd'
+            'transition': 'transitionend',
+            'OTransition': 'oTransitionEnd',
+            'MozTransition': 'transitionend',
+            'WebkitTransition': 'webkitTransitionEnd'
         };
 
-        for(let t in transitions){
-            if( el.style[t] !== undefined ){
+        for (const t in transitions){
+            if ( el.style[t] !== undefined ){
                 return transitions[t];
             }
         }
@@ -61,7 +61,7 @@ export function Collapase (props: CollapaseProps) {
             }, 0);
         }
     });
-    onMount (() => {
+    onMount(() => {
         if (dom) {
             const transitionEvent = whichTransitionEvent();
             dom.addEventListener(transitionEvent, transitionEventEnd);
@@ -73,7 +73,7 @@ export function Collapase (props: CollapaseProps) {
     });
 
     props.ref && props.ref({
-        getHeight() {
+        getHeight () {
             const orignHeight = dom.style.height;
             dom.style.transition = 'none';
             dom.style.height = 'auto';

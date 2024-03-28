@@ -1,4 +1,4 @@
-
+/* eslint-disable camelcase */
 
 export const propsData = [
     {name: 'type', desc: '类型 404|403|500|empty|fail|deny', type: 'Object', default: ''},
@@ -10,7 +10,7 @@ export const propsData = [
 ]
 
 export const eventsData = [
-    
+
 ]
 
 export const anchorData = [

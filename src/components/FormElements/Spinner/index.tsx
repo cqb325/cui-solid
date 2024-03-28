@@ -2,22 +2,23 @@ import { InnerInput } from "../Input/input";
 import { Icon } from "../../Icon";
 import { useClassList } from "../../utils/useProps";
 import createField from "../../utils/createField";
+import type { Signal } from "solid-js";
 
 type SpinnerProps = {
     classList?: any,
     class?: string,
     size?: 'small'|'default'|'large',
     name?: string,
-    value?: number | Function[],
+    value?: number | Signal<any>,
     style?: any,
     max?: number,
     min?: number,
     step?: number,
     loop?: boolean,
     placeholder?: string,
-    onChange?: Function,
-    onPlus?: Function,
-    onSub?: Function,
+    onChange?: (value: number) => void,
+    onPlus?: (value: number, step: number) => void,
+    onSub?: (value: number, step: number) => void,
     disabled?: boolean
 }
 export function Spinner (props: SpinnerProps) {
@@ -26,7 +27,7 @@ export function Spinner (props: SpinnerProps) {
         'cm-spinner-disabled': props.disabled
     });
 
-    const [value, setValue] = createField(props, Math.max(0, props.min ?? 0));
+    const [value, setValue] = createField<number>(props, Math.max(0, props.min ?? 0));
 
     const _onInput = (val: string, e: any) => {
         val = val.replace(/[^0-9\.]/g, '');
@@ -42,8 +43,8 @@ export function Spinner (props: SpinnerProps) {
         }
     };
 
-    let min = props.min || 0;
-    let step = props.step || 1;
+    const min = props.min || 0;
+    const step = props.step || 1;
     const _onChange = (value: number) => {
         let val = value;
         if (props.max !== undefined) {
@@ -52,11 +53,11 @@ export function Spinner (props: SpinnerProps) {
         if (min !== undefined) {
             val = Math.max(val, min);
         }
-        
+
         Promise.resolve().then(() => {
             setValue(val);
         })
-        
+
         props.onChange && props.onChange(val);
     };
 
@@ -77,7 +78,7 @@ export function Spinner (props: SpinnerProps) {
         if (props.max !== undefined) {
             v = Math.min(props.max, v);
         }
-        
+
         setValue(v);
         props.onChange && props.onChange(v);
         props.onPlus && props.onPlus(v, step);
@@ -99,7 +100,7 @@ export function Spinner (props: SpinnerProps) {
         if (min !== undefined) {
             v = Math.max(min, v);
         }
-        
+
         setValue(v);
         props.onChange && props.onChange(v);
         props.onSub && props.onSub(v, step);
@@ -111,7 +112,7 @@ export function Spinner (props: SpinnerProps) {
      * @param {[type]} num2 [description]
      */
     function add (num1: number, num2: number): number {
-        let r1; let r2; let m;
+        let r1; let r2;
         try {
             r1 = num1.toString().split('.')[1].length;
         } catch (e) {
@@ -122,19 +123,19 @@ export function Spinner (props: SpinnerProps) {
         } catch (e) {
             r2 = 0;
         }
-        m = Math.pow(10, Math.max(r1, r2));
+        const m = Math.pow(10, Math.max(r1, r2));
         return (num1 * m + num2 * m) / m;
     }
 
     return <div classList={classList()} style={props.style}>
-        <InnerInput size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]} 
+        <InnerInput size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]}
             onChange={_onChange} onKeyDown={_onKeyDown} append={
                 <>
-                    <span class='cm-spinner-plus' onClick={plus}>
-                        <Icon name='chevron-up' size={12}/>
+                    <span class="cm-spinner-plus" onClick={plus}>
+                        <Icon name="chevron-up" size={12}/>
                     </span>
-                    <span class='cm-spinner-subs' onClick={sub}>
-                        <Icon name='chevron-down' size={12}/>
+                    <span class="cm-spinner-subs" onClick={sub}>
+                        <Icon name="chevron-down" size={12}/>
                     </span>
                 </>
             }/>

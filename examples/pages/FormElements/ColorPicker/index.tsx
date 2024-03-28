@@ -15,12 +15,12 @@ useDirective(hljs);
 
 export default function ColorPickerPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     ColorPicker 颜色选择器
                 </Title>
-                
+
                 <Space id="cp_base" dir="v">
                     <Card bordered>
                         <Space dir="h" size={50}>
@@ -34,7 +34,7 @@ export default function ColorPickerPage () {
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['cp_base']}/>
@@ -47,7 +47,7 @@ export default function ColorPickerPage () {
                             <ColorPicker value={'rgba(25, 190,107, .5)'} alpha/>
                         </Space>
                         <Divider align="left"><Text type="primary">透明度</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         开启属性 alpha，可以选择带 Alpha 通道的颜色
                         </Paragraph>
                         <DemoCode data={codes['cp_alpha']}/>
@@ -62,7 +62,7 @@ export default function ColorPickerPage () {
                             <ColorPicker value={'#19be6b'} recommend colors={['#311B92', '#512DA8', '#673AB7', '#9575CD', '#D1C4E9']}/>
                         </Space>
                         <Divider align="left"><Text type="primary">颜色预设</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         开启属性 recommend 可以显示推荐的颜色预设，或设置属性 colors 来自定义预设颜色。
                         </Paragraph>
                         <DemoCode data={codes['cp_recommand']}/>
@@ -77,7 +77,7 @@ export default function ColorPickerPage () {
                             <ColorPicker value={'#19be6b'} size="small"/>
                         </Space>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         选择器有三种尺寸：大、默认（中）、小。
                         </Paragraph>
                         <DemoCode data={codes['cp_size']}/>
@@ -87,11 +87,11 @@ export default function ColorPickerPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Select Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>

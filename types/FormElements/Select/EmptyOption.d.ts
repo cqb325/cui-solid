@@ -2,7 +2,7 @@ type SelectOptions = {
     data: any;
     checked?: boolean;
     disabled?: boolean;
-    onClick?: Function;
+    onClick?: (value: any) => void;
     style?: any;
     visible?: boolean;
 };

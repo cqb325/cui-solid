@@ -1,3 +1,4 @@
+import type { DraggableData } from './utils';
 type DraggableProps = {
     classList?: any;
     class?: string;
@@ -5,9 +6,9 @@ type DraggableProps = {
     position?: any;
     scale?: number;
     bounds?: string;
-    onStart?: Function;
-    onDrag?: Function;
-    onStop?: Function;
+    onStart?: (e: any, data: DraggableData) => boolean | undefined;
+    onDrag?: (e: any, data: DraggableData) => boolean | undefined;
+    onStop?: (e: any, data: DraggableData) => boolean | undefined;
     axis?: 'x' | 'y' | 'both';
     style?: any;
     positionOffset?: any;

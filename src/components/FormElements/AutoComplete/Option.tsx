@@ -6,10 +6,10 @@ type SelectOptions = {
     disabled?: boolean,
     textField: string,
     valueField: string,
-    onClick?: Function,
+    onClick?: (value: any, data: any) => void,
     style?: any,
     visible?: boolean,
-    renderOption?: Function
+    renderOption?: (data: any) => any
 }
 
 export function Option (props: SelectOptions) {

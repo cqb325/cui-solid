@@ -14,7 +14,7 @@ useDirective(hljs);
 
 function DividerPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Divider 分割线
@@ -31,7 +31,7 @@ function DividerPage () {
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
                         </section>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             默认为水平分割线，可在中间加入文字, 设置 dashed可以设置虚线分割线
                         </Paragraph>
                         <DemoCode data={codes['divider_base']}/>
@@ -42,13 +42,13 @@ function DividerPage () {
                     <Card bordered>
                         <section>
                             <span>苹果</span>
-                            <Divider dir='v' />
+                            <Divider dir="v" />
                             <span>香蕉</span>
-                            <Divider dir='v' />
+                            <Divider dir="v" />
                             <span>芒果</span>
                         </section>
                         <Divider align="left"><Text type="primary">垂直分割线</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>dir="v"</Text> 设置为行内的垂直分割线
                         </Paragraph>
                         <DemoCode data={codes['divider_vertical']}/>
@@ -59,12 +59,12 @@ function DividerPage () {
                     <Card bordered>
                         <section>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
-                            <Divider align='left'>分割线</Divider>
+                            <Divider align="left">分割线</Divider>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
-                            <Divider align='right'>分割线</Divider>
+                            <Divider align="right">分割线</Divider>
                         </section>
                         <Divider align="left"><Text type="primary">文字位置</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>align</Text> 设置为文字的位置，支持left和right 默认居中
                         </Paragraph>
                         <DemoCode data={codes['divider_align']}/>
@@ -73,14 +73,14 @@ function DividerPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Divider Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>
 }

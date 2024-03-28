@@ -1,3 +1,4 @@
+import type { Signal } from "solid-js";
 import { CarouselItem } from "./Item";
 type CarouselProps = {
     classList?: any;
@@ -10,8 +11,8 @@ type CarouselProps = {
     effect?: 'fade' | 'slide';
     dotType?: 'dot' | 'line' | 'columnar';
     dotAlign?: 'left' | 'center' | 'right';
-    activeIndex?: Function[];
-    onChange?: Function;
+    activeIndex?: Signal<any>;
+    onChange?: (v: any) => void;
 };
 export declare function Carousel(props: CarouselProps): import("solid-js").JSX.Element;
 export declare namespace Carousel {

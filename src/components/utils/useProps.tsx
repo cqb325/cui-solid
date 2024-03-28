@@ -1,7 +1,7 @@
-import { ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
 
 export function useClassList (props: ComponentProps<any>, ...customClassList: any) {
-    let obj = {
+    const obj = {
         ...props.classList,
     };
     if (props.class) {
@@ -13,7 +13,7 @@ export function useClassList (props: ComponentProps<any>, ...customClassList: an
             if (typeof item === 'string') {
                 obj[item] = true;
             } else {
-                for (let key in item) {
+                for (const key in item) {
                     obj[key] = item[key];
                 }
             }

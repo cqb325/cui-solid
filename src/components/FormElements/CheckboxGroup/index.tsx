@@ -1,4 +1,4 @@
-import { createContext, createSignal, createEffect } from "solid-js";
+import { createContext, createSignal, createEffect, For } from "solid-js";
 import { useClassList } from "../../utils/useProps";
 import { InnerCheckbox } from "../../inner/Checkbox";
 import createField from '../../utils/createField';
@@ -14,7 +14,7 @@ type CheckboxGroupProps = {
     style?: any,
     children?: any,
     disabled?: boolean,
-    onChange?: Function,
+    onChange?: (value: any) => void,
     data?: any,
     textField?: string,
     valueField?: string,
@@ -25,7 +25,7 @@ export function CheckboxGroup (props: CheckboxGroupProps) {
         'cm-checkbox-group-stack': props.block
     });
 
-    const [value, setValue] = createField(props, []);
+    const [value, setValue] = createField<any[]>(props, []);
 
     const _onChange = (checked: boolean, v: any) => {
         if (props.disabled) {
@@ -70,11 +70,9 @@ export function CheckboxGroup (props: CheckboxGroupProps) {
     });
 
     return <div classList={classList()} style={props.style}>
-        {
-            props.data.map((item: any) => {
-                return <InnerCheckbox inner disabled={props.disabled || item.disabled} value={item[valueField]} checked={controllers[item[valueField]][0]()} label={item[textField]} onChange={_onChange}></InnerCheckbox>
-            })
-        }
+        <For each={props.data}>{(item: any) => {
+                return <InnerCheckbox inner disabled={props.disabled || item.disabled} value={item[valueField]} checked={controllers[item[valueField]][0]()} label={item[textField]} onChange={_onChange} />
+            }}</For>
     </div>
 }
 

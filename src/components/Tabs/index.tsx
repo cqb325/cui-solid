@@ -2,7 +2,7 @@ import { For, Show, children, createEffect, onMount, untrack } from "solid-js";
 import { Icon } from "../Icon";
 import { useClassList } from "../utils/useProps";
 import { createStore, produce } from "solid-js/store";
-import { TabProps } from "./Tab";
+import type { TabProps } from "./Tab";
 
 export * from './Tab';
 
@@ -15,8 +15,8 @@ type TabsProps = {
     activeName?: string,
     ref?: any,
     extra?: any,
-    onTabClick?: Function,
-    onRemove?: Function,
+    onTabClick?: (item: any) => void,
+    onRemove?: (name: string) => void,
     duration?: number
 }
 
@@ -27,7 +27,7 @@ type TabStore = {
     scrollLeft: number
 }
 
-export function Tabs(props: TabsProps) {
+export function Tabs (props: TabsProps) {
     let line: any;
     let scroll: any;
     let header: any;
@@ -77,7 +77,7 @@ export function Tabs(props: TabsProps) {
         setStore('tabs', produce((tabs: TabProps[]) => {
             tabs.push(obj);
         }));
-        
+
         setTimeout(() => {
             updateScroll();
         });
@@ -90,8 +90,8 @@ export function Tabs(props: TabsProps) {
 
     /**
      * 删除tab
-     * @param name 
-     * @param e 
+     * @param name
+     * @param e
      */
     const onRemove = (name: string, e: any) => {
         e.preventDefault && e.preventDefault();
@@ -109,7 +109,7 @@ export function Tabs(props: TabsProps) {
 
     /**
      * 内容滚动样式
-     * @returns 
+     * @returns
      */
     const contextStyle = () => {
         const avtiveName = store.activeName;
@@ -119,7 +119,7 @@ export function Tabs(props: TabsProps) {
                 currentIndex = index;
             }
         });
-        
+
         const s: any = {
             'transform': `translate(${-currentIndex * 100}%, 0)`
         }
@@ -142,7 +142,7 @@ export function Tabs(props: TabsProps) {
         setStore('tabs', evaluatedTabs());
     })
 
-    onMount (() => {
+    onMount(() => {
         updateScroll();
     });
 
@@ -151,7 +151,7 @@ export function Tabs(props: TabsProps) {
         const headerWidth = header.getBoundingClientRect().width;
         if (headerWidth > scrollWidth && !store.scroll) {
             setStore('scroll', true);
-            
+
         }
         if (headerWidth < scrollWidth && store.scroll) {
             setStore('scroll', false);
@@ -169,7 +169,7 @@ export function Tabs(props: TabsProps) {
                     currentIndex = index;
                 }
             });
-            
+
             const eles = header.querySelectorAll('.cm-tabs-header-item');
             const ele = eles[currentIndex];
             if (!ele) {
@@ -178,7 +178,7 @@ export function Tabs(props: TabsProps) {
             const wrap = header.closest('.cm-tabs-header-wrap');
             const close = ele.querySelector('.cm-tabs-close');
             const closeW = close ? close.getBoundingClientRect().width : 0;
-            
+
             const rect = ele.getBoundingClientRect();
             const wrapRect = wrap.getBoundingClientRect();
             const headerLeft = rect.left - wrapRect.left;
@@ -197,10 +197,10 @@ export function Tabs(props: TabsProps) {
     });
 
     return <div classList={classList()} style={props.style}>
-        <div class='cm-tabs-header-wrap'>
-            <div class='cm-tabs-active-line' ref={line} style={lineStyle()}></div>
-            <div class='cm-tabs-scroll' ref={scroll}>
-                <ul class='cm-tabs-header' ref={header}>
+        <div class="cm-tabs-header-wrap">
+            <div class="cm-tabs-active-line" ref={line} style={lineStyle()} />
+            <div class="cm-tabs-scroll" ref={scroll}>
+                <ul class="cm-tabs-header" ref={header}>
                     <For each={store.tabs}>
                         {(item: TabProps) => {
                             const className = () => ({
@@ -208,12 +208,12 @@ export function Tabs(props: TabsProps) {
                                 'cm-tabs-header-item-active': item.name === store.activeName,
                                 'cm-tabs-header-item-disabled': item.disabled
                             });
-                            return <li classList={className()} 
+                            return <li classList={className()}
                                 onClick={onTabClick.bind(null, item)}>
                                     {item.icon}
                                     {item.title}
                                 <Show when={item.closeable}>
-                                    <Icon name='x' onClick={onRemove.bind(null, item.name)} class='cm-tabs-close' size={12}/>
+                                    <Icon name="x" onClick={onRemove.bind(null, item.name)} class="cm-tabs-close" size={12}/>
                                 </Show>
                             </li>
                         }}
@@ -223,14 +223,14 @@ export function Tabs(props: TabsProps) {
             <Show when={props.extra}>
                 {props.extra}
             </Show>
-            <div class='cm-tabs-prev' onClick={scrollPrev}>
-                <Icon name='chevron-left' size={14}/>
+            <div class="cm-tabs-prev" onClick={scrollPrev}>
+                <Icon name="chevron-left" size={14}/>
             </div>
-            <div class='cm-tabs-next' onClick={scrollNext}>
-                <Icon name='chevron-right' size={14}/>
+            <div class="cm-tabs-next" onClick={scrollNext}>
+                <Icon name="chevron-right" size={14}/>
             </div>
         </div>
-        <div class='cm-tabs-content' style={contextStyle()}>
+        <div class="cm-tabs-content" style={contextStyle()}>
             <For each={store.tabs}>
                 {(item: TabProps) => {
                     const panelClass = () => useClassList(item, 'cm-tab-panel', {

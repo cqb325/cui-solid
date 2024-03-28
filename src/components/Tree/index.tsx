@@ -1,3 +1,4 @@
+import type { Signal} from "solid-js";
 import { Show, batch, createContext, createEffect, createMemo, untrack, useContext } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import createModel from "../utils/createModel";
@@ -11,19 +12,19 @@ export type TreeProps = {
     class?: string,
     style?: any,
     data?: any[],
-    onSelect?: Function,
+    onSelect?: (data: any) => void,
     opened?: any[],
-    selected?: string | number | Function[],
+    selected?: string | number | Signal<any>,
     ref?: any,
     gutter?: number,
     value?: any[],
     multi?: boolean,
     directory?: boolean,
-    onChange?: Function,
-    loadData?: Function,
-    onContextMenu?: Function,
+    onChange?: (vals: any) => void,
+    loadData?: (data: any) => any,
+    onContextMenu?: (data: any) => void,
     contextMenu?: any,
-    onSelectMenu?: Function,
+    onSelectMenu?: ((name: string) => void),
     checkRelation?: 'related'|'unRelated'
 }
 
@@ -32,7 +33,7 @@ const TreeContext = createContext();
 export function Tree (props: TreeProps) {
     const classList = () => useClassList(props, 'cm-tree');
     const [value, setValue] = createModel(props, 'value', '');
-    const [opened, setOpened] = createModel(props, 'opened', []);
+    const [opened, setOpened] = createModel<any[]>(props, 'opened', []);
     const [selected, setSelected] = createModel(props, 'selected', '');
     const gutter = props.gutter ?? 24;
     const checkRelation = props.checkRelation ?? 'related';
@@ -41,7 +42,7 @@ export function Tree (props: TreeProps) {
         value: value() || [],
         checkRelation,
         data: props.data
-    });;
+    });
 
     createEffect(() => {
         datum = new Datum({
@@ -49,7 +50,7 @@ export function Tree (props: TreeProps) {
             checkRelation,
             data: props.data
         });
-        
+
         batch(() => {
             setStore('data', props.data);
             setStore('dataMap', datum.dataMap);
@@ -68,11 +69,11 @@ export function Tree (props: TreeProps) {
         selected: '',
         openIds: [],
         checkedMap: {...datum.valueMap}
-    });
+    } as any);
 
     /**
      * 打开某个id
-     * @param id 
+     * @param id
      */
     const openNode = (id: any) => {
         const openIds = opened();
@@ -100,7 +101,7 @@ export function Tree (props: TreeProps) {
     // 展开控制
     createEffect(() => {
         const openIds = opened();
-        
+
         untrack(() => {
             store.openIds.forEach((lastOpenId: any) => {
                 if (!openIds.includes(lastOpenId)) {
@@ -137,17 +138,17 @@ export function Tree (props: TreeProps) {
 
     // 选择框选择
     createEffect(() => {
-        let vals = value();
+        let vals: any = value();
         if (props.multi && typeof vals === 'string') {
             vals = vals.split(',');
         }
-        
+
         datum.setValue(vals);
         const all = datum.getAllChecked();
-        
-        let lastChecked: any[] = [];
+
+        const lastChecked: any[] = [];
         untrack(() => {
-            for (let i in store.checkedMap) {
+            for (const i in store.checkedMap) {
                 if (store.checkedMap[i] && !vals.includes(i)) {
                     lastChecked.push(i);
                 }
@@ -156,7 +157,7 @@ export function Tree (props: TreeProps) {
         lastChecked.forEach((lastChecked: any) => {
             setStore('checkedMap', lastChecked, datum.valueMap[lastChecked]);
         })
-        
+
         all && all.forEach((val: string | number) => {
             setStore('checkedMap', val, datum.valueMap[val]);
         })
@@ -192,12 +193,12 @@ export function Tree (props: TreeProps) {
 
     /**
      * 动态添加子节点
-     * @param id 
-     * @param item 
-     * @param children 
+     * @param id
+     * @param item
+     * @param children
      */
     const addChildren = (id: any, item: any, children: any[]) => {
-        let aitem = store.dataMap[id];
+        const aitem = store.dataMap[id];
         if (aitem) {
             datum.addChildren(id, children);
             datum.set(id, 0, '');
@@ -209,7 +210,7 @@ export function Tree (props: TreeProps) {
                     node.children = children;
                 });
             }));
-            
+
             setStore('dataMap', produce((map: any) => {
                 children.map((child: any) => {
                     map[child.id] = child;
@@ -224,7 +225,7 @@ export function Tree (props: TreeProps) {
 
     /**
      * 获取选中的节点
-     * @returns 
+     * @returns
      */
     const getSelectNode = () => {
         return store.dataMap[store.selected];
@@ -263,8 +264,8 @@ export function Tree (props: TreeProps) {
         }
     });
 
-    return <TreeContext.Provider value={{signal: [store, setStore], onSelect , onOpenClose, onChecked, 
-        loadData: props.loadData, addChildren, cancelLoading, onContextMenu: props.onContextMenu, 
+    return <TreeContext.Provider value={{signal: [store, setStore], onSelect , onOpenClose, onChecked,
+        loadData: props.loadData, addChildren, cancelLoading, onContextMenu: props.onContextMenu,
         contextMenu: props.contextMenu}}>
         <Show when={props.contextMenu} fallback={
             <div classList={classList()}>

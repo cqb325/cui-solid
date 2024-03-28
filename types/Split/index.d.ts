@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 type SplitProps = {
     classList?: any;
     class?: any;

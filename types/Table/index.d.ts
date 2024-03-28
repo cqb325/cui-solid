@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 type TableProps = {
     columns: any[];
     data: any[];
@@ -9,13 +9,13 @@ type TableProps = {
     border?: boolean;
     stripe?: boolean;
     highlight?: boolean;
-    onRowSelect?: Function;
-    onRowChecked?: Function;
-    onCheckedAll?: Function;
-    onSort?: Function;
+    onRowSelect?: (row: any, preRow: any) => void;
+    onRowChecked?: (row: any, checked: boolean) => void;
+    onCheckedAll?: (rows: any[]) => void;
+    onSort?: (column: any, sortType: any) => void;
     ref?: any;
     size?: 'small';
-    spanMethod?: Function;
+    spanMethod?: (data: any, column: any, index: number, columnIndex: number) => any;
     loading?: boolean;
     virtual?: boolean;
 };
@@ -36,7 +36,7 @@ export type TableStore = {
 export type ColumnProps = {
     name?: string;
     title?: string | JSXElement;
-    render?: Function;
+    render?: (value: any, column: any, row: any) => any;
     type?: string;
     width?: string;
     _width?: number;

@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 
 export function FooterNavigations (props: any) {
     return <div class="cm-page-footer-navigations">

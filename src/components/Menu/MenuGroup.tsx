@@ -1,4 +1,5 @@
-import { JSXElement, createEffect, onMount } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { createEffect, onMount } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { MenuItem } from "./MenuItem";
 import { useMenuContext } from ".";
@@ -51,7 +52,7 @@ export function MenuGroup (props: MenuGroupProps) {
             setTimeout(() => {
                 const parentPadding = self.parentElement.getAttribute('x-padding');
                 const padding = parseInt(parentPadding) + 16;
-                
+
                 self.setAttribute('x-padding', parentPadding);
                 listEle.setAttribute('x-padding', padding);
             });

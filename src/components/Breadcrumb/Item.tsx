@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 
 export interface BreadcrumbItemProps {
     classList?: any,
@@ -7,7 +7,7 @@ export interface BreadcrumbItemProps {
     link?: string,
     icon?: any,
     separator?: string | JSXElement
-};
+}
 
 export function Item (props: BreadcrumbItemProps) {
     return props as unknown as JSXElement;

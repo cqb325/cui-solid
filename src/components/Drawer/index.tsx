@@ -1,4 +1,5 @@
-import { JSXElement, Show, createComputed, createEffect, onCleanup, onMount } from "solid-js";
+import type { JSXElement, Signal} from "solid-js";
+import { Show, createComputed } from "solid-js";
 import { Icon } from "../Icon";
 import { useClassList } from "../utils/useProps";
 import createModel from "../utils/createModel";
@@ -17,7 +18,7 @@ export interface DrawerProps {
     escClose?: boolean
     onClose?(): void
     onShow?(): void
-    visible?: Function[]
+    visible?: Signal<any>
 }
 
 export function Drawer (props: DrawerProps) {
@@ -69,15 +70,15 @@ export function Drawer (props: DrawerProps) {
     }
 
     return <div classList={classList()} style={props.style} ref={box} tabIndex={1} onKeyUp={onKeyUp}>
-        <div class='cm-drawer-mask' onClick={onMaskClick}></div>
-        <div class='cm-drawer-wrap' style={style()} ref={target}>
+        <div class="cm-drawer-mask" onClick={onMaskClick} />
+        <div class="cm-drawer-wrap" style={style()} ref={target}>
             <Show when={props.title}>
                 <div class="cm-drawer-title">
                     {props.title}
                 </div>
             </Show>
             <Show when={props.hasClose ?? true}>
-                <Icon name='x' size={18} class='cm-drawer-close' onClick={onClose}/>
+                <Icon name="x" size={18} class="cm-drawer-close" onClick={onClose}/>
             </Show>
             <div class="cm-drawer-body">
                 {props.children}

@@ -7,7 +7,7 @@ export const menuData = [
         redirect: '/base/button'
     },
     {
-        type: 'SubMenu', 
+        type: 'SubMenu',
         name: 'base',
         title: '基础组件',
         path: '/base',
@@ -27,7 +27,7 @@ export const menuData = [
         ]
     },
     {
-        type: 'SubMenu', 
+        type: 'SubMenu',
         name: 'layout',
         title: '布局',
         path: '/layout',
@@ -41,7 +41,7 @@ export const menuData = [
         ]
     },
     {
-        type: 'SubMenu', 
+        type: 'SubMenu',
         name: 'nav',
         title: '导航',
         path: '/nav',
@@ -60,7 +60,7 @@ export const menuData = [
         ]
     },
     {
-        type: 'SubMenu', 
+        type: 'SubMenu',
         name: 'view',
         title: '视图',
         path: '/view',
@@ -82,7 +82,7 @@ export const menuData = [
         ]
     },
     {
-        type: 'SubMenu', 
+        type: 'SubMenu',
         name: 'formElements',
         title: '表单',
         path: '/forms',
@@ -110,7 +110,7 @@ export const menuData = [
         ]
     },
     {
-        type: 'SubMenu', 
+        type: 'SubMenu',
         name: 'other',
         title: '其他',
         path: '/other',

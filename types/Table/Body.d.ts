@@ -1,7 +1,7 @@
-import { TableStore } from '.';
+import type { TableStore } from '.';
 type BodyProps = {
     data: TableStore;
-    onScroll: Function;
+    onScroll: (scrollLeft: number, clientWidth: number, scrollWidth: number) => void;
     height?: number;
     virtual?: boolean;
 };

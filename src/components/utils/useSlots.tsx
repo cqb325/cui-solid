@@ -1,4 +1,5 @@
-import { JSXElement, children, createComputed, on } from "solid-js"
+import type { JSXElement} from "solid-js";
+import { children, createComputed, on } from "solid-js"
 import { createStore } from "solid-js/store"
 
 export interface SlotProps {

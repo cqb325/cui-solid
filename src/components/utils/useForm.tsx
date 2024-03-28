@@ -1,20 +1,26 @@
-import { Accessor } from "solid-js"
+import type { Accessor, Setter } from "solid-js"
+
+type CheckFunction = (v: any) => any
+
+type clearFunction = () => any
 
 export interface useFormProps {
     isValid () : boolean
+    validate () : boolean
     getFormData () : any
     setFormData (mData: any, check?: boolean): void
-    setCheckValid(name: string, checkFn: Function): void
+    setCheckValid(name: string, checkFn: CheckFunction): void
     getValidation(name: string): any
     getMessage (name: string): any
     bindController(name: string, v: any, setV: Accessor<any>): void
-    setClearValid(name: string, clearFn: Function): void
+    setClearValid(name: string, clearFn: clearFunction): void
     clearValidates(name?: string) : void
+    resetFieldsValidate(name?: string) : void
     [key: string]: any
 }
 
 export interface useFormParams {
-    data: Object,
+    data: any,
     validation?: any,
     message?: any
 }
@@ -22,11 +28,11 @@ export interface useFormParams {
 function useForm ({data, validation = {}, message = {}}: useFormParams): useFormProps {
     const elementsChecks: any = {};
     const elementsClears: any = {};
-    const controllers:Map<string, any> = new Map<string, any>;
+    const controllers:Map<string, any> = new Map<string, any>();
     const isValid = async () => {
         const names = Object.keys(elementsChecks);
         let valid = true;
-        for (let name of names) {
+        for (const name of names) {
             const check = elementsChecks[name];
             if (!await check(newData[name])) {
                 valid = false;
@@ -37,8 +43,8 @@ function useForm ({data, validation = {}, message = {}}: useFormParams): useForm
     }
     /**
      * 单字段验证
-     * @param name 
-     * @returns 
+     * @param name
+     * @returns
      */
     const checkField = async (name: string) => {
         const check = elementsChecks[name];
@@ -72,17 +78,17 @@ function useForm ({data, validation = {}, message = {}}: useFormParams): useForm
             }
         });
     }
-    const setCheckValid = (name: string, checkFn: Function) => {
+    const setCheckValid = (name: string, checkFn: CheckFunction) => {
         elementsChecks[name] = checkFn;
     }
 
-    const setClearValid = (name: string, clearFn: Function) => {
+    const setClearValid = (name: string, clearFn: clearFunction) => {
         elementsClears[name] = clearFn;
     }
 
     /**
      * 清空校验
-     * @param name 
+     * @param name
      */
     const clearValidates = (name?: string) => {
         if (name) {
@@ -92,7 +98,7 @@ function useForm ({data, validation = {}, message = {}}: useFormParams): useForm
             }
         } else {
             const names = Object.keys(elementsClears);
-            for (let name of names) {
+            for (const name of names) {
                 const fn = elementsClears[name];
                 if (fn) {
                     fn();
@@ -107,11 +113,13 @@ function useForm ({data, validation = {}, message = {}}: useFormParams): useForm
             setV(value);
         }
     }
-    const bindController = (name: string, v: any, setV: Function) => {
+    const bindController = (name: string, v: Accessor<any>, setV: Setter<any>) => {
         controllers.set(name, [v, setV]);
     }
     const newData: any = {...data,
         isValid,
+        // 别名
+        validate: isValid,
         getFormData,
         setFormData,
         setCheckValid,
@@ -120,6 +128,7 @@ function useForm ({data, validation = {}, message = {}}: useFormParams): useForm
         bindController,
         setClearValid,
         clearValidates,
+        resetFieldsValidate: clearValidates,
         checkField
     }
     const ret = new Proxy(newData, {
@@ -133,7 +142,7 @@ function useForm ({data, validation = {}, message = {}}: useFormParams): useForm
         set (target, prop: string, value, receiver) {
             target[prop] = value;
             set(prop, value);
-            let check = elementsChecks[prop];
+            const check = elementsChecks[prop];
             check && check(value);
             return true;
         }

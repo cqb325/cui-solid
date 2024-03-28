@@ -1,9 +1,9 @@
-import { TableStore } from '.';
+import type { TableStore } from '.';
 type HeadProps = {
     data: TableStore;
     sticky?: boolean;
-    onInitColumnWidth: Function;
-    onResizeHeader: Function;
+    onInitColumnWidth: (idx: number, width: number) => void;
+    onResizeHeader: (width: number, height: number) => void;
     virtual?: boolean;
 };
 export declare function Head(props: HeadProps): import("solid-js").JSX.Element;

@@ -1,4 +1,4 @@
-import { JSXElement } from 'solid-js';
+import type { JSXElement } from 'solid-js';
 /**
  * Spin 类
  * @class Spin

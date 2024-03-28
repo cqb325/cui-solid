@@ -12,8 +12,8 @@ type SwitchProps = {
     checked?: any,
     labels?: any[],
     values?: any[],
-    onBeforeChange?: Function,
-    onChange?: Function,
+    onBeforeChange?: (currentStatus: boolean) => Promise<boolean>,
+    onChange?: (value: any) => void,
     loading?: boolean
 }
 export function Switch (props: SwitchProps) {
@@ -23,7 +23,7 @@ export function Switch (props: SwitchProps) {
         'cm-switch-checked': checked(),
         'cm-switch-loading': props.loading,
     });
-    const [checked, setChecked] = createField(props, 'checked', false);
+    const [checked, setChecked] = createField<boolean>(props, 'checked', false);
 
     const labels = props.labels || [];
     const values = props.values || [true, false];
@@ -40,22 +40,22 @@ export function Switch (props: SwitchProps) {
             ret = await props.onBeforeChange(checked());
         }
         if (ret) {
-            let flag = checked();
-            let v = !flag ? values[0] : values[1];
+            const flag = checked();
+            const v = !flag ? values[0] : values[1];
             props.onChange && props.onChange(v);
             setChecked(v);
         }
     }
-    
+
     const text = () => checked() ? labels[0] : labels[1];
-    return <div classList={classList()} style={props.style} tabIndex='0' onClick={toggleSwitch}>
+    return <div classList={classList()} style={props.style} tabIndex="0" onClick={toggleSwitch}>
         {/* 文字对齐辅助 */}
         <span style={{width: '0px', "font-size": '12px', visibility: 'hidden'}}>A</span>
-        <span class='cm-switch-inner'>{text()}</span>
+        <span class="cm-switch-inner">{text()}</span>
         {
             props.loading ? <Loading /> : null
         }
-        <input name={props.name} type='hidden' value={checked() ? values[0] : values[1]} />
+        <input name={props.name} type="hidden" value={checked() ? values[0] : values[1]} />
     </div>
 }
 

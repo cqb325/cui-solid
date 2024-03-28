@@ -1,4 +1,5 @@
-import { For, JSXElement, createContext, useContext, createEffect } from "solid-js";
+import type { Accessor, JSXElement} from "solid-js";
+import { For, createContext, useContext, createEffect } from "solid-js";
 import createModel from "../../utils/createModel";
 import { useClassList } from "../../utils/useProps"
 import { Value } from "../../inner/Value";
@@ -20,12 +21,12 @@ type CascaderProps = {
     align?: 'bottomLeft'|'bottomRight',
     revers?: boolean,
     data: any[],
-    onSelect?: Function,
-    onChange?: Function,
+    onSelect?: (item: any) => void,
+    onChange?: (value: any) => void,
     trigger?:'click'|'hover',
     changeOnSelect?: boolean,
     placeholder?: string,
-    loadData?: Function
+    loadData?: (item: any) => Promise<any>
 }
 
 const CascaderContext = createContext();
@@ -59,19 +60,19 @@ export type CascaderStore = {
 
 export function Cascader (props: CascaderProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
-    const [value, setValue] = createField(props, []);
+    const [value, setValue] = createField<any[]>(props, []);
     const trigger = props.trigger ?? 'click';
 
-    let arrData: any[] = [];
-    let mapData: any = {};
+    const arrData: any[] = [];
+    const mapData: any = {};
     const orignData = JSON.parse(JSON.stringify(props.data));
     buildDataArray(props.data, arrData);
     buildDataMap(orignData, mapData);
 
-    const [store, setStore] = createStore({
+    const [store, setStore] = createStore<CascaderStore>({
         selectedValue: value() || [],
         columns: []
-    } as CascaderStore);
+    });
 
     const seperator = props.seperator ?? '/';
     const align = props.align ?? 'bottomLeft';
@@ -82,25 +83,25 @@ export function Cascader (props: CascaderProps) {
     });
 
 
-    let valMap: any = {};
-    let level1 = props.data.map(item => item.value)
+    const valMap: any = {};
+    const level1 = props.data.map(item => item.value)
 
     createEffect(() => {
-        let val = value() || [];
+        const val = value() || [];
         setStore('selectedValue', [...val])
     })
 
     createEffect(() => {
-        let vals = store.selectedValue;
-        let columns = [level1];
+        const vals = store.selectedValue;
+        const columns = [level1];
         if (vals && vals.length) {
             vals.forEach((val: any) => {
                 if (valMap[val]) {
                     columns.push(valMap[val]);
                 } else {
-                    let item = mapData[val];
+                    const item = mapData[val];
                     if (item && item.children) {
-                        let levelIds = item.children.map((aItem: any) => aItem.value);
+                        const levelIds = item.children.map((aItem: any) => aItem.value);
                         valMap[val] = levelIds;
                         columns.push(levelIds);
                     }
@@ -116,7 +117,7 @@ export function Cascader (props: CascaderProps) {
             const item = mapData[val];
             return item.title;
         }) : [];
-        
+
         return arr.length ? arr.join(seperator) : '';
     }
 
@@ -151,12 +152,12 @@ export function Cascader (props: CascaderProps) {
     }
 
     return <CascaderContext.Provider value={{onSelect, loadData: props.loadData, addChildren}}>
-        <div classList={classList()} tabIndex='0'>
-            <Dropdown visible={[visible, setVisible]} transfer={props.transfer} align={align} revers={props.revers} 
-                    trigger='click' disabled={props.disabled} menu={<div class="cm-cascader-wrap">
+        <div classList={classList()} tabIndex="0">
+            <Dropdown visible={[visible, setVisible]} transfer={props.transfer} align={align} revers={props.revers}
+                    trigger="click" disabled={props.disabled} menu={<div class="cm-cascader-wrap">
                         <For each={store.columns}>
-                            {(column: any[], index: Function) => {
-                                return <Menu data={column} trigger={trigger} 
+                            {(column: any[], index: Accessor<number>) => {
+                                return <Menu data={column} trigger={trigger}
                                     store={[store, setStore]} mapData={mapData} level={index()}/>
                             }}
                         </For>

@@ -16,7 +16,7 @@ import { CompAnchor } from "../../common/CompAnchor";
 
 export default function SideBySidePage () {
     return <>
-        <div class='sys-ctx-main-left'>
+        <div class="sys-ctx-main-left">
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     SideBySide 对比
@@ -26,13 +26,13 @@ export default function SideBySidePage () {
                         <div style={{width: '640px', height: '426px'}}>
                             <SideBySide left={<div style={{background: 'green'}}>
                                 <Image src={img1}/>
-                            </div>} 
+                            </div>}
                                 right={<div style={{background: 'red'}}>
                                     <Image src={img2}/>
                                 </div>}/>
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法 。
                         </Paragraph>
                         <DemoCode data={codes['sidebyside_base']}/>
@@ -41,9 +41,9 @@ export default function SideBySidePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

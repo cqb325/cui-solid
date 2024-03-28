@@ -5,7 +5,7 @@ export function DateRangePane (props: any) {
     const val1 = () => local.value[0];
     const val2 = () => local.value[1];
     return <>
-        <DatePane name='start' value={val1()} {...others}/>
-        <DatePane name='end' value={val2()} {...others}/>
+        <DatePane name="start" value={val1()} {...others}/>
+        <DatePane name="end" value={val2()} {...others}/>
     </>
 }

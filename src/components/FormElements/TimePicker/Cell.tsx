@@ -27,7 +27,7 @@ export function Cell (props: any) {
         }
     });
 
-    return <div class='cm-time-picker-cell' ref={wrap}>
+    return <div class="cm-time-picker-cell" ref={wrap}>
         <ul>
             <For each={arr}>
                 {(num: number) => {

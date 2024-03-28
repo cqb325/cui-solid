@@ -1,5 +1,6 @@
 import { useClassList } from "../utils/useProps";
-import { JSX, JSXElement, Match, Show, Switch, createSignal, onMount } from 'solid-js'
+import type { JSX, JSXElement} from 'solid-js';
+import { Match, Show, Switch, createSignal, onMount } from 'solid-js'
 
 export interface AvatarProps {
     classList?: any,
@@ -33,7 +34,7 @@ export function Avatar (props: AvatarProps) {
     let string: any;
     let wrap: any;
 
-    onMount (() => {
+    onMount(() => {
         if (wrap && string) {
             string.style.Transform = '';
             string.style.webkitTransform = '';
@@ -52,7 +53,7 @@ export function Avatar (props: AvatarProps) {
     })
 
     const style = () => {
-        let obj = {...props.style};
+        const obj = {...props.style};
         if (typeof props.size === 'number') {
             obj.width = props.size + 'px';
             obj.height = props.size + 'px';
@@ -70,16 +71,16 @@ export function Avatar (props: AvatarProps) {
         props.onMouseLeave && props.onMouseLeave(e);
     }
 
-    return <span classList={classList()} style={style()} onClick={props.onClick} ref={wrap} 
+    return <span classList={classList()} style={style()} onClick={props.onClick} ref={wrap}
         onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         <Show when={hover()}>
             <div class="cm-avatar-hover">
                 {props.hoverMask}
             </div>
         </Show>
-        <Switch fallback={<span class='cm-avatar-string' ref={string}>{props.children}</span>}>
+        <Switch fallback={<span class="cm-avatar-string" ref={string}>{props.children}</span>}>
             <Match when={props.src}>
-                <img src={props.src} alt='' />
+                <img src={props.src} alt="" />
             </Match>
             <Match when={props.icon}>
                 {props.icon}

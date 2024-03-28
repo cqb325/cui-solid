@@ -4,11 +4,11 @@ type SelectOptions = {
     disabled?: boolean;
     textField: string;
     valueField: string;
-    onClick?: Function;
+    onClick?: (value: any) => void;
     style?: any;
     visible?: boolean;
     ref?: any;
-    renderOption?: Function;
+    renderOption?: (item: any) => any;
 };
 export declare function Option(props: SelectOptions): import("solid-js").JSX.Element;
 export {};

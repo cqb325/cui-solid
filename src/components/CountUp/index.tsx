@@ -21,9 +21,9 @@ interface CountUpProps {
 }
 
 /**
- * 
- * @param props 
- * @returns 
+ *
+ * @param props
+ * @returns
  */
 export function CountUp (props: CountUpProps) {
     const startVal = props.start ?? 0;
@@ -85,5 +85,5 @@ export function CountUp (props: CountUpProps) {
 
     const classList = () => useClassList(props, 'cm-count-up');
 
-    return <span classList={classList()} style={props.style} ref={target}></span>
+    return <span classList={classList()} style={props.style} ref={target} />
 }

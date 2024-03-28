@@ -3,7 +3,8 @@ import { Collapase } from "../inner/Collapase";
 import { Icon } from "../Icon";
 import { useAccordionContext } from ".";
 import { useClassList } from "../utils/useProps";
-import { JSXElement, createEffect, createSignal } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 
 type AccordionItemProps = {
     name?: string,
@@ -64,7 +65,7 @@ export function Item (props: AccordionItemProps) {
         setEnd(false);
         setOpened(open);
     });
-    
+
     const classList = () => useClassList(props, 'cm-accordion-item', {
         'cm-accordion-item-active': opened(),
         'cm-accordion-item-full': opened() && end()
@@ -77,7 +78,7 @@ export function Item (props: AccordionItemProps) {
         <div class="cm-accordion-title" onClick={onTitleClick}>
             {props.icon}
             <div class="cm-accordion-item-title-text">{props.title}</div>
-            <Icon class='cm-accordion-title-arrow' name='chevron-right'/>
+            <Icon class="cm-accordion-title-arrow" name="chevron-right"/>
         </div>
         <Collapase open={opened()} onEnd={onEnd}>
             <div class="cm-accordion-content">{props.children}</div>

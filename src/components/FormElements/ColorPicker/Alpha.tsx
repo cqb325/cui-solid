@@ -3,7 +3,7 @@ import { toRGBAString } from "./utils";
 
 export function Alpha (props: any) {
     const [left, setLeft] = createSignal(props.value.hsl.a * 100);
-    
+
     const gradientStyle = () => {
         const {r, g, b} = props.value.rgba;
         const start = toRGBAString({r, g, b, a: 0});
@@ -66,7 +66,7 @@ export function Alpha (props: any) {
 
     return <div class="cm-color-picker-alpha" ref={container}>
         <div class="cm-color-picker-alpha-wrap" style={gradientStyle()} onMouseDown={handleMouseDown}>
-            <div class="cm-color-picker-alpha-picker" style={{left: `${left()}%`, top: '0px'}}></div>
+            <div class="cm-color-picker-alpha-picker" style={{left: `${left()}%`, top: '0px'}} />
         </div>
     </div>
 }

@@ -1,9 +1,10 @@
-import { Accessor, For, JSXElement, Show, createEffect, createMemo, createUniqueId } from "solid-js"
+import type { Accessor, JSXElement} from "solid-js";
+import { For, Show, createEffect, createMemo, createUniqueId, untrack } from "solid-js"
 import { useClassList } from "../utils/useProps"
 import { Tag } from "../Tag"
 import { Popover } from "../Popover"
 import { createStore } from "solid-js/store"
-import { untrack } from "solid-js/web"
+
 
 export interface TagConfig {
     id: string|number
@@ -40,7 +41,7 @@ export function TagGroup (props: TagGroupProps) {
         setStore('list', newList);
         props.onClose && props.onClose(item, e);
     }
-    
+
     createEffect(() => {
         setStore('list', props.data);
     })
@@ -48,7 +49,7 @@ export function TagGroup (props: TagGroupProps) {
     createEffect(() => {
         const list = store.list;
         const max = props.max ?? list.length;
-        
+
         const show:TagConfig[] = [];
         const hide:TagConfig[] = [];
         untrack(() => {

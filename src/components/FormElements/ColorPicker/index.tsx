@@ -34,7 +34,7 @@ export function ColorPicker (props: ColorPickerProps) {
     const [value, setValue] = createField(props, '');
     const [val, setVal] = createSignal(changeColor(value() || '#2D8CF0'));
     const [confirmVal, setConfirmVal] = createSignal('');
-    
+
     let oldHue: any = val();
     const classList = () => useClassList(props, 'cm-color-picker', {
         [`cm-color-picker-${props.size}`]: props.size,
@@ -75,7 +75,7 @@ export function ColorPicker (props: ColorPickerProps) {
     })
 
     return <div classList={classList()} style={props.style}>
-        <Dropdown transfer={props.transfer} align={align} disabled={props.disabled} trigger='click' visible={[open, setOpen]}
+        <Dropdown transfer={props.transfer} align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
             menu={<div class="cm-color-picker-wrap">
                 <Space dir="v">
                     <Saturation value={val()} onChange={onColorChange}/>
@@ -88,9 +88,9 @@ export function ColorPicker (props: ColorPickerProps) {
                     </Show>
                     <div class="cm-color-picker-confirm">
                         <Space dir="h">
-                            <Input size='small' class="cm-color-picker-input" value={[confirmVal, setConfirmVal]}/>
-                            <Button size='small' type='default' onClick={onClear}>清除</Button>
-                            <Button size='small' type='primary' onClick={onConfirm}>确定</Button>
+                            <Input size="small" class="cm-color-picker-input" value={[confirmVal, setConfirmVal]}/>
+                            <Button size="small" type="default" onClick={onClear}>清除</Button>
+                            <Button size="small" type="primary" onClick={onConfirm}>确定</Button>
                         </Space>
                     </div>
                 </Space>

@@ -19,7 +19,7 @@ export default function CascaderPage () {
     const [value, setValue]: any[] = createSignal();
     const data = [
         {
-            value: 'beijing', title: '北京', 
+            value: 'beijing', title: '北京',
             children: [
                 {value: 'gugong', title: '故宫'},
                 {value: 'tiantan', title: '天坛'},
@@ -77,7 +77,7 @@ export default function CascaderPage () {
         }
     ];
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Cascader 级联选择
@@ -86,7 +86,7 @@ export default function CascaderPage () {
                     <Card bordered>
                         <Cascader data={data}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['cascader_base']}/>
@@ -98,7 +98,7 @@ export default function CascaderPage () {
                     <Card bordered>
                         <Cascader data={data2} disabled/>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 disabled 禁用
                         </Paragraph>
                         <DemoCode data={codes['cascader_disabled']}/>
@@ -114,7 +114,7 @@ export default function CascaderPage () {
                             <Cascader data={data3} size="large" value={['jiangsu','suzhou','shizilin']} />
                         </Space>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             size 支持 small 和 large
                         </Paragraph>
                         <DemoCode data={codes['cascader_size']}/>
@@ -126,7 +126,7 @@ export default function CascaderPage () {
                     <Card bordered>
                         <Cascader data={data4} seperator=">"/>
                         <Divider align="left"><Text type="primary">自定义分隔符</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 seperator 可以自定义分隔符
                         </Paragraph>
                         <DemoCode data={codes['cascader_sep']}/>
@@ -136,9 +136,9 @@ export default function CascaderPage () {
 
                 <Space id="cascader_trigger" dir="v">
                     <Card bordered>
-                        <Cascader data={data5} trigger='hover' value={['jiangsu','suzhou','shizilin']} />
+                        <Cascader data={data5} trigger="hover" value={['jiangsu','suzhou','shizilin']} />
                         <Divider align="left"><Text type="primary">触发事件</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 trigger 修改展开的触发条件， 支持hover和click
                         </Paragraph>
                         <DemoCode data={codes['cascader_trigger']}/>
@@ -150,7 +150,7 @@ export default function CascaderPage () {
                     <Card bordered>
                         <Cascader data={data6} changeOnSelect value={['jiangsu','suzhou','shizilin']} />
                         <Divider align="left"><Text type="primary">选择及改变</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 changeOnSelect 选择选项及改变值
                         </Paragraph>
                         <DemoCode data={codes['cascader_change']}/>
@@ -162,14 +162,14 @@ export default function CascaderPage () {
                     <Card bordered>
                         <Space>
                             <Cascader data={data7} value={[value, setValue]} />
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 setValue(['jiangsu','suzhou','shizilin'])
                             }}>
                                 设置值
                             </Button>
                         </Space>
                         <Divider align="left"><Text type="primary">可控</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             value 可控属性
                         </Paragraph>
                         <DemoCode data={codes['cascader_control']}/>
@@ -207,7 +207,7 @@ export default function CascaderPage () {
                             }}/>
                         </Space>
                         <Divider align="left"><Text type="primary">动态加载</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             数据属性存在loading 可配合 loadData 方法进行动态加载子元素
                         </Paragraph>
                         <DemoCode data={codes['cascader_loading']}/>
@@ -217,15 +217,15 @@ export default function CascaderPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Cascader Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_data_props' dir="v">
+                    <Space id="comp_data_props" dir="v">
                         <Title type="primary" heading={4}>data Props</Title>
-                        <Table columns={propsColumns} data={dataPropsData} border size='small' />
+                        <Table columns={propsColumns} data={dataPropsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>

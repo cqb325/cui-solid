@@ -1,4 +1,5 @@
 import { useClassList } from "../../utils/useProps";
+import type { Signal} from "solid-js";
 import { For, createSignal } from "solid-js";
 import { RateItem } from "./Item";
 import createField from "../../utils/createField";
@@ -9,11 +10,11 @@ type RateProps = {
     disabled?: boolean,
     icon: any,
     style?: any,
-    value?: number | Function[],
+    value?: number | Signal<any>,
     children?: any,
     count?: number,
     allowHalf?: boolean,
-    onChange?: Function,
+    onChange?: (value: number) => void,
     name?: string
 }
 export function Rate (props: RateProps) {

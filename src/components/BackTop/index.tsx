@@ -1,5 +1,5 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
-import { useClassList, useStyle } from "../utils/useProps"
+import { useClassList } from "../utils/useProps"
 import { scrollTop } from "../utils/utils";
 
 type BackTopProps = {
@@ -11,7 +11,7 @@ type BackTopProps = {
     children?: any,
     height?: number,
     duration?: number,
-    onClick?: Function
+    onClick?: () => void
 }
 export function BackTop (props: BackTopProps) {
     const [backTop, setBackTop] = createSignal(false);

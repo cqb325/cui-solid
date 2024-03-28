@@ -1,23 +1,25 @@
-import { For, Show, createEffect, createSignal } from "solid-js";
+import { For, Show, createEffect } from "solid-js";
 import { BothSide } from "../../Layout";
 import { InnerCheckbox } from "../../inner/Checkbox";
 import { ListItem } from "./ListItem";
+import type { SetStoreFunction} from "solid-js/store";
 import { produce } from "solid-js/store";
 import { InnerInput } from "../Input/input";
 import { Icon } from "../../Icon";
+import type { TransferStore } from ".";
 
 type TransferListProps = {
     width?: number,
     height?: number,
     store?: any,
-    setStore: Function,
+    setStore: SetStoreFunction<TransferStore>,
     name?: string,
     value?: any[],
-    onSelect: Function,
-    render?: Function,
+    onSelect: (item: any, checked: boolean) => void,
+    render?: (item: any) => any,
     filter?: boolean
 }
-export function List(props: TransferListProps) {
+export function List (props: TransferListProps) {
     const style = () => ({
         width: props.width ? `${props.width}px` : '',
         height: props.height ? `${props.height}px` : '',
@@ -50,9 +52,11 @@ export function List(props: TransferListProps) {
     const onSelect = (data: any) => {
         props.onSelect(data, !data._checked);
         if (data._checked) {
-            props.setStore(`${props.name}Ids`, [...props.store[`${props.name}Ids`], data.id]);
+            const key: any = `${props.name}Ids`;
+            props.setStore(key, [...props.store[`${props.name}Ids`], data.id]);
         } else {
-            props.setStore(`${props.name}Ids`, produce((arr: any[]) => {
+            const key: any = `${props.name}Ids`;
+            props.setStore(key, produce((arr: any[]) => {
                 arr.splice(arr.indexOf(data.id), 1);
             }));
         }
@@ -82,15 +86,15 @@ export function List(props: TransferListProps) {
                 ids.push(item.id);
             }
         })
-        props.setStore(`${props.name}Ids`, ids);
+        props.setStore(`${props.name}Ids` as any, ids);
     }
 
     createEffect(() => {
         const arr = props.store[`${props.name}Ids`];
         if (arr.length) {
-            props.setStore && props.setStore(`${props.name}Disabled`, false);
+            props.setStore && props.setStore(`${props.name}Disabled` as any, false);
         } else {
-            props.setStore && props.setStore(`${props.name}Disabled`, true);
+            props.setStore && props.setStore(`${props.name}Disabled` as any, true);
         }
     });
 
@@ -126,7 +130,7 @@ export function List(props: TransferListProps) {
         <div class="cm-transfer-list-body">
             <Show when={props.filter}>
                 <div class="cm-transfer-filter-wrap">
-                    <InnerInput append={<Icon name='search'/>} size="small" onInput={onFilter}/>
+                    <InnerInput append={<Icon name="search"/>} size="small" onInput={onFilter}/>
                 </div>
             </Show>
             <div class="cm-transfer-list-content">

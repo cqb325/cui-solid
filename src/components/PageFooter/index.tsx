@@ -7,7 +7,7 @@ export interface PageFooterProps {
     children?: any;
 }
 
-export function PageFooter(props: PageFooterProps){
+export function PageFooter (props: PageFooterProps){
     const classList = () => useClassList(props, 'cm-page-footer');
     return <div classList={classList()} style={props.style}>
         {props.children}

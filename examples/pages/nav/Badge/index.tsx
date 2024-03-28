@@ -17,7 +17,7 @@ useDirective(hljs);
 
 export default function BadgePage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Badge 徽标
@@ -26,11 +26,11 @@ export default function BadgePage () {
                     <Card bordered>
                         <Space dir="h">
                             <Badge count={3}>
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         最简单的使用方法。
                         </Paragraph>
                         <DemoCode data={codes['badge_base']}/>
@@ -42,17 +42,17 @@ export default function BadgePage () {
                     <Card bordered>
                         <Space dir="h" size={24}>
                             <Badge dot>
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge dot>
-                                <Icon name="bell1" size={26}></Icon>
+                                <Icon name="bell1" size={26} />
                             </Badge>
                             <Badge dot>
                                 <a href="#">可以是一个链接</a>
                             </Badge>
                         </Space>
                         <Divider align="left"><Text type="primary">小红点</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         小红点徽标
                         </Paragraph>
                         <DemoCode data={codes['badge_dot']}/>
@@ -64,14 +64,14 @@ export default function BadgePage () {
                     <Card bordered>
                         <Space dir="h" size={24}>
                             <Badge count={100}>
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge count={1000} overflowCount={999}>
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                         </Space>
                         <Divider align="left"><Text type="primary">封顶数字</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         通过设置 <Text code>overflowCount</Text> 属性设置一个封顶值，当超过时，会显示{'${overflowCount}'}+
                         </Paragraph>
                         <DemoCode data={codes['badge_overcount']}/>
@@ -86,7 +86,7 @@ export default function BadgePage () {
                             <Badge count={10} class="demo-badge-alone"/>
                         </Space>
                         <Divider align="left"><Text type="primary">独立使用及自定义样式</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             独立使用及自定义样式
                         </Paragraph>
                         <DemoCode data={codes['badge_alone']}/>
@@ -98,14 +98,14 @@ export default function BadgePage () {
                     <Card bordered>
                         <Space dir="h" size={50}>
                             <Badge text="new">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge text="hot">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                         </Space>
                         <Divider align="left"><Text type="primary">自定义内容</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>text</Text> 属性，可以自定义显示内容。
                         </Paragraph>
                         <DemoCode data={codes['badge_text']}/>
@@ -125,15 +125,15 @@ export default function BadgePage () {
                             </Space>
 
                             <Space dir="v">
-                                <Badge status="success" text='Success'/>
-                                <Badge status="error" text='Error'/>
-                                <Badge status="default" text='Default'/>
-                                <Badge status="processing" text='Processing'/>
-                                <Badge status="warning" text='Warning'/>
+                                <Badge status="success" text="Success"/>
+                                <Badge status="error" text="Error"/>
+                                <Badge status="default" text="Default"/>
+                                <Badge status="processing" text="Processing"/>
+                                <Badge status="warning" text="Warning"/>
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">状态点</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             用于表示状态的小圆点。
                         </Paragraph>
                         <DemoCode data={codes['badge_status']}/>
@@ -161,7 +161,7 @@ export default function BadgePage () {
                             <Badge color="#f50" text="#f50" />
                         </Space>
                         <Divider align="left"><Text type="primary">多彩徽标</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             属性 <Text code>color</Text> 可以设置更多预设的状态点颜色，或者自定义颜色。
                         </Paragraph>
                         <DemoCode data={codes['badge_color']}/>
@@ -173,26 +173,26 @@ export default function BadgePage () {
                     <Card bordered>
                         <Space dir="h" size={24}>
                             <Badge count={5} type="primary">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge count={5} type="success">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge count={5} type="normal">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge count={5} type="info">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge count={5} type="error">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge count={5} type="warning">
-                                <a href="#" class="demo-badge"></a>
+                                <a href="#" class="demo-badge" />
                             </Badge>
                         </Space>
                         <Divider align="left"><Text type="primary">预设颜色</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>type</Text> 属性，可以设置不同的颜色。
                         </Paragraph>
                         <DemoCode data={codes['badge_type']}/>
@@ -202,14 +202,14 @@ export default function BadgePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Badge Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>;
 }

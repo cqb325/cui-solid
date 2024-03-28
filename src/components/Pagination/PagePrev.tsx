@@ -7,6 +7,6 @@ export function PagePrev (props: any) {
         'cm-pagination-num-disabled': props.current === 1
     });
     return (<li onClick={props.onClick} classList={classList()}>
-        <Icon name='chevron-left' size={14}/>
-    </li>); 
-};
+        <Icon name="chevron-left" size={14}/>
+    </li>);
+}

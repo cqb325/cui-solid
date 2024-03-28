@@ -1,6 +1,8 @@
-import { JSXElement, createContext, useContext } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { createContext, useContext } from "solid-js";
 import { Form } from "../Form";
-import useForm, { useFormProps } from "../utils/useForm";
+import type { useFormProps } from "../utils/useForm";
+import useForm from "../utils/useForm";
 import { useClassList } from "../utils/useProps";
 
 export interface LoginProps {

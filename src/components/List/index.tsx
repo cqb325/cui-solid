@@ -1,3 +1,4 @@
+import type { Signal} from "solid-js";
 import { createContext, useContext } from "solid-js";
 import createModel from "../utils/createModel";
 import { useClassList } from "../utils/useProps";
@@ -12,14 +13,12 @@ type ListProps = {
     head?: any,
     foot?: any,
     children?: any,
-    render?: Function,
-    onSelect?: Function
+    onSelect?: (item: any) => void
 }
 
 export type ListContextProps = {
-    render?: Function,
-    signal: Function[],
-    onSelect?: Function
+    signal: Signal<any>,
+    onSelect?: (item: any) => void
 }
 
 const ListContext = createContext<ListContextProps>();
@@ -33,17 +32,16 @@ export function List (props: ListProps) {
     const [activeKey, setActiveKey] = createModel(props, 'activeKey', '');
 
     return <ListContext.Provider value={{
-        render: props.render,
         signal: [activeKey, setActiveKey],
         onSelect: props.onSelect
     }}>
         <div classList={classList()} style={props.style}>
             {
-                props.head ? <div class='cm-list-head'>{props.head}</div> : null
+                props.head ? <div class="cm-list-head">{props.head}</div> : null
             }
             {props.children}
             {
-                props.foot ? <div class='cm-list-foot'>{props.foot}</div> : null
+                props.foot ? <div class="cm-list-foot">{props.foot}</div> : null
             }
         </div>
     </ListContext.Provider>;

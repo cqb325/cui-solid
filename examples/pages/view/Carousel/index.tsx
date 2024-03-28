@@ -28,7 +28,7 @@ useDirective(hljs);
 export default function CarouselPage (props: any) {
     const [index, setIndex] = createSignal(0);
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Carousel 跑马灯
@@ -58,7 +58,7 @@ export default function CarouselPage (props: any) {
                             </Carousel.Item>
                         </Carousel>
                         <Divider align="left"><Text type="primary">基本用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基本用法
                         </Paragraph>
                         <DemoCode data={codes['carousel_base']}/>
@@ -91,7 +91,7 @@ export default function CarouselPage (props: any) {
                             </Carousel.Item>
                         </Carousel>
                         <Divider align="left"><Text type="primary">自动播放</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             添加<Text code>autoPlay</Text> 可以自动播放
                         </Paragraph>
                         <DemoCode data={codes['carousel_autoplay']}/>
@@ -153,7 +153,7 @@ export default function CarouselPage (props: any) {
                             </Col>
                         </Row>
                         <Divider align="left"><Text type="primary">dot位置</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>dotAlign</Text> 支持left和right  默认center
                         </Paragraph>
                         <DemoCode data={codes['carousel_dotAlign']}/>
@@ -208,9 +208,9 @@ export default function CarouselPage (props: any) {
                                 </div>
                             </Carousel.Item>
                         </Carousel>
-                            
+
                         <Divider align="left"><Text type="primary">dot样式</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>dotType</Text> 支持 line 和 columnar  默认圆形
                         </Paragraph>
                         <DemoCode data={codes['carousel_dotstyle']}/>
@@ -249,7 +249,7 @@ export default function CarouselPage (props: any) {
                             </div>
                         </Space>
                         <Divider align="left"><Text type="primary">可控</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             <Text code>activeIndex</Text> 属性进行控制显示的索引
                         </Paragraph>
                         <DemoCode data={codes['carousel_control']}/>
@@ -259,15 +259,15 @@ export default function CarouselPage (props: any) {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Carousel Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    
 
-                    <Space id='comp_events' dir="v">
+
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

@@ -1,5 +1,7 @@
-import { Accessor, For, JSXElement, Match, Show, Switch, children } from "solid-js";
-import { Avatar, AvatarProps } from "../Avatar";
+import type { Accessor, JSXElement} from "solid-js";
+import { For, Show, children } from "solid-js";
+import type { AvatarProps } from "../Avatar";
+import { Avatar } from "../Avatar";
 import { Tooltip } from "../Tooltip";
 import { useClassList } from "../utils/useProps";
 
@@ -27,7 +29,7 @@ export function AvatarList (props: AvatarListProps) {
             {(item: AvatarProps, index: Accessor<number>) => {
                 item.asProps = false;
                 if (index() < max()) {
-                    return <div class='cm-avatar-list-item'>
+                    return <div class="cm-avatar-list-item">
                         <Tooltip align={props.align || 'top'} content={item.title}>
                             <Avatar {...item} size={props.size}/>
                         </Tooltip>
@@ -36,7 +38,7 @@ export function AvatarList (props: AvatarListProps) {
             }}
         </For>
         <Show when={avatarsLength() > max() }>
-            <div class='cm-avatar-list-item'>
+            <div class="cm-avatar-list-item">
                 <Avatar size={props.size} style={props.excessStyle}>+{avatarsLength() - max()}</Avatar>
             </div>
         </Show>

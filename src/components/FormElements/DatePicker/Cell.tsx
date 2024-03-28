@@ -19,13 +19,13 @@ export function Cell (props: any) {
         }
     });
 
-    return <div class='cm-month-picker-cell' ref={wrap}>
+    return <div class="cm-month-picker-cell" ref={wrap}>
         <ul>
             <For each={props.data}>
                 {(num: number) => {
-                    let disabled = () => {
+                    const disabled = () => {
                         let dis = false;
-                        let d = new Date(props.day);
+                        const d = new Date(props.day);
                         if (props.type === 'year') {
                             // 年份必须使用那年的1月1号进行比较
                             // 要不然年份小于禁用年份月份大于禁用月份时 年份会被禁用

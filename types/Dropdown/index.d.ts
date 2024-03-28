@@ -1,3 +1,4 @@
+import type { Signal } from "solid-js";
 export * from './DropdownMenu';
 export * from './DropdownItem';
 export declare const useDropdownConext: () => unknown;
@@ -7,16 +8,16 @@ type DropdownProps = {
     classList?: any;
     class?: any;
     style?: any;
-    onSelect?: Function;
+    onSelect?: (name: string) => void;
     children: any;
     menu?: any;
-    visible?: boolean | Function[];
+    visible?: boolean | Signal<any>;
     transfer?: boolean;
     theme?: 'dark' | 'light';
     disabled?: boolean;
     revers?: boolean;
     handler?: string;
     fixWidth?: boolean;
-    onBeforeDrop?: Function;
+    onBeforeDrop?: (visible: boolean) => boolean;
 };
 export declare function Dropdown(props: DropdownProps): import("solid-js").JSX.Element;

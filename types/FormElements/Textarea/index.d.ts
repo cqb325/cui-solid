@@ -9,9 +9,9 @@ export interface TextareaProps {
     trigger?: 'input' | 'blur';
     wordCount?: boolean;
     maxLength?: number;
-    onChange?: Function;
-    onInput?: Function;
-    onKeyUp?: Function;
-    onEnter?: Function;
+    onChange?: (value: any) => void;
+    onInput?: (value: any, e: any) => void;
+    onKeyUp?: (value: any, e: any) => void;
+    onEnter?: (value: any, e: any) => void;
 }
 export declare function Textarea(props: TextareaProps): import("solid-js").JSX.Element;

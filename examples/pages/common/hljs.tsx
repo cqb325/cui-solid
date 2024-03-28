@@ -1,8 +1,9 @@
 import his from 'highlight.js'
+import type { Accessor } from 'solid-js';
 
 export function hljs (el: Element, accessor: () => any) {
     Promise.resolve().then(() => {
-        let blocks = el.querySelectorAll('pre code');
+        const blocks = el.querySelectorAll('pre code');
         blocks.forEach((block: Element) => {
             his.highlightElement(block as HTMLElement)
         });
@@ -17,4 +18,4 @@ declare module "solid-js" {
     }
 }
 
-export const useDirective = (fn: (el: HTMLElement, accessor: () => Function) => void) => {};
+export const useDirective = (fn: (el: HTMLElement, accessor: () => Accessor<any>) => void) => {};

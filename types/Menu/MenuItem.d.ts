@@ -1,9 +1,9 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 type MenuItemProps = {
     name?: string;
     disabled?: boolean;
     isSubmenuTitle?: boolean;
-    onSelect?: Function;
+    onSelect?: () => void;
     data?: any;
     children?: any;
     icon?: JSXElement;

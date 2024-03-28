@@ -16,15 +16,15 @@ export declare function offsetXYFromParent(evt: {
     clientX: number;
     clientY: number;
 }, offsetParent: HTMLElement, scale: number): ControlPosition;
-export declare function findInArray(array: Array<any> | TouchList, callback: Function): any;
+export declare function findInArray(array: Array<any> | TouchList, callback: any): any;
 export declare function getTouch(e: any, identifier: number): null | {
     clientX: number;
     clientY: number;
 };
 export declare function getControlPosition(e: any, touchIdentifier: any, props: any, node: any): null | ControlPosition;
 export declare function createCoreData(node: any, lastX: number, lastY: number, x: number, y: number): DraggableData;
-export declare function addEvent(el: any, event: string, handler: any, inputOptions?: Object): void;
-export declare function removeEvent(el: any, event: string, handler: Function, inputOptions?: Object): void;
+export declare function addEvent(el: any, event: string, handler: any, inputOptions?: any): void;
+export declare function removeEvent(el: any, event: string, handler: any, inputOptions?: any): void;
 export declare function snapToGrid(grid: [number, number], pendingX: number, pendingY: number): [number, number];
 export declare function addUserSelectStyles(doc: any): void;
 export declare function removeUserSelectStyles(doc: any): void;
@@ -39,4 +39,4 @@ export declare function getBoundPosition({ bounds, node }: any, x: number, y: nu
 export declare function canDragX(axis: string): boolean;
 export declare function canDragY(axis: string): boolean;
 export declare function getTranslation({ x, y }: ControlPosition, positionOffset: any, unitSuffix: string): string;
-export declare function createCSSTransform(controlPos: ControlPosition, positionOffset: any): Object;
+export declare function createCSSTransform(controlPos: ControlPosition, positionOffset: any): any;

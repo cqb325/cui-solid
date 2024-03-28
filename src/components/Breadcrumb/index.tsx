@@ -1,5 +1,7 @@
-import { children, For, JSXElement } from "solid-js";
-import { BreadcrumbItemProps, Item } from "./Item";
+import type { JSXElement } from "solid-js";
+import { children, For } from "solid-js";
+import type { BreadcrumbItemProps} from "./Item";
+import { Item } from "./Item";
 import { useClassList } from "../utils/useProps";
 import { InnerItem } from "./InnerItem";
 

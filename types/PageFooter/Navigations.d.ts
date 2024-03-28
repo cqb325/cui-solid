@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 export declare function FooterNavigations(props: any): import("solid-js").JSX.Element;
 export declare function FooterNavigation(props: any): import("solid-js").JSX.Element;
 export declare namespace FooterNavigation {

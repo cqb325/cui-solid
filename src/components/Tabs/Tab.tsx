@@ -1,4 +1,4 @@
-import { Component, JSXElement } from "solid-js";
+import type { Component, JSXElement } from "solid-js";
 // type TabProps = {
 //     children?: any,
 //     title?: any,
@@ -27,7 +27,7 @@ import { Component, JSXElement } from "solid-js";
 //         const tab = ctx?.store.tabs.find((tab: any) => tab.name === props.name);
 //         return !!tab;
 //     }
-    
+
 //     return <Show when={isShow()}>
 //         <div classList={classList()} >{props.children}</div>
 //     </Show>

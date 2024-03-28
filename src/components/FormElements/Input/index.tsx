@@ -1,7 +1,6 @@
 import { CheckboxGroup } from '../CheckboxGroup';
 import { RadioGroup } from '../RadioGroup';
 import { InnerInput } from './input';
-import { Textarea } from '../Textarea';
 import { Switch as MySwitch } from '../Switch';
 import { Search } from '../Search';
 import { Spinner } from '../Spinner';

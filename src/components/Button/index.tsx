@@ -1,6 +1,7 @@
 import useClickAnimating from "../utils/useClickAnimating";
 import { Loading } from "../inner/Loading";
-import { Show, splitProps, useContext, ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
+import { Show, splitProps, useContext } from "solid-js";
 import { ButtonGroupContext } from "../ButtonGroup";
 import { useClassList } from "../utils/useProps";
 
@@ -19,7 +20,7 @@ export type ButtonProps = {
     icon?: any,
     iconAlign?: 'left' | 'right',
     ref?: any,
-    onClick?: Function
+    onClick?: (e: any) => void
 } & ComponentProps<any>;
 
 export const Button = (props: ButtonProps) => {
@@ -65,6 +66,6 @@ export const Button = (props: ButtonProps) => {
             {local.loading ? <Loading /> : local.icon ? <span class="cm-button-icon">{local.icon}</span> : null}
         </>
     return <Show when={!local.link} fallback={<a classList={classList()} style={local.style} ref={local.ref} title={local.title} {...others} onMouseUp={setAnimating} onClick={handleClick}>{slots}</a>}>
-        <button type='button' classList={classList()} style={local.style} ref={local.ref} title={local.title} disabled={disabled()} {...others} onMouseUp={setAnimating} onClick={handleClick}>{slots}</button>
+        <button type="button" classList={classList()} style={local.style} ref={local.ref} title={local.title} disabled={disabled()} {...others} onMouseUp={setAnimating} onClick={handleClick}>{slots}</button>
     </Show>
 }

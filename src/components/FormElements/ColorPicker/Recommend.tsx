@@ -1,6 +1,7 @@
-import { Accessor, For, Show } from "solid-js";
+import type { Accessor} from "solid-js";
+import { For, Show } from "solid-js";
 
-export function Recommend(props: any) {
+export function Recommend (props: any) {
     const colors = props.colors ?? [
         '#2d8cf0',
         '#19be6b',
@@ -38,7 +39,7 @@ export function Recommend(props: any) {
                 {(color: string, index: Accessor<number>) => {
                     return <>
                         <div class="cm-color-picker-recommend-color" onClick={() => onClick(color)}>
-                            <div style={{background: color}}></div>
+                            <div style={{background: color}} />
                         </div>
                         <Show when={(index() + 1) % 12 === 0}>
                             <br/>

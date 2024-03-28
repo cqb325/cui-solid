@@ -44,6 +44,6 @@ export function LoadingBar (props: LoadingBarProps) {
     })
 
     return <div classList={classList()} >
-        <div classList={innerClass()} style={innerStyle()}></div>
+        <div classList={innerClass()} style={innerStyle()} />
     </div>
 }

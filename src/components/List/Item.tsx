@@ -1,11 +1,11 @@
 import { useClassList } from "../utils/useProps";
-import { useListContext, ListContextProps } from ".";
+import type { ListContextProps } from ".";
+import { useListContext } from ".";
 
 type ListItemProps = {
     id: string | number,
     data?: any,
     style?: any,
-    render?: Function,
     actions?: any,
     avatar?: any,
     content?: any,
@@ -13,7 +13,6 @@ type ListItemProps = {
     title?: any,
     desc?: any,
 }
-// {className, style, data, actions, activeKey, render, onClick}
 export function Item (props: ListItemProps) {
     const ctx: ListContextProps|undefined = useListContext();
     const activeKey = ctx?.signal[0];
@@ -29,19 +28,19 @@ export function Item (props: ListItemProps) {
     }
 
     return <div classList={classList()} style={props.style} onClick={onClick}>
-        <div class='cm-list-item-main'>
+        <div class="cm-list-item-main">
             <div class="cm-list-item-meta">
-                {props.avatar ? <div class='cm-list-item-avatar'>{props.avatar}</div> : null}
-                {props.title || props.desc ? <div class='cm-list-item-body'>
+                {props.avatar ? <div class="cm-list-item-avatar">{props.avatar}</div> : null}
+                {props.title || props.desc ? <div class="cm-list-item-body">
                     <div class="cm-list-item-title">{props.title}</div>
                     <div class="cm-list-item-desc">{props.desc}</div>
                 </div> : null}
             </div>
-            <div class='cm-list-item-content'>
+            <div class="cm-list-item-content">
                 {props.children}
             </div>
         </div>
-        {   props.actions ? <ul class='cm-list-item-addon'>
+        { props.actions ? <ul class="cm-list-item-addon">
             {props.actions}
         </ul> : null}
     </div>

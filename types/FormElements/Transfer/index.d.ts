@@ -1,3 +1,4 @@
+import type { Signal } from "solid-js";
 type TransferProps = {
     classList?: any;
     class?: string;
@@ -5,10 +6,17 @@ type TransferProps = {
     width?: number;
     height?: number;
     data?: any[];
-    value?: any[] | Function[];
+    value?: any[] | Signal<any>;
     filter?: boolean;
-    render?: Function;
-    onChange?: Function;
+    render?: (item: any) => any;
+    onChange?: (value: any[]) => void;
+};
+export type TransferStore = {
+    data: any[];
+    sourceDisabled: boolean;
+    targetDisabled: boolean;
+    sourceIds: any[];
+    targetIds: any[];
 };
 export declare function Transfer(props: TransferProps): import("solid-js").JSX.Element;
 export {};

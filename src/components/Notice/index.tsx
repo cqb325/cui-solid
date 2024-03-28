@@ -1,7 +1,6 @@
 import { createUniqueId } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import { render } from "solid-js/web";
-import { Icon } from "../Icon";
 import usePortal from "../utils/usePortal";
 import { Notices } from "./Notices";
 import usezIndex from "../utils/usezIndex";
@@ -16,7 +15,7 @@ export type NoticeConfig = {
     theme?: 'success' | 'warning' | 'error' | 'info',
     btn?: any,
     style?: any,
-    onClose?: Function
+    onClose?: () => void
 }
 
 type StoreData = {
@@ -28,7 +27,7 @@ type StoreData = {
 
 /**
  * Notice
- * @returns 
+ * @returns
  */
 function Notice () {
     const [store, setStore] = createStore({

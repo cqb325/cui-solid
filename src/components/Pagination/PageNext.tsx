@@ -7,6 +7,6 @@ export function PageNext (props: any) {
         'cm-pagination-num-disabled': props.disabled
     });
     return (<li onClick={props.onClick} classList={classList()}>
-        <Icon name='chevron-right' size={14}/>
-    </li>); 
-};
+        <Icon name="chevron-right" size={14}/>
+    </li>);
+}

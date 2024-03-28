@@ -1,11 +1,12 @@
 import { createUniqueId } from "solid-js";
+import type { SetStoreFunction} from "solid-js/store";
 import { produce } from "solid-js/store";
-import { ColumnProps, TableStore } from '.';
+import type { ColumnProps, TableStore } from '.';
 
 /**
  * 初始化表头
  * 添加默认id确定最后一个flex
- * @param columns 
+ * @param columns
  */
 export function initColumns (columns: ColumnProps[]) {
     let maxFixedLeft = -1;
@@ -33,7 +34,7 @@ export function initColumns (columns: ColumnProps[]) {
 /**
  * 滚动条滚动后更新固定列的样式
  */
-export function updateScrollFixed (maxFixedLeft: number, minFixedRight: number, setStore: Function, scrollLeft: number, clientWidth: number, scrollWidth: number) {
+export function updateScrollFixed (maxFixedLeft: number, minFixedRight: number, setStore: SetStoreFunction<TableStore>, scrollLeft: number, clientWidth: number, scrollWidth: number) {
     if (maxFixedLeft >= 0 || minFixedRight < Number.MAX_VALUE) {
         setStore('showFixedLeft', scrollLeft > 0);
         setStore('showFixedRight', clientWidth + scrollLeft < scrollWidth);
@@ -42,7 +43,7 @@ export function updateScrollFixed (maxFixedLeft: number, minFixedRight: number, 
 
 /**
  * 初始化表格数据
- * @param data 
+ * @param data
  */
 export function initData (data: any[]) : any[] {
     let ret = data ?? [];
@@ -56,8 +57,8 @@ export function initData (data: any[]) : any[] {
     return ret;
 }
 
-export function sortData (setStore: Function, store: TableStore, column: ColumnProps) {
-    let arr = [...store.data];
+export function sortData (setStore: SetStoreFunction<TableStore>, store: TableStore, column: ColumnProps) {
+    const arr = [...store.data];
     if (column.sortType === '') {
         arr.sort((a: any, b: any) => {
             return a._originSort - b._originSort > 0 ? 1 : -1;
@@ -93,11 +94,11 @@ export function _buildTreeData (data: any[], target: any[], level: number, show:
 
 /**
  * 树形数据重构
- * @param data 
- * @returns 
+ * @param data
+ * @returns
  */
 export function buildTreeData (data: any[]) {
-    let arr: any[] = [];
+    const arr: any[] = [];
     _buildTreeData(data, arr, 0, true);
     return arr;
 }
@@ -122,10 +123,10 @@ const showChildren = (map: any, id: string) => {
 
 /**
  * 显示隐藏树形数据
- * @param setStore 
- * @param row 
+ * @param setStore
+ * @param row
  */
-export function showHideChildren(setStore: Function, row: any) {
+export function showHideChildren (setStore: SetStoreFunction<TableStore>, row: any) {
     setStore('data', (item: any) => item.id === row.id, produce((item: any) => item._showChildren = !item._showChildren))
     setStore('data', produce((data: any) => {
         const ids = row.children.map((child: any) => {
@@ -150,11 +151,11 @@ export function showHideChildren(setStore: Function, row: any) {
 
 /**
  * 排序信息
- * @param setStore 
- * @param column 
- * @param sortType 
+ * @param setStore
+ * @param column
+ * @param sortType
  */
-export function sortHandler (setStore: Function, store:TableStore, column: ColumnProps, sortType: string) {
+export function sortHandler (setStore: SetStoreFunction<TableStore>, store:TableStore, column: ColumnProps, sortType: string) {
     setStore('columns', (col: any) => col.name === column.name, produce((col: any) => {
         if (col.sortType === sortType) {
             col.sortType = '';
@@ -171,11 +172,11 @@ export function sortHandler (setStore: Function, store:TableStore, column: Colum
 
 /**
  * 添加或删除展开收缩的数据
- * @param setStore 
- * @param column 
- * @param row 
+ * @param setStore
+ * @param column
+ * @param row
  */
-export function addRemoveExpand (setStore: Function, column: ColumnProps, row: any) {
+export function addRemoveExpand (setStore: SetStoreFunction<TableStore>, column: ColumnProps, row: any) {
     setStore('data', produce((data: any) => {
         let currentIndex = -1;
         const currentRow = data.find((item: any, index: number) => {
@@ -198,7 +199,7 @@ export function addRemoveExpand (setStore: Function, column: ColumnProps, row: a
 }
 
 // resize开始
-export const onResizeStart = (setStore: Function, column: ColumnProps, e: any) => {
+export const onResizeStart = (setStore: SetStoreFunction<TableStore>, column: ColumnProps, e: any) => {
     if (typeof e.button === 'number' && e.button !== 0) return false;
     setStore('resizing', true);
     const r = e.target.getBoundingClientRect().right;
@@ -210,7 +211,7 @@ export const onResizeStart = (setStore: Function, column: ColumnProps, e: any) =
 }
 
 // resize鼠标移动
-export const onResizeMove = (store: any, setStore: Function, e: any) => {
+export const onResizeMove = (store: any, setStore: SetStoreFunction<TableStore>, e: any) => {
     if (store.resizing) {
         const deltaX = e.clientX - store.x;
         setStore('x', e.clientX);
@@ -219,7 +220,7 @@ export const onResizeMove = (store: any, setStore: Function, e: any) => {
     }
 }
 // resize结束
-export const onResizeEnd = (store: TableStore, setStore: Function) => {
+export const onResizeEnd = (store: TableStore, setStore: SetStoreFunction<TableStore>) => {
     setStore('resizing', false);
     setStore('columns', (col: ColumnProps) => col.id === store.resizeId, produce((col: ColumnProps) => {
         col.width = col.width ? parseFloat(col.width) + (store.posX - store.startX) + 'px' : undefined;

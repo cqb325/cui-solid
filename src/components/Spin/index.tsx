@@ -1,5 +1,6 @@
 import { useClassList } from '../utils/useProps';
-import { JSXElement, Match, Switch } from 'solid-js';
+import type { JSXElement} from 'solid-js';
+import { Match, Switch } from 'solid-js';
 
 /**
  * Spin 类
@@ -19,35 +20,35 @@ export function Spin (props: SpinProps) {
     const type = () => props.type || 'pulse';
     return (
         <div classList={classList()}>
-            <div class='cm-spin-inner'>
-                <div class='cm-spin' style={{width: props.size + 'px', height: props.size + 'px'}}>
+            <div class="cm-spin-inner">
+                <div class="cm-spin" style={{width: props.size + 'px', height: props.size + 'px'}}>
                     <Switch>
                         <Match when={type() === 'pulse'}>
-                            <div class='cm-spin-pulse'></div>
+                            <div class="cm-spin-pulse" />
                         </Match>
                         <Match when={type() === 'oval'}>
-                            <svg class='cm-spin-oval' xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 38 38' stroke='#2d8cf0'>
-                                <g fill='none' fill-rule='evenodd'>
-                                    <g transform='translate(1 1)' stroke-width='2'>
-                                        <circle stroke-opacity='.5' cx='18' cy='18' r='18'/>
-                                        <path d='M36 18c0-9.94-8.06-18-18-18' transform='rotate(113.635 18 18)'>
-                                            <animateTransform attributeName='transform' type='rotate' from='0 18 18' to='360 18 18' dur='1s' repeatCount='indefinite'/>
+                            <svg class="cm-spin-oval" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 38 38" stroke="#2d8cf0">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g transform="translate(1 1)" stroke-width="2">
+                                        <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                                        <path d="M36 18c0-9.94-8.06-18-18-18" transform="rotate(113.635 18 18)">
+                                            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
                                         </path>
                                     </g>
                                 </g>
                             </svg>
                         </Match>
                         <Match when={type() === 'gear'}>
-                            <svg class='cm-spin-gears' width='32px' height='32px' xmlns='http://www.w3.org/2000/svg'
-                                viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'>
-                                <g transform='translate(50 50)'>
-                                    <g transform='translate(-19 -19) scale(0.6)'>
-                                        <g transform='rotate(177)'>
-                                            <animateTransform attributeName='transform' type='rotate' values='0;360'
-                                                keyTimes='0;1' dur='2s' begin='0s' repeatCount='indefinite'
+                            <svg class="cm-spin-gears" width="32px" height="32px" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                <g transform="translate(50 50)">
+                                    <g transform="translate(-19 -19) scale(0.6)">
+                                        <g transform="rotate(177)">
+                                            <animateTransform attributeName="transform" type="rotate" values="0;360"
+                                                keyTimes="0;1" dur="2s" begin="0s" repeatCount="indefinite"
                                             />
-                                            <path fill='#20a0ff'
-                                                d='M37.3496987939662 -7 L47.3496987939662 -7 L47.3496987939662 7
+                                            <path fill="#20a0ff"
+                                                d="M37.3496987939662 -7 L47.3496987939662 -7 L47.3496987939662 7
                                             L37.3496987939662 7 A38 38 0 0 1 31.359972760794346 21.46047782418268
                                             L31.359972760794346 21.46047782418268 L38.431040572659825 28.531545636048154
                                             L28.531545636048154 38.431040572659825 L21.46047782418268 31.359972760794346
@@ -69,17 +70,17 @@ export function Spin (props: SpinProps) {
                                             -31.359972760794342 L21.460477824182686 -31.359972760794342
                                             L28.531545636048158 -38.43104057265982 L38.4310405726598 -28.53154563604818
                                             L31.35997276079433 -21.4604778241827 A38 38 0 0 1 37.3496987939662
-                                            -6.999999999999995 M0 -23A23 23 0 1 0 0 23 A23 23 0 1 0 0 -23'
+                                            -6.999999999999995 M0 -23A23 23 0 1 0 0 23 A23 23 0 1 0 0 -23"
                                             />
                                         </g>
                                     </g>
-                                    <g transform='translate(19 19) scale(0.6)'>
-                                        <g transform='rotate(160.5)'>
-                                            <animateTransform attributeName='transform' type='rotate' values='360;0'
-                                                keyTimes='0;1' dur='2s' begin='-0.125s' repeatCount='indefinite'
+                                    <g transform="translate(19 19) scale(0.6)">
+                                        <g transform="rotate(160.5)">
+                                            <animateTransform attributeName="transform" type="rotate" values="360;0"
+                                                keyTimes="0;1" dur="2s" begin="-0.125s" repeatCount="indefinite"
                                             />
-                                            <path fill='rgba(12.549019607843137%,62.74509803921568%,100%,0.382)'
-                                                d='M37.3496987939662 -7 L47.3496987939662 -7 L47.3496987939662 7
+                                            <path fill="rgba(12.549019607843137%,62.74509803921568%,100%,0.382)"
+                                                d="M37.3496987939662 -7 L47.3496987939662 -7 L47.3496987939662 7
                                             L37.3496987939662 7 A38 38 0 0 1 31.359972760794346 21.46047782418268
                                             L31.359972760794346 21.46047782418268 L38.431040572659825 28.531545636048154
                                             L28.531545636048154 38.431040572659825
@@ -104,7 +105,7 @@ export function Spin (props: SpinProps) {
                                             -31.359972760794342 L21.460477824182686 -31.359972760794342
                                             L28.531545636048158 -38.43104057265982 L38.4310405726598 -28.53154563604818
                                             L31.35997276079433 -21.4604778241827 A38 38 0 0 1 37.3496987939662
-                                            -6.999999999999995 M0 -23A23 23 0 1 0 0 23 A23 23 0 1 0 0 -23'
+                                            -6.999999999999995 M0 -23A23 23 0 1 0 0 23 A23 23 0 1 0 0 -23"
                                             />
                                         </g>
                                     </g>
@@ -113,7 +114,7 @@ export function Spin (props: SpinProps) {
                         </Match>
                     </Switch>
                 </div>
-                <div class='cm-spin-text'>{props.title || 'loading...'}</div>
+                <div class="cm-spin-text">{props.title || 'loading...'}</div>
             </div>
         </div>
     );

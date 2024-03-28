@@ -1,11 +1,12 @@
-import { Portal, Show, render } from "solid-js/web";
+import { Portal, render } from "solid-js/web";
 import createModel from "../utils/createModel";
 import usePortal from "../utils/usePortal";
 import { useClassList } from "../utils/useProps";
 import { Draggable } from "../Draggable";
 import { Icon } from "../Icon";
 import { Button } from "../Button";
-import { JSXElement, createEffect, createSignal, createUniqueId, untrack } from "solid-js";
+import type { JSXElement, Setter, Signal} from "solid-js";
+import { createEffect, createSignal, createUniqueId, untrack, Show } from "solid-js";
 import usezIndex from "../utils/usezIndex";
 
 type Position = {
@@ -25,14 +26,14 @@ type ModalProps = {
     bodyStyle?: any,
     children?: any,
     footer?: boolean,
-    loading?: boolean | Function[],
-    onOk?: Function,
-    onCancel?: Function,
-    onClosed?: Function,
-    onClickClose?: Function,
+    loading?: boolean | Signal<boolean>,
+    onOk?: () => void,
+    onCancel?: () => void,
+    onClosed?: () => void,
+    onClickClose?: () => void,
     okText?: any,
     cancleText?: any,
-    visible?: boolean | Function[],
+    visible?: boolean | Signal<boolean>,
     defaultPosition?: Position,
     mask?: boolean,
     maskClosable?: boolean,
@@ -98,7 +99,7 @@ export function Modal (props: ModalProps) {
                 setOverflow = false;
             }
         } else {
-            if(wrap) {
+            if (wrap) {
                 const wrapH = wrap.getBoundingClientRect().height;
                 const contentH = wrap.children[0].getBoundingClientRect().height;
                 // 超出显示内容
@@ -154,25 +155,25 @@ export function Modal (props: ModalProps) {
     const resetPostion = props.resetPostion ?? false;
     return <Portal mount={usePortal(id, id)}>
         <Show when={mask}>
-            <div classList={maskClass()} onClick={onMaskClick} ref={maskEle} style={{"z-index": (zindex - 1)}}></div>
+            <div classList={maskClass()} onClick={onMaskClick} ref={maskEle} style={{"z-index": (zindex - 1)}} />
         </Show>
         <div classList={wrapClass()} ref={wrap} tabIndex="1" onKeyDown={onkeydown} style={{"z-index": zindex}}>
-            <Draggable ref={draggable} bounds={props.bounds || 'body'} style={props.defaultPosition} handle={'.cm-modal-header[data-id="' + modalId + '"]'} 
+            <Draggable ref={draggable} bounds={props.bounds || 'body'} style={props.defaultPosition} handle={'.cm-modal-header[data-id="' + modalId + '"]'}
                 disabled={props.disabled}>
                 <div classList={classList()} style={props.style}>
-                    <div class='cm-modal-header' data-id={`${modalId}`}>
-                        { props.title ? <div class='cm-modal-title'>{props.title}</div> : null }
+                    <div class="cm-modal-header" data-id={`${modalId}`}>
+                        { props.title ? <div class="cm-modal-title">{props.title}</div> : null }
                         <Show when={hasCloseIcon}>
-                            <span class='cm-modal-close' onClick={onClickClose}><Icon name='x'/></span>
+                            <span class="cm-modal-close" onClick={onClickClose}><Icon name="x"/></span>
                         </Show>
                     </div>
-                    <div class='cm-modal-body' style={props.bodyStyle}>
+                    <div class="cm-modal-body" style={props.bodyStyle}>
                         {props.children}
                     </div>
                     <Show when={footer}>
-                        <div class='cm-modal-footer'>
-                            <Button type='primary' loading={loading()} onClick={onOk}>{okText}</Button>
-                            <Button type='default' className='mr-10' onClick={onCancel}>{cancleText}</Button>
+                        <div class="cm-modal-footer">
+                            <Button type="primary" loading={loading()} onClick={onOk}>{okText}</Button>
+                            <Button type="default" class="mr-10" onClick={onCancel}>{cancleText}</Button>
                         </div>
                     </Show>
                 </div>
@@ -183,13 +184,13 @@ export function Modal (props: ModalProps) {
 
 
 export interface ModalConfig extends ModalProps{
-    content?: JSXElement,
+    content?: JSXElement | (() => any),
     status?: 'success'|'info'|'warning'|'error'|'confirm'
 }
 
 function ModalFun () {
-    const [visible, setVisible] = createSignal(true);
-    let disposeFn: Function;
+    const [visible, setVisible] = createSignal<boolean>(true);
+    let disposeFn: () => void;
     return {
         open (config: ModalConfig) {
             setVisible(true);
@@ -209,8 +210,8 @@ function ModalFun () {
             if (config.status === 'confirm') {
                 icon = 'help-circle'
             }
-            const close = (v: boolean) => {
-                setVisible(v);
+            const close: Setter<boolean> = (v?: unknown) => {
+                setVisible(v as boolean);
                 setTimeout(() => {
                     disposeFn?.()
                 }, 250)
@@ -219,15 +220,15 @@ function ModalFun () {
             config.visible = [visible, close];
             config.defaultPosition = {top: '200px', ...config.defaultPosition};
             const ele = usePortal('cm-modal-portal-instance', 'cm-modal-portal');
-            
+
             const disposeFn = render(() => <Modal {...config} class="cm-modal-instance">
                 <div class="cm-modal-left">
-                    <div class='cm-modal-icon'>
+                    <div class="cm-modal-icon">
                         <Icon name={icon} size={24}/>
                     </div>
                 </div>
                 <div class="cm-modal-right">
-                    {config.content}
+                    {typeof config.content === 'function' ? config.content() : config.content}
                 </div>
             </Modal>, ele);
         },

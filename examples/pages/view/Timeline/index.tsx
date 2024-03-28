@@ -17,7 +17,7 @@ useDirective(hljs);
 
 export default function TimelinePage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Timeline 时间轴
@@ -43,7 +43,7 @@ export default function TimelinePage () {
                             </Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         基础用法
                         </Paragraph>
                         <DemoCode data={codes['timeline_base']}/>
@@ -58,7 +58,7 @@ export default function TimelinePage () {
                             <Timeline.Item color="blue">发布3.0版本</Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">颜色</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             用各种颜色来标识不同状态，可以使用green、red、blue、yellow或自定义的颜色，默认是 blue 。
                         </Paragraph>
                         <DemoCode data={codes['timeline_color']}/>
@@ -74,7 +74,7 @@ export default function TimelinePage () {
                             <Timeline.Item color="blue" fill>发布3.0版本</Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">填充</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置fill可以将color填充节点
                         </Paragraph>
                         <DemoCode data={codes['timeline_fill']}/>
@@ -83,7 +83,7 @@ export default function TimelinePage () {
 
                 <Space id="timeline_alternate" dir="v">
                     <Card bordered>
-                        <Timeline mode='alternate'>
+                        <Timeline mode="alternate">
                             <Timeline.Item time="2023-01-01 12:00:00">
                                 <label class="time">第一个节点内容</label>
                                 <span class="content">描述信息</span>
@@ -106,7 +106,7 @@ export default function TimelinePage () {
                             </Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">交替</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>mode='alternate'</Text> 可以交替显示时间轴内容
                         </Paragraph>
                         <DemoCode data={codes['timeline_alternate']}/>
@@ -115,7 +115,7 @@ export default function TimelinePage () {
 
                 <Space id="timeline_right" dir="v">
                     <Card bordered>
-                        <Timeline mode='right'>
+                        <Timeline mode="right">
                             <Timeline.Item time="2023-01-01 12:00:00">
                                 <label class="time">第一个节点内容</label>
                                 <span class="content">描述信息</span>
@@ -130,7 +130,7 @@ export default function TimelinePage () {
                             </Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">靠右</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>mode='right'</Text> 可以渲染靠右的时间轴
                         </Paragraph>
                         <DemoCode data={codes['timeline_right']}/>
@@ -139,7 +139,7 @@ export default function TimelinePage () {
 
                 <Space id="timeline_center" dir="v">
                     <Card bordered>
-                        <Timeline mode='center'>
+                        <Timeline mode="center">
                             <Timeline.Item time="2023-01-01 12:00:00">
                                 <label class="time">第一个节点内容</label>
                                 <span class="content">描述信息</span>
@@ -154,7 +154,7 @@ export default function TimelinePage () {
                             </Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">时间节点靠左</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>mode='center'</Text> 可以将时间靠左显示
                         </Paragraph>
                         <DemoCode data={codes['timeline_center']}/>
@@ -165,13 +165,13 @@ export default function TimelinePage () {
                 <Space id="timeline_icon" dir="v">
                     <Card bordered>
                         <Timeline>
-                            <Timeline.Item color="green" icon={<Icon name='trophy' size={13}/>}>发布1.0版本</Timeline.Item>
+                            <Timeline.Item color="green" icon={<Icon name="trophy" size={13}/>}>发布1.0版本</Timeline.Item>
                             <Timeline.Item color="green">发布2.0版本</Timeline.Item>
                             <Timeline.Item color="red">严重故障</Timeline.Item>
                             <Timeline.Item color="blue">发布3.0版本</Timeline.Item>
                         </Timeline>
                         <Divider align="left"><Text type="primary">自定义轴点</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             自定义轴点的内容，一个图标。
                         </Paragraph>
                         <DemoCode data={codes['timeline_icon']}/>
@@ -181,18 +181,18 @@ export default function TimelinePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Timeline Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_itemprops' dir="v">
+                    <Space id="comp_itemprops" dir="v">
                         <Title type="primary" heading={4}>Timeline.Item Props</Title>
-                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>
 }

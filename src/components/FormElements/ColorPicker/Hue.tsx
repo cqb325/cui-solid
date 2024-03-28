@@ -60,7 +60,7 @@ export function Hue (props: any) {
     })
     return <div class="cm-color-picker-hue" ref={container}>
         <div class="cm-color-picker-hue-wrap" onMouseDown={handleMouseDown}>
-            <div class="cm-color-picker-hue-pointer" style={{top: 0, left: `${left()}%`}}></div>
+            <div class="cm-color-picker-hue-pointer" style={{top: 0, left: `${left()}%`}} />
         </div>
     </div>
 }

@@ -20,7 +20,7 @@ useDirective(hljs);
 function CollapaseDemo () {
     const [open, setOpen] = createSignal(true);
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Collapase 折叠
@@ -30,7 +30,7 @@ function CollapaseDemo () {
                         <div style={{height: '150px'}}>
                             <Button onClick={() => {
                                 setOpen(!open());
-                            }} type='primary'>Toggle</Button>
+                            }} type="primary">Toggle</Button>
                             <div>
                                 <Collapase open={open()}>
                                     <ul>
@@ -44,7 +44,7 @@ function CollapaseDemo () {
                             </div>
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             控制折叠
                         </Paragraph>
                         <DemoCode data={codes['collapse_base']}/>
@@ -54,11 +54,11 @@ function CollapaseDemo () {
                 <div id="comp_api">
                     <Space dir="v" size={24}>
                         <Title type="primary" heading={3}>API</Title>
-                        <Space id='comp_props' dir="v">
+                        <Space id="comp_props" dir="v">
                             <Title type="primary" heading={4}>Collapase Props</Title>
-                            <Table columns={propsColumns} data={propsData} border size='small' />
+                            <Table columns={propsColumns} data={propsData} border size="small" />
                         </Space>
-                        <Space id='comp_events' dir="v">
+                        <Space id="comp_events" dir="v">
                             <Title type="primary" heading={4}>Collapase Events</Title>
                             <Table columns={eventsColumns} data={eventsData} border size="small" />
                         </Space>

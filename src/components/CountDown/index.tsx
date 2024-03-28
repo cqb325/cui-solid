@@ -10,10 +10,10 @@ interface CountDownProps {
     suffix?: any,
     value?: string|number|Date,
     format?: string,
-    onEnd?: Function
+    onEnd?: () => void
 }
 
-function fixedZero(val: number) {
+function fixedZero (val: number) {
     return `${val}`.padStart(2, '0');
 }
 
@@ -59,7 +59,7 @@ export function CountDown (props: CountDownProps) {
     }
 
     const update = () => {
-        timer = setInterval (() => {
+        timer = setInterval(() => {
             setNow(new Date().getTime())
         }, 1000);
     }
@@ -75,8 +75,8 @@ export function CountDown (props: CountDownProps) {
     const classList = () => useClassList(props, 'cm-count-down');
 
     return <span classList={classList()} style={props.style}>
-        <Show when={props.prefix}><span class='cm-count-down-prefix'>{props.prefix}</span></Show>
-        <span class='cm-count-down-value'>{text()}</span>
-        <Show when={props.suffix}><span class='cm-count-down-suffix'>{props.suffix}</span></Show>
+        <Show when={props.prefix}><span class="cm-count-down-prefix">{props.prefix}</span></Show>
+        <span class="cm-count-down-value">{text()}</span>
+        <Show when={props.suffix}><span class="cm-count-down-suffix">{props.suffix}</span></Show>
     </span>
 }

@@ -6,7 +6,7 @@ export function Value (props: any) {
     const onClear = () => {
         props.onClear && props.onClear();
     }
-    
+
     const text = () => {
         if (props.value) {
             if (typeof props.value === 'string') {
@@ -36,10 +36,10 @@ export function Value (props: any) {
                 {props.prepend}
             </div>
         </Show>
-        <div class='cm-time-picker-text'>{text()}</div>
-        <Icon name='clock' class='cm-time-picker-cert'/>
+        <div class="cm-time-picker-text">{text()}</div>
+        <Icon name="clock" class="cm-time-picker-cert"/>
         <Show when={props.clearable && (props.value !== '' && props.value.length !== 0)}>
-            <Icon name='x-circle' class='cm-time-picker-clear' onClick={onClear}/>
+            <Icon name="x-circle" class="cm-time-picker-clear" onClick={onClear}/>
         </Show>
     </div>
 }

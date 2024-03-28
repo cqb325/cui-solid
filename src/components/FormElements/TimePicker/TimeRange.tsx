@@ -6,7 +6,7 @@ export function TimeRange (props: any) {
     const val1 = () => local.value[0];
     const val2 = () => local.value[1];
     return <>
-        <TimePane value={val1()} header={local.header[0]} footer={(local.footer && local.footer.length) && local.footer[0]} {...others} name='start'/>
-        <TimePane value={val2()} header={local.header[1]} footer={(local.footer && local.footer.length) && local.footer[1]} {...others} name='end'/>
+        <TimePane value={val1()} header={local.header[0]} footer={(local.footer && local.footer.length) && local.footer[0]} {...others} name="start"/>
+        <TimePane value={val2()} header={local.header[1]} footer={(local.footer && local.footer.length) && local.footer[1]} {...others} name="end"/>
     </>
 }

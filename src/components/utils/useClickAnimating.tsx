@@ -2,11 +2,11 @@ import { createSignal } from "solid-js";
 
 /**
  * 点击触发animating
- * @returns 
+ * @returns
  */
 function useClickAnimating () {
     const [animating, setAnimating] = createSignal(false);
-    const setAnimate  = () => {
+    const setAnimate = () => {
         setAnimating(true);
         setTimeout(() => {
             setAnimating(false);

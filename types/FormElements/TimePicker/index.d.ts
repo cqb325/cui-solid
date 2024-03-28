@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement, Signal } from "solid-js";
 type TimePickerProps = {
     classList?: any;
     class?: any;
@@ -9,9 +9,9 @@ type TimePickerProps = {
     clearable?: boolean;
     align?: 'bottomLeft' | 'bottomRight';
     format?: string;
-    value?: string | Date | string[] | Date[] | Function[];
+    value?: string | Date | string[] | Date[] | Signal<any>;
     prepend?: string | JSXElement;
-    disabledTime?: Function;
+    disabledTime?: (num: number, type: string) => boolean;
     minuteStep?: number;
     secondStep?: number;
     hourStep?: number;
@@ -19,9 +19,9 @@ type TimePickerProps = {
     footer?: string | JSXElement | string[] | JSXElement[];
     seperator?: string;
     transfer?: boolean;
-    trigger?: Function;
+    trigger?: () => any;
     placeholder?: string;
-    onChange?: Function;
+    onChange?: (value: any) => void;
 };
 export declare function Timepicker(props: TimePickerProps): import("solid-js").JSX.Element;
 export declare const useTimepickerContext: () => unknown;

@@ -32,7 +32,7 @@ export default function ContactsPage () {
         children: [{name: '兰州市', id: '兰州市'}, {name: '嘉峪关市', id: '嘉峪关市'}, {name: '金昌市', id: '金昌市'}, {name: '白银市', id: '白银市'}]
     }];
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     IndexList 索引列表
@@ -40,10 +40,10 @@ export default function ContactsPage () {
                 <Space id="indexlist_base" dir="v">
                     <Card bordered>
                         <div style={{height: "500px"}}>
-                            <IndexList data={data}></IndexList>
+                            <IndexList data={data} />
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['indexlist_base']}/>
@@ -55,10 +55,10 @@ export default function ContactsPage () {
                         <div style={{height: "500px"}}>
                             <IndexList data={data} selectable onChange={(v) => {
                                 console.log(v);
-                            }}></IndexList>
+                            }} />
                         </div>
                         <Divider align="left"><Text type="primary">可选择</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             添加selectable属性可以对选项进行选择
                         </Paragraph>
                         <DemoCode data={codes['indexlist_selectable']}/>
@@ -68,10 +68,10 @@ export default function ContactsPage () {
                 <Space id="indexlist_border" dir="v">
                     <Card bordered>
                         <div style={{height: "500px"}}>
-                            <IndexList data={data} border></IndexList>
+                            <IndexList data={data} border />
                         </div>
                         <Divider align="left"><Text type="primary">边框</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             添加 border 属性渲染边框
                         </Paragraph>
                         <DemoCode data={codes['indexlist_border']}/>
@@ -88,10 +88,10 @@ export default function ContactsPage () {
                                     <span style={{"padding-right": '5px'}}>xxxxxxxxx</span></Space>
                             }} onChange={(v) => {
                                 console.log(v);
-                            }}></IndexList>
+                            }} />
                         </div>
                         <Divider align="left"><Text type="primary">自定义渲染</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过 renderItem 方法可以自定义选项的渲染方式
                         </Paragraph>
                         <DemoCode data={codes['indexlist_custom']}/>
@@ -100,14 +100,14 @@ export default function ContactsPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>IndexList Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_item_props' dir="v">
+                    <Space id="comp_item_props" dir="v">
                         <Title type="primary" heading={4}>data Props</Title>
-                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

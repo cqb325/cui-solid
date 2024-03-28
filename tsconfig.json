@@ -1,6 +1,12 @@
 {
-  "include": ["src/**/*.tsx", "examples/**/*.tsx"],
-  // "include": ["src/**/*.tsx"],
+  "include": [
+    "src/**/*.tsx",
+    "examples/**/*.tsx",
+    "./.eslintrc.cjs",
+  ],
+  // "include": [
+  //   "src/**/*.tsx"
+  // ],
   "compilerOptions": {
     "strict": true,
     "target": "ESNext",
@@ -13,11 +19,18 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["vite/client"],
+    "types": [
+      "vite/client"
+    ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": [
+        "src/*"
+      ],
     }
   },
-  "exclude": ["node_modules", "**/*d.ts"]
+  "exclude": [
+    "node_modules",
+    "**/*d.ts"
+  ]
 }

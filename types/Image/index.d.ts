@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 type ImageProps = {
     classList?: any;
     class?: string;
@@ -13,15 +13,15 @@ type ImageProps = {
     lazy?: boolean;
     referrerPolicy?: any;
     scrollContainer?: string | HTMLElement;
-    onLoad?: Function;
-    onError?: Function;
+    onLoad?: () => void;
+    onError?: () => void;
     placeholder?: string | JSXElement;
     width?: number | string;
     height?: number | string;
     infinite?: boolean;
     maskClosable?: boolean;
-    onClose?: Function;
-    onSwitch?: Function;
+    onClose?: () => void;
+    onSwitch?: (index: number) => void;
     previewIndex?: number;
 };
 export declare function Image(props: ImageProps): import("solid-js").JSX.Element;

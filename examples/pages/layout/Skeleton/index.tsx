@@ -26,7 +26,7 @@ export default function SkeletonPage () {
         setLoading(!loading());
     }
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Skeleton 骨架屏
@@ -70,7 +70,7 @@ export default function SkeletonPage () {
                         </div>
 
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['skeleton_base']}/>
@@ -93,7 +93,7 @@ export default function SkeletonPage () {
                         </Skeleton>
 
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['skeleton_img']}/>
@@ -105,9 +105,9 @@ export default function SkeletonPage () {
                 <Space id="skeleton_combine" dir="v">
                     <Card bordered>
                         <Skeleton placeholder={<div style={{display: 'flex', "align-items": 'flex-start'}}>
-                                <Skeleton.Avatar shape='square' style={{ 'margin-right': '12px' }} />
+                                <Skeleton.Avatar shape="square" style={{ 'margin-right': '12px' }} />
                                 <div>
-                                    <Skeleton.Title width='120px' style={{ 'margin-bottom': '12px', 'margin-top': '12px' }} />
+                                    <Skeleton.Title width="120px" style={{ 'margin-bottom': '12px', 'margin-top': '12px' }} />
                                     <Skeleton.Paragraph width={['240px', '220px', '180px']} rows={3} />
                                 </div>
                             </div>} loading={true}>
@@ -125,7 +125,7 @@ export default function SkeletonPage () {
                         </Skeleton>
 
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['skeleton_combine']}/>
@@ -155,13 +155,11 @@ export default function SkeletonPage () {
                                 <Skeleton.Image width="280px" height="140px" />
                             </Col>
                         </Row>} loading={true}>
-                            <div style={{display: 'flex', "align-items": 'flex-start'}}>
-                                
-                            </div>
+                            <div style={{display: 'flex', "align-items": 'flex-start'}} />
                         </Skeleton>
 
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['skeleton_active']}/>
@@ -170,24 +168,24 @@ export default function SkeletonPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Skeleton Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_item_props' dir="v">
+                    <Space id="comp_item_props" dir="v">
                         <Title type="primary" heading={4}>Item Props</Title>
-                        <Table columns={propsColumns} data={itemPropsData} border size='small' />
+                        <Table columns={propsColumns} data={itemPropsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_avatar_props' dir="v">
+                    <Space id="comp_avatar_props" dir="v">
                         <Title type="primary" heading={4}>Avatar Props</Title>
-                        <Table columns={propsColumns} data={avatarPropsData} border size='small' />
+                        <Table columns={propsColumns} data={avatarPropsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_paragraph_props' dir="v">
+                    <Space id="comp_paragraph_props" dir="v">
                         <Title type="primary" heading={4}>Paragraph Props</Title>
-                        <Table columns={propsColumns} data={paragraphPropsData} border size='small' />
+                        <Table columns={propsColumns} data={paragraphPropsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

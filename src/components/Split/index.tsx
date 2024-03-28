@@ -1,4 +1,5 @@
-import { For, JSXElement, createEffect, createRenderEffect, createSignal, onCleanup } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { For, createEffect, createRenderEffect, createSignal, onCleanup } from "solid-js";
 import { useClassList } from "../utils/useProps"
 import { createStore } from "solid-js/store";
 import { useSlots } from "../utils/useSlots";
@@ -49,7 +50,7 @@ export function Split (props: SplitProps) {
         } else {
             wh = parseFloat(wh);
         }
-        let max = props.max ? props.max / wrapSize * 100 : 100 - min / wrapSize * 100;
+        const max = props.max ? props.max / wrapSize * 100 : 100 - min / wrapSize * 100;
         wh = wh + (dir === 'v' ? store.deltaX : store.deltaY)/wrapSize * 100;
         wh = Math.max(wh, min / wrapSize * 100);
         wh = Math.min(wh, max);
@@ -94,7 +95,7 @@ export function Split (props: SplitProps) {
         setStore('y', e.clientY);
         setStore('deltaX', deltaX);
         setStore('deltaY', deltaY);
-        
+
     }
     const onDragEnd = (e: any) => {
         setStore('dragging', false);
@@ -118,7 +119,7 @@ export function Split (props: SplitProps) {
                 <div class="cm-split-handler-bar-wrap">
                     <For each={[1,2,3,4,5,6,7,8]}>
                         {() => {
-                            return <div class="cm-split-handler-bar"></div>
+                            return <div class="cm-split-handler-bar" />
                         }}
                     </For>
                 </div>

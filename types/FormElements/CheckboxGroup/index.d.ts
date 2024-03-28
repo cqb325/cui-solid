@@ -8,7 +8,7 @@ type CheckboxGroupProps = {
     style?: any;
     children?: any;
     disabled?: boolean;
-    onChange?: Function;
+    onChange?: (value: any) => void;
     data?: any;
     textField?: string;
     valueField?: string;

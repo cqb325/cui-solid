@@ -15,7 +15,7 @@ useDirective(hljs);
 
 export default function SliderPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Slider 滑块
@@ -24,7 +24,7 @@ export default function SliderPage () {
                     <Card bordered>
                         <Slider />
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         基础用法
                         </Paragraph>
                         <DemoCode data={codes['slider_base']}/>
@@ -39,7 +39,7 @@ export default function SliderPage () {
                             <Slider disabled range value={[30, 70]}/>
                         </Space>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         disabled 可禁用
                         </Paragraph>
                         <DemoCode data={codes['slider_disabled']}/>
@@ -54,7 +54,7 @@ export default function SliderPage () {
                             <Slider step={0.1}/>
                         </Space>
                         <Divider align="left"><Text type="primary">步长</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         step 属性可修改滑动的步长
                         </Paragraph>
                         <DemoCode data={codes['slider_step']}/>
@@ -65,7 +65,7 @@ export default function SliderPage () {
                     <Card bordered>
                         <Slider value={30} />
                         <Divider align="left"><Text type="primary">初始化值</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         value 可初始化值
                         </Paragraph>
                         <DemoCode data={codes['slider_init']}/>
@@ -77,7 +77,7 @@ export default function SliderPage () {
                     <Card bordered>
                         <Slider step={0.01} min={0.2} max={1} value={0.3}/>
                         <Divider align="left"><Text type="primary">最大小值</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         可通过min max 修改最小最大值
                         </Paragraph>
                         <DemoCode data={codes['slider_minMax']}/>
@@ -89,7 +89,7 @@ export default function SliderPage () {
                     <Card bordered>
                         <Slider value={[30, 70]} range/>
                         <Divider align="left"><Text type="primary">范围</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         设置 range 为范围滑块
                         </Paragraph>
                         <DemoCode data={codes['slider_range']}/>
@@ -103,7 +103,7 @@ export default function SliderPage () {
                             return v + '分'
                         }}/>
                         <Divider align="left"><Text type="primary">格式化</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         使用 tipFormatter 可自定义提示信息
                         </Paragraph>
                         <DemoCode data={codes['slider_tip']}/>
@@ -115,7 +115,7 @@ export default function SliderPage () {
                     <Card bordered>
                         <Slider step={10} marks={{0: '0', 20: '20a', 50: '50'}}/>
                         <Divider align="left"><Text type="primary">标记</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                         设置属性 marks 可以显示标记
                         </Paragraph>
                         <DemoCode data={codes['slider_marks']}/>
@@ -125,11 +125,11 @@ export default function SliderPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Slider Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
                         <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>

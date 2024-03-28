@@ -16,7 +16,7 @@ useDirective(hljs);
 
 export default function LoadingBarPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     LoadingBar 加载进度条
@@ -24,19 +24,19 @@ export default function LoadingBarPage () {
                 <Space id="loadingbar_base" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 loadingBar.start();
                             }}>开始</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 loadingBar.finish();
                             }}>结束</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 loadingBar.error();
                             }}>错误</Button>
                         </Space>
 
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             loadingBar 为全局变量，包含start、finish和error三个接口， 一般配合路由使用
                         </Paragraph>
                         <DemoCode data={codes['loadingbar_base']}/>
@@ -46,9 +46,9 @@ export default function LoadingBarPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>LoadingBar Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

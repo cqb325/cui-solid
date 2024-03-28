@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement, Signal } from "solid-js";
 type Position = {
     top?: string;
     bottom?: string;
@@ -15,14 +15,14 @@ type ModalProps = {
     bodyStyle?: any;
     children?: any;
     footer?: boolean;
-    loading?: boolean | Function[];
-    onOk?: Function;
-    onCancel?: Function;
-    onClosed?: Function;
-    onClickClose?: Function;
+    loading?: boolean | Signal<boolean>;
+    onOk?: () => void;
+    onCancel?: () => void;
+    onClosed?: () => void;
+    onClickClose?: () => void;
     okText?: any;
     cancleText?: any;
-    visible?: boolean | Function[];
+    visible?: boolean | Signal<boolean>;
     defaultPosition?: Position;
     mask?: boolean;
     maskClosable?: boolean;
@@ -32,7 +32,7 @@ type ModalProps = {
 };
 export declare function Modal(props: ModalProps): import("solid-js").JSX.Element;
 export interface ModalConfig extends ModalProps {
-    content?: JSXElement;
+    content?: JSXElement | (() => any);
     status?: 'success' | 'info' | 'warning' | 'error' | 'confirm';
 }
 export declare const modal: {

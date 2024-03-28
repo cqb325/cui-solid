@@ -2,7 +2,7 @@ import { batch, createSignal } from "solid-js";
 import { getTouchIdentifier, getControlPosition, createCoreData, addUserSelectStyles,
     addEvent, removeEvent, removeUserSelectStyles, snapToGrid } from './utils';
 
-export function DraggableCore(props: any) {
+export function DraggableCore (props: any) {
     const [touchIdentifier, setTouchIdentifier] = createSignal(null);
     const [lastX, setLastX] = createSignal(NaN);
     const [lastY, setLastY] = createSignal(NaN);
@@ -73,7 +73,8 @@ export function DraggableCore(props: any) {
             let deltaX = x - lastX(), deltaY = y - lastY();
             [deltaX, deltaY] = snapToGrid(props.grid, deltaX, deltaY);
             if (!deltaX && !deltaY) return; // skip useless drag
-            x = lastX() + deltaX, y = lastY() + deltaY;
+            x = lastX() + deltaX;
+            y = lastY() + deltaY;
         }
 
         const coreEvent = createCoreData(thisNode, lastX(), lastY(), x, y);
@@ -102,28 +103,28 @@ export function DraggableCore(props: any) {
 
     const handleDragStop = (e: any) => {
         if (!dragging()) return;
-    
+
         const position = getControlPosition(e, touchIdentifier(), props, thisNode);
         if (position == null) return;
         const {x, y} = position;
         const coreEvent = createCoreData(thisNode, lastX(), lastY(), x, y);
-    
+
         // Call event handler
         const shouldContinue = props.onStop(e, coreEvent);
         if (shouldContinue === false) return false;
-    
+
         if (thisNode) {
           // Remove user-select hack
           removeUserSelectStyles(thisNode.ownerDocument);
         }
-    
+
         // Reset the el.
         batch(() => {
             setDragging(false);
             setLastX(NaN);
             setLastY(NaN);
         });
-    
+
         if (thisNode) {
           // Remove event handlers
           removeEvent(thisNode.ownerDocument, 'mousemove', handleDrag);

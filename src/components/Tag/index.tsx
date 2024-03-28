@@ -1,3 +1,4 @@
+import type { Signal } from 'solid-js';
 import { Show } from 'solid-js';
 import { Icon } from '../Icon';
 import { useClassList } from '../utils/useProps';
@@ -11,13 +12,13 @@ type TagProps = {
     circle?: boolean,
     size?: 'small'|'large',
     avatar?: any,
-    onBeforeClose?: Function,
-    onClose?: Function,
+    onBeforeClose?: (e: any) => boolean,
+    onClose?: (e: any) => void,
     style?: any,
     children?: any,
     closable?: boolean,
     border?: boolean,
-    visible?: boolean | Function[]
+    visible?: boolean | Signal<boolean>
 }
 
 export function Tag (props: TagProps) {
@@ -54,17 +55,17 @@ export function Tag (props: TagProps) {
     return <Show when={visible()} fallback={null}>
         <div classList={classList()} style={props.style}>
             {props.avatar}
-            <div class='cm-tag-content'>
-                <div class='cm-tag-text'>{props.children}</div>
+            <div class="cm-tag-content">
+                <div class="cm-tag-text">{props.children}</div>
                 {
-                    props.closable 
-                        ? <Icon name='x' class='cm-tag-close' size={12} onClick={_onClose}/>
+                    props.closable
+                        ? <Icon name="x" class="cm-tag-close" size={12} onClick={_onClose}/>
                         : null
                 }
             </div>
             {
-                value() !== '' ? <span class='cm-tag-badge'>
-                    <span class='cm-tag-badge-text'>{value()}</span>
+                value() !== '' ? <span class="cm-tag-badge">
+                    <span class="cm-tag-badge-text">{value()}</span>
                 </span> : null
             }
         </div>

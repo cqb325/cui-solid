@@ -1,7 +1,7 @@
 import { splitProps, Show, JSXElement } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { Space } from "../Layout";
-import { BreadcrumbItemProps } from "./Item";
+import type { BreadcrumbItemProps } from "./Item";
 
 export function InnerItem (props: BreadcrumbItemProps) {
     const [local, others] = splitProps(props, ['classList', 'link', 'icon', 'children']);

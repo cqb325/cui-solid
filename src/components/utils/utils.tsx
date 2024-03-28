@@ -1,4 +1,4 @@
-export function scrollTop(el: any, from = 0, to: number, duration = 500, endCallback?: Function) {
+export function scrollTop (el: any, from = 0, to: number, duration = 500, endCallback?: () => void) {
     if (!window.requestAnimationFrame) {
         window.requestAnimationFrame = (
             function (callback) {
@@ -9,7 +9,7 @@ export function scrollTop(el: any, from = 0, to: number, duration = 500, endCall
     const difference = Math.abs(from - to);
     const step = Math.ceil(difference / duration * 50);
 
-    function scroll(start: number, end: number, step: number) {
+    function scroll (start: number, end: number, step: number) {
         if (start === end) {
             endCallback && endCallback();
             return;

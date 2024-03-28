@@ -1,4 +1,5 @@
-import { createEffect, createSignal, JSXElement, onMount, Show } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { Icon } from "../Icon";
 import { useMenuContext } from ".";
@@ -8,7 +9,7 @@ type MenuItemProps = {
     name?: string,
     disabled?: boolean,
     isSubmenuTitle?: boolean,
-    onSelect?: Function,
+    onSelect?: () => void,
     data?: any,
     children?: any,
     icon?: JSXElement,
@@ -49,7 +50,7 @@ export function MenuItem (props: MenuItemProps) {
     onMount(() => {
         const parentPadding = self.parentElement.getAttribute('x-padding');
         const padding = parseInt(parentPadding) + 16;
-        
+
         self.style.paddingLeft = ctx?.dir === 'h' ? '16px' : padding + 'px';
 
         if (!props.isSubmenuTitle) {
@@ -85,7 +86,7 @@ export function MenuItem (props: MenuItemProps) {
             <div class="cm-menu-item-text">{props.children}</div>
             <Show when={props.cert}>
                 <div class="cm-menu-item-cert">
-                    <Icon name='chevron-down' size={14}/>
+                    <Icon name="chevron-down" size={14}/>
                 </div>
             </Show>
         </li>

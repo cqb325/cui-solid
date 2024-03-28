@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 export declare const FormContext: import("solid-js").Context<FormContextOptions | undefined>;
 export type FormContextOptions = {
     labelWidth?: number;
@@ -6,7 +6,7 @@ export type FormContextOptions = {
     form: any;
     errorTransfer?: boolean;
     errorAlign?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
-    onChange: Function;
+    onChange: (name: string, value: any) => void;
 };
 type FormProps = {
     classList?: any;
@@ -18,8 +18,8 @@ type FormProps = {
     inline?: boolean;
     errorTransfer?: boolean;
     errorAlign?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
-    onChange?: Function;
-    onBeforeSubmit?: Function;
+    onChange?: (name: string, value: any) => void;
+    onBeforeSubmit?: () => any;
     autocomplete?: string;
 };
 export declare function Form(props: FormProps): import("solid-js").JSX.Element;

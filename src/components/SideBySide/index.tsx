@@ -25,7 +25,7 @@ export function SideBySide (props: SideBySideProps) {
     createEffect(() => {
         const wrapRect = wrap.getBoundingClientRect();
         let w = untrack(() => split());
-        
+
         w = w + (store.deltaX / wrapRect.width * 100);
         w = Math.min(w, 100);
         w = Math.max(w, 0);
@@ -52,7 +52,7 @@ export function SideBySide (props: SideBySideProps) {
         setStore('y', e.clientY);
         setStore('deltaX', deltaX);
         setStore('deltaY', deltaY);
-        
+
     }
     const onDragEnd = (e: any) => {
         setStore('dragging', false);
@@ -84,9 +84,9 @@ export function SideBySide (props: SideBySideProps) {
         </div>
         <div class="cm-sbs-handler" style={handlerStyle()} onMouseDown={onDragStart}>
             <div class="cm-sbs-track">
-                <div class="cm-sbs-line"></div>
-                <div class="cm-sbs-line"></div>
-                <div class="cm-sbs-line"></div>
+                <div class="cm-sbs-line" />
+                <div class="cm-sbs-line" />
+                <div class="cm-sbs-line" />
             </div>
         </div>
     </div>

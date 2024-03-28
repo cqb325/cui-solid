@@ -6,7 +6,7 @@ import { Icon } from "../Icon";
 import { Image } from "../Image";
 import { Space } from "../Layout";
 import useValidation from "../utils/useValidation";
-import { UserNameProps } from "./UserName";
+import type { UserNameProps } from "./UserName";
 import { useLoginContext } from "./Login";
 import { CountDown } from "./CountDown";
 
@@ -21,7 +21,7 @@ export function Captcha (props: CaptchaProps) {
     const [action, setAction] = createSignal<string>(props.action ?? '');
     const [counting, setCounting] = createSignal<boolean>(false);
     const name = props.name ?? 'captcha';
-    const icon = props.icon ?? <Icon name='key'/>;
+    const icon = props.icon ?? <Icon name="key"/>;
     const rules = {require: useValidation().required, ...props.rules};
     const messages = {require: "请输入验证码！", ...props.messages};
     const placeholder = props.placeholder ?? '请输入验证码';

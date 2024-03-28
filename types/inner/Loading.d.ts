@@ -1,1 +1,1 @@
-export declare const Loading: ({ size, color }: any) => import("solid-js").JSX.Element;
+export declare const Loading: (_props: any) => import("solid-js").JSX.Element;

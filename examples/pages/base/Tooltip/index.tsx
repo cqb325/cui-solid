@@ -18,7 +18,7 @@ export default function TooltipPage () {
     const style = {width: '120px', 'text-align': 'center'}
 
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Tooltip 文字提示
@@ -31,7 +31,7 @@ export default function TooltipPage () {
                             </Tooltip>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             简单的展示，添加属性closable可以关闭标签。<br/>
                             点击关闭标签时，会触发 onClose 事件。
                         </Paragraph>
@@ -93,7 +93,7 @@ export default function TooltipPage () {
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">位置</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             支持12个不同的方向显示，具体配置可查看API。
                         </Paragraph>
                         <DemoCode data={codes['popover_align']}/>
@@ -111,7 +111,7 @@ export default function TooltipPage () {
                             </Tooltip>
                         </Space>
                         <Divider align="left"><Text type="primary">多行内容</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             content内容为自定义JSX标签，可以编辑复杂内容。
                         </Paragraph>
                         <DemoCode data={codes['tooltip_multi']}/>
@@ -128,7 +128,7 @@ export default function TooltipPage () {
                             </Tooltip>
                         </Space>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置disabled可以禁用提示。
                         </Paragraph>
                         <DemoCode data={codes['tooltip_disabled']}/>
@@ -138,7 +138,7 @@ export default function TooltipPage () {
                 <Space id="tooltip_theme" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Tooltip theme='light' content={<div>
+                            <Tooltip theme="light" content={<div>
                                 <Paragraph>Tip Content</Paragraph>
                             </div>}>
                                 <span>show tips</span>
@@ -151,7 +151,7 @@ export default function TooltipPage () {
                             </Tooltip>
                         </Space>
                         <Divider align="left"><Text type="primary">样式</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             通过设置 theme 切换显示样式, 支持light和dark 默认dark
                         </Paragraph>
                         <DemoCode data={codes['tooltip_theme']}/>
@@ -160,9 +160,9 @@ export default function TooltipPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Tooltip Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

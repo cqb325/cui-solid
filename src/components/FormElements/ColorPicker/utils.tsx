@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 
-export function clamp(value: number, min: number, max: number) {
+export function clamp (value: number, min: number, max: number) {
     if (value < min) {
         return min;
     }
@@ -12,7 +12,7 @@ export function clamp(value: number, min: number, max: number) {
     return value;
 }
 
-function setAlpha(data: any, alpha: number) {
+function setAlpha (data: any, alpha: number) {
     const color: any = tinycolor(data);
     const {_a} = color;
 
@@ -23,7 +23,7 @@ function setAlpha(data: any, alpha: number) {
     return color;
 }
 
-function getColor(data: any, colorData: any) {
+function getColor (data: any, colorData: any) {
     const alpha = colorData && colorData.a;
 
     if (colorData) {
@@ -40,7 +40,7 @@ function getColor(data: any, colorData: any) {
     return setAlpha(colorData, alpha);
 }
 
-export function changeColor(data: any, oldHue?: any) {
+export function changeColor (data: any, oldHue?: any) {
     const colorData = data === '' ? '#2d8cf0' : data;
     const color = getColor(data, colorData);
     const hsl = color.toHsl();
@@ -76,7 +76,7 @@ export function changeColor(data: any, oldHue?: any) {
 }
 
 
-export function toRGBAString(rgba: any) {
+export function toRGBAString (rgba: any) {
     const {r, g, b, a} = rgba;
     return `rgba(${[r, g, b, a].join(',')})`;
 }

@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 export interface IndexListProps {
     classList?: any;
     class?: string;

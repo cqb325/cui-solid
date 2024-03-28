@@ -1,17 +1,17 @@
 export const CheckedMode = {
     // 只返回全选数据，包含父节点和子节点
     Full: 0,
-  
+
     // 返回全部选中子节点和部分选中的父节点
     Half: 1,
-  
+
     // 只返回选中子节点
     Child: 2,
-  
+
     // 如果父节点下所有子节点全部选中，只返回父节点
     Shallow: 3
 };
-  
+
 class Datum {
     data: any[] = [];
     dataMap: any = {};
@@ -36,7 +36,7 @@ class Datum {
         this.data = data;
         this.links = {};
         this.levels = [];
-    
+
         if (!data) { return; }
         this.initData(null, data, 0);
     }
@@ -77,10 +77,10 @@ class Datum {
                 }
             }
             this.setValueMap(id, childChecked);
-            if (checked === undefined) { 
+            if (checked === undefined) {
                 checked = childChecked;
-            } else if (checked !== childChecked) { 
-                checked = 2; 
+            } else if (checked !== childChecked) {
+                checked = 2;
             }
         });
         return checked;
@@ -109,8 +109,8 @@ class Datum {
     }
 
     getAllChecked () {
-        let ret: any = [];
-        for (let val in this.valueMap) {
+        const ret: any = [];
+        for (const val in this.valueMap) {
             if (this.valueMap[val]) {
                 ret.push(val);
             }
@@ -138,7 +138,7 @@ class Datum {
 
     getValue (mode: 0|1|2|3) {
         const value: any[] = [];
-        for (let id in this.valueMap) {
+        for (const id in this.valueMap) {
             const checked = this.valueMap[id];
             switch (mode) {
                 case CheckedMode.Full:
@@ -186,16 +186,16 @@ class Datum {
 
     /**
      * 预先选择，返回被选择的节点
-     * @param ids 
-     * @param direction 
+     * @param ids
+     * @param direction
      */
     ifSets (ids: any[]) {
         const map: any = {};
         ids.forEach((id: any) => {
             this.ifSet(id, 1, '', map);
         });
-        let arr = [];
-        for(let key in map) {
+        const arr = [];
+        for (const key in map) {
             if (map[key]) {
                 arr.push(key);
             }
@@ -206,14 +206,14 @@ class Datum {
     ifSet (id: any, checked: number, direction: string, map: any) {
         if (!this.isDisabled(id)) { map[id] = checked; }
         const { parent, children } = this.links[id];
-    
+
         // children
         if (direction !== 'asc') {
             children && children.forEach((cid: any) => {
                 this.ifSet(cid, checked, 'desc', map);
             });
         }
-    
+
         // parent
         if (direction !== 'desc' && parent) {
             const parentId = parent;
@@ -234,14 +234,14 @@ class Datum {
             return;
         }
         const { parent, children } = this.links[id];
-    
+
         // children
         if (direction !== 'asc') {
             children && children.forEach((cid: any) => {
                 this.set(cid, checked, 'desc');
             });
         }
-    
+
         // parent
         if (direction !== 'desc' && parent) {
             const parentId = parent;
@@ -298,8 +298,8 @@ class Datum {
 
     /**
      * 动态添加子节点
-     * @param id 
-     * @param children 
+     * @param id
+     * @param children
      */
     addChildren (id: any, children: any[]) {
         const item = this.dataMap[id];

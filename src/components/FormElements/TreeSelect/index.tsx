@@ -2,11 +2,11 @@ import { useClassList } from "../../utils/useProps"
 import { Tree } from "../../Tree";
 import { Dropdown } from "../../Dropdown";
 import { Value } from "../../inner/Value";
-import { TreeProps } from "../../Tree";
+import type { TreeProps } from "../../Tree";
 import createField from "../../utils/createField";
 import { createEffect, createMemo, createSignal } from "solid-js";
 import { Icon } from "../../Icon";
-import { TagConfig } from "../../TagGroup";
+import type { TagConfig } from "../../TagGroup";
 
 type TreeSelectProps = {
     classList?: any,
@@ -34,13 +34,13 @@ const ModeMap = {
 }
 
 export function TreeSelect (props: TreeSelectProps) {
-    const [value, setValue] = createField(props, props.multi ? [] : '');
+    const [value, setValue] = createField<any>(props, props.multi ? [] : '');
     const [text, setText] = createSignal('');
     const align = props.align ?? 'bottomLeft';
     let tree: any;
-    let mode: number = ModeMap[props.mode ?? 'Half'];
+    const mode: number = ModeMap[props.mode ?? 'Half'];
     const checkRelation = props.checkRelation ?? 'related';
-    const classList  = () => useClassList(props, 'cm-tree-select', {
+    const classList = () => useClassList(props, 'cm-tree-select', {
         'cm-tree-select-disabled': props.disabled,
         [`cm-tree-select-${props.size}`]: props.size,
     });
@@ -67,7 +67,7 @@ export function TreeSelect (props: TreeSelectProps) {
     }
 
     const onValueClose = (item: TagConfig, e: any) => {
-        let v = value();
+        const v = value();
         v.splice(v.indexOf(item.id), 1);
         setValue([...v]);
     }
@@ -97,7 +97,7 @@ export function TreeSelect (props: TreeSelectProps) {
 
     createEffect(() => {
         const outValue = value();
-        
+
         if (props.multi && outValue.join(',') === getChecked().join(',')) {
             return;
         }
@@ -135,9 +135,9 @@ export function TreeSelect (props: TreeSelectProps) {
                 setValue(vals);
                 return;
             }
-            
+
             setTimeout(() => {
-                let all = checkRelation === 'related' ? getChecked() : tree.getAllChecked();
+                const all = checkRelation === 'related' ? getChecked() : tree.getAllChecked();
                 const arr = tree.getAllCheckedData(all);
                 setText(arr);
             })
@@ -155,14 +155,14 @@ export function TreeSelect (props: TreeSelectProps) {
 
     props.ref && props.ref({...tree});
 
-    return <div classList={classList()} style={props.style} tabIndex='1'>
-        <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger='click' menu={<div class='cm-tree-select-wrap'>
+    return <div classList={classList()} style={props.style} tabIndex="1">
+        <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger="click" menu={<div class="cm-tree-select-wrap">
             <Tree data={props.data} multi={props.multi} onSelect={onSelect} onChange={onTreeChange} ref={tree} value={value()}
                 selected={props.multi ? '' : [value, setValue]} checkRelation={props.checkRelation}/>
         </div>}>
             <Value text={text()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
-                valueClosable={props.valueClosable} clearable={props.clearable} onClear={onClear} 
-                prepend={props.prepend} size={props.size} icon={<Icon name='chevron-down'/>} onClose={onValueClose}/>
+                valueClosable={props.valueClosable} clearable={props.clearable} onClear={onClear}
+                prepend={props.prepend} size={props.size} icon={<Icon name="chevron-down"/>} onClose={onValueClose}/>
         </Dropdown>
     </div>
 }

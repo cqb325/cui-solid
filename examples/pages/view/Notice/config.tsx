@@ -1,4 +1,4 @@
-
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'style', desc: '自定义样式', type: 'Object', default: ''},
     {name: 'key', desc: '消息的标识，调用close可根据key进行关闭', type: 'string', default: ''},

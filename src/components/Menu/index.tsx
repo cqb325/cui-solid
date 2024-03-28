@@ -1,3 +1,4 @@
+import type { Signal} from "solid-js";
 import { createContext, createEffect, untrack, useContext } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import { useClassList } from "../utils/useProps"
@@ -17,8 +18,8 @@ type MenuProps = {
     theme?: 'light'|'dark',
     dir?: 'v'|'h',
     min?: boolean,
-    activeName?: string|Function[],
-    onSelect?: Function
+    activeName?: string|Signal<any>,
+    onSelect?: (name: any, data: any) => void
 }
 
 export function Menu (props: MenuProps) {
@@ -57,7 +58,7 @@ export function Menu (props: MenuProps) {
     const updateParentOpenStatus = (name: string) => {
         let parent = treeMap && treeMap[name] && treeMap[name].parent;
         if (parent) {
-            while(parent) {
+            while (parent) {
                 if (!store.openKeys[parent.name]) {
                     setOpen(parent.name);
                 }
@@ -104,7 +105,7 @@ export function Menu (props: MenuProps) {
                 }
 
                 let item = treeMap[name];
-                
+
                 const names: any = {[name]: true};
                 while (item.parent) {
                     names[item.parent.name] = true;
@@ -119,7 +120,7 @@ export function Menu (props: MenuProps) {
                         delete openKeys[key];
                     }
                 });
-                
+
                 Object.assign(openKeys, names);
             }));
         } else {
@@ -134,7 +135,7 @@ export function Menu (props: MenuProps) {
     }
 
     return <MenuContext.Provider value={{onSelect, store, setOpen, tree, treeMap, theme: theme(), dir: dir()}}>
-        <ul classList={classList()} x-padding={0} x-name='__root' x-level={0}>
+        <ul classList={classList()} x-padding={0} x-name="__root" x-level={0}>
             {props.children}
         </ul>
     </MenuContext.Provider>

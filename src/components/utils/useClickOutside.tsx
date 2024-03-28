@@ -1,5 +1,5 @@
 
-export function useClickOutside (ref?: any, callback?: Function, onMouseDown?: Function) {
+export function useClickOutside (ref?: any, callback?: () => any, onMouseDown?: (e: any) => any): () => void {
     const clickOutsideHandler = (e: any) => {
         onMouseDown && onMouseDown(e);
         if (ref instanceof Array) {
@@ -31,6 +31,6 @@ export function useClickOutside (ref?: any, callback?: Function, onMouseDown?: F
     };
 
     document.addEventListener('mousedown', clickOutsideHandler);
-    
+
     return removeEventListener;
 }

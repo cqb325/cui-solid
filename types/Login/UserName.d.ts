@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 export interface UserNameProps {
     label?: string;
     size?: 'small' | 'large';

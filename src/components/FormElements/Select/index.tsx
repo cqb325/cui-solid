@@ -1,15 +1,15 @@
-import { Accessor, children, createEffect, createMemo, createSignal, For, JSXElement, onCleanup, onMount, Show, untrack } from 'solid-js';
+import type { Accessor, JSXElement} from 'solid-js';
+import { children, createEffect, createMemo, createSignal, For, onCleanup, onMount, Show, untrack } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
 import { Option } from './InnerOption';
 import { EmptyOption } from './EmptyOption';
 import { Value } from '../../inner/Value';
-import { InnerInput } from '../Input/input';
 import createField from "../../utils/createField";
 import { useClassList } from '../../utils/useProps';
 import { Icon } from '../../Icon';
-import { TagConfig } from '../../TagGroup';
+import type { TagConfig } from '../../TagGroup';
 import { Dropdown } from '../../Dropdown';
-import { SelectOptionProps } from './Option';
+import type { SelectOptionProps } from './Option';
 import { VirtualList } from 'cui-virtual-list';
 export * from './Option'
 export * from './OptionGroup'
@@ -30,10 +30,10 @@ type SelectOptions = {
     class?: any,
     classList?: any,
     filter?: boolean,
-    renderOption?: Function,
+    renderOption?: (data: any) => any,
     ref?: any,
     emptyOption?: any,
-    onChange?: Function,
+    onChange?: (value: any, option?: any) => void,
     showMax?: number,
     valueClosable?: boolean,
     transfer?: boolean,
@@ -41,7 +41,7 @@ type SelectOptions = {
     showMore?: boolean,
     loading?: boolean,
     children?: any,
-    remoteMethod?: Function,
+    remoteMethod?: (queryStr: any) => void,
     maxHeight?: number,
     debounceTime?: number
     defaultLabel?: string|string[],
@@ -55,7 +55,7 @@ export function Select (props: SelectOptions) {
     const align = props.align ?? 'bottomLeft';
     const items = children(() => props.children)
 	const evaluatedItems = () => items.toArray() as unknown as SelectOptionProps[];
-    const [value, setValue] = createField(props, props.multi ? [] : '');
+    const [value, setValue] = createField<any>(props, props.multi ? [] : '');
 
     let initLabels: any[] = [];
     if (props.filter && props.defaultLabel) {
@@ -103,7 +103,7 @@ export function Select (props: SelectOptions) {
     const newData: Accessor<any[]> = createMemo<any[]>(() => {
         const data = evaluatedItems();
         dataMap = {};
-        let newData: any[] = [];
+        const newData: any[] = [];
         if (props.emptyOption) {
             newData.push({[valueField]: '', [textField]: props.emptyOption, _show: true, emptyOption: true});
         }
@@ -171,7 +171,7 @@ export function Select (props: SelectOptions) {
                 val.push(v);
                 arr.push(option);
             }
-            
+
             setValue([...val]);
             setQuery('');
             setShowLabels([...arr]);
@@ -266,8 +266,8 @@ export function Select (props: SelectOptions) {
     // 多选场景下删除value
     const onValueClose = (item: TagConfig, e: any) => {
         if (props.multi) {
-            let arr: any[] = showLabels();
-            let val = value();
+            const arr: any[] = showLabels();
+            const val = value();
             const index = val.indexOf(item.id);
             if (index > -1) {
                 val.splice(index, 1);
@@ -282,9 +282,9 @@ export function Select (props: SelectOptions) {
     // 撤消按键，删除最后一个value
     const onDeleteLastValue = () => {
         if (props.multi) {
-            let arr: any[] = showLabels();
-            let val = value();
-            
+            const arr: any[] = showLabels();
+            const val = value();
+
             if (val.length > 0) {
                 val.pop();
                 arr.pop();
@@ -300,25 +300,25 @@ export function Select (props: SelectOptions) {
     });
 
     return <div classList={classList()} style={props.style} ref={wrap}>
-        <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger='click' visible={[open, setOpen]}
-            menu={<div class='cm-select-options-wrap'>
-            <div class='cm-select-options' style={{'max-height': props.maxHeight ? `${props.maxHeight}px` : ''}}>
+        <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
+            menu={<div class="cm-select-options-wrap">
+            <div class="cm-select-options" style={{'max-height': props.maxHeight ? `${props.maxHeight}px` : ''}}>
                 {/* {
                     props.filter ? <div class='cm-select-filter-wrap'>
                         <InnerInput notCreateFiled class='cm-select-filter' trigger='input' size='small' clearable value={[query, setQuery]} onInput={onFilter}/>
                     </div>
                     : null
                 } */}
-                <Show when={!props.loading} fallback={<div class='cm-select-loading'>加载中</div>}>
-                    <ul class='cm-select-option-list'>
+                <Show when={!props.loading} fallback={<div class="cm-select-loading">加载中</div>}>
+                    <ul class="cm-select-option-list">
                         <VirtualList items={displayItems()} itemEstimatedSize={30} maxHeight={200}>
                             {(props: any) : JSXElement => {
                                 const item = props.item;
                                 if (item.emptyOption) {
                                     return <EmptyOption visible data={{label: item[textField], value: ''}} checked={value() === ''} onClick={onClear}/>
                                 } else {
-                                    return <Option ref={props.ref} renderOption={props.renderOption} visible={item._show} disabled={item.disabled} data={item} checked={item._checked} 
-                                        textField={textField} valueField={valueField} onClick={(v: any) => onOptionClick(v, item)}></Option>
+                                    return <Option ref={props.ref} renderOption={props.renderOption} visible={item._show} disabled={item.disabled} data={item} checked={item._checked}
+                                        textField={textField} valueField={valueField} onClick={(v: any) => onOptionClick(v, item)} />
                                 }
                             }}
                         </VirtualList>
@@ -328,9 +328,9 @@ export function Select (props: SelectOptions) {
         </div>}>
             <Value text={labels()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
                 valueClosable={props.valueClosable || (props.filter)} clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
-                prepend={props.prefix} size={props.size} icon={<Icon name='chevron-down' class="cm-select-cert"/>} onClose={onValueClose}
+                prepend={props.prefix} size={props.size} icon={<Icon name="chevron-down" class="cm-select-cert"/>} onClose={onValueClose}
                 query={[query, setQuery]} filter={props.filter} onDeleteLastValue={onDeleteLastValue}/>
         </Dropdown>
-        
+
     </div>
 }

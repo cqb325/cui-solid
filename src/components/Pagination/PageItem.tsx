@@ -7,4 +7,4 @@ export function PageItem (props: any) {
     return <li onClick={props.onClick} classList={classList()}>
         {props.currentIndex}
     </li>;
-};
+}

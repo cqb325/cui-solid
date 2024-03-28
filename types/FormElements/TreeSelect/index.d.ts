@@ -1,4 +1,4 @@
-import { TreeProps } from "../../Tree";
+import type { TreeProps } from "../../Tree";
 type TreeSelectProps = {
     classList?: any;
     class?: string;

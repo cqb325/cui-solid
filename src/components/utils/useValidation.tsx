@@ -65,7 +65,7 @@ function useValidation () {
         mobile (value: any) {
             return /^1[3-8][0-9]{9}$/.test(value);
         },
-        
+
         ip (value: any) {
             return /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/.test(value);
         },

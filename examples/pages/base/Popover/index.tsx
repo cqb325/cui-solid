@@ -21,7 +21,7 @@ export default function PopoverPage () {
     const [visible, setVisible] = createSignal(false);
     const style = {width: '120px', 'text-align': 'center'}
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Popover 气泡提示
@@ -41,7 +41,7 @@ export default function PopoverPage () {
                             </div>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             支持两种种触发方式：鼠标悬停、点击。默认是鼠标悬停。
                         </Paragraph>
                         <DemoCode data={codes['popover_base']}/>
@@ -101,7 +101,7 @@ export default function PopoverPage () {
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">位置</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             支持12个不同的方向显示，具体配置可查看API。
                         </Paragraph>
                         <DemoCode data={codes['popover_align']}/>
@@ -112,21 +112,21 @@ export default function PopoverPage () {
                     <Card bordered>
                         <Space dir="v">
                             <div>
-                                <Popover visible={[visible, setVisible]} theme='light' content={<div>
+                                <Popover visible={[visible, setVisible]} theme="light" content={<div>
                                     <div>content!content!content!</div>
                                     <div>content!content!content!</div>
                                     <div>content!content!content!</div>
                                     <div>content!content!content!</div>
-                                    <Button type='text' size='small' onClick={() => {
+                                    <Button type="text" size="small" onClick={() => {
                                         setVisible(false);
                                     }}>Close</Button>
                                 </div>} arrow trigger="click">
                                     <span>Click</span>
                                 </Popover>
-                                
+
                                 <div>
-                                <Popover theme='light' align='topRight' content={<Space dir='v' style={{width: '150px'}}>
-                                    <div><Icon name='help-circle' color="var(--cui-warning-color)"/> <Text>确认用户信息</Text></div>
+                                <Popover theme="light" align="topRight" content={<Space dir="v" style={{width: '150px'}}>
+                                    <div><Icon name="help-circle" color="var(--cui-warning-color)"/> <Text>确认用户信息</Text></div>
                                     <div>是否确认删除该信息</div>
                                 </Space>} arrow confirm onOk={() => {
                                     console.log(1);
@@ -142,7 +142,7 @@ export default function PopoverPage () {
                             </div>
                         </Space>
                         <Divider align="left"><Text type="primary">可控</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             visible属性为可控属性
                         </Paragraph>
                         <DemoCode data={codes['popover_controller']}/>
@@ -151,14 +151,14 @@ export default function PopoverPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Popover Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>
         </div>
-        
+
         <CompAnchor data={anchorData}/>
     </>
 }

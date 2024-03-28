@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'start', desc: '开始', type: 'Function', default: ''},
     {name: 'finish', desc: '结束', type: 'Function', default: ''},
@@ -5,7 +6,7 @@ export const propsData = [
 ]
 
 export const eventsData = [
-    
+
 ]
 
 export const anchorData = [

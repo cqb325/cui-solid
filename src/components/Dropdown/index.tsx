@@ -1,3 +1,4 @@
+import type { Signal} from "solid-js";
 import { createComputed, createContext, createSignal, onCleanup, onMount, Show, useContext } from "solid-js";
 import { Portal } from "solid-js/web";
 import { useClassList } from "../utils/useProps";
@@ -21,27 +22,27 @@ type DropdownProps = {
     classList?:any,
     class?:any,
     style?:any,
-    onSelect?: Function,
+    onSelect?: (name: string) => void,
     children: any,
     menu?: any,
-    visible?: boolean|Function[],
+    visible?: boolean|Signal<any>,
     transfer?: boolean,
     theme?: 'dark'|'light',
     disabled?: boolean,
     revers?: boolean,
     handler?: string,
     fixWidth?: boolean,
-    onBeforeDrop?: Function
+    onBeforeDrop?: (visible: boolean) => boolean,
 }
 
-export function Dropdown(props: DropdownProps){
+export function Dropdown (props: DropdownProps){
     const [visible, setVisible] = createModel(props, 'visible', false);
     const [opened, setOpened] = createSignal(visible());
     let targetEle: any;
     let target: any;
-    let trigger = props.trigger || 'hover';
+    const trigger = props.trigger || 'hover';
     let timer: any;
-    let align = props.align || 'bottom';
+    const align = props.align || 'bottom';
     let wrap: any;
     const zindex = usezIndex();
     const revers = props.revers ?? true;
@@ -89,7 +90,7 @@ export function Dropdown(props: DropdownProps){
         if (props.disabled) {
             return;
         }
-        
+
         e.preventDefault && e.preventDefault();
         e.stopPropagation && e.stopPropagation();
         targetEle = e.target;
@@ -199,11 +200,11 @@ export function Dropdown(props: DropdownProps){
             const offsetHeight = getOffsetHeight(align, rect);
             const h = originTop + offsetHeight;
             const w = originLeft + offsetWidth;
-            
+
             const containerHeight = window.innerHeight || document.documentElement.clientHeight;
             const containerWidth = window.innerWidth || document.documentElement.clientWidth;
             const targetRect = te.getBoundingClientRect();
-            
+
             if (revers) {
                 if (h > containerHeight) {
                     if (align === 'bottom' || align === 'bottomLeft' || align === 'bottomRight') {
@@ -234,7 +235,7 @@ export function Dropdown(props: DropdownProps){
         }
     };
 
-    let removeClickOutside: Function;
+    let removeClickOutside: () => void;
     onMount(() => {
         if (target.nextElementSibling) {
             if (trigger === 'hover') {
@@ -288,7 +289,7 @@ export function Dropdown(props: DropdownProps){
 
     const id = 'cm-dropdown-portal';
     return <>
-        <span ref={target} style={{display: 'none'}}></span>
+        <span ref={target} style={{display: 'none'}} />
         {props.children}
         <Show when={props.transfer} fallback={
             <DropdownContext.Provider value={{onSelect}}>

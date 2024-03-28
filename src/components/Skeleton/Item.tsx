@@ -1,4 +1,5 @@
-import { Accessor, For, JSXElement } from "solid-js";
+import type { Accessor, JSXElement } from "solid-js";
+import { For } from "solid-js";
 import { useClassList, useStyle } from "../utils/useProps";
 
 export type BasicProps = {
@@ -21,7 +22,7 @@ export type GenericProps = BasicProps & AvatarProps;
 function Generic (props: GenericProps) {
     const size = props.size ?? 'medium';
     const shape = props.shape ?? 'circle';
-    const classList  = () => useClassList(props, 'cm-skeleton-item', {
+    const classList = () => useClassList(props, 'cm-skeleton-item', {
         [`cm-skeleton-${props.type}`]: props.type,
         [`cm-skeleton-${props.type}-${size}`]: size,
         [`cm-skeleton-${props.type}-${shape}`]: shape,
@@ -31,7 +32,7 @@ function Generic (props: GenericProps) {
         width: typeof props.size === 'number' ? props.size + 'px' : props.width,
         height: typeof props.size === 'number' ? props.size + 'px' : props.height,
     })
-    return <div classList={classList()} style={style()}></div>;
+    return <div classList={classList()} style={style()} />;
 }
 
 const generator = <T extends BasicProps>(type: string) => (props: T): JSXElement => <Generic type={type} {...props} />;
@@ -48,7 +49,7 @@ export interface ParagraphProps extends BasicProps {
 
 export function Paragraph (props: ParagraphProps) {
     const rows = props.rows ?? 4;
-    const classList  = () => useClassList(props, 'cm-skeleton-paragraph');
+    const classList = () => useClassList(props, 'cm-skeleton-paragraph');
     const arr = new Array(rows).fill(1);
     const outStyle = () => useStyle(props, {
         width: props.width,
@@ -56,11 +57,11 @@ export function Paragraph (props: ParagraphProps) {
     return <ul classList={classList()} style={outStyle()}>
         <For each={arr}>
             {(_: number, index: Accessor<number>) => {
-                let style: any = {};
+                const style: any = {};
                 if (props.width && props.width instanceof Array) {
                     style.width = props.width[index()];
                 }
-                return <li style={style}></li>
+                return <li style={style} />
             }}
         </For>
     </ul>

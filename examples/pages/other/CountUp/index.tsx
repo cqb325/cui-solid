@@ -16,12 +16,12 @@ import { Table } from "@/components/Table";
 import { propsColumns } from "../../common/columns";
 useDirective(hljs);
 
-export default function CountUpPage(){
+export default function CountUpPage (){
     let countup: any;
     let countup2: any;
     const [value, setValue] = createSignal(2000);
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     CountUp 数字动画
@@ -47,7 +47,7 @@ export default function CountUpPage(){
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             该组件基于 countup.js 封装，可以自由控制数字动画过程。
                         </Paragraph>
                         <DemoCode data={codes['countup_base']}/>
@@ -67,7 +67,7 @@ export default function CountUpPage(){
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">小数</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置属性 decimal 指定小数位数。
                         </Paragraph>
                         <DemoCode data={codes['countup_decimal']}/>
@@ -77,9 +77,9 @@ export default function CountUpPage(){
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>CountUp Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

@@ -1,4 +1,5 @@
-import { JSXElement, Show } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { Show } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
 type TimelineItemProps = {
@@ -18,7 +19,7 @@ export function TimelineItem (props: TimelineItemProps) {
         'cm-timeline-item-head-fill': props.fill
     })
     return <div class="cm-timeline-item">
-        <div class="cm-timeline-item-tail"></div>
+        <div class="cm-timeline-item-tail" />
         <div classList={classList()}>
             {props.icon}
         </div>

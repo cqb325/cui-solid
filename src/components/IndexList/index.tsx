@@ -1,4 +1,5 @@
-import { For, JSXElement, Show, createComputed, createSignal, createUniqueId, onCleanup } from "solid-js";
+import type { JSXElement} from "solid-js";
+import { For, Show, createComputed, createSignal, createUniqueId, onCleanup } from "solid-js";
 import { useClassList } from "../utils/useProps"
 import createModel from "../utils/createModel";
 import { createStore } from "solid-js/store";
@@ -15,7 +16,7 @@ export interface IndexListProps {
     onChange?(value: any[]): void
 }
 
-export function IndexList(props: IndexListProps){
+export function IndexList (props: IndexListProps){
     const promote = () => props.promote ?? true;
     const [value, setValue] = createModel<any[]>(props, 'value', []);
     const [activeAnchor, setActiveAnchor] = createSignal('');
@@ -32,11 +33,11 @@ export function IndexList(props: IndexListProps){
     // 构建数据结构
     let map: {[key: string|number]: any} = {};
     let wrap: any;
-    let topMap: {[key: string|number]: number} = {};
+    const topMap: {[key: string|number]: number} = {};
     createComputed(() => {
         const list: any[] = [];
         map = {};
-        let listMap: {[key: string|number]: any} = {};
+        const listMap: {[key: string|number]: any} = {};
         props.data.forEach((item: any) => {
             if (item.id === undefined || item.id === null) {
                 item.id = createUniqueId();
@@ -72,7 +73,7 @@ export function IndexList(props: IndexListProps){
         }
         const val = value();
         const id = subItem.id;
-        
+
         if (subItem.active) {
             const index = val.indexOf(id);
             val.splice(index, 1);
@@ -94,7 +95,7 @@ export function IndexList(props: IndexListProps){
             e.stopPropagation();
         }
         const ele = document.querySelector(id);
-        
+
         if (ele) {
             if (promote()) {
                 setPromoteText(name);
@@ -128,7 +129,7 @@ export function IndexList(props: IndexListProps){
 
     const getAnchorByScrollTop = (scrollTop: number) => {
         let minId = ''; let min = Number.MAX_VALUE;
-        for(let id in topMap){
+        for (const id in topMap){
             const t = Math.abs(topMap[id] - scrollTop);
             if (min > t) {
                 min = t;

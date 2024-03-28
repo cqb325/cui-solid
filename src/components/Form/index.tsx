@@ -1,4 +1,5 @@
-import { createContext, splitProps, ComponentProps, JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
+import { createContext, splitProps, ComponentProps } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
 export const FormContext = createContext<FormContextOptions>();
@@ -9,7 +10,7 @@ export type FormContextOptions = {
     form: any,
     errorTransfer?: boolean,
     errorAlign?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom',
-    onChange: Function
+    onChange: (name: string, value: any) => void
 }
 
 type FormProps = {
@@ -22,8 +23,8 @@ type FormProps = {
     inline?: boolean,
     errorTransfer?: boolean,
     errorAlign?: 'top'|'bottom'|'left'|'right'|'topLeft'|'topRight'|'bottomLeft'|'bottomRight'|'leftTop'|'leftBottom'|'rightTop'|'rightBottom',
-    onChange?: Function,
-    onBeforeSubmit?: Function,
+    onChange?: (name: string, value: any) => void,
+    onBeforeSubmit?: () => any,
     autocomplete?: string
 }
 
@@ -35,7 +36,9 @@ export function Form (props: FormProps) {
     });
     const [local, others] = splitProps(props, ['labelWidth', 'form', 'inline', 'classList', 'class', 'onChange', 'children', 'onBeforeSubmit']);
     const _onChange = (name: string, v: any) => {
-        local.form[name] = v;
+        if (local.form) {
+            local.form[name] = v;
+        }
         if (local.onChange) {
             local.onChange(name, v);
         }
@@ -60,7 +63,7 @@ export function Form (props: FormProps) {
 
     return <FormContext.Provider value={ctx}>
         <form classList={classList()} onSubmit={onSubmit} {...others} autocomplete={props.autocomplete}>
-        <button type="submit" style={{display: 'none'}}></button>{local.children}</form>
+        <button type="submit" style={{display: 'none'}} />{local.children}</form>
     </FormContext.Provider>;
 }
 

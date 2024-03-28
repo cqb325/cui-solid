@@ -21,6 +21,6 @@ export function Divider (props: DividerProps) {
         height: props.height
     });
     return <div classList={classList()} style={aStyle()}>
-        {props.children ? <span class='cm-divider-text'>{props.children}</span> : null}
+        {props.children ? <span class="cm-divider-text">{props.children}</span> : null}
     </div>;
 }

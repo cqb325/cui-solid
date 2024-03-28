@@ -2,7 +2,9 @@ import { Popover } from "../../Popover";
 import createField from "../../utils/createField";
 import { useClassList } from "../../utils/useProps"
 import { Draggable } from "../../Draggable";
-import { createEffect, For, onMount, Show } from "solid-js";
+import type { Signal } from "solid-js";
+import { createEffect, For, Show } from "solid-js";
+import type { DraggableData } from "@/components/Draggable/utils";
 
 type SliderProps = {
     classList?: any,
@@ -12,11 +14,11 @@ type SliderProps = {
     min?: number,
     max?: number,
     step?: number,
-    value?: number | number[] | Function[],
+    value?: number | number[] | Signal<any>,
     disabled?: boolean,
-    tipFormatter?: Function,
+    tipFormatter?: (value: any) => any,
     marks?: any,
-    onChange?: Function
+    onChange?: (value: any) => void
 }
 
 export function Slider (props: SliderProps) {
@@ -25,16 +27,16 @@ export function Slider (props: SliderProps) {
     let rightDrag: any;
     let pop: any;
     let popRight: any;
-    let min = props.min ?? 0;
-    let max = props.max ?? 100;
+    const min = props.min ?? 0;
+    const max = props.max ?? 100;
     const step = props.step ?? 1.00;
     const range = props.range ?? false;
-    const [value, setValue] = createField(props, range ? [0, 0] : 0);
+    const [value, setValue] = createField<any>(props, range ? [0, 0] : 0);
     const classList = () => useClassList(props, 'cm-slider', {
         'cm-slider-disabled': props.disabled
     });
 
-    let snap = () => {
+    const snap = () => {
         const rect = rail.getBoundingClientRect();
         const allW = rect.width;
         return allW / (max - min) * step;
@@ -42,11 +44,11 @@ export function Slider (props: SliderProps) {
 
     // 根据值计算位置
     const calculateLeftRight = () => {
-        const val = range ? value() : [min, value()];
+        const val: any = range ? value() : [min, value()];
         const trackWidth = Math.abs(val[1] - val[0]) / (max - min) * 100;
         const trackLeft = (val[0] - min) / (max - min) * 100;
         const handleRight = (val[1] - min) / (max - min) * 100;
-        
+
         return {left: trackLeft, width: trackWidth, right: handleRight};
     }
     const trackStyle = () => {
@@ -55,7 +57,7 @@ export function Slider (props: SliderProps) {
     };
 
     const contextLeft = () => {
-        const v = range ? value()[0] : value();
+        const v: any = range ? value()[0] : value();
         if (props.tipFormatter) {
             return props.tipFormatter(v);
         }
@@ -73,10 +75,10 @@ export function Slider (props: SliderProps) {
     createEffect(() => {
         const ret = calculateLeftRight();
         const rect = rail.getBoundingClientRect();
-        
+
         const leftX = range ? rect.width * ret.left / 100 : rect.width * ret.right / 100;
         const rightX = range ? rect.width * (ret.left + ret.width) / 100 : 0;
-        
+
         if (leftDrag) {
             leftDrag.setPosition({
                 x: leftX,
@@ -103,7 +105,7 @@ export function Slider (props: SliderProps) {
     }
 
     //左侧拖拽
-    const onLeftDrag = (e: any, data: any) => {
+    const onLeftDrag = (e: any, data: DraggableData) => {
         const railRect = rail.getBoundingClientRect();
         const allW = railRect.width;
         const v = toFixed(data.x / allW * (max - min) + min);
@@ -113,13 +115,13 @@ export function Slider (props: SliderProps) {
         if (range && v > value()[1]) {
             return false;
         }
-        let val = range ? [v, Math.max(v, value()[1])] : v;
+        const val = range ? [v, Math.max(v, value()[1])] : v;
         setValue(val);
         props.onChange && props.onChange(val);
     }
 
     //右侧拖拽
-    const onRightDrag = (e: any, data: any) => {
+    const onRightDrag = (e: any, data: DraggableData) => {
         const railRect = rail.getBoundingClientRect();
         const allW = railRect.width;
         const v = toFixed(data.x / allW * (max - min) + min);
@@ -129,7 +131,7 @@ export function Slider (props: SliderProps) {
         if (range && v < value()[0]) {
             return false;
         }
-        let val = range ? [Math.min(value()[0], v), v] : v;
+        const val = range ? [Math.min(value()[0], v), v] : v;
         setValue(val);
         props.onChange && props.onChange(val);
     }
@@ -154,7 +156,7 @@ export function Slider (props: SliderProps) {
         const v = toFixed(Math.round(x / allW * (max - min) / step + min) * step);
 
         let val = value();
-        
+
         if (range) {
             const nearLeft = Math.abs(val[1] - v) > Math.abs(val[0] - v);
             val = nearLeft ? [v, val[1]] : [val[0], v];
@@ -170,7 +172,7 @@ export function Slider (props: SliderProps) {
         if (!props.marks) {
             return [];
         }
-        let arr = [];
+        const arr = [];
         for (let i = min; i <= max; i += step) {
             if (props.marks[i]) {
                 arr.push(i);
@@ -182,7 +184,7 @@ export function Slider (props: SliderProps) {
     const marks = () => {
         if (props.marks) {
             const arr = [];
-            for (let step in props.marks) {
+            for (const step in props.marks) {
                 arr.push({
                     step: parseFloat(step),
                     label: props.marks[step]
@@ -194,9 +196,9 @@ export function Slider (props: SliderProps) {
     }
 
     return <div classList={classList()} style={props.style} onMouseDown={onMouseDown}>
-        <div class='cm-slider-rail' ref={rail} ></div>
-        <div class='cm-slider-track' style={trackStyle()}></div>
-        <div class='cm-slider-steps'>
+        <div class="cm-slider-rail" ref={rail} />
+        <div class="cm-slider-track" style={trackStyle()} />
+        <div class="cm-slider-steps">
             {/* {this.renderSteps()} */}
             <For each={steps()}>
                 {(item: number) => {
@@ -207,27 +209,27 @@ export function Slider (props: SliderProps) {
                         'cm-slider-step-active': isActive
                     });
                     const left = `${((item - min) / (max - min)) * 100}%`;
-                    return <span classList={stepClass()} style={{left}}></span>
+                    return <span classList={stepClass()} style={{left}} />
                 }}
             </For>
         </div>
-        <Popover disabled={props.disabled} content={contextLeft()} align='top' ref={pop} arrow>
-            <Draggable axis='x' disabled={props.disabled} ref={leftDrag} onDrag={onLeftDrag} bounds="parent" class="cm-slider-handle-drag"
+        <Popover disabled={props.disabled} content={contextLeft()} align="top" ref={pop} arrow>
+            <Draggable axis="x" disabled={props.disabled} ref={leftDrag} onDrag={onLeftDrag} bounds="parent" class="cm-slider-handle-drag"
             grid={[snap(), snap()]}>
-                <div class='cm-slider-handle' tabIndex='0' />
+                <div class="cm-slider-handle" tabIndex="0" />
             </Draggable>
         </Popover>
 
         <Show when={range}>
-            <Popover disabled={props.disabled} content={contextRight()} align='top' ref={popRight} arrow>
-                <Draggable axis='x' disabled={props.disabled} ref={rightDrag} onDrag={onRightDrag} bounds="parent" class="cm-slider-handle-drag"
+            <Popover disabled={props.disabled} content={contextRight()} align="top" ref={popRight} arrow>
+                <Draggable axis="x" disabled={props.disabled} ref={rightDrag} onDrag={onRightDrag} bounds="parent" class="cm-slider-handle-drag"
                 grid={[snap(), snap()]}>
-                    <div class='cm-slider-handle' tabIndex='1' />
+                    <div class="cm-slider-handle" tabIndex="1" />
                 </Draggable>
             </Popover>
         </Show>
         <Show when={props.marks}>
-            <div class='cm-slider-marks'>
+            <div class="cm-slider-marks">
                 <For each={marks()}>
                     {(item: any) => {
                         const left = `${((item.step - min) / (max - min)) * 100}%`;

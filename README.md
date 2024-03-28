@@ -41,6 +41,10 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v0.1.37
+    1、添加eslint，并修改格式化代码
+    2、form支持async-validator 校验方式
+
     v0.1.36
     1、修复Select 使用transfer不显示问题
 

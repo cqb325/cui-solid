@@ -14,10 +14,10 @@ export interface TextareaProps {
     trigger?: 'input'|'blur'
     wordCount?: boolean
     maxLength?: number
-    onChange?: Function
-    onInput?: Function
-    onKeyUp?: Function
-    onEnter?: Function
+    onChange?: (value: any) => void
+    onInput?: (value: any, e: any) => void
+    onKeyUp?: (value: any, e: any) => void
+    onEnter?: (value: any, e: any) => void
 }
 
 export function Textarea (props: TextareaProps) {
@@ -27,7 +27,7 @@ export function Textarea (props: TextareaProps) {
         'cm-input-disabled': local.disabled,
         'cm-input-auto-height': local.autoHeight
     });
-    const [_value, setValue] = createField(props, '');
+    const [_value, setValue] = createField<any>(props, '');
     const [valForCount, setValForCount] = createSignal(_value());
     const trigger = local.trigger || 'blur';
     const _onChange = (e: any) => {
@@ -79,11 +79,11 @@ export function Textarea (props: TextareaProps) {
     }
 
     return <div classList={classList()} style={props.style}>
-        <textarea class='cm-input' {...others} value={_value()} spellcheck={false} autocomplete="off" wrap="soft"
+        <textarea class="cm-input" {...others} value={_value()} spellcheck={false} autocomplete="off" wrap="soft"
                 onChange={_onChange} onInput={_onInput} onKeyUp={_onKeyUp} onBlur={onBlurChange}
-            ></textarea>
+             />
         {
-            props.wordCount && props.maxLength ? <div class='cm-input-suffix'>
+            props.wordCount && props.maxLength ? <div class="cm-input-suffix">
                 <WordCount total={props.maxLength} value={valForCount()}/>
             </div> : null
         }

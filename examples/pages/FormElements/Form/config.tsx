@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export const propsData = [
     {name: 'classList', desc: '自定义class', type: 'Object', default: ''},
     {name: 'class', desc: '自定义class', type: 'string', default: ''},
@@ -36,8 +37,10 @@ export const eventsData = [
 
 export const anchorData = [
     {id: 'form_base', text: '基础用法'},
-    {id: 'form_fields', text: '支持的表单项'},
     {id: 'form_dynamic_rule', text: '动态校验'},
+    {id: 'form_error_transfer', text: '错误提示位置'},
+    {id: 'form_async_validate', text: 'async_validator'},
+    {id: 'form_fields', text: '支持的表单项'},
     {id: 'comp_api', text: 'API'},
     {id: 'comp_props', text: '属性'},
     {id: 'comp_events', text: '事件'},
@@ -46,8 +49,10 @@ export const anchorData = [
 import form_base from "./codes/form_base"
 import form_fields from "./codes/form_fields"
 import form_dynamic_rule from "./codes/form_dynamic_rule"
+import form_async_validate from "./codes/form_async_validate"
 export const codes = {
     form_fields,
     form_dynamic_rule,
+    form_async_validate,
     form_base,
 }

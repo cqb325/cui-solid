@@ -8,7 +8,7 @@ type FormItemProps = {
     inline?: boolean;
     name?: string;
     children?: any;
-    labelStyle?: Object;
+    labelStyle?: any;
     label?: string;
     style?: any;
     rules?: {

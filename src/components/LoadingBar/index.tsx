@@ -2,19 +2,19 @@ import { render } from "solid-js/web";
 import usePortal from "../utils/usePortal";
 import { LoadingBar } from "./LoadingBar";
 
-let duration = 800;
+const duration = 800;
 let timer: any;
 let bar: any;
 
 
-function clearTimer() {
+function clearTimer () {
     if (timer) {
         clearInterval(timer);
         timer = null;
     }
 }
 
-function hide() {
+function hide () {
     setTimeout(() => {
         update({
             show: false
@@ -27,7 +27,7 @@ function hide() {
     }, duration);
 }
 
-function update(options: any) {
+function update (options: any) {
     bar.update(options);
 }
 
@@ -47,7 +47,7 @@ function LoadingBarFn () {
             });
 
             timer = setInterval(() => {
-                percent += Math.floor(Math.random () * 3 + 1);
+                percent += Math.floor(Math.random() * 3 + 1);
                 if (percent > 95) {
                     clearTimer();
                 }

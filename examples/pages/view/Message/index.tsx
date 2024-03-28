@@ -17,29 +17,29 @@ useDirective(hljs);
 
 export default function MessagePage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     Message 消息提示
                 </Title>
                 <Space id="message_base" dir="v">
                     <Card bordered>
-                        <Space dir='h'>
-                            <Button type='primary' onClick={() => {
+                        <Space dir="h">
+                            <Button type="primary" onClick={() => {
                                 message.info('提示信息')
                             }}>消息</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 message.success('登录成功')
                             }}>成功</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 message.error('添加错误')
                             }}>错误</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 message.warning('需要数字类型')
                             }}>警告</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['message_base']}/>
@@ -49,26 +49,26 @@ export default function MessagePage () {
 
                 <Space id="message_background" dir="v">
                     <Card bordered>
-                        <Space dir='h'>
-                            <Button type='primary' onClick={() => {
+                        <Space dir="h">
+                            <Button type="primary" onClick={() => {
                                 message.info({
                                     content: '提示信息',
                                     background: true
                                 })
                             }}>消息</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 message.success({
                                     content: '登录成功',
                                     background: true
                                 })
                             }}>成功</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 message.error({
                                     content: '添加错误',
                                     background: true,
                                 })
                             }}>错误</Button>
-                            <Button type='primary' onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 message.warning({
                                     content: '需要数字类型',
                                     background: true,
@@ -76,7 +76,7 @@ export default function MessagePage () {
                             }}>警告</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">背景色</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             配置参数 background 可以显示背景色
                         </Paragraph>
                         <DemoCode data={codes['message_background']}/>
@@ -86,8 +86,8 @@ export default function MessagePage () {
 
                 <Space id="message_close" dir="v">
                     <Card bordered>
-                        <Space dir='h'>
-                            <Button type='primary' onClick={() => {
+                        <Space dir="h">
+                            <Button type="primary" onClick={() => {
                                 message.info({
                                     content: '可关闭message',
                                     background: true,
@@ -97,7 +97,7 @@ export default function MessagePage () {
                             }}>可关闭</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">可关闭</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             配置参数 closeable 可关闭消息
                         </Paragraph>
                         <DemoCode data={codes['message_close']}/>
@@ -107,8 +107,8 @@ export default function MessagePage () {
 
                 <Space id="message_loading" dir="v">
                     <Card bordered>
-                        <Space dir='h'>
-                            <Button type='primary' onClick={() => {
+                        <Space dir="h">
+                            <Button type="primary" onClick={() => {
                                 const key = createUniqueId();
                                 message.info({
                                     key,
@@ -124,7 +124,7 @@ export default function MessagePage () {
                             }}>加载</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">加载中</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             配置参数 loading 显示加载中的消息， message可通过key关闭消息
                         </Paragraph>
                         <DemoCode data={codes['message_loading']}/>
@@ -134,14 +134,14 @@ export default function MessagePage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>Message Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='comp_events' dir="v">
+                    <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>
-                        <Table columns={eventsColumns} data={eventsData} border size='small' />
+                        <Table columns={eventsColumns} data={eventsData} border size="small" />
                     </Space>
                 </Space>
             </Space>

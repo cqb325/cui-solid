@@ -3,6 +3,7 @@ import { Button } from "../../Button"
 import { Icon } from "../../Icon"
 import { useClassList } from "../../utils/useProps"
 import { List } from "./List"
+import type { Signal} from "solid-js";
 import { createEffect } from "solid-js"
 import createField from "../../utils/createField"
 
@@ -13,13 +14,13 @@ type TransferProps = {
     width?: number,
     height?: number,
     data?: any[],
-    value?: any[] | Function[],
+    value?: any[] | Signal<any>,
     filter?: boolean,
-    render?: Function,
-    onChange?: Function,
+    render?: (item: any) => any,
+    onChange?: (value: any[]) => void,
 }
 
-type TransferStore = {
+export type TransferStore = {
     data: any[],
     sourceDisabled: boolean,
     targetDisabled: boolean,
@@ -27,15 +28,15 @@ type TransferStore = {
     targetIds: any[],
 }
 export function Transfer (props: TransferProps) {
-    const [value, setValue] = createField(props, []);
+    const [value, setValue] = createField<any[]>(props, []);
     const classList = () => useClassList(props, 'cm-transfer')
-    const [store, setStore] = createStore({
+    const [store, setStore] = createStore<TransferStore>({
         data: [],
         sourceDisabled: true,
         targetDisabled: true,
         sourceIds: [],
         targetIds: []
-    } as TransferStore);
+    });
 
     createEffect(() => {
         setStore('data', props.data || []);
@@ -62,7 +63,7 @@ export function Transfer (props: TransferProps) {
         store.targetIds.forEach((id: any) => {
             setStore('data', (item: any) => item.id === id, '_checked', false);
         });
-        let v = value();
+        const v = value();
         store.targetIds.forEach((id: any) => {
             v.splice(v.indexOf(id), 1);
         });
@@ -72,13 +73,13 @@ export function Transfer (props: TransferProps) {
     }
 
     return <div classList={classList()} style={props.style}>
-        <List width={props.width} height={props.height} store={store} setStore={setStore} name='source' 
+        <List width={props.width} height={props.height} store={store} setStore={setStore} name="source"
             value={value()} onSelect={onSelect} filter={props.filter} render={props.render}/>
         <div class="cm-transfer-operation">
-            <Button disabled={store.sourceDisabled} icon={<Icon name='chevron-right'/>} size="small" onClick={transferToTarget}>To Right</Button>
-            <Button disabled={store.targetDisabled} icon={<Icon name='chevron-left'/>} size="small" onClick={transferToSource}>To Left</Button>
+            <Button disabled={store.sourceDisabled} icon={<Icon name="chevron-right"/>} size="small" onClick={transferToTarget}>To Right</Button>
+            <Button disabled={store.targetDisabled} icon={<Icon name="chevron-left"/>} size="small" onClick={transferToSource}>To Left</Button>
         </div>
-        <List width={props.width} height={props.height} store={store} setStore={setStore} name='target' 
+        <List width={props.width} height={props.height} store={store} setStore={setStore} name="target"
             value={value()} onSelect={onSelect} filter={props.filter} render={props.render}/>
     </div>
 }

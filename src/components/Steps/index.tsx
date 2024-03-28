@@ -1,5 +1,6 @@
-import { Accessor, For, JSXElement, children } from "solid-js";
-import { StepProps } from "./Step";
+import type { Accessor, JSXElement} from "solid-js";
+import { For, children } from "solid-js";
+import type { StepProps } from "./Step";
 import { useClassList } from "../utils/useProps";
 import { InnerStep } from "./InnerStep";
 import { Step } from "./Step";

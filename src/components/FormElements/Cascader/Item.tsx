@@ -24,6 +24,7 @@ export function Item (props: any) {
                 ctx && ctx.addChildren(props.data, children);
                 props.data.loading = false;
             } catch (e) {
+                // todo
             } finally {
                 setLoading(false);
             }
@@ -34,7 +35,7 @@ export function Item (props: any) {
         ctx && ctx.onSelect(props.data);
     }
     const activeItem = () => {
-        let vals = [];
+        const vals = [];
         for (let i = 0; i < props.level; i++) {
             vals.push(store.selectedValue[i]);
         }
@@ -52,13 +53,13 @@ export function Item (props: any) {
             activeItem();
         }, 100);
     }
-    return <div classList={classList()} onClick={onClick} 
+    return <div classList={classList()} onClick={onClick}
         onMouseEnter={props.trigger === 'hover' ? onMouseEnter : undefined}>
         {props.data.icon}
         <span class="cm-cascader-text">{props.data.title}</span>
         <Show when={(props.data.children && props.data.children.length) || props.data.loading}>
-            <Show when={loading()} fallback={<Icon name='chevron-right' class='cm-menu-submenu-cert'/>}>
-                <Loading color='#1890ff'/>
+            <Show when={loading()} fallback={<Icon name="chevron-right" class="cm-menu-submenu-cert"/>}>
+                <Loading color="#1890ff"/>
             </Show>
         </Show>
     </div>

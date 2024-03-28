@@ -15,7 +15,7 @@ type MessageProps = {
     closeable?: boolean,
     background?: any,
     loading?: boolean,
-    onClose?: Function
+    onClose?: (item?: any) => void
 }
 
 function Message () {
@@ -33,7 +33,7 @@ function Message () {
     render(() => <Messages data={store.list} onClose={onClose}/>, ele);
     return {
         close: (key: string) => {
-            const item: undefined | MessageProps  = store.list.find((aitem: any) => {
+            const item: undefined | MessageProps = store.list.find((aitem: any) => {
                 return aitem.key === key;
             });
             onClose(item);

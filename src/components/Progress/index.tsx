@@ -15,7 +15,7 @@ type ProgressProps = {
     value?: number,
     strokeWidth?: number,
     textInside?: boolean,
-    infoRender?: Function,
+    infoRender?: (status: any, value: any) => any,
     strokeColor?: string | string[] | StrokeProps[],
     type?: 'line'|'circle',
     radius?: number,
@@ -25,10 +25,10 @@ type ProgressProps = {
 export function Progress (props: ProgressProps) {
     const max = () => props.max ?? 100;
     const value = () => {
-        if(props.value && props.value < 0) {
+        if (props.value && props.value < 0) {
             return 0;
         }
-        if(props.value && props.value >= max()) {
+        if (props.value && props.value >= max()) {
             return max();
         }
         return props.value ?? 0;
@@ -36,7 +36,7 @@ export function Progress (props: ProgressProps) {
     const strokeWidth = props.strokeWidth ?? 10;
     const type = props.type ?? 'line';
     const radius = () => props.radius ?? 60;
-    let status = () => {
+    const status = () => {
         if (value() === 100) {
             return 'finished';
         }
@@ -55,10 +55,10 @@ export function Progress (props: ProgressProps) {
             return props.infoRender(sta, value());
         }
         if (sta === 'finished') {
-            return <Icon name='check-circle' size={size}/>;
+            return <Icon name="check-circle" size={size}/>;
         }
         if (sta === 'error') {
-            return <Icon name='x-circle' size={size}/>;
+            return <Icon name="x-circle" size={size}/>;
         }
         return `${value()}%`;
     }
@@ -82,7 +82,7 @@ export function Progress (props: ProgressProps) {
         }
         return obj;
     }
-    
+
     // 计算当前角度对应的弧度值
     const rad = 2 * Math.PI;
 
@@ -110,7 +110,7 @@ export function Progress (props: ProgressProps) {
             if (props.strokeColor instanceof Array) {
                 for (let i = 0; i < props.strokeColor.length; i++) {
                     const stroke = props.strokeColor[i] as StrokeProps;
-                    
+
                     if (percent() * 100 >= stroke.percent) {
                         obj['stroke'] = stroke.color;
                     }
@@ -121,26 +121,26 @@ export function Progress (props: ProgressProps) {
     }
 
     return <div classList={classList()}>
-        <div class='cm-progress-outer'>
-            <div class='cm-progress-inner'>
+        <div class="cm-progress-outer">
+            <div class="cm-progress-inner">
                 <Switch>
                     <Match when={type === 'line'}>
-                        <div class='cm-progress-bar' style={style()}>
+                        <div class="cm-progress-bar" style={style()}>
                             <Show when={props.textInside}>
-                                <span class='cm-progress-info'>{`${value()}%`}</span>
+                                <span class="cm-progress-info">{`${value()}%`}</span>
                             </Show>
                         </div>
                     </Match>
                     <Match when={type === 'circle'}>
-                        <svg width='100%' height='100%' version='1.1'
-                            xmlns='http://www.w3.org/2000/svg' style={{display: 'block', width: (2 * radius() + strokeWidth) + 'px', height: (2 * radius() + strokeWidth)  + 'px'}}>
-                            <circle cx={tx()} cy={tx()} r={radius()} stroke='#f3f3f3'
-                                stroke-width={strokeWidth} fill-opacity='0' />
-                            <path class='cm-progress-bar-path'
+                        <svg width="100%" height="100%" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" style={{display: 'block', width: (2 * radius() + strokeWidth) + 'px', height: (2 * radius() + strokeWidth) + 'px'}}>
+                            <circle cx={tx()} cy={tx()} r={radius()} stroke="#f3f3f3"
+                                stroke-width={strokeWidth} fill-opacity="0" />
+                            <path class="cm-progress-bar-path"
                                 d={descriptions().join(' ')}
-                                stroke-linecap='round'
+                                stroke-linecap="round"
                                 stroke-width={strokeWidth}
-                                fill-opacity='0'
+                                fill-opacity="0"
                                 transform={`translate(${tx()},${tx()})`}
                                 style={circleStyle()}
                             />
@@ -150,7 +150,7 @@ export function Progress (props: ProgressProps) {
             </div>
         </div>
         <Show when={!props.textInside}>
-            <span class='cm-progress-info'>{text()}</span>
+            <span class="cm-progress-info">{text()}</span>
         </Show>
     </div>
 }

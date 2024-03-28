@@ -1,12 +1,14 @@
+import type { Signal } from "solid-js";
+
 type RateItemProps = {
-    onMouseEnter?: Function,
-    onMouseEnterHalf?: Function,
-    onClickHalfStar?: Function,
-    onClickStar?: Function,
+    onMouseEnter?: (value: number) => void,
+    onMouseEnterHalf?: (value: number, e: any) => void,
+    onClickHalfStar?: (value: number, e: any) => void,
+    onClickStar?: (value: number) => void,
     icon?: any,
     index: number,
     allowHalf?: boolean,
-    current: Function[],
+    current: Signal<any>,
 }
 export function RateItem (props: RateItemProps) {
     const [current, setCurrent] = props.current;
@@ -33,7 +35,7 @@ export function RateItem (props: RateItemProps) {
         </span>
         {
             props.allowHalf
-            ? <span class='cm-rate-star-content' onMouseEnter={props.onMouseEnterHalf?.bind(null, props.index + 0.5)}
+            ? <span class="cm-rate-star-content" onMouseEnter={props.onMouseEnterHalf?.bind(null, props.index + 0.5)}
             onClick={props.onClickHalfStar?.bind(null, props.index + 0.5)}>
                 { props.icon }
             </span>

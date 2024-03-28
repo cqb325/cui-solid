@@ -6,8 +6,8 @@ export interface PaginationProps {
     current: number;
     total: number;
     pageSize: number;
-    onChange?: Function;
-    onChangePageSize?: Function;
+    onChange?: (page: number, pageSize: number) => void;
+    onChangePageSize?: (pageSize: number) => void;
     innerNear?: number;
     displayedPages?: number;
     startEndShowNum?: number;

@@ -22,7 +22,7 @@ useDirective(hljs);
 
 export default function AvatarListPage () {
     return <>
-        <div class='sys-ctx-main-left' use:hljs={''}>
+        <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
                 <Title heading={2}>
                     AvatarList 头像列表
@@ -31,14 +31,14 @@ export default function AvatarListPage () {
                     <Card bordered>
                         <Space dir="h" align="center">
                             <AvatarList>
-                                <Avatar asProps title='头像1' src={img1}/>
-                                <Avatar asProps title='头像2' src={img2}/>
-                                <Avatar asProps title='头像3' src={img3}/>
-                                <Avatar asProps title='头像4' src={img4}/>
+                                <Avatar asProps title="头像1" src={img1}/>
+                                <Avatar asProps title="头像2" src={img2}/>
+                                <Avatar asProps title="头像3" src={img3}/>
+                                <Avatar asProps title="头像4" src={img4}/>
                             </AvatarList>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             基础用法
                         </Paragraph>
                         <DemoCode data={codes['avatar_base']}/>
@@ -49,14 +49,14 @@ export default function AvatarListPage () {
                     <Card bordered>
                         <Space dir="h" align="center">
                             <AvatarList max={3} excessStyle={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>
-                                <Avatar asProps title='头像1' src={img1}/>
-                                <Avatar asProps title='头像2' src={img2}/>
-                                <Avatar asProps title='头像3' src={img3}/>
-                                <Avatar asProps title='头像4' src={img4}/>
+                                <Avatar asProps title="头像1" src={img1}/>
+                                <Avatar asProps title="头像2" src={img2}/>
+                                <Avatar asProps title="头像3" src={img3}/>
+                                <Avatar asProps title="头像4" src={img4}/>
                             </AvatarList>
                         </Space>
                         <Divider align="left"><Text type="primary">最大显示数</Text></Divider>
-                        <Paragraph type="secondary" spacing='extended'>
+                        <Paragraph type="secondary" spacing="extended">
                             设置属性 <Text code>max</Text> 可以指定最多显示几个头像，超出后会显示额外数目。
                         </Paragraph>
                         <DemoCode data={codes['avatar_max']}/>
@@ -65,14 +65,14 @@ export default function AvatarListPage () {
 
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
-                    <Space id='comp_props' dir="v">
+                    <Space id="comp_props" dir="v">
                         <Title type="primary" heading={4}>AvatarList Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size='small' />
+                        <Table columns={propsColumns} data={propsData} border size="small" />
                     </Space>
 
-                    <Space id='data_props' dir="v">
+                    <Space id="data_props" dir="v">
                         <Title type="primary" heading={4}>data Props</Title>
-                        <Table columns={propsColumns} data={dataData} border size='small' />
+                        <Table columns={propsColumns} data={dataData} border size="small" />
                     </Space>
                 </Space>
             </Space>

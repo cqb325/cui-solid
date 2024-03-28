@@ -1,0 +1,6 @@
+node_modules
+dist
+dist-doc
+types
+*.md
+vite.config.ts

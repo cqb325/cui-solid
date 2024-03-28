@@ -1,4 +1,5 @@
-import { splitProps, ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
+import { splitProps } from "solid-js";
 import { useClassList, useStyle } from "../utils/useProps";
 interface IconProps extends ComponentProps<'div'> {
     classList?: any,
