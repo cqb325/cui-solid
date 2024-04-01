@@ -51,7 +51,7 @@ for (let i = 0; i < 3; i++) {
 
 const cascaderData = [
     {
-        value: 'beijing', title: '北京', 
+        value: 'beijing', title: '北京',
         children: [
             {value: 'gugong', title: '故宫'},
             {value: 'tiantan', title: '天坛'},
@@ -129,7 +129,7 @@ const cascaderData = [
             </FormItem>
         </Col>
     </Row>
-    
+
     <Row>
         <Col grid={0.33}>
             <FormItem label='开关：' name='switch'>
@@ -165,7 +165,7 @@ const cascaderData = [
             </FormItem>
         </Col>
     </Row>
-    
+
     <Row>
         <Col grid={0.33}>
             <FormItem label='地市：' name='city'>
@@ -240,7 +240,7 @@ const cascaderData = [
             </FormItem>
         </Col>
     </Row>
-    
+
     <Row>
         <Col grid={0.33}>
             <FormItem label='月份：' name='month'>
@@ -276,7 +276,7 @@ const cascaderData = [
             </FormItem>
         </Col>
     </Row>
-    
+
     <Row>
         <Col grid={0.33}>
             <FormItem label='日期时间范围：' name='dateTimeRange'>
@@ -312,34 +312,14 @@ const cascaderData = [
             </FormItem>
         </Col>
     </Row>
-    
+
     <Space dir="h">
         <Button onClick={() => {
-            form.setFormData({
-                count: '',
-                check: true,
-                fruit: [],
-                sex: 1,
-                switch: true,
-                age: 20,
-                city: '1',
-                cascader: [],
-                time: '',
-                timeRange: '',
-                date: '',
-                dateRange: '',
-                month: '',
-                monthRange: '',
-                dateTime: '',
-                dateTimeRange: '',
-                slider: 0,
-                tree: []
-            });
-            form.clearValidates();
+             form.resetFields();
         }}>重置</Button>
 
         <Button onClick={() => {
             form.isValid();
         }}>校验</Button>
     </Space>
-</Form>`
+</Form>`;

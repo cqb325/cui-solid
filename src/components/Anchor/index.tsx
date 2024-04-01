@@ -18,6 +18,7 @@ type AnchorProps = {
     bounds?: number,
     showInk?: boolean,
     mode?: 'hash'|'history'
+    onChange?: (id: string) => void,
 }
 
 type AnchorStore = {
@@ -48,6 +49,10 @@ export function Anchor (props: AnchorProps) {
 
     createEffect(() => {
         setStore('links', evaluatedLinks());
+    })
+
+    createEffect(() => {
+        props.onChange?.(store.currentId);
     })
 
     let scrollContainer: any = null;

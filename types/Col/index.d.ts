@@ -1,3 +1,7 @@
+type ColResponsiveProps = {
+    grid?: number;
+    offset?: number;
+};
 type ColProps = {
     classList?: any;
     class?: any;
@@ -8,6 +12,12 @@ type ColProps = {
     pull?: number;
     offset?: number;
     flex?: string;
+    xs?: number | ColResponsiveProps;
+    sm?: number | ColResponsiveProps;
+    md?: number | ColResponsiveProps;
+    lg?: number | ColResponsiveProps;
+    xl?: number | ColResponsiveProps;
+    xxl?: number | ColResponsiveProps;
 };
 export declare const Col: (props: ColProps) => import("solid-js").JSX.Element;
 export {};

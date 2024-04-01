@@ -27,7 +27,7 @@ type ModalProps = {
     children?: any,
     footer?: boolean,
     loading?: boolean | Signal<boolean>,
-    onOk?: () => void,
+    onOk?: () => boolean | Promise<boolean> | undefined | void,
     onCancel?: () => void,
     onClosed?: () => void,
     onClickClose?: () => void,
@@ -79,15 +79,33 @@ export function Modal (props: ModalProps) {
         props.onCancel && props.onCancel();
     }
 
-    const onOk = () => {
-        props.onOk && props.onOk();
+    const onOk = async () => {
+        // 先判断显示loading
         if (props.loading) {
             if (!loading()) {
                 setLoading(true);
             }
-            return;
         }
-        onClose();
+        // 如果存在onOK回调判断是否返回值
+        if (props.onOk) {
+            const ret = await props.onOk?.();
+            // 没有返回值并且非loading直接关闭
+            if (ret === undefined && !loading()) {
+                onClose();
+            }
+            // 返回true直接关闭
+            if (ret === true) {
+                onClose();
+            }
+            // 返回false，重置loading
+            if (ret === false) {
+                setLoading(false);
+            }
+        } else {
+            if (!loading()) {
+                onClose();
+            }
+        }
     }
 
     createEffect(() => {

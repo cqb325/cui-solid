@@ -16,7 +16,7 @@ type ModalProps = {
     children?: any;
     footer?: boolean;
     loading?: boolean | Signal<boolean>;
-    onOk?: () => void;
+    onOk?: () => boolean | Promise<boolean> | undefined | void;
     onCancel?: () => void;
     onClosed?: () => void;
     onClickClose?: () => void;

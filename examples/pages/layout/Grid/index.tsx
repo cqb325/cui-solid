@@ -75,9 +75,21 @@ function GridLayout () {
                             <Col grid={1/4}><ColText>1/4</ColText></Col>
                             <Col grid={1/4}><ColText>1/4</ColText></Col>
                         </Row>
+                        <div>row2</div>
+                        <Row gutter={[16, 16]} class="example-demo">
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                            <Col grid={1/4}><ColText>1/4</ColText></Col>
+                        </Row>
                         <Divider align="left"><Text type="primary">区块间隔</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             通过给 <Text code>row</Text> 添加 gutter 属性，可以给下属的 <Text code>col</Text> 添加间距，推荐使用 (16+8n)px 作为栅格间隔。
+                            gutter属性支持数字或数组，数组格式为 [水平间距, 垂直间距]。
                         </Paragraph>
                         <DemoCode data={codes['grid_gutter']}/>
                     </Card>
@@ -196,6 +208,34 @@ function GridLayout () {
                             通过给row设置参数align为不同的值，来定义子元素在垂直方向上的排布方式。在flex模式下有效。
                         </Paragraph>
                         <DemoCode data={codes['grid_align']}/>
+                    </Card>
+                </Space>
+
+                <Space id="grid_responsive" dir="v">
+                    <Card bordered>
+                        <Space dir="v" size={5} style={{'margin-top': '20px'}}>
+                            <div>width, offset</div>
+                            <Row class="example-demo" gutter={16}>
+                                <Col xs={{grid: 1/6, offset: 1 / 24}} lg={{grid: 0.25, offset: 1 / 12}}><ColText style={{"height": "80px"}}/></Col>
+                                <Col xs={{grid: 5/12, offset: 1 / 12}} lg={{grid: 0.25, offset: 1 / 12}}><ColText style={{"height": "80px"}}/></Col>
+                                <Col xs={{grid: 1/6, offset: 1 / 12}} lg={{grid: 0.25, offset: 1 / 12}}><ColText style={{"height": "80px"}}/></Col>
+                            </Row>
+                            <div>gutter</div>
+                            <Row class="example-demo" gutter={{xs: [8, 8], lg: [32, 32]}}>
+                                <Col grid={1/3}><ColText style={{"height": "80px"}}/></Col>
+                                <Col grid={1/3}><ColText style={{"height": "80px"}}/></Col>
+                                <Col grid={1/3}><ColText style={{"height": "80px"}}/></Col>
+                                <Col grid={1/3}><ColText style={{"height": "80px"}}/></Col>
+                                <Col grid={1/3}><ColText style={{"height": "80px"}}/></Col>
+                                <Col grid={1/3}><ColText style={{"height": "80px"}}/></Col>
+                            </Row>
+                        </Space>
+                        <Divider align="left"><Text type="primary">响应式布局</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            预设六个响应尺寸：xs sm md lg xl xxl，调整浏览器尺寸来查看效果。
+                            gutter也支持响应式，可以通过内嵌到 xs sm md lg xl xxl 属性中来使用
+                        </Paragraph>
+                        <DemoCode data={codes['grid_responsive']}/>
                     </Card>
                 </Space>
 

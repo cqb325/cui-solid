@@ -10,6 +10,7 @@ type AnchorProps = {
     bounds?: number;
     showInk?: boolean;
     mode?: 'hash' | 'history';
+    onChange?: (id: string) => void;
 };
 export declare function Anchor(props: AnchorProps): import("solid-js").JSX.Element;
 export declare namespace Anchor {

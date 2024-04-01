@@ -24,8 +24,35 @@ import { propsColumns } from "../../../pages/common/columns";
 import { createSignal } from "solid-js";
 useDirective(hljs);
 
+interface FormData1 {
+    u: string
+    p: string
+}
+
+interface FormModel {
+    count: number,
+    check: boolean,
+    fruit: string[],
+    sex: number,
+    switch: boolean,
+    age: number,
+    city: string,
+    cascader: string[],
+    time: string,
+    timeRange: string | string[],
+    date: string,
+    dateRange: string | string[],
+    month: string,
+    monthRange: string | Date[],
+    dateTime: string | Date,
+    dateTimeRange: string | string[] | Date[],
+    slider: number,
+    tree: string[],
+    color: string
+}
+
 function FormPage () {
-    const form1 = useForm({
+    const form1 = useForm<FormData1>({
         data: {
             u: '',
             p: ''
@@ -35,7 +62,7 @@ function FormPage () {
         message: {
         }
     });
-    const form = useForm({
+    const form = useForm<FormModel>({
         data: {
             count: 10,
             check: true,
@@ -77,7 +104,6 @@ function FormPage () {
             }
         }
     });
-
     const form2 = useForm({
         data: {
             select: 1,
@@ -395,7 +421,7 @@ function FormPage () {
                                         <Space dir="h">
                                             <Input prefix="￥" suffix="元" />
                                             <Button onClick={() => {
-                                                form.count = parseInt(form.count) + 1;
+                                                form.count = form.count + 1;
                                                 console.log(form.getFormData());
                                             }}>Add</Button>
                                         </Space>
@@ -575,28 +601,29 @@ function FormPage () {
                             </Row>
                             <Space dir="h">
                                 <Button onClick={() => {
-                                    form.setFormData({
-                                        count: '',
-                                        check: true,
-                                        fruit: [],
-                                        sex: 1,
-                                        switch: true,
-                                        age: 20,
-                                        city: '1',
-                                        cascader: [],
-                                        time: '',
-                                        timeRange: '',
-                                        date: '',
-                                        dateRange: '',
-                                        month: '',
-                                        monthRange: '',
-                                        dateTime: '',
-                                        dateTimeRange: '',
-                                        slider: 0,
-                                        tree: [],
-                                        color: ''
-                                    });
-                                    form.clearValidates();
+                                    form.resetFields();
+                                    // form.setFormData({
+                                    //     count: '',
+                                    //     check: true,
+                                    //     fruit: [],
+                                    //     sex: 1,
+                                    //     switch: true,
+                                    //     age: 20,
+                                    //     city: '1',
+                                    //     cascader: [],
+                                    //     time: '',
+                                    //     timeRange: '',
+                                    //     date: '',
+                                    //     dateRange: '',
+                                    //     month: '',
+                                    //     monthRange: '',
+                                    //     dateTime: '',
+                                    //     dateTimeRange: '',
+                                    //     slider: 0,
+                                    //     tree: [],
+                                    //     color: ''
+                                    // });
+                                    // form.clearValidates();
                                 }}>重置</Button>
 
                                 <Button onClick={() => {

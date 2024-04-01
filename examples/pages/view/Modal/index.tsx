@@ -250,16 +250,24 @@ export default function ModalPage () {
                                 });
                             }}>错误</Button>
 
-                            <Button type="error" onClick={() => {
+                            <Button type="primary" onClick={() => {
                                 modal.confirm({
                                     title: '提示',
-                                    content: <div>确认信息</div>
+                                    loading: true,
+                                    content: <div>确认信息</div>,
+                                    onOk: () => {
+                                        return new Promise((resolve) => {
+                                            setTimeout(() => {
+                                                resolve(true)
+                                            }, 2000);
+                                        });
+                                    }
                                 });
                             }}>确认</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">单实例使用</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            使用modal的 方法弹出对话框
+                            使用modal的 方法弹出对话框，onOk回调可以返回一个true/false,来控制modal的关闭，返回true立即关闭， 返回false不关闭会将loading重置，不返回或undefined，则按照默认方式处理
                         </Paragraph>
                         <DemoCode data={codes['modal_instance']}/>
                     </Card>

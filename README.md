@@ -14,24 +14,26 @@ CUI-SOLID
 [![NPM downloads](https://img.shields.io/npm/dt/cui-solid.svg?style=flat-square)](https://npmjs.org/package/cui-solid)
 ![JS gzip size](https://img.badgesize.io/https:/unpkg.com/cui-solid/dist/cui.min.esm.js?label=gzip%20size%3A%20JS&compression=gzip&style=flat-square)
 ![CSS gzip size](https://img.badgesize.io/https://unpkg.com/cui-solid/dist/styles/cui.css?compression=gzip&label=gzip%20size:%20CSS&style=flat-square)
-## Docs
-[documents on gitee](https://cqb325.gitee.io/cui-solid-doc "cui-solid-doc")
 
-[documents on github](https://cqb325.github.io/cui-solid-doc "cui-solid-doc")
+## Docs
+
+[documents on gitee](https://cqb325.gitee.io/cui-solid-doc 'cui-solid-doc')
+
+[documents on github](https://cqb325.github.io/cui-solid-doc 'cui-solid-doc')
 
 ## Repository
 
-[Gitee](https://gitee.com/cqb325/cui-solid "Gitee")
+[Gitee](https://gitee.com/cqb325/cui-solid 'Gitee')
 
-[Github](https://github.com/cqb325/cui-solid "Github")
+[Github](https://github.com/cqb325/cui-solid 'Github')
 
 ## Other Packages
 
-[solid-vue-router a router package by vue-router](https://gitee.com/cqb325/solid-vue-router "solid-vue-router")
+[solid-vue-router a router package by vue-router](https://gitee.com/cqb325/solid-vue-router 'solid-vue-router')
 
-[cui-pin a pin field input component](https://gitee.com/cqb325/cui-pin "cui-pin")
+[cui-pin a pin field input component](https://gitee.com/cqb325/cui-pin 'cui-pin')
 
-[cui-solid-draggable followed by react-draggable](https://gitee.com/cqb325/cui-solid-draggable "cui-solid-draggable")
+[cui-solid-draggable followed by react-draggable](https://gitee.com/cqb325/cui-solid-draggable 'cui-solid-draggable')
 
 ## Install
 
@@ -41,6 +43,14 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+
+    v0.1.38
+    1、添加 resetFields 方法
+    2、添加 useForm 泛型
+    3、Modal添加onOk返回值控制Modal的关闭
+    4、Anchor添加onChange回调
+    5、Row/Col支持响应式
+
     v0.1.37
     1、添加eslint，并修改格式化代码
     2、form支持async-validator 校验方式
@@ -51,13 +61,13 @@ CUI-SOLID
     v0.1.35
     1、修复Select单选不显示问题
     2、Form添加浮动显示错误信息方式
-    
+
     v0.1.34
     1、Select支持远程过滤和默认值
     2、badge添加offset属性
     3、popover支持confirm
     4、Tag默认无border添加border属性
-    
+
     v0.1.33
     1、修复Modal溢出出现滚动条问题
 
@@ -88,7 +98,7 @@ CUI-SOLID
     v0.1.26
     1、修改Exception减少打包尺寸
     2、Dropdown 定位和样式修改
-    
+
     v0.1.25
     1、Pagination重构分页显示规则并添加mini型
 
@@ -97,16 +107,16 @@ CUI-SOLID
 
     v0.1.23
     1、List取消使用Slots
-    
+
     v0.1.21
     1、新增Banner组件
 
     v0.1.16
     1、更新router依赖版本至v1.0.12
-    
+
     v0.1.15
     1、修改popover采用useTransition
-    
+
     v0.1.14
     1、修改anchor-link样式
     2、修改dropdown样式和动画采用useTransition
@@ -135,11 +145,11 @@ CUI-SOLID
     v0.1.9
     1、添加Drawer组件
     2、优化一些响应性属性
-    
+
     v0.1.8
     1、优化dark模式样式
     2、timeline优化
     3、fix：bugs
 
-    v0.1.7 
+    v0.1.7
     1、Select/Table support large data uses cui-virtaul-list

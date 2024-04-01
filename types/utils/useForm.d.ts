@@ -1,7 +1,7 @@
 import type { Accessor } from "solid-js";
 type CheckFunction = (v: any) => any;
 type clearFunction = () => any;
-export interface useFormProps {
+export type useFormProps = {
     isValid(): boolean;
     validate(): boolean;
     getFormData(): any;
@@ -13,12 +13,13 @@ export interface useFormProps {
     setClearValid(name: string, clearFn: clearFunction): void;
     clearValidates(name?: string): void;
     resetFieldsValidate(name?: string): void;
-    [key: string]: any;
-}
-export interface useFormParams {
-    data: any;
+    clearValidates(): void;
+    resetFields(): void;
+};
+export interface useFormParams<T> {
+    data: T;
     validation?: any;
     message?: any;
 }
-declare function useForm({ data, validation, message }: useFormParams): useFormProps;
+declare function useForm<T>({ data, validation, message, }: useFormParams<T>): useFormProps & T;
 export default useForm;
