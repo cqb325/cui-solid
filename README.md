@@ -43,6 +43,9 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v1.0.1
+    1、fix: export new components
+    
     v1.0.0
     1、Table selectedRowKeys 置空问题，数据变更无法回显问题
     2、添加 TableStyleLayout 组件
