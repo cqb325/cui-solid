@@ -8,7 +8,9 @@ type DividerProps = {
     style?: any,
     dashed?: boolean,
     children?: any,
-    height?: string,
+    margin?: number | string,
+    textColor?: string, // 颜色
+    textMargin?: number | string
 }
 
 export function Divider (props: DividerProps) {
@@ -18,8 +20,13 @@ export function Divider (props: DividerProps) {
         'cm-divider-dashed': props.dashed
     });
     const aStyle = () => useStyle(props, {
-        height: props.height
+        margin: `${props.margin}${typeof props.margin === 'number' ? 'px' : ''}`,
     });
+
+    const textStyle = () => ({
+        margin: `${props.textMargin}${typeof props.textMargin === 'number' ? 'px' : ''}`,
+        color: props.textColor
+    })
     return <div classList={classList()} style={aStyle()}>
         {props.children ? <span class="cm-divider-text">{props.children}</span> : null}
     </div>;

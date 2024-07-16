@@ -34,6 +34,7 @@ export default defineConfig({
         conditions: ['development', 'browser'],
         alias: {
             // 'solid-vue-router': path.resolve('./src/solid-router'),
+            // 'cui-virtual-list': path.resolve('./cui-virtual-list'),
             '@': path.resolve('./src')
         }
     },

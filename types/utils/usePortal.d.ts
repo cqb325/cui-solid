@@ -1,1 +1,1 @@
-export default function usePortal(id: string, className: string): Element;
+export default function usePortal(id: string, className: string): Element | undefined;

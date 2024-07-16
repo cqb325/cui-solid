@@ -2,17 +2,22 @@ import { createStore, produce } from "solid-js/store";
 import { useClassList } from "../utils/useProps";
 import { Head } from "./Head";
 import { Body } from "./Body";
-import type { JSXElement} from "solid-js";
-import { Show, createContext, createEffect, useContext } from "solid-js";
+import type { JSXElement, Signal} from "solid-js";
+import { Show, createContext, createEffect, onCleanup, onMount, untrack, useContext } from "solid-js";
 import { showHideChildren, sortHandler, addRemoveExpand,
-    onResizeStart, onResizeMove, onResizeEnd, initColumns, updateScrollFixed, initData } from "./utils";
+    onResizeStart, onResizeMove, onResizeEnd, initColumns, updateScrollFixed, initData,
+    observerSizeChange} from "./utils";
 import { Spin } from "../Spin";
+import type { PopoverProps } from "../Popover";
 
 const TableContext = createContext();
+
+type KeyType = string | number;
 
 type TableProps = {
     columns: any[],
     data: any[],
+    rowKey?: string,
     height?: number,
     classList?: any,
     class?: any,
@@ -20,6 +25,7 @@ type TableProps = {
     border?: boolean,
     stripe?: boolean,
     highlight?: boolean,
+    selectedRowKeys?: Signal<KeyType[]>,
     onRowSelect?: (row: any, preRow: any) => void,
     onRowChecked?: (row: any, checked: boolean) => void,
     onCheckedAll?: (rows: any[]) => void,
@@ -28,6 +34,7 @@ type TableProps = {
     size?: 'small',
     spanMethod?: (data: any, column: any, index: number, columnIndex: number) => any,
     loading?: boolean,
+    loadingText?: string|JSXElement,
     virtual?: boolean
 }
 // 表格存储
@@ -52,6 +59,8 @@ export type ColumnProps = {
     render?: (value: any, column: any, row: any) => any,
     type?: string,
     width?: string,
+    minWidth?: number,
+    maxWidth?: number,
     _width?: number,
     resize?: boolean,
     sort?: boolean | 'custom',
@@ -59,6 +68,12 @@ export type ColumnProps = {
     sortType?: 'asc'|'desc'|'',
     fixed?: 'left'|'right',
     tree?: boolean,
+    ellipsis?: boolean,
+    tooltip?: boolean,
+    tooltipAlign?: PopoverProps['align'],
+    tooltipTheme?: PopoverProps['theme'],
+    tooltipMaxWidth?: number,
+    tooltipStyle?: any,
     fixedLeftLast?: boolean,
     fixedRightFirst?: boolean,
     id: string,
@@ -74,13 +89,16 @@ export function Table (props: TableProps) {
         'cm-table-small': props.size === 'small',
         'cm-table-resizing': store.resizing
     });
+    let wrap: any;
     const {maxFixedLeft, minFixedRight} = initColumns(props.columns);
+    const rowKey = props.rowKey ?? 'id';
+    const [selectedRowKeys, setSelectedRowKeys] = props.selectedRowKeys ? props.selectedRowKeys : [];
 
-    let data: any[] = initData(props.data);
+    let data: any[] = initData(props.data, rowKey);
 
     // 传入的data变化
     createEffect(() => {
-        data = initData(props.data);
+        data = initData(props.data, rowKey);
         setStore('data', data);
         setStore('checkedAll', false);
     });
@@ -134,11 +152,13 @@ export function Table (props: TableProps) {
         let status: boolean | string = false;
         let checkedNum = 0;
         let total = 0;
+        const checkedRowKeys: KeyType[] = [];
         store.data.forEach((item: any) => {
             if (!item._disabled) {
                 total++;
             }
             if (item._checked) {
+                checkedRowKeys.push(item.id);
                 checkedNum ++;
                 status = 'indeterminate';
             }
@@ -147,17 +167,57 @@ export function Table (props: TableProps) {
             status = true;
         }
 
+        if (checkedRowKeys.join(',') !== selectedRowKeys?.().join(',')) {
+            setSelectedRowKeys?.(checkedRowKeys);
+        }
+
         setStore('checkedAll', status);
         props.onRowChecked && props.onRowChecked(row, checked);
     }
+
+    createEffect(() => {
+        const rowKeys = selectedRowKeys?.();
+        // data变更后也重新设置选择状态
+        store.data;
+        if (rowKeys && rowKeys.length > 0) {
+            setStore('data', item => rowKeys.includes(item.id) && !item._checked , produce((item: any) => item._checked = true))
+        } else {
+            setStore('data', item => item._checked, produce((item: any) => item._checked = false))
+        }
+        let status: boolean | string = false;
+        let checkedNum = 0;
+        let total = 0;
+        untrack(() => {
+            store.data.forEach((item: any) => {
+                if (!item._disabled) {
+                    total++;
+                }
+                if (item._checked) {
+                    checkedNum ++;
+                    status = 'indeterminate';
+                }
+            })
+        })
+        if (checkedNum >= total) {
+            status = true;
+        }
+        setStore('checkedAll', status);
+    });
 
     // 头部选择框选中事件,禁用的选择框不进行响应
     const onHeadChecked = (checked: boolean) => {
         setStore('checkedAll', checked);
         setStore('data', item => checked ? !item._disabled && !item._checked : !item._disabled && item._checked, produce((item: any) => item._checked = checked))
+        const checkedRowKeys: KeyType[] = [];
         const rows = store.data.filter(item => {
+            if (item._checked) {
+                checkedRowKeys.push(item.id);
+            }
             return item._checked;
         })
+        if (checkedRowKeys.join(',') !== selectedRowKeys?.().join(',')) {
+            setSelectedRowKeys?.(checkedRowKeys);
+        }
         props.onCheckedAll && props.onCheckedAll(rows);
     }
 
@@ -193,10 +253,9 @@ export function Table (props: TableProps) {
     }
     // resize停止
     const onDragEnd = () => {
-        console.log('end');
         document.removeEventListener('mousemove', onDragMove);
         document.removeEventListener('mouseup', onDragEnd);
-        onResizeEnd(store, setStore);
+        onResizeEnd(store, setStore, wrap);
     }
 
     // resize 辅助线条样式
@@ -245,6 +304,19 @@ export function Table (props: TableProps) {
         setChecked
     });
 
+    onMount(() => {
+        const body = wrap.querySelector('.cm-table-body');
+        const ro = new ResizeObserver((entries) => {
+            entries.forEach((entry) => {
+                observerSizeChange(store, setStore, wrap);
+            })
+        });
+        ro.observe(body);
+        onCleanup(() => {
+            ro.unobserve(body);
+        })
+    })
+
     const style = () => ({
         ...props.style,
         'max-height': props.height ? `${props.height}px` : '',
@@ -256,11 +328,11 @@ export function Table (props: TableProps) {
     return <TableContext.Provider value={{onSelectRow, onRowChecked, onHeadChecked, onSort,
         onShowChildren, onExpand, onDragStart, highlight: props.highlight, border: props.border,
         spanMethod: props.spanMethod}}>
-        <div classList={classList()}>
+        <div classList={classList()} ref={wrap}>
             <div class="cm-table-resize-helper" style={resizeStyle()} />
             <div class="cm-table-loading" />
             <Show when={props.loading} fallback={null}>
-                <Spin />
+                <Spin type="dot" title={props.loadingText || ''}/>
             </Show>
             <div class="cm-table" style={style()} >
                 <Head data={store} sticky={isSticky()} onInitColumnWidth={onInitColumnWidth} onResizeHeader={onResizeHeader} virtual={props.virtual}/>

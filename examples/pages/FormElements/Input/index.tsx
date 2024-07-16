@@ -14,7 +14,8 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { Textarea } from "@/components";
+import { Datepicker, Option, Select, Spinner, Textarea, Tooltip } from "@/components";
+import { InputGroup } from "@/components/FormElements/InputGroup";
 useDirective(hljs);
 
 function InputDemo () {
@@ -121,6 +122,8 @@ function InputDemo () {
                 <Space id="input_append" dir="v">
                     <Card bordered>
                         <Input prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
+                        <Input size="small" prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
+                        <Input size="large" prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
                         <Divider align="left"><Text type="primary">追加</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             使用<Text code>prepend</Text> 可添加前追加， 使用<Text code>append</Text>属性可添加后追加
@@ -168,78 +171,58 @@ function InputDemo () {
                     </Card>
                 </Space>
 
-                {/* <Space id="image_base" dir="v">
-                    <Input clearable value={[count, setCount]}/>
-                    <Input disabled value='disabled'/>
-                    <Form form={form} labelWidth={100}>
-                        <FormItem label='阿萨德：' name='count'>
-                            <Space dir="h">
-                                <Input name='count' prefix='￥' suffix='元'/>
-                                <Button onClick={() => {
-                                    form.count = parseInt(form.count) + 1;
-                                    console.log(form.getFormData());
-                                    setCount(count() + 1);
-                                }}>Add</Button>
-                            </Space>
-                        </FormItem>
-                    </Form>
-                    <Space dir="h">
-                        <Input prepend={<Icon name='user'/>} append={<Icon name='search1'/>}/>
-                    </Space>
-                    <Space dir="h">
-                        <Input clearable size='large'/><Input clearable/><Input clearable size='small'/>
-                    </Space>
-                    <Space dir='h'>
-                        <Input type='hidden'/>
-                    </Space>
-                    <Space>
-                        <Input type='password'/>
-                    </Space>
-                    <Space>
-                        <Input type='textarea' autoHeight value="asdasd" placeholder='entering something'/>
-                    </Space>
-                    <Space>
-                        <Input type='switch' />
-                        <Input type='switch' size='small'/>
-                        <Input type='switch' size='large'/>
-                        <Input type='switch' labels={['开', '关']}/>
-                        <Input type='switch' labels={['On', 'Off']} values={[1, 0]}/>
-                    </Space>
-                    <Space dir="h">
-                        <Input type='search' onEnter={(v: any) => {
-                            console.log(v);
-                        }}/>
-                        <Input type='search' enterButton/>
-                    </Space>
-                    <Space dir="h">
-                        <Input type='spinner' value={[spinner, setSpinner]} onChange={(v: number) => {
-                            console.log(v);
-                        }}/>
 
-                        <Button onClick={() => {
-                            setSpinner(10);
-                        }}>更新</Button>
-                    </Space>
-                    <Space dir="h">
-                        <Input type='rate' icon={<Icon name='star' size={26}/>}/>
-                        <Input type='rate' allowHalf icon={<Icon name='star' size={26} />} onChange={(v) => {
-                            console.log(v);
-                        }}/>
-                        <Input type='rate' disabled icon={<Icon name='star' size={26}/>}/>
-                    </Space>
+                <Space id="input_group" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <InputGroup compact>
+                                <Select style={{"width": "100px"}}>
+                                    <Option value={1} label="啊实打" />
+                                </Select>
+                                <Input />
+                            </InputGroup>
+                            <InputGroup compact>
+                                <Select style={{"width": "100px"}}>
+                                    <Option value={1} label="啊实打" />
+                                </Select>
+                                <Select style={{"width": "100px"}}>
+                                    <Option value={1} label="啊实打22" />
+                                </Select>
+                            </InputGroup>
+                            <InputGroup compact>
+                                <Input style={{"width": "100px"}}/>
+                                <Datepicker style={{"width": "130px"}}/>
+                            </InputGroup>
+                            <InputGroup compact>
+                                <Input style={{"width": "150px"}}/>
+                                <Button type="primary">搜索</Button>
+                            </InputGroup>
+                            <InputGroup compact>
+                                <Input style={{"width": "150px"}}/>
+                                <Spinner />
+                            </InputGroup>
+                            <InputGroup compact>
+                                <Select style={{"width": "100px"}}>
+                                    <Option value={1} label="啊实打" />
+                                </Select>
+                                <Input style={{"width": "150px"}}/>
+                                <Button type="primary">搜索</Button>
+                            </InputGroup>
 
-                    <Space dir="v">
-                        <Input type='autocomplete' data={nameData()} onSearch={(v: any) => {
-                            console.log(1);
+                            <InputGroup compact>
+                                <Datepicker style={{"width": "120px"}}/>
+                                <Input style={{"width": "150px"}}/>
+                                <Button icon={<Icon name="copy"/>} />
+                            </InputGroup>
+                        </Space>
+                        <Divider align="left"><Text type="primary">输入框组合</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            使用InputGroup进行输入框组合
+                        </Paragraph>
+                        <DemoCode data={codes['input_auto_height']}/>
+                    </Card>
+                </Space>
 
-                            const arr: any = [];
-                            arr.push(v);
-                            arr.push(v+v);
-                            arr.push(v+v+v);
-                            setNameData(arr);
-                        }}/>
-                    </Space>
-                </Space> */}
 
 
                 <Space dir="v" size={24} id="comp_api">
@@ -255,77 +238,6 @@ function InputDemo () {
                 </Space>
             </Space>
         </div>
-        <Space dir="v">
-            {/* <Space dir="h">
-                <Input type='time'/>
-                <Input type='time' format='HH:mm:ss' value={time} onChange={(v) => {
-                    setTime(v);
-                }}/>
-                <Button type='primary' onClick={() => {
-                    setTime('10:10:00')
-                }}>修改</Button>
-                <Input type='time' format='HH:mm:ss' clearable value={time} onChange={(v) => {
-                    setTime(v);
-                }}/>
-            </Space>
-            <Space dir="h">
-                <Input type='time' size='large'/>
-                <Input type='time'/>
-                <Input type='time' size='small'/>
-            </Space>
-            <Space dir="h">
-                <Input type='time' disabled/>
-                <Input type='time' format='HH:mm'/>
-                <Input type='time' value={time} onChange={(v) => {
-                    setTime(v);
-                }} disabledTime={(time, num, type) => {
-                    if ((type === 'minute' || type === 'second') && time[0] === 12) {
-                        return true;
-                    }
-                    return false;
-                }}/>
-            </Space>
-
-            <Space dir="h">
-                <Input type='timerange' value={timerange} onChange={(v) => {
-                    setTimerange(v);
-                }}/>
-
-                <Input type='timerange' disabled/>
-
-                <Input type='timerange' format='HH:mm' value={timerange2} onChange={(v) => {
-                    setTimerange2(v);
-                }}/>
-            </Space>
-
-            <Space dir="h">
-                <Input type='date' value={dateTime} format='YYYY-MM-DD' onChange={(v) => {
-                    console.log(v);
-                    setDateTime(v);
-                }}/>
-                <Input type='date' disabled/>
-
-                <Input type='date' value={dateTime} format='YYYY-MM-DD' onChange={(v) => {
-                    console.log(v);
-                    setDateTime(v);
-                }} clearable/>
-            </Space>
-
-            <Space dir="h">
-                <Input type='datetimerange' value={daterange} format='YYYY-MM-DD HH:mm:ss' onChange={(v) => {
-                    console.log(v);
-                    setDateRange(v);
-                }}/>
-                <Input type='datetimerange' disabled />
-                <Input type='datetimerange' value={daterange} format='YYYY-MM-DD HH:mm:ss' onChange={(v) => {
-                    console.log(v);
-                    setDateRange(v);
-                }} clearable/>
-                <Button onClick={() => {
-                    setDateRange('2022-06-01~2022-06-15');
-                }}>修改值</Button>
-            </Space> */}
-        </Space>
 
         <CompAnchor data={anchorData}/>
     </>

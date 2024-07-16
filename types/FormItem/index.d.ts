@@ -10,6 +10,7 @@ type FormItemProps = {
     children?: any;
     labelStyle?: any;
     label?: string;
+    labelAlign?: 'start' | 'end' | 'center';
     style?: any;
     rules?: {
         [key: string]: any;

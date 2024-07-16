@@ -1,5 +1,6 @@
 import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
 import { useClassList } from "../utils/useProps";
+import { isServer } from "solid-js/web";
 
 type CollapaseProps = {
     open?: boolean,
@@ -12,10 +13,10 @@ type CollapaseProps = {
     ref?: any
 }
 
-export function Collapase (props: CollapaseProps) {
+export function Collapase(props: CollapaseProps) {
     const classList = () => useClassList(props, 'cm-collapase');
     let dom: any;
-    function whichTransitionEvent (){
+    function whichTransitionEvent() {
         const el: any = document.createElement('surface');
         const transitions: any = {
             'transition': 'transitionend',
@@ -24,14 +25,14 @@ export function Collapase (props: CollapaseProps) {
             'WebkitTransition': 'webkitTransitionEnd'
         };
 
-        for (const t in transitions){
-            if ( el.style[t] !== undefined ){
+        for (const t in transitions) {
+            if (el.style[t] !== undefined) {
                 return transitions[t];
             }
         }
     }
 
-    function transitionEventEnd () {
+    function transitionEventEnd() {
         if (props.open) {
             dom ? dom.style.height = 'auto' : false;
         }
@@ -63,17 +64,19 @@ export function Collapase (props: CollapaseProps) {
     });
     onMount(() => {
         if (dom) {
+            if (isServer) return;
             const transitionEvent = whichTransitionEvent();
             dom.addEventListener(transitionEvent, transitionEventEnd);
         }
     });
     onCleanup(() => {
+        if (isServer) return;
         const transitionEvent = whichTransitionEvent();
         dom && dom.removeEventListener(transitionEvent, transitionEventEnd);
     });
 
     props.ref && props.ref({
-        getHeight () {
+        getHeight() {
             const orignHeight = dom.style.height;
             dom.style.transition = 'none';
             dom.style.height = 'auto';

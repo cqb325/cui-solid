@@ -1,60 +1,72 @@
 .cm-tree {
     line-height: 1.5;
 }
+
 .cm-tree-nodes,
-.cm-tree-item{
+.cm-tree-item {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.cm-tree-item{
+
+.cm-tree-item {
     white-space: nowrap;
     margin: 5px 0;
 }
-.cm-tree > .cm-tree-nodes{
+
+.cm-tree>.cm-tree-nodes {
     display: block;
     max-height: none;
 }
-.cm-tree-nodes{
+
+.cm-tree-nodes {
     display: none;
     // max-height: 0px;
     overflow-y: hidden;
     transition: all 0.25s ease-in-out;
 }
-.cm-tree-item-content{
+
+.cm-tree-item-content {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.cm-tree-title{
+
+.cm-tree-title {
     flex: 1;
     display: inline-flex;
     flex-direction: row;
     align-items: center;
 }
-.cm-tree-text{
+
+.cm-tree-text {
     cursor: pointer;
     padding: 0 4px;
     border-radius: 2px;
     color: var(--cui-color-text-1);
     transition: all 0.25s ease-in-out;
-    &:hover{
+
+    &:hover {
         background: var(--cui-color-fill-1);
     }
 }
+
 .cm-tree-patch {
     flex: 1;
 }
+
 .cm-tree-title.disabled {
-    .cm-tree-text{
+    .cm-tree-text {
         color: var(--cui-color-disabled-text);
-        &:hover{
+
+        &:hover {
             background: transparent;
         }
     }
 }
+
 .cm-tree-item-file,
-.cm-tree-item-folder{
+.cm-tree-item-folder {
     width: 16px;
     height: 16px;
     text-align: center;
@@ -63,13 +75,16 @@
     background-repeat: no-repeat;
     background-position: center 40%;
 }
-.cm-tree-item-folder{
+
+.cm-tree-item-folder {
     background-image: url('./imgs/folderClosed.gif');
 }
-.cm-tree-item-file{
+
+.cm-tree-item-file {
     background-image: url('./imgs/leaf.gif');
 }
-.cm-tree-arrow{
+
+.cm-tree-arrow {
     cursor: pointer;
     width: 16px;
     height: 16px;
@@ -81,45 +96,145 @@
     // background-repeat: no-repeat;
     // background-position: center 40%;
     transition: all 0.25s ease-in-out;
+
     svg {
         width: 12px;
         height: 12px;
         fill: var(--cui-color-text-1);
     }
-    &.hide{
+
+    &.hide {
         visibility: hidden;
     }
 }
-.cm-tree-item-open{
-    >.cm-tree-item-content{
+
+.cm-tree-item-open {
+    >.cm-tree-item-content {
         .cm-tree-item-folder {
             background-image: url('./imgs/folderOpen.gif');
         }
-        .cm-tree-arrow{
+
+        .cm-tree-arrow {
             transform: rotate(90deg);
             // background-image: url('./arrow_down.svg');
         }
     }
-    >.cm-tree-nodes{
+
+    >.cm-tree-nodes {
         display: block;
     }
 }
-.cm-tree-nodes-visible.cm-tree-nodes{
+
+.cm-tree-nodes-visible.cm-tree-nodes {
     display: block;
 }
+
 // .cm-tree-nodes-open.cm-tree-nodes{
-    
+
 // }
 
-.cm-tree-item-selected{
-    >.cm-tree-item-content{
-        .cm-tree-text{
+.cm-tree-item-selected {
+    >.cm-tree-item-content {
+        .cm-tree-text {
             background: var(--cui-color-fill-1);
         }
     }
 }
+
 .cm-tree {
-    .cm-checkbox{
+    .cm-checkbox {
         margin-right: 0;
     }
+}
+
+.cm-tree-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+
+    &.cm-tree-item-open {
+        .cm-tree-arrow {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+.cm-tree-arrow {
+    transition: all 0.25s;
+
+    img {
+        width: 100%;
+    }
+}
+
+.cm-tree-node-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.cm-tree-node-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+
+    &.cm-tree-node-drop_active {
+        background-color: rgba(var(--cui-blue-6), 0.15);
+    }
+}
+
+.cm-tree-item-dragging {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid var(--cui-primary-color);
+        pointer-events: none;
+    }
+}
+
+.cm-tree-item-selected {
+    .cm-tree-text {
+        background: var(--cui-color-fill-1);
+    }
+}
+
+.cm-tree-node-drop {
+    width: 100%;
+    height: 2px;
+
+    &.cm-tree-node-drop_active {
+        background-color: rgba(var(--cui-blue-6), 0.8);
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: -2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 6px;
+            border: 2px solid var(--cui-primary-color);
+        }
+    }
+}
+
+.cm-tree-item-open {
+    .cm-tree-item-folder {
+        background-image: url('./imgs/folderOpen.gif');
+    }
+}
+
+.cm-tree {
+    display: flex;
+}
+
+.cm-tree-empty {
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
 }

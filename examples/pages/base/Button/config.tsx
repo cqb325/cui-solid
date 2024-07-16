@@ -11,6 +11,7 @@ export const propsData = [
     {name: 'disabled', desc: '禁用状态', type: 'boolean', default: 'false'},
     {name: 'loading', desc: '加载状态，true情况下不会响应点击事件', type: 'boolean', default: 'false'},
     {name: 'ghost', desc: '幽灵按钮', type: 'boolean', default: 'false'},
+    {name: 'danger', desc: '危险按钮', type: 'boolean', default: 'false'},
     {name: 'icon', desc: '按钮图标', type: 'Icon', default: ''},
     {name: 'iconAlign', desc: '按钮图标位置', type: 'left|right', default: 'left'},
     {name: 'onClick', desc: '点击回调函数', type: 'Function', default: ''},
@@ -30,6 +31,7 @@ export const eventsData = [
 
 export const anchorData = [
     {id: 'button_type', text: '按钮类型'},
+    {id: 'button_danger', text: '危险按钮'},
     {id: 'button_ghost', text: '幽灵按钮'},
     {id: 'button_disabled', text: '禁用按钮'},
     {id: 'button_size', text: '按钮尺寸'},
@@ -49,6 +51,7 @@ import button_size from "./codes/button_size";
 import button_icon from "./codes/button_icon";
 import button_loading from "./codes/button_loading";
 import button_group from "./codes/button_group";
+import button_danger from "./codes/button_danger";
 export const codes = {
     button_type,
     button_ghost,
@@ -56,5 +59,6 @@ export const codes = {
     button_size,
     button_icon,
     button_loading,
-    button_group
+    button_group,
+    button_danger
 }

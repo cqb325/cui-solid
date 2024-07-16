@@ -17,15 +17,16 @@ export declare function updateScrollFixed(maxFixedLeft: number, minFixedRight: n
  * 初始化表格数据
  * @param data
  */
-export declare function initData(data: any[]): any[];
+export declare function initData(data: any[], rowKey: string): any[];
 export declare function sortData(setStore: SetStoreFunction<TableStore>, store: TableStore, column: ColumnProps): void;
-export declare function _buildTreeData(data: any[], target: any[], level: number, show: boolean): void;
+export declare function _buildTreeData(data: any[], target: any[], level: number, show: boolean, rowKey: string): void;
 /**
  * 树形数据重构
  * @param data
+ * @param rowKey
  * @returns
  */
-export declare function buildTreeData(data: any[]): any[];
+export declare function buildTreeData(data: any[], rowKey: string): any[];
 /**
  * 显示隐藏树形数据
  * @param setStore
@@ -48,4 +49,5 @@ export declare function sortHandler(setStore: SetStoreFunction<TableStore>, stor
 export declare function addRemoveExpand(setStore: SetStoreFunction<TableStore>, column: ColumnProps, row: any): void;
 export declare const onResizeStart: (setStore: SetStoreFunction<TableStore>, column: ColumnProps, e: any) => false | undefined;
 export declare const onResizeMove: (store: any, setStore: SetStoreFunction<TableStore>, e: any) => void;
-export declare const onResizeEnd: (store: TableStore, setStore: SetStoreFunction<TableStore>) => void;
+export declare const onResizeEnd: (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => void;
+export declare const observerSizeChange: (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => void;

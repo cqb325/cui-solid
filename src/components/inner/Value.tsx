@@ -28,6 +28,7 @@ export interface ValueProps {
 export function Value (props: ValueProps) {
     const [query, setQuery] = props.query ?? [() => '', () => {}];
     let filterInput: any;
+    let selection: any;
     const onClear = (e: any) => {
         e.stopImmediatePropagation && e.stopImmediatePropagation();
         e.preventDefault && e.preventDefault();
@@ -56,8 +57,18 @@ export function Value (props: ValueProps) {
 
     const inputStyle = () => {
         const str = props.filter ? query() : '';
+        filterInput.style.width = '10px';
+        filterInput.style.width = filterInput.scrollWidth + 'px';
+
+        Promise.resolve().then(() => {
+            filterInput.style.width = '10px';
+            const maxWidth = Math.floor(selection?.getBoundingClientRect().width || 10);
+            filterInput.style.width = filterInput.scrollWidth + 'px';
+            filterInput.parentElement.style.width = Math.min(maxWidth-20, filterInput.scrollWidth) + 'px';
+        })
         return {
-            width: str !== undefined ? str.length * 12 + 20 + 'px' : '100%',
+            width: '10px',
+            // width: str !== undefined ? str.length * 12 + 20 + 'px' : '100%',
         }
     }
 
@@ -88,19 +99,18 @@ export function Value (props: ValueProps) {
         </Show>
         <Switch>
             <Match when={props.multi}>
-                <div class="cm-field-selection">
+                <div class="cm-field-selection" ref={selection}>
                     <TagGroup data={text()} closable={props.valueClosable} max={props.showMax} showMore={props.showMore} onClose={props.onClose}
-                        size={props.size === 'small' ? 'small' : 'large'}/>
-                    {
-                        props.filter
-                        ? <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class="cm-select-filter"
-                            trigger="input" size={props.size} value={[query, setQuery]} onKeyDown={onFilterKeyDown}/>
-                        : null
-                    }
+                        size={props.size === 'small' ? 'small' : 'large'} extra={
+                            props.filter
+                            ? <InnerInput ref={filterInput} style={inputStyle()} notCreateFiled class="cm-select-filter"
+                                trigger="input" size={props.size} value={[query, setQuery]} onKeyDown={onFilterKeyDown}/>
+                            : null
+                        }/>
                 </div>
             </Match>
             <Match when={!props.multi}>
-                <div class="cm-field-text">
+                <div class="cm-field-text" ref={selection}>
                     <Show when={!props.filter}>
                         {props.text ? props.text : <span class="cm-field-placeholder">{props.placeholder??''}</span>}
                     </Show>

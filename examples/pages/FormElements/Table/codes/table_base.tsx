@@ -1,9 +1,9 @@
 export default `const columns = [
     {type: 'index', title: '序号', width: '80px'},
-    {name: 'name', title: '名称', width: '150px'},
-    {name: 'x', title: 'X', width: '300px'},
-    {name: 'y', title: 'Y', width: '300px'},
-    {name: 'date', title: '日期', width: '200px'},
+    {name: 'name', title: '名称', minWidth: 100, maxWidth: 150, tooltip: true, tooltipStyle: {width: '200px'}, tooltipAlign: 'bottom', tooltipTheme: 'light'},
+    {name: 'x', title: 'X'},
+    {name: 'y', title: 'Y'},
+    {name: 'date', title: '日期', width: '200px'}
 ];
 
 const data = [];

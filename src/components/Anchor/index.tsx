@@ -1,4 +1,4 @@
-import type { JSXElement} from "solid-js";
+import type { JSXElement } from "solid-js";
 import { For, children, createEffect, onCleanup, onMount, untrack } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useClassList } from "../utils/useProps"
@@ -6,6 +6,7 @@ import { scrollTop } from "../utils/utils";
 
 import type { AnchorLinkProps } from './AnchorLink';
 import { AnchorLink } from './AnchorLink';
+import { isServer } from "solid-js/web";
 
 type AnchorProps = {
     children?: any,
@@ -17,7 +18,7 @@ type AnchorProps = {
     offsetTop?: number,
     bounds?: number,
     showInk?: boolean,
-    mode?: 'hash'|'history'
+    mode?: 'hash' | 'history'
     onChange?: (id: string) => void,
 }
 
@@ -31,11 +32,11 @@ type AnchorStore = {
     upperFirstTitle?: boolean
 }
 
-export function Anchor (props: AnchorProps) {
+export function Anchor(props: AnchorProps) {
     const classList = () => useClassList(props, 'cm-anchor');
 
     const links = children(() => props.children)
-	const evaluatedLinks = () => links.toArray() as unknown as AnchorLinkProps[]
+    const evaluatedLinks = () => links.toArray() as unknown as AnchorLinkProps[]
 
     const [store, setStore] = createStore({
         inkTop: 0,
@@ -156,7 +157,7 @@ export function Anchor (props: AnchorProps) {
         while (++i < len) {
             const currentEle = titlesOffsetArr[i];
             const nextEle = titlesOffsetArr[i + 1];
-            if (scrollTop >= currentEle.offset && scrollTop < ((nextEle && nextEle.offset) || Infinity)) {
+            if (scrollTop >= currentEle?.offset && scrollTop < ((nextEle && nextEle.offset) || Infinity)) {
                 titleItem = titlesOffsetArr[i];
                 break;
             }
@@ -228,6 +229,7 @@ export function Anchor (props: AnchorProps) {
     }
 
     onMount(() => {
+        if (isServer) return;
         init();
         const timer = setInterval(() => {
             const links = store.links.map(item => {
@@ -240,8 +242,15 @@ export function Anchor (props: AnchorProps) {
                 const titleEle = document.getElementById(id);
                 if (titleEle) {
                     const offset = titleEle.offsetTop - scrollElement.offsetTop;
-                    if (titlesOffsetArr[index] && titlesOffsetArr[index].offset !== offset) {
+                    if (!titlesOffsetArr[index]) {
+                        titlesOffsetArr[index] = {
+                            link: `#${id}`,
+                            offset: 0
+                        }
+                    }
+                    if (titlesOffsetArr[index] && titlesOffsetArr[index]?.offset !== offset) {
                         titlesOffsetArr[index].offset = offset;
+                        titlesOffsetArr[index].link = `#${id}`;
                     }
                 }
             });
@@ -253,6 +262,7 @@ export function Anchor (props: AnchorProps) {
     });
 
     onCleanup(() => {
+        if (isServer) return;
         removeListener();
     });
 
@@ -264,10 +274,10 @@ export function Anchor (props: AnchorProps) {
                         <a class="cm-anchor-link-title" href={link.href} data-scroll-offset={props.scrollOffset || 0} data-href={link.href}
                             onClick={(e: any) => {
                                 gotoAnchor(link.href, e);
-                            }} title={link.title as string}>{ link.title }</a>
-                            {
-                                renderLinks(link.subItems())
-                            }
+                            }} title={link.title as string}>{link.title}</a>
+                        {
+                            renderLinks(link.subItems())
+                        }
                     </div>
                 }}
             </For>
@@ -280,7 +290,7 @@ export function Anchor (props: AnchorProps) {
         <div class="cm-anchor-wrapper">
             <div class="cm-anchor-inner">
                 <div class={"cm-anchor-ink " + (showInk ? 'cm-anchor-show' : '')}>
-                    <span class="cm-anchor-ink-ball" style={{top: `${store.inkTop}px`, height: `${store.inkHeight}px`}} />
+                    <span class="cm-anchor-ink-ball" style={{ top: `${store.inkTop}px`, height: `${store.inkHeight}px` }} />
                 </div>
                 {renderLinks(store.links)}
             </div>

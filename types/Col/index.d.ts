@@ -12,6 +12,7 @@ type ColProps = {
     pull?: number;
     offset?: number;
     flex?: string;
+    fixWidth?: boolean;
     xs?: number | ColResponsiveProps;
     sm?: number | ColResponsiveProps;
     md?: number | ColResponsiveProps;

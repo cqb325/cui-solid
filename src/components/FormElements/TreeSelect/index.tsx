@@ -1,8 +1,8 @@
 import { useClassList } from "../../utils/useProps"
-import { Tree } from "../../Tree";
+import { Tree, TreeCheckMod } from "../../Tree";
 import { Dropdown } from "../../Dropdown";
 import { Value } from "../../inner/Value";
-import type { TreeProps } from "../../Tree";
+import type { NodeKeyType, TreeInstanceProps, TreeNode, TreeProps } from "../../Tree";
 import createField from "../../utils/createField";
 import { createEffect, createMemo, createSignal } from "solid-js";
 import { Icon } from "../../Icon";
@@ -18,27 +18,22 @@ type TreeSelectProps = {
     disabled?: boolean,
     clearable?: boolean,
     prepend?: any,
-    mode?: 'All'|'Half'|'Leaf'|'Shallow',
+    mode?: TreeCheckMod,
     size?: 'small'|'large',
     showMax?: number,
     valueClosable?: boolean,
     placeholder?: string,
     showMore?: boolean
+    multi?: boolean,
+    onChange?: (value: NodeKeyType|NodeKeyType[]) => void,
 } & TreeProps;
 
-const ModeMap = {
-    'All': 0,
-    'Half': 1,
-    'Leaf': 2,
-    'Shallow': 3,
-}
-
 export function TreeSelect (props: TreeSelectProps) {
-    const [value, setValue] = createField<any>(props, props.multi ? [] : '');
-    const [text, setText] = createSignal('');
+    const [value, setValue] = createField<NodeKeyType|NodeKeyType[]>(props, props.multi ? [] : '');
+    const [text, setText] = createSignal<any>('');
     const align = props.align ?? 'bottomLeft';
-    let tree: any;
-    const mode: number = ModeMap[props.mode ?? 'Half'];
+    let tree: TreeInstanceProps | undefined;
+    const mode: TreeCheckMod = props.mode ?? TreeCheckMod.HALF;
     const checkRelation = props.checkRelation ?? 'related';
     const classList = () => useClassList(props, 'cm-tree-select', {
         'cm-tree-select-disabled': props.disabled,
@@ -50,80 +45,32 @@ export function TreeSelect (props: TreeSelectProps) {
         }
     }
 
-    const onTreeChange = (ids: any[]) => {
-        if (checkRelation === 'related') {
-            setValue(getChecked());
-            props.onChange && props.onChange(getChecked());
-        } else {
-            setValue(ids);
-            props.onChange && props.onChange(ids);
-        }
+    const onTreeChange = (ids: NodeKeyType[]|NodeKeyType) => {
+        setValue(ids);
+        props.onChange && props.onChange(getChecked());
     }
 
     const onClear = () => {
-        const ret = props.multi ? [] : '';
+        const ret: NodeKeyType | NodeKeyType[] = props.multi ? [] : '';
         setValue(ret);
         props.onChange && props.onChange(ret);
     }
 
     const onValueClose = (item: TagConfig, e: any) => {
-        const v = value();
+        const v = value() as NodeKeyType[];
         v.splice(v.indexOf(item.id), 1);
         setValue([...v]);
     }
 
     const getChecked = () => {
-        let all = [];
-        switch (mode) {
-            case 0: {
-                all = tree.getAllChecked();
-                break;
-            }
-            case 1: {
-                all = tree.getHalfChecked();
-                break;
-            }
-            case 2: {
-                all = tree.getChildChecked();
-                break;
-            }
-            case 3: {
-                all = tree.getShallowChecked();
-                break;
-            }
-        }
-        return all;
+        const all = tree?.getCheckedKeys(mode);
+        return all || [];
     }
 
     createEffect(() => {
         const outValue = value();
-
-        if (props.multi && outValue.join(',') === getChecked().join(',')) {
+        if (props.multi && (outValue as NodeKeyType[]).join(',') === getChecked().join(',')) {
             return;
-        }
-        if (props.multi) {
-            if (checkRelation === 'unRelated') {
-                tree.setValue(outValue);
-            } else {
-                if (mode === 0) {
-                    tree.setValue(outValue);
-                }
-                if (mode === 1) {
-                    tree.setValue(outValue);
-                }
-                if (mode === 2) {
-                    tree.setValue(outValue);
-                }
-                if (mode === 3) {
-                    if (outValue.join(',') === getChecked().join(',')) {
-                        tree.setValue(tree.getAllChecked());
-                    } else {
-                        tree.setValue(tree.getIfSets(outValue));
-                    }
-                }
-            }
-        } else {
-            // setVal(outValue);
         }
     })
 
@@ -137,15 +84,19 @@ export function TreeSelect (props: TreeSelectProps) {
             }
 
             setTimeout(() => {
-                const all = checkRelation === 'related' ? getChecked() : tree.getAllChecked();
-                const arr = tree.getAllCheckedData(all);
-                setText(arr);
+                const all: any[] = tree?.getChecked(mode).map((item: TreeNode) => {
+                    return {
+                        id: item[props.keyField || 'id'],
+                        title: item[props.titleField || 'title']
+                    }
+                }) || [];
+                setText(all);
             })
         } else {
             setTimeout(() => {
-                const data = tree.getSelectNode();
+                const data: TreeNode | undefined = tree?.getNode(vals as NodeKeyType);
                 if (data) {
-                    setText(data.title);
+                    setText(data[props.titleField || 'title']);
                 } else {
                     setText('');
                 }
@@ -157,8 +108,8 @@ export function TreeSelect (props: TreeSelectProps) {
 
     return <div classList={classList()} style={props.style} tabIndex="1">
         <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger="click" menu={<div class="cm-tree-select-wrap">
-            <Tree data={props.data} multi={props.multi} onSelect={onSelect} onChange={onTreeChange} ref={tree} value={value()}
-                selected={props.multi ? '' : [value, setValue]} checkRelation={props.checkRelation}/>
+            <Tree data={props.data} checkable={props.multi} onNodeSelect={onSelect} onChange={onTreeChange} ref={tree}
+                value={props.multi ? [value, setValue] as any[] : []} selected={props.multi ? '' : [value, setValue] as any} checkRelation={props.checkRelation}/>
         </div>}>
             <Value text={text()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
                 valueClosable={props.valueClosable} clearable={props.clearable} onClear={onClear}

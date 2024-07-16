@@ -6,7 +6,9 @@ type DividerProps = {
     style?: any;
     dashed?: boolean;
     children?: any;
-    height?: string;
+    margin?: number | string;
+    textColor?: string;
+    textMargin?: number | string;
 };
 export declare function Divider(props: DividerProps): import("solid-js").JSX.Element;
 export {};

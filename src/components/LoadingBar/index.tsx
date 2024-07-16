@@ -33,7 +33,9 @@ function update (options: any) {
 
 function LoadingBarFn () {
     const ele = usePortal('cm-loading-bar-portal', 'cm-loading-bar-portal');
-    render(() => <LoadingBar ref={bar}/>, ele);
+    if (ele) {
+        render(() => <LoadingBar ref={bar}/>, ele);
+    }
     return {
         start () {
             if (timer) return;

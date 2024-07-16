@@ -1,5 +1,5 @@
 import { createEffect, onCleanup, onMount } from "solid-js";
-import { CountUp as CU } from "countup.js";
+import { CountUp as CU } from "./countUp";
 import { useClassList } from "../utils/useProps";
 
 interface CountUpProps {

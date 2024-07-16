@@ -1,4 +1,7 @@
+import { isServer } from "solid-js/web";
+
 export default async function useCopy (text: string) {
+    if (isServer) return false;
     if (navigator.clipboard && window.isSecureContext) {
         // navigator clipboard 向剪贴板写文本
         try {

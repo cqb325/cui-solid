@@ -21,15 +21,23 @@ const GAPS = new Set<string>();
 
 const defaultResponsive = 'lg';
 
-for (const type in RESPONSIVE) {
-    const id = 'cm-grid-' + type;
-    if (document.getElementById(id)) continue;
-    const style = document.createElement('style');
-    style.id = id;
-    document.head.appendChild(style);
+let isCreated = false;
+
+function initStyleElements () {
+    for (const type in RESPONSIVE) {
+        const id = 'cm-grid-' + type;
+        if (document.getElementById(id)) continue;
+        const style = document.createElement('style');
+        style.id = id;
+        document.head.appendChild(style);
+    }
+    isCreated = true;
 }
 
 function createStyle (text: string, responsive: responsiveType) {
+    if (!isCreated) {
+        initStyleElements();
+    }
     document.getElementById('cm-grid-' + responsive)!.innerHTML += text;
     // const style = document.createElement('style');
     // style.innerHTML = text;

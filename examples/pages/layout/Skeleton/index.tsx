@@ -92,9 +92,9 @@ export default function SkeletonPage () {
                             <h4>CUI/SolidJs</h4>
                         </Skeleton>
 
-                        <Divider align="left"><Text type="primary">基础用法</Text></Divider>
+                        <Divider align="left"><Text type="primary">图片</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            基础用法
+                            图片
                         </Paragraph>
                         <DemoCode data={codes['skeleton_img']}/>
                     </Card>
@@ -124,9 +124,9 @@ export default function SkeletonPage () {
                             </div>
                         </Skeleton>
 
-                        <Divider align="left"><Text type="primary">基础用法</Text></Divider>
+                        <Divider align="left"><Text type="primary">头像效果</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            基础用法
+                            头像效果
                         </Paragraph>
                         <DemoCode data={codes['skeleton_combine']}/>
                     </Card>
@@ -158,9 +158,9 @@ export default function SkeletonPage () {
                             <div style={{display: 'flex', "align-items": 'flex-start'}} />
                         </Skeleton>
 
-                        <Divider align="left"><Text type="primary">基础用法</Text></Divider>
+                        <Divider align="left"><Text type="primary">动画效果</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            基础用法
+                            动画效果
                         </Paragraph>
                         <DemoCode data={codes['skeleton_active']}/>
                     </Card>

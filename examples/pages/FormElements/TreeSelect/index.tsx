@@ -16,6 +16,7 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { TreeCheckMod } from "@/components";
 useDirective(hljs);
 
 export default function TreeSelectPage () {
@@ -79,6 +80,18 @@ export default function TreeSelectPage () {
         data2.push({id: `${i + 1}`, title: `node_${i + 1}`, children: c});
     }
 
+    const data4 = JSON.parse(JSON.stringify(data1));
+    const data5 = JSON.parse(JSON.stringify(data1));
+    const data6 = JSON.parse(JSON.stringify(data1));
+    const data7 = JSON.parse(JSON.stringify(data1));
+    const data8 = JSON.parse(JSON.stringify(data1));
+    const data9 = JSON.parse(JSON.stringify(data1));
+    const data10 = JSON.parse(JSON.stringify(data1));
+    const data11 = JSON.parse(JSON.stringify(data1));
+    const data12 = JSON.parse(JSON.stringify(data1));
+    const data13 = JSON.parse(JSON.stringify(data1));
+    const data14 = JSON.parse(JSON.stringify(data1));
+
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -111,13 +124,13 @@ export default function TreeSelectPage () {
                     <Card bordered>
                         <Row>
                             <Col grid={0.33}>
-                                <TreeSelect data={data1} size="small"/>
+                                <TreeSelect data={data4} size="small"/>
                             </Col>
                             <Col grid={0.33}>
-                                <TreeSelect data={data1}/>
+                                <TreeSelect data={data4}/>
                             </Col>
                             <Col grid={0.33}>
-                                <TreeSelect data={data1} size="large"/>
+                                <TreeSelect data={data4} size="large"/>
                             </Col>
                         </Row>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
@@ -131,7 +144,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_clearable" dir="v">
                     <Card bordered>
-                        <TreeSelect data={data1} clearable/>
+                        <TreeSelect data={data5} clearable/>
                         <Divider align="left"><Text type="primary">可清空</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         clearable 可清空选择数据
@@ -143,7 +156,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_prepend" dir="v">
                     <Card bordered>
-                        <TreeSelect prepend={<Icon name="tag"/>} data={data1} clearable/>
+                        <TreeSelect prepend={<Icon name="tag"/>} data={data6} clearable/>
                         <Divider align="left"><Text type="primary">前缀</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         使用 prepend 可添加前缀
@@ -155,7 +168,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_multi" dir="v">
                     <Card bordered>
-                        <TreeSelect multi data={data1} clearable/>
+                        <TreeSelect multi data={data7} clearable/>
                         <Divider align="left"><Text type="primary">多选</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         使用 multi 为多选模式, 多选默认级联选择
@@ -167,7 +180,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_relation" dir="v">
                     <Card bordered>
-                        <TreeSelect multi data={data1} clearable checkRelation="unRelated" />
+                        <TreeSelect multi data={data8} clearable checkRelation="unRelated" />
                         <Divider align="left"><Text type="primary">多选非级联</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         checkRelation 支持 unRelated (非级联) 和 related (级联) 默认 related
@@ -180,7 +193,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_showMax" dir="v">
                     <Card bordered>
-                        <TreeSelect multi data={data1} clearable checkRelation="unRelated" showMax={2}/>
+                        <TreeSelect multi data={data9} clearable checkRelation="unRelated" showMax={2}/>
                         <Divider align="left"><Text type="primary">显示个数</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         showMax 可以设置最多显示的个数
@@ -192,7 +205,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_valueClosable" dir="v">
                     <Card bordered>
-                        <TreeSelect multi data={data1} valueClosable clearable checkRelation="unRelated" />
+                        <TreeSelect multi data={data10} valueClosable clearable checkRelation="unRelated" />
                         <Divider align="left"><Text type="primary">值可关闭</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         valueClosable 支持 选择的值可以进行关闭
@@ -204,16 +217,18 @@ export default function TreeSelectPage () {
                 <Space id="tree_mode" dir="v">
                     <Card bordered>
                         <Space dir="v">
-                            <div>Leaf:</div>
-                            <TreeSelect multi data={data1} clearable mode="Leaf" />
-                            <div>Shallow:</div>
-                            <TreeSelect multi data={data1} clearable mode="Shallow" />
-                            <div>All:</div>
-                            <TreeSelect multi data={data1} clearable mode="All" />
+                            <div>CHILD:</div>
+                            <TreeSelect multi data={data11} clearable mode={TreeCheckMod.CHILD} />
+                            <div>HALF:</div>
+                            <TreeSelect multi data={data12} clearable mode={TreeCheckMod.HALF} />
+                            <div>SHALLOW:</div>
+                            <TreeSelect multi data={data13} clearable mode={TreeCheckMod.SHALLOW} />
+                            <div>FULL:</div>
+                            <TreeSelect multi data={data14} clearable mode={TreeCheckMod.FULL} />
                         </Space>
                         <Divider align="left"><Text type="primary">选择模式</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                        mode 支持 All 、 Half、 Leaf、 Shallow 默认为 Half
+                        mode 支持 FULL 、 HALF、 CHILD、 SHALLOW 默认为 HALF
                         </Paragraph>
                         <DemoCode data={codes['tree_mode']}/>
                     </Card>

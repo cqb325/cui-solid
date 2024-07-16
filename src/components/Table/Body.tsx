@@ -4,7 +4,7 @@ import { Cell } from "./Cell";
 import { useTableContext } from ".";
 import type { TableStore, ColumnProps } from '.';
 import { Colgroup } from "./Colgroup";
-import { VirtualListCore } from "cui-virtual-list";
+import { VirtualListCore } from "../virtual-list";
 
 type BodyProps = {
     data: TableStore,
@@ -18,6 +18,10 @@ type RowProps = {
     data: any,
     index: number,
     ref?: any
+}
+
+const RowWrap = (props: any) => {
+    return <Row data={props.item} index={props.index} store={props.store} ref={props.ref}/>
 }
 
 export function Row (props: RowProps) {
@@ -99,14 +103,14 @@ export function Body (props: BodyProps) {
             const scrollElHeight = props.height ?? document.documentElement.clientHeight;
             setHeight(scrollElHeight - hh);
         } else {
-            setTimeout(() => {
+            Promise.resolve().then(() => {
                 const content = body.querySelector('.cm-table-body-wrap');
                 const contentH = content.getBoundingClientRect().height;
                 if (props.height && contentH > props.height - hh) {
                     const bodyH = props.height - hh;
                     setHeight(bodyH);
                 }
-            })
+            });
         }
     })
 
@@ -133,13 +137,18 @@ export function Body (props: BodyProps) {
                             </tr>
                         </thead>
                         <tbody ref={bodyElement}>
-                            <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement}
-                                items={props.data.data} itemEstimatedSize={30} maxHeight={height() || props.height}>
+                            {/* <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement}
+                                items={props.data.data} itemEstimatedSize={50} maxHeight={height() || props.height}>
                                 {(params: any) => {
                                     const rowData = params.item;
                                     return <Row data={rowData} index={params.index} store={props.data} ref={params.ref}/>
                                 }}
-                            </VirtualListCore>
+                            </VirtualListCore> */}
+                            <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement}
+                                items={props.data.data} itemEstimatedSize={50} maxHeight={height() || props.height}
+                                itemComponent={{component: RowWrap, props: {
+                                    store: props.data
+                                }}} />
                             <Show when={!props.data.data || !props.data.data.length}>
                                 <EmprtyRow store={props.data}/>
                             </Show>

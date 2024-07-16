@@ -1,9 +1,11 @@
 import { onCleanup } from "solid-js";
 import { clamp } from "./utils";
+import { isServer } from "solid-js/web";
 
-export function Saturation (props: any) {
+export function Saturation(props: any) {
     let container: any;
     const handleMouseDown = (e: any) => {
+        if (isServer) return;
         if (typeof e.button === 'number' && e.button !== 0) return false;
         handleChange(e);
 
@@ -12,12 +14,14 @@ export function Saturation (props: any) {
     }
 
     const onDragEnd = (e: any) => {
+        if (isServer) return;
         handleChange(e);
         document.removeEventListener('mousemove', handleChange);
         document.removeEventListener('mouseup', onDragEnd);
     }
 
     onCleanup(() => {
+        if (isServer) return;
         document.removeEventListener('mousemove', handleChange);
         document.removeEventListener('mouseup', onDragEnd);
     })

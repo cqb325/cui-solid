@@ -1,6 +1,6 @@
 export default `const fixedColumns = [
-    {type: 'index', title: '序号', width: '80px', fixed: 'left'},
-    {name: 'name', title: '名称', width: '150px', fixed: 'left'},
+    {type: 'index', title: '序号', width: '80px', fixed: 'left', resize: true},
+    {name: 'name', title: '名称', width: '150px', fixed: 'left', resize: true},
     {name: 'x', title: 'X', width: '300px'},
     {name: 'y', title: 'Y', width: '300px'},
     {name: 'date', title: '日期', width: '200px', fixed: 'right'},

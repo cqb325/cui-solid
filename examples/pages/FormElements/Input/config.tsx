@@ -50,6 +50,7 @@ export const anchorData = [
     {id: 'input_size', text: '尺寸'},
     {id: 'input_word_count', text: '字符计数'},
     {id: 'input_auto_height', text: '适应高度'},
+    {id: 'input_group', text: '输入框组合'},
     {id: 'comp_api', text: 'API'},
     {id: 'comp_props', text: '属性'},
     {id: 'comp_events', text: '事件'},

@@ -65,7 +65,7 @@ export default function TagPage () {
                 <Space id="tag_theme" dir="v">
                     <Card bordered>
                         <Space dir="v">
-                            <Space dir="h">
+                            <Space dir="h" wrap>
                                 <Tag>default tag</Tag>
                                 <Tag theme="primary">PRIMARY</Tag>
                                 <Tag theme="danger">中文</Tag>

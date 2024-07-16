@@ -71,6 +71,23 @@ function DividerPage () {
                     </Card>
                 </Space>
 
+                <Space id="divider_margin" dir="v">
+                    <Card bordered>
+                        <section>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
+                            <Divider align="left" margin={10}>分割线</Divider>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
+                            <Divider align="right" margin="20px 0 10px 0">分割线</Divider>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
+                        </section>
+                        <Divider align="left"><Text type="primary">上下外边距</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            使用 <Text code>margin</Text> 设置divider的上下外边距
+                        </Paragraph>
+                        <DemoCode data={codes['divider_margin']}/>
+                    </Card>
+                </Space>
+
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
                     <Space id="comp_props" dir="v">

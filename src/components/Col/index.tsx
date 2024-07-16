@@ -19,6 +19,7 @@ type ColProps = {
     pull?: number,
     offset?: number,
     flex?: string,
+    fixWidth?: boolean,
     xs?: number | ColResponsiveProps,
     sm?: number | ColResponsiveProps,
     md?: number | ColResponsiveProps,
@@ -58,6 +59,9 @@ export const Col = (props: ColProps) => {
         };
         if (!isResponsive) {
             obj.flex = `0 0 ${(props.grid || 1) * 100}%`;
+            if (props.fixWidth) {
+                obj['max-width'] = `${(props.grid || 1) * 100}%`;
+            }
         }
         if (props.push) {
             obj.left = `${props.push * 100}%`;

@@ -43,6 +43,28 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v1.0.0
+    1、Table selectedRowKeys 置空问题，数据变更无法回显问题
+    2、添加 TableStyleLayout 组件
+    3、divider 添加 margin 、 textMargin 和 color 属性
+    4、Button 添加 danger 属性，危险按钮
+    5、TagGroup 添加 extra 属性
+    6、添加 InputGroup组件
+    7、dropdown在滚动的时候实时更新位置
+    8、新的Virtual List组件，提升性能
+    9、新的Tree组件，支持更多的接口和功能，支持拖拽等
+    10、增加spin类型
+    11、Table selectedRowKeys 响应问题
+    12、Virtual List 优化
+    13、支持ssr源码使用
+
+    v0.1.40
+    1、Select 远程过滤和默认值 导致控制值显示不正确问题
+
+    v0.1.39
+    1、Col 添加max-width
+    2、Table 添加自定义标识的 rowKey 和 勾选绑定 selectedRowKeys
+    3、fix useSlots 无法获取context数据问题
 
     v0.1.38
     1、添加 resetFields 方法

@@ -15,6 +15,7 @@ type ModalProps = {
     bodyStyle?: any;
     children?: any;
     footer?: boolean;
+    footerAlign?: 'start' | 'center' | 'end';
     loading?: boolean | Signal<boolean>;
     onOk?: () => boolean | Promise<boolean> | undefined | void;
     onCancel?: () => void;

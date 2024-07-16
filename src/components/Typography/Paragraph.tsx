@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { Icon } from "../Icon";
 import useCopy from "../utils/useCopy";
 import type { ParagraphProps } from "./paragraph.d";
@@ -25,11 +25,12 @@ export function Paragraph (props: ParagraphProps) {
         }
     }
 
-    return <p style={props.style} classList={classList()} ref={ref}>
+    return <div style={props.style} classList={classList()} ref={ref}>
         {props.children}
-        {
-            props.copyable ? (copyed() ? <span class="cm-typograghy-copyed"><Icon name="check"/></span>
-            : <span class="cm-typograghy-copy" onClick={onCopy}><Icon name="copy"/></span>) : null
-        }
-    </p>;
+        <Show when={props.copyable}>
+            <Show when={copyed()} fallback={<span class="cm-typograghy-copy" onClick={onCopy}><Icon name="copy" /></span>}>
+                <span class="cm-typograghy-copyed"><Icon name="check" /></span>
+            </Show>
+        </Show>
+    </div>;
 }

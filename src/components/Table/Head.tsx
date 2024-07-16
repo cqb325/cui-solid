@@ -16,17 +16,17 @@ type HeadProps = {
 export function Head (props: HeadProps) {
     let thead: any;
     let headerWrap: any;
-    const onWrapEntry = (entry: ResizeObserverEntry) => {
-        const el = entry.target;
-        const index = el.getAttribute("data-index");
+    // const onWrapEntry = (entry: ResizeObserverEntry) => {
+    //     const el = entry.target;
+    //     const index = el.getAttribute("data-index");
 
-        if (index) {
-            const idx = parseInt(index);
-            if (el) {
-                props.onInitColumnWidth(idx, el.getBoundingClientRect().width);
-            }
-        }
-    }
+    //     if (index) {
+    //         const idx = parseInt(index);
+    //         if (el) {
+    //             props.onInitColumnWidth(idx, el.getBoundingClientRect().width);
+    //         }
+    //     }
+    // }
     const onHeadEntry = (entry: ResizeObserverEntry) => {
         const el = entry.target;
         if (el.tagName === 'THEAD') {
@@ -48,31 +48,31 @@ export function Head (props: HeadProps) {
         }
     }
 
-    const ro = new ResizeObserver((entries) => {
-        entries.forEach((entry) => onWrapEntry(entry));
-    });
+    // const ro = new ResizeObserver((entries) => {
+    //     entries.forEach((entry) => onWrapEntry(entry));
+    // });
 
-    createEffect(() => {
-        const columns = props.data.columns;
-        if (columns.length) {
-            setTimeout(() => {
-                const childs = thead.querySelectorAll('th');
-                const len = childs.length;
-                for (let i = 0; i < len; i++) {
-                    ro.unobserve(childs[i]);
-                    ro.observe(childs[i]);
-                }
-            })
-        }
-    })
+    // createEffect(() => {
+    //     const columns = props.data.columns;
+    //     if (columns.length) {
+    //         setTimeout(() => {
+    //             const childs = thead.querySelectorAll('th');
+    //             const len = childs.length;
+    //             for (let i = 0; i < len; i++) {
+    //                 ro.unobserve(childs[i]);
+    //                 ro.observe(childs[i]);
+    //             }
+    //         })
+    //     }
+    // })
 
-    onCleanup(() => {
-        const childs = thead.querySelectorAll('th');
-        const len = childs.length;
-        for (let i = 0; i < len; i++) {
-            childs[i] && ro.unobserve(childs[i]);
-        }
-    });
+    // onCleanup(() => {
+    //     const childs = thead.querySelectorAll('th');
+    //     const len = childs.length;
+    //     for (let i = 0; i < len; i++) {
+    //         childs[i] && ro.unobserve(childs[i]);
+    //     }
+    // });
 
     onMount(() => {
         const ro2 = new ResizeObserver((entries) => {
@@ -112,9 +112,9 @@ export function Head (props: HeadProps) {
                         {(col: ColumnProps, index: Accessor<number>) => {
                             return <Cell column={col} type="th" showFixedLeft={props.data.showFixedLeft} colIndex={index()}
                             showFixedRight={props.data.showFixedRight} checkedAll={props.data.checkedAll} ref={(el: Element) => {
-                                Promise.resolve().then(() => {
-                                    props.onInitColumnWidth(index(), el.getBoundingClientRect().width);
-                                })
+                                // Promise.resolve().then(() => {
+                                //     props.onInitColumnWidth(index(), el.getBoundingClientRect().width);
+                                // })
                             }}/>
                         }}
                     </For>

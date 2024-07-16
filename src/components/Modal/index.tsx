@@ -26,6 +26,7 @@ type ModalProps = {
     bodyStyle?: any,
     children?: any,
     footer?: boolean,
+    footerAlign?: 'start' | 'center' | 'end',
     loading?: boolean | Signal<boolean>,
     onOk?: () => boolean | Promise<boolean> | undefined | void,
     onCancel?: () => void,
@@ -50,6 +51,7 @@ export function Modal (props: ModalProps) {
     const [loading, setLoading] = createSignal(false);
     let setOverflow = false;
     let originOverflow = '';
+    const footerAlign = props.footerAlign ?? 'center';
     const classList = () => useClassList(props, 'cm-modal');
     const zindex = usezIndex();
 
@@ -189,9 +191,12 @@ export function Modal (props: ModalProps) {
                         {props.children}
                     </div>
                     <Show when={footer}>
-                        <div class="cm-modal-footer">
+                        <div classList={{
+                            'cm-modal-footer': true,
+                            [`cm-modal-footer-${footerAlign}`]: !!footerAlign
+                        }}>
                             <Button type="primary" loading={loading()} onClick={onOk}>{okText}</Button>
-                            <Button type="default" class="mr-10" onClick={onCancel}>{cancleText}</Button>
+                            <Button type="default" onClick={onCancel}>{cancleText}</Button>
                         </div>
                     </Show>
                 </div>
@@ -239,7 +244,7 @@ function ModalFun () {
             config.defaultPosition = {top: '200px', ...config.defaultPosition};
             const ele = usePortal('cm-modal-portal-instance', 'cm-modal-portal');
 
-            const disposeFn = render(() => <Modal {...config} class="cm-modal-instance">
+            const disposeFn = ele ? render(() => <Modal {...config} class="cm-modal-instance">
                 <div class="cm-modal-left">
                     <div class="cm-modal-icon">
                         <Icon name={icon} size={24}/>
@@ -248,7 +253,7 @@ function ModalFun () {
                 <div class="cm-modal-right">
                     {typeof config.content === 'function' ? config.content() : config.content}
                 </div>
-            </Modal>, ele);
+            </Modal>, ele) : null;
         },
         success (config: ModalConfig) {
             config.status = 'success';

@@ -390,7 +390,9 @@ export default function SelectPage () {
 
                 <Space id="select_largelist" dir="v">
                     <Card bordered>
-                        <Input type="select" filter>
+                        <Input type="select" filter onChange={(v: any) => {
+                            console.log(v);
+                        }}>
                             <For each={largeArray}>
                                 {(item, index) => {
                                     return <Option value={item.value} label={`${new Array(item.num).fill(true).map(() => 'Row').join(" ")} Row ` + index()} />

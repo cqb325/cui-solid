@@ -20,6 +20,7 @@ type FormItemProps = {
     children?: any,
     labelStyle?: any,
     label?: string,
+    labelAlign?: 'start' | 'end' | 'center',
     style?: any,
     rules?: {[key: string]: any},
     messages?: {[key: string]: string},
@@ -32,6 +33,7 @@ export function FormItem (props: FormItemProps) {
     const ctx: FormContextOptions|undefined = useContext<FormContextOptions|undefined>(FormContext);
     const validation:any = useValidation();
     let itemRef: any;
+    const labelAlign = props.labelAlign ?? 'center';
     const errorTransfer = props.errorTransfer ?? ctx?.errorTransfer ?? false;
     const errorAlign = props.errorAlign ?? ctx?.errorAlign ?? 'right';
 
@@ -48,7 +50,7 @@ export function FormItem (props: FormItemProps) {
     const clazzName = () => useClassList(props, 'cm-form-item', {
         'cm-form-item-error': error(),
         'cm-form-item-inline': props.inline || ctx?.inline,
-        'cm-form-item-required': isRequired
+        'cm-form-item-required': isRequired && props.label
     })
 
     // 自带校验方式
@@ -137,7 +139,10 @@ export function FormItem (props: FormItemProps) {
 
     return <FormItemContext.Provider value={{name: props.name}}>
         <div classList={clazzName()} style={props.style}>
-            <label class="cm-form-label" style={{width: ctx?.labelWidth + 'px', ...props.labelStyle}}>{props.label}</label>
+            <label classList={{
+                "cm-form-label": true,
+                [`cm-form-label-${labelAlign}`]: true,
+            }} style={{width: ctx?.labelWidth + 'px', ...props.labelStyle}}>{props.label}</label>
             <Show when={errorTransfer} fallback={
                 <div class="cm-form-item-element" ref={itemRef}>
                     {props.children}

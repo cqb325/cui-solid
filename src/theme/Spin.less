@@ -1,3 +1,8 @@
+.cm-spin-wrap {
+    --spin-dot-size: 20px;
+    --spin-dot: 8px;
+}
+
 .cm-spin-wrap,
 .cm-svg-spin-wrap {
     position: absolute;
@@ -14,8 +19,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     display: inline-block;
     text-align: center;
     color: #108ee9;
@@ -23,7 +28,7 @@
     z-index: 10003;
 }
 
-.cm-spin-pulse{
+.cm-spin-pulse {
     width: 40px;
     height: 40px;
     display: inline-block;
@@ -45,6 +50,7 @@
         opacity: 0;
     }
 }
+
 @keyframes scaleout {
     0% {
         -webkit-transform: scale(0);
@@ -58,8 +64,98 @@
     }
 }
 
-.cm-spin{
+.cm-spin {
     margin: 0 auto;
     width: 40px;
     height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cm-spin-small {
+    --spin-dot-size: 14px;
+    --spin-dot: 6px;
+}
+
+.cm-spin-large {
+    --spin-dot-size: 32px;
+    --spin-dot: 12px;
+}
+
+.cm-spin-dot {
+    position: relative;
+    width: var(--spin-dot-size);
+    height: var(--spin-dot-size);
+    transform: rotate(45deg);
+    animation: cm-spin-point 1.2s linear infinite;
+}
+
+.cm-spin-dot-point {
+    width: var(--spin-dot);
+    height: var(--spin-dot);
+    background-color: var(--cui-color-primary);
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0.3;
+    animation: cm-spin-point-opacity 1s linear infinite;
+    animation-direction: alternate;
+}
+
+.cm-spin-dot .cm-spin-dot-point:nth-child(1) {
+    top: 0;
+    left: 0;
+}
+
+.cm-spin-dot .cm-spin-dot-point:nth-child(2) {
+    top: 0;
+    right: 0;
+    animation-delay: 0.4s;
+}
+
+.cm-spin-dot .cm-spin-dot-point:nth-child(3) {
+    bottom: 0;
+    left: 0;
+    animation-delay: 0.8s;
+}
+
+.cm-spin-dot .cm-spin-dot-point:nth-child(4) {
+    bottom: 0;
+    right: 0;
+    animation-delay: 1.2s;
+}
+
+@keyframes cm-spin-point {
+    // 0% {
+    //     transform: scale(0.75) rotate(0);
+    // }
+
+    // 20%,
+    // 25% {
+    //     transform: scale(1) rotate(90deg);
+    // }
+
+    // 45%,
+    // 50% {
+    //     transform: scale(0.75) rotate(180deg);
+    // }
+
+    // 70%,
+    // 75% {
+    //     transform: scale(1) rotate(270deg);
+    // }
+
+    // 95%,
+    // 100% {
+    //     transform: scale(0.75) rotate(360deg);
+    // }
+    100% {
+        transform: rotate(405deg);
+    }
+}
+
+@keyframes cm-spin-point-opacity {
+    100% {
+        opacity: 1;
+    }
 }

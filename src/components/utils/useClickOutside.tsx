@@ -1,5 +1,7 @@
+import { isServer } from "solid-js/web";
 
-export function useClickOutside (ref?: any, callback?: () => any, onMouseDown?: (e: any) => any): () => void {
+export function useClickOutside(ref?: any, callback?: () => any, onMouseDown?: (e: any) => any): () => void {
+    if (isServer) return () => { };
     const clickOutsideHandler = (e: any) => {
         onMouseDown && onMouseDown(e);
         if (ref instanceof Array) {

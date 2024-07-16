@@ -55,6 +55,16 @@ export default function SpinPage () {
                                 <div>卡片内容卡片内容</div>
                                 <Spin type="oval" />
                             </Card>
+
+                            <Card title="卡片" style={{width: '300px', height: '300px', border: '1px solid #ccc', position: 'relative'}}>
+                                <div>卡片内容卡片内容</div>
+                                <div>卡片内容卡片内容</div>
+                                <div>卡片内容卡片内容</div>
+                                <div>卡片内容卡片内容</div>
+                                <div>卡片内容卡片内容</div>
+                                <div>卡片内容卡片内容</div>
+                                <Spin type="dot" size="small"/>
+                            </Card>
                         </Space>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">

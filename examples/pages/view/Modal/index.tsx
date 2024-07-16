@@ -38,7 +38,7 @@ export default function ModalPage () {
                         <Button type="primary" onClick={() => {
                             setVisible(true);
                         }}>打开</Button>
-                        <Modal title="提示" visible={[visible, setVisible]}>
+                        <Modal title="提示" visible={[visible, setVisible]} footerAlign="end">
                             <div>modal 内容</div>
                             <div>modal 内容</div>
                             <div>modal 内容</div>

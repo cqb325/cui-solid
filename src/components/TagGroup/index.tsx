@@ -22,6 +22,7 @@ export interface TagGroupProps {
     max?: number
     showMore?: boolean,
     size?: 'small'|'large'
+    extra?: JSXElement
     onClose? (item: TagConfig, e: any): void
 }
 
@@ -88,5 +89,6 @@ export function TagGroup (props: TagGroupProps) {
                 </Popover>
             </Show>
         </Show>
+        { props.extra }
     </div>
 }

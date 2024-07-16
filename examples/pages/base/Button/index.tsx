@@ -48,6 +48,26 @@ const ButtonPage = () => {
                     </Card>
                 </div>
 
+
+                <div id="button_danger">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Space dir="h">
+                                <Button type="primary" danger>Primary</Button>
+                                <Button type="default" danger>Default</Button>
+                                <Button type="text" danger>Text Button</Button>
+                                <Button type="link" danger>LINK</Button>
+                                <Button type="dashed" danger>Dashed BUTTON</Button>
+                            </Space>
+                        </Space>
+                        <Divider align="left"><Text type="primary">危险按钮</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            危险按钮， 通过danger属性设置。
+                        </Paragraph>
+                        <DemoCode data={codes['button_danger']}/>
+                    </Card>
+                </div>
+
                 <div id="button_ghost">
                     <Card bordered>
                         <Space dir="h" style={{background: 'var(--cui-color-fill-0)', padding: '10px'}}>
@@ -57,6 +77,7 @@ const ButtonPage = () => {
                             <Button type="warning" ghost>WARNING</Button>
                             <Button type="default" ghost>DEFAULT</Button>
                             <Button type="dashed" ghost>DASHED</Button>
+                            <Button type="primary" danger ghost>DASHED</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">幽灵按钮</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -70,9 +91,12 @@ const ButtonPage = () => {
                     <Card bordered>
                         <Space dir="h">
                             <Button type="primary" disabled>PRIMARY</Button>
+                            <Button disabled>Default</Button>
                             <Button type="primary" ghost disabled>Ghost</Button>
                             <Button type="link" disabled>Link</Button>
                             <Button type="text" disabled>Text</Button>
+                            <Button type="dashed" disabled>Dashed</Button>
+                            <Button type="primary" disabled danger>Danger</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">禁用按钮</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">

@@ -1,6 +1,7 @@
 import { createStore } from "solid-js/store"
 import { useClassList } from "../utils/useProps"
 import { createEffect, createSignal, onCleanup, untrack } from "solid-js"
+import { isServer } from "solid-js/web"
 
 export interface SideBySideProps {
     style?: any
@@ -10,7 +11,7 @@ export interface SideBySideProps {
     right?: any
 }
 
-export function SideBySide (props: SideBySideProps) {
+export function SideBySide(props: SideBySideProps) {
     const classList = () => useClassList(props, 'cm-side-by-side');
     const [split, setSplit] = createSignal(50);
     const [store, setStore] = createStore({
@@ -71,6 +72,7 @@ export function SideBySide (props: SideBySideProps) {
     })
 
     onCleanup(() => {
+        if (isServer) return;
         document.removeEventListener('mousemove', onDragMove);
         document.removeEventListener('mouseup', onDragEnd);
     })

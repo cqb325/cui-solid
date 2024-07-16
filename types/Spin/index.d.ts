@@ -7,9 +7,10 @@ import type { JSXElement } from 'solid-js';
 type SpinProps = {
     classList?: any;
     class?: string;
-    type?: 'pulse' | 'oval' | 'gear';
+    style?: any;
+    type?: 'pulse' | 'oval' | 'gear' | 'dot';
     title?: string | JSXElement;
-    size?: number;
+    size?: number | 'small' | 'large';
 };
 export declare function Spin(props: SpinProps): import("solid-js").JSX.Element;
 export {};

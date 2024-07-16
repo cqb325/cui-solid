@@ -12,6 +12,7 @@ export type ButtonProps = {
     loading?: boolean;
     ghost?: boolean;
     icon?: any;
+    danger?: boolean;
     iconAlign?: 'left' | 'right';
     ref?: any;
     onClick?: (e: any) => void;

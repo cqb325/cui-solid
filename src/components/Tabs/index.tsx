@@ -27,7 +27,7 @@ type TabStore = {
     scrollLeft: number
 }
 
-export function Tabs (props: TabsProps) {
+export function Tabs(props: TabsProps) {
     let line: any;
     let scroll: any;
     let header: any;
@@ -37,7 +37,7 @@ export function Tabs (props: TabsProps) {
     });
 
     const tabs = children(() => props.children)
-	const evaluatedTabs = () => tabs.toArray() as unknown as TabProps[]
+    const evaluatedTabs = () => tabs.toArray() as unknown as TabProps[]
 
     const [store, setStore] = createStore({
         activeName: '',
@@ -162,6 +162,7 @@ export function Tabs (props: TabsProps) {
     // 更新下线的移动位置
     const lineStyle = () => {
         if (!props.card) {
+            if (!header) return;
             const avtiveName = store.activeName;
             let currentIndex: number = 0;
             store.tabs.forEach((atab: any, index: number) => {
@@ -210,10 +211,10 @@ export function Tabs (props: TabsProps) {
                             });
                             return <li classList={className()}
                                 onClick={onTabClick.bind(null, item)}>
-                                    {item.icon}
-                                    {item.title}
+                                {item.icon}
+                                {item.title}
                                 <Show when={item.closeable}>
-                                    <Icon name="x" onClick={onRemove.bind(null, item.name)} class="cm-tabs-close" size={12}/>
+                                    <Icon name="x" onClick={onRemove.bind(null, item.name)} class="cm-tabs-close" size={12} />
                                 </Show>
                             </li>
                         }}
@@ -224,10 +225,10 @@ export function Tabs (props: TabsProps) {
                 {props.extra}
             </Show>
             <div class="cm-tabs-prev" onClick={scrollPrev}>
-                <Icon name="chevron-left" size={14}/>
+                <Icon name="chevron-left" size={14} />
             </div>
             <div class="cm-tabs-next" onClick={scrollNext}>
-                <Icon name="chevron-right" size={14}/>
+                <Icon name="chevron-right" size={14} />
             </div>
         </div>
         <div class="cm-tabs-content" style={contextStyle()}>

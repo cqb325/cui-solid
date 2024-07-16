@@ -17,21 +17,27 @@
             box-shadow: 0 0 0 2px rgb(45 140 240 / 20%);
         }
     }
+
     .cm-dropdown {
         min-width: 100%;
+        max-width: 100%;
     }
 }
+
 .cm-select-filter {
     border: none;
+
     &.cm-input-wrapper:hover,
-    &.cm-input-wrapper:focus-within{
+    &.cm-input-wrapper:focus-within {
         border-color: transparent;
         box-shadow: none;
     }
+
     .cm-input {
         padding: 0;
     }
 }
+
 .cm-select-filter-wrap {
     border-bottom: 1px solid #d9d9d9;
     padding-bottom: 5px;
@@ -46,11 +52,13 @@
             border-color: transparent;
             box-shadow: none;
         }
+
         &:focus {
             box-shadow: none;
             border-color: transparent;
         }
-        &:focus-within{
+
+        &:focus-within {
             box-shadow: none;
             border-color: transparent;
         }
@@ -106,13 +114,15 @@
     display: flex;
     flex-direction: row;
     gap: 3px;
+
     .cm-tag {
         .cm-tag-content {
             padding-left: 4px;
             padding-right: 4px;
         }
     }
-    > div:not(.cm-tag) {
+
+    >div:not(.cm-tag) {
         text-overflow: ellipsis;
         width: 100%;
         white-space: nowrap;
@@ -170,10 +180,12 @@
     margin: 0;
     padding: 0;
     flex: 1;
-    > div {
+
+    >div {
         &:hover {
-            overflow: auto!important;
+            overflow: auto !important;
         }
+
         // &::-webkit-scrollbar{
         //     width: 8px;
         //     height: 8px;
@@ -246,7 +258,8 @@
     .cm-select-value {
         height: 40px;
     }
-    .cm-select-options-wrap{
+
+    .cm-select-options-wrap {
         top: 40px;
     }
 }
@@ -268,19 +281,22 @@
     align-items: center;
     margin-right: 3px;
 }
+
 .cm-select-dropup {
     .cm-select-options-wrap {
         top: auto;
         bottom: var(--height-control-default);
     }
+
     .cm-select-large {
-        .cm-select-options-wrap{
+        .cm-select-options-wrap {
             top: auto;
             bottom: var(--height-control-large);
         }
     }
+
     .cm-select-small {
-        .cm-select-options-wrap{
+        .cm-select-options-wrap {
             top: auto;
             bottom: var(--height-control-small);
         }

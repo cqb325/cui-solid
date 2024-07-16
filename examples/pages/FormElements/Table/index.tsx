@@ -4,14 +4,14 @@ import { Button } from "@/components/Button";
 import { Space } from "@/components/Layout";
 import data3 from "./data3";
 import data4 from "./data4";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { Title } from "@/components/Typography/Title";
 import { Card } from "@/components/Card";
 import { Divider } from "@/components/Divider";
 import { Paragraph } from "@/components/Typography/Paragraph";
 import { Text } from "@/components/Typography/Text";
 import { eventsColumns, propsColumns } from "../../common/columns";
-import { anchorData, codes, eventsData, propsData } from "./config";
+import { anchorData, codes, columnData, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
@@ -20,14 +20,21 @@ useDirective(hljs);
 export default function TablePage () {
     const columns = [
         {type: 'index', title: '序号', width: '80px'},
-        {name: 'name', title: '名称', width: '150px'},
+        {name: 'name', title: '名称'},
+        {name: 'x', title: 'X'},
+        {name: 'y', title: 'Y'},
+        {name: 'date', title: '日期', width: '200px'},
+    ];
+    const fixedHeadercolumns = [
+        {type: 'index', title: '序号', width: '80px'},
+        {name: 'name', title: '名称', minWidth: 100, maxWidth: 150, tooltip: true, tooltipStyle: {width: '200px'}, tooltipAlign: 'bottom', tooltipTheme: 'light'},
         {name: 'x', title: 'X'},
         {name: 'y', title: 'Y'},
         {name: 'date', title: '日期', width: '200px'},
     ];
     const columnsx = [
         {type: 'index', title: '序号', width: '80px'},
-        {name: 'name', title: '名称', width: '150px'},
+        {name: 'name', title: '名称', minWidth: 100, maxWidth: 150, tooltip: true, tooltipStyle: {width: '200px'}, tooltipAlign: 'bottom', tooltipTheme: 'light'},
         {name: 'x', title: 'X'},
         {name: 'y', title: 'Y'},
         {name: 'date', title: '日期', width: '200px'},
@@ -35,8 +42,8 @@ export default function TablePage () {
 
 
     const fixedColumns = [
-        {type: 'index', title: '序号', width: '80px', fixed: 'left'},
-        {name: 'name', title: '名称', width: '150px', fixed: 'left'},
+        {type: 'index', title: '序号', width: '80px', fixed: 'left', resize: true},
+        {name: 'name', title: '名称', width: '150px', fixed: 'left', resize: true},
         {name: 'x', title: 'X', width: '300px'},
         {name: 'y', title: 'Y', width: '300px'},
         {name: 'date', title: '日期', width: '200px', fixed: 'right'},
@@ -71,7 +78,7 @@ export default function TablePage () {
 
 
     const columns6 = [
-        {name: 'name', title: '名称', width: '150px', resize: true},
+        {name: 'name', title: '名称', width: '150px', resize: true, maxWidth: 200, minWidth: 100},
         {name: 'x', title: 'X', width: '300px', resize: true},
         {name: 'y', title: 'Y', width: '300px', resize: true},
         {name: 'date', title: '日期', width: '200px'},
@@ -187,10 +194,35 @@ export default function TablePage () {
         }
     ]
 
-    const data = [];
+    const columns8 = [
+        {type: 'checkbox', width: '55px' },
+        {name: 'name', title: '名称', width: '150px'},
+        {name: 'x', title: 'X', width: '300px'},
+        {name: 'y', title: 'Y', width: '300px'},
+        {name: 'date', title: '日期', width: '200px'},
+        {name: '_op', title: '操作', fixed: 'right', width: '150px', render: (v: any, column: any, row: any) => {
+            return <Space>
+                <Button type="text" size="small" ghost>添加</Button>
+                <Button type="text" size="small" ghost>修改</Button>
+            </Space>
+        }}
+    ];
+
+    const data: any[] = [];
     for (let i = 0; i < 5; i++) {
         data.push({
             id: i,
+            name: 'name_name_name_name_name_' + i,
+            x: Math.random() + 100,
+            y: Math.random() + 30,
+            _disabled: i % 3 === 0,
+            date: new Date().toLocaleDateString()
+        });
+    }
+    const data21: any[] = [];
+    for (let i = 0; i < 5; i++) {
+        data21.push({
+            id: 5 + i,
             name: 'name_' + i,
             x: Math.random() + 100,
             y: Math.random() + 30,
@@ -198,6 +230,8 @@ export default function TablePage () {
             date: new Date().toLocaleDateString()
         });
     }
+
+    const [d, setD] = createSignal(data);
 
     const largedata = [];
     for (let i = 0; i < 1000; i++) {
@@ -216,7 +250,12 @@ export default function TablePage () {
     let table: any;
     const [loading, setLoading] = createSignal(false);
     const [data5, setData5] = createSignal(data4);
+    type KeyType = string | number;
+    const [selectedRowKeys, setSelectedRowKeys] = createSignal<KeyType[]>([]);
 
+    createEffect(() => {
+        console.log(selectedRowKeys());
+    })
 
     return <>
         <div class="sys-ctx-main-left" style={{width: 0}} use:hljs={''}>
@@ -261,7 +300,7 @@ export default function TablePage () {
 
                 <Space id="table_fixedHeader" dir="v">
                     <Card bordered>
-                        <Table columns={columns} data={data} border stripe height={200}/>
+                        <Table columns={fixedHeadercolumns} data={data} border stripe height={200}/>
                         <Divider align="left"><Text type="primary">固定表头</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         通过设置属性 height 给表格指定高度后，会自动固定表头。
@@ -363,11 +402,34 @@ export default function TablePage () {
                 <Space id="table_checkbox" dir="v">
                     <Card bordered>
                         <Space dir="v">
-                            <Table columns={columns2} data={data} />
+                            <Table columns={columns2} data={d()} selectedRowKeys={[selectedRowKeys, setSelectedRowKeys]}/>
+                            <Space>
+                                <Button type="primary" onClick={() => {
+                                    setSelectedRowKeys([1,2]);
+                                }}>
+                                    勾选
+                                </Button>
+                                <Button type="primary" onClick={() => {
+                                    setSelectedRowKeys([]);
+                                }}>
+                                    置空
+                                </Button>
+                                <Button type="primary" onClick={() => {
+                                    setD(data21);
+                                }}>
+                                    设置数据
+                                </Button>
+                                <Button type="primary" onClick={() => {
+                                    setD(data);
+                                }}>
+                                    重置数据
+                                </Button>
+                            </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">选择框</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                        column 中设置type 为checkbox可以添加选择列, 通过render函数可自定义渲染内容
+                        column 中设置type 为checkbox可以添加选择列, 通过render函数可自定义渲染内容<br/>
+                        selectedRowKeys 可以绑定勾选行的key
                         </Paragraph>
                         <DemoCode data={codes['table_checkbox']}/>
                     </Card>
@@ -468,7 +530,7 @@ export default function TablePage () {
                 <Space id="table_largedata" dir="v">
                     <Card bordered>
                         <Space dir="v">
-                            <Table columns={columns} data={largedata} border virtual height={300}/>
+                            <Table columns={columns8} data={largedata} border virtual height={300}/>
                         </Space>
                         <Divider align="left"><Text type="primary">大列表</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -487,7 +549,7 @@ export default function TablePage () {
                     </Space>
                     <Space id="comp_column_props" dir="v">
                         <Title type="primary" heading={4}>Column Props</Title>
-                        <Table columns={propsColumns} data={propsData} border size="small" />
+                        <Table columns={propsColumns} data={columnData} border size="small" />
                     </Space>
                     <Space id="comp_events" dir="v">
                         <Title type="primary" heading={4}>Events</Title>

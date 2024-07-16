@@ -1,7 +1,10 @@
-import type { JSXElement } from "solid-js";
+import type { JSXElement, Signal } from "solid-js";
+import type { PopoverProps } from "../Popover";
+type KeyType = string | number;
 type TableProps = {
     columns: any[];
     data: any[];
+    rowKey?: string;
     height?: number;
     classList?: any;
     class?: any;
@@ -9,6 +12,7 @@ type TableProps = {
     border?: boolean;
     stripe?: boolean;
     highlight?: boolean;
+    selectedRowKeys?: Signal<KeyType[]>;
     onRowSelect?: (row: any, preRow: any) => void;
     onRowChecked?: (row: any, checked: boolean) => void;
     onCheckedAll?: (rows: any[]) => void;
@@ -17,6 +21,7 @@ type TableProps = {
     size?: 'small';
     spanMethod?: (data: any, column: any, index: number, columnIndex: number) => any;
     loading?: boolean;
+    loadingText?: string | JSXElement;
     virtual?: boolean;
 };
 export type TableStore = {
@@ -39,6 +44,8 @@ export type ColumnProps = {
     render?: (value: any, column: any, row: any) => any;
     type?: string;
     width?: string;
+    minWidth?: number;
+    maxWidth?: number;
     _width?: number;
     resize?: boolean;
     sort?: boolean | 'custom';
@@ -46,6 +53,12 @@ export type ColumnProps = {
     sortType?: 'asc' | 'desc' | '';
     fixed?: 'left' | 'right';
     tree?: boolean;
+    ellipsis?: boolean;
+    tooltip?: boolean;
+    tooltipAlign?: PopoverProps['align'];
+    tooltipTheme?: PopoverProps['theme'];
+    tooltipMaxWidth?: number;
+    tooltipStyle?: any;
     fixedLeftLast?: boolean;
     fixedRightFirst?: boolean;
     id: string;

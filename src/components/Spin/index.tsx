@@ -10,18 +10,21 @@ import { Match, Switch } from 'solid-js';
 type SpinProps = {
     classList?: any,
     class?: string,
-    type?: 'pulse'|'oval'|'gear',
+    style?: any,
+    type?: 'pulse'|'oval'|'gear'|'dot',
     title?: string|JSXElement,
-    size?: number
+    size?: number | 'small' | 'large'
 }
 
 export function Spin (props: SpinProps) {
-    const classList = () => useClassList(props, 'cm-spin-wrap');
+    const classList = () => useClassList(props, 'cm-spin-wrap', {
+        [`cm-spin-${props.size}`]: props.size && typeof props.size === 'string'
+    });
     const type = () => props.type || 'pulse';
     return (
         <div classList={classList()}>
             <div class="cm-spin-inner">
-                <div class="cm-spin" style={{width: props.size + 'px', height: props.size + 'px'}}>
+                <div class="cm-spin" style={{width: props.size + 'px', height: props.size + 'px', ...props.style}}>
                     <Switch>
                         <Match when={type() === 'pulse'}>
                             <div class="cm-spin-pulse" />
@@ -112,9 +115,17 @@ export function Spin (props: SpinProps) {
                                 </g>
                             </svg>
                         </Match>
+                        <Match when={type() === 'dot'}>
+                            <div class="cm-spin-dot">
+                                <div class="cm-spin-dot-point" />
+                                <div class="cm-spin-dot-point" />
+                                <div class="cm-spin-dot-point" />
+                                <div class="cm-spin-dot-point" />
+                            </div>
+                        </Match>
                     </Switch>
                 </div>
-                <div class="cm-spin-text">{props.title || 'loading...'}</div>
+                <div class="cm-spin-text">{props.title ?? 'loading...'}</div>
             </div>
         </div>
     );

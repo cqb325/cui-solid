@@ -1,8 +1,9 @@
-import type { JSXElement} from "solid-js";
+import type { JSXElement } from "solid-js";
 import { For, createEffect, createRenderEffect, createSignal, onCleanup } from "solid-js";
 import { useClassList } from "../utils/useProps"
 import { createStore } from "solid-js/store";
 import { useSlots } from "../utils/useSlots";
+import { isServer } from "solid-js/web";
 
 type SplitProps = {
     classList?: any,
@@ -14,7 +15,7 @@ type SplitProps = {
     children?: JSXElement
 }
 
-export function Split (props: SplitProps) {
+export function Split(props: SplitProps) {
     const dir = props.dir || 'v';
     const classList = () => useClassList(props, 'cm-split-wrap', {
         [`cm-split-wrap-${dir}`]: dir
@@ -51,17 +52,17 @@ export function Split (props: SplitProps) {
             wh = parseFloat(wh);
         }
         const max = props.max ? props.max / wrapSize * 100 : 100 - min / wrapSize * 100;
-        wh = wh + (dir === 'v' ? store.deltaX : store.deltaY)/wrapSize * 100;
+        wh = wh + (dir === 'v' ? store.deltaX : store.deltaY) / wrapSize * 100;
         wh = Math.max(wh, min / wrapSize * 100);
         wh = Math.min(wh, max);
         setSplit(wh + '%');
     });
 
     const prevStyle = () => {
-        return {[`${dir === 'v' ? 'width' : 'height'}`]: split()};
+        return { [`${dir === 'v' ? 'width' : 'height'}`]: split() };
     }
     const handlerStyle = () => {
-        return {[`${dir === 'v' ? 'left' : 'top'}`]: split()};
+        return { [`${dir === 'v' ? 'left' : 'top'}`]: split() };
     }
     const nextStyle = {
         flex: '1'
@@ -106,6 +107,7 @@ export function Split (props: SplitProps) {
     }
 
     onCleanup(() => {
+        if (isServer) return;
         document.removeEventListener('mousemove', onDragMove);
         document.removeEventListener('mouseup', onDragEnd);
     })
@@ -117,7 +119,7 @@ export function Split (props: SplitProps) {
         <div class="cm-slpit-handler-wrap" style={handlerStyle()}>
             <div classList={handlerClassList()} onMouseDown={onDragStart}>
                 <div class="cm-split-handler-bar-wrap">
-                    <For each={[1,2,3,4,5,6,7,8]}>
+                    <For each={[1, 2, 3, 4, 5, 6, 7, 8]}>
                         {() => {
                             return <div class="cm-split-handler-bar" />
                         }}

@@ -1,4 +1,4 @@
-import { createUniqueId } from "solid-js";
+import { batch, createUniqueId } from "solid-js";
 import type { SetStoreFunction} from "solid-js/store";
 import { produce } from "solid-js/store";
 import type { ColumnProps, TableStore } from '.';
@@ -45,15 +45,15 @@ export function updateScrollFixed (maxFixedLeft: number, minFixedRight: number, 
  * 初始化表格数据
  * @param data
  */
-export function initData (data: any[]) : any[] {
+export function initData (data: any[], rowKey: string) : any[] {
     let ret = data ?? [];
     ret = [...ret];
     ret.forEach((item, index) => {
-        item.id = item.id ?? createUniqueId();
+        item.id = item[rowKey] ?? createUniqueId();
         item._originSort = index;
     });
 
-    ret = buildTreeData(data);
+    ret = buildTreeData(data, rowKey);
     return ret;
 }
 
@@ -80,14 +80,14 @@ export function sortData (setStore: SetStoreFunction<TableStore>, store: TableSt
     setStore('data', arr);
 }
 
-export function _buildTreeData (data: any[], target: any[], level: number, show: boolean) {
+export function _buildTreeData (data: any[], target: any[], level: number, show: boolean, rowKey: string) {
     data.forEach((item: any) => {
-        item.id = item.id ?? createUniqueId();
+        item.id = item[rowKey] ?? createUniqueId();
         item._level = level;
         item._show = show;
         target.push(item);
         if (item.children && item.children.length) {
-            _buildTreeData(item.children, target, level + 1, !!item._showChildren);
+            _buildTreeData(item.children, target, level + 1, !!item._showChildren, rowKey);
         }
     })
 }
@@ -95,11 +95,12 @@ export function _buildTreeData (data: any[], target: any[], level: number, show:
 /**
  * 树形数据重构
  * @param data
+ * @param rowKey
  * @returns
  */
-export function buildTreeData (data: any[]) {
+export function buildTreeData (data: any[], rowKey: string) {
     const arr: any[] = [];
-    _buildTreeData(data, arr, 0, true);
+    _buildTreeData(data, arr, 0, true, rowKey);
     return arr;
 }
 
@@ -220,11 +221,19 @@ export const onResizeMove = (store: any, setStore: SetStoreFunction<TableStore>,
     }
 }
 // resize结束
-export const onResizeEnd = (store: TableStore, setStore: SetStoreFunction<TableStore>) => {
+export const onResizeEnd = (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => {
     setStore('resizing', false);
     setStore('columns', (col: ColumnProps) => col.id === store.resizeId, produce((col: ColumnProps) => {
-        col.width = col.width ? parseFloat(col.width) + (store.posX - store.startX) + 'px' : undefined;
+        let w = col.width ? parseFloat(col.width) + (store.posX - store.startX) : undefined;
+        if (w && col.minWidth) {
+            w = Math.max(w, col.minWidth);
+        }
+        if (w && col.maxWidth) {
+            w = Math.min(w, col.maxWidth);
+        }
+        col.width = w ? w + 'px' : undefined;
     }));
+    observerSizeChange(store, setStore, wrap);
     let nextId: string | undefined;
     store.columns.find((col: ColumnProps, index: number) => {
         const flag = col.id === store.resizeId;
@@ -237,4 +246,50 @@ export const onResizeEnd = (store: TableStore, setStore: SetStoreFunction<TableS
         col._ = createUniqueId();
     }));
     setStore('posX', 0);
+}
+
+export const observerSizeChange = (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => {
+    let wrapWidth = wrap.querySelector('.cm-table')!.getBoundingClientRect().width;
+    const body = wrap.querySelector('.cm-table-body')! as HTMLElement;
+    const hasScroll = body.offsetHeight < body.scrollHeight;
+
+    if (hasScroll) {
+        const scrollWidth = body.offsetWidth - body.clientWidth;
+        wrapWidth -= scrollWidth;
+    }
+
+    const fxiedWidthColumns = store.columns.filter((col: ColumnProps) => col.width);
+    const fixedWidth = fxiedWidthColumns.reduce((pre: number, cur: ColumnProps) => pre + (cur.width ? parseFloat(cur.width) : 0), 0);
+    setStore('columns', produce((columns: ColumnProps[]) => {
+        const dynamicWidthColumns = columns.filter((col: ColumnProps) => !col.width);
+        if (dynamicWidthColumns.length > 0) {
+            const allDynamicWidth = Math.max(wrapWidth - fixedWidth, 0);
+            const dynamicWidth = allDynamicWidth / dynamicWidthColumns.length;
+            let remainWidth = allDynamicWidth;
+            // 先设置有minWidth或maxWidth的列
+            dynamicWidthColumns.filter((col:ColumnProps) => col.minWidth || col.maxWidth).forEach((col:ColumnProps) => {
+                let w = dynamicWidth;
+                if (col.minWidth) {
+                    w = Math.max(w, col.minWidth);
+                }
+                if (col.maxWidth) {
+                    w = Math.min(w, col.maxWidth);
+                }
+                remainWidth -= w;
+                col._width = w;
+            })
+            const remianColumns = dynamicWidthColumns.filter((col:ColumnProps) => !(col.minWidth || col.maxWidth));
+            const remainColWidth = remainWidth / remianColumns.length;
+
+            remianColumns.forEach((col:ColumnProps) => {
+                col._width = remainColWidth;
+            });
+        }
+    }));
+    fxiedWidthColumns.forEach((col: ColumnProps) => {
+        const w = col.width ? parseFloat(col.width) : 0;
+        setStore('columns', (c) => col.id === c.id, produce((c) => {
+            c._width = w;
+        }));
+    });
 }

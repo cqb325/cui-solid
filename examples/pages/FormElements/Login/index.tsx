@@ -17,7 +17,7 @@ import { message } from "@/components/Message";
 import { Popover } from "@/components/Popover";
 import { Progress } from "@/components/Progress";
 
-export default function LoginPage () {
+export default function LoginPage() {
     const [strong, setStrong] = createSignal('强');
     const [percent, setPercent] = createSignal(0);
     const [color, setColor] = createSignal('');
@@ -42,33 +42,33 @@ export default function LoginPage () {
                 </Title>
                 <Space id="login_base" dir="v">
                     <Card bordered>
-                        <div style={{width: '450px', margin: 'auto'}}>
-                            <Login onSubmit={(valid, {u, p}) => {
+                        <div style={{ width: '450px', margin: 'auto' }}>
+                            <Login onSubmit={(valid, { u, p }) => {
                                 console.log(valid, u, p);
                             }}>
-                                <UserName name="u"/>
-                                <Password name="p"/>
+                                <UserName name="u" />
+                                <Password name="p" />
                                 <Submit />
                             </Login>
                         </div>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            Input的基础用法
+                            Login的基础用法
                         </Paragraph>
-                        <DemoCode data={codes['login_base']}/>
+                        <DemoCode data={codes['login_base']} />
                     </Card>
                 </Space>
 
                 <Space id="login_get_captcha" dir="v">
                     <Card bordered>
-                        <div style={{width: '450px', margin: 'auto'}}>
-                            <Login onSubmit={(valid, {u, p}) => {
+                        <div style={{ width: '450px', margin: 'auto' }}>
+                            <Login onSubmit={(valid, { u, p }) => {
                                 console.log(valid, u, p);
                             }}>
                                 <Mobile />
                                 <Captcha field="mobile" onGetCaptcha={() => {
                                     message.info('获取验证码');
-                                }}/>
+                                }} />
                                 <Submit />
                             </Login>
                         </div>
@@ -76,19 +76,19 @@ export default function LoginPage () {
                         <Paragraph type="secondary" spacing="extended">
                             Captcha 组件内置了验证码获取的逻辑。
                         </Paragraph>
-                        <DemoCode data={codes['login_get_captcha']}/>
+                        <DemoCode data={codes['login_get_captcha']} />
                     </Card>
                 </Space>
 
                 <Space id="login_img_captcha" dir="v">
                     <Card bordered>
-                        <div style={{width: '450px', margin: 'auto'}}>
-                            <Login onSubmit={(valid, {u, p}) => {
+                        <div style={{ width: '450px', margin: 'auto' }}>
+                            <Login onSubmit={(valid, { u, p }) => {
                                 console.log(valid, u, p);
                             }}>
-                                <UserName name="username"/>
-                                <Password name="password"/>
-                                <Captcha action="https://zitie.cqb325.cn/cui/manager/user/captchaGet"/>
+                                <UserName name="username" />
+                                <Password name="password" />
+                                <Captcha action="https://zitie.cqb325.cn/cui/manager/user/captchaGet" />
                                 <Submit />
                             </Login>
                         </div>
@@ -96,18 +96,18 @@ export default function LoginPage () {
                         <Paragraph type="secondary" spacing="extended">
                             Captcha 默认为获取验证码按钮，指定action属性后为图形验证码，点击可刷新验证码。
                         </Paragraph>
-                        <DemoCode data={codes['login_img_captcha']}/>
+                        <DemoCode data={codes['login_img_captcha']} />
                     </Card>
                 </Space>
 
                 <Space id="login_init" dir="v">
                     <Card bordered>
-                        <div style={{width: '450px', margin: 'auto'}}>
-                            <Login onSubmit={(valid, {u, p}) => {
+                        <div style={{ width: '450px', margin: 'auto' }}>
+                            <Login onSubmit={(valid, { u, p }) => {
                                 console.log(valid, u, p);
-                            }} data={{u: '1111', p: '111'}}>
-                                <UserName name="u"/>
-                                <Password name="p"/>
+                            }} data={{ u: '1111', p: '111' }}>
+                                <UserName name="u" />
+                                <Password name="p" />
                                 <Submit />
                             </Login>
                         </div>
@@ -115,46 +115,48 @@ export default function LoginPage () {
                         <Paragraph type="secondary" spacing="extended">
                             Login的data属性可初始化登录表单
                         </Paragraph>
-                        <DemoCode data={codes['login_init']}/>
+                        <DemoCode data={codes['login_init']} />
                     </Card>
                 </Space>
 
 
                 <Space id="login_custom_rule" dir="v">
                     <Card bordered>
-                        <div style={{width: '450px', margin: 'auto'}}>
-                            <Login onSubmit={(valid, {u, p}) => {
+                        <div style={{ width: '450px', margin: 'auto' }}>
+                            <Login onSubmit={(valid, { u, p }) => {
                                 console.log(valid, u, p);
                             }}>
                                 <Email />
-                                <Popover trigger="click" arrow theme="light" align="right" content={<div class="demo-register-tip" style={{width: '240px', "white-space": 'normal'}}>
+                                <Popover trigger="click" arrow theme="light" align="right" content={<div class="demo-register-tip" style={{ width: '240px', "white-space": 'normal' }}>
                                     <div class="demo-register-tip-title">
-                                        强度：{ strong() }
+                                        强度：{strong()}
                                     </div>
                                     <Progress value={percent()} hidePercent strokeWidth={6} strokeColor={color()} />
                                     <div class="demo-register-tip-desc">
                                         请至少输入 6 个字符。请不要使用容易被猜到的密码。
                                     </div>
                                 </div>}>
-                                    <Password name="password" rules={{pw: (v: string) => {
-                                        if (v.length < 6) {
-                                            return false;
+                                    <Password name="password" rules={{
+                                        pw: (v: string) => {
+                                            if (v.length < 6) {
+                                                return false;
+                                            }
+                                            return true;
                                         }
-                                        return true;
-                                    }}} messages={{pw: '密码不能少于6位'}} onInput={(v) => {
+                                    }} messages={{ pw: '密码不能少于6位' }} onInput={(v) => {
                                         onChangePassword(v);
-                                    }}/>
+                                    }} />
                                 </Popover>
-                                <Password name="confirmPassword" rules={{equalTo: 'password'}} messages={{equalTo: '密码不匹配'}} placeholder="请输入确认密码"/>
+                                <Password name="confirmPassword" rules={{ equalTo: 'password' }} messages={{ equalTo: '密码不匹配' }} placeholder="请输入确认密码" />
                                 <Submit />
                             </Login>
                         </div>
                         <Divider align="left"><Text type="primary">自定义校验及组合</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                        各组件都有默认的校验规则 rules，不过也可以根据场景自定义，比如实现一个密码二次确认的校验。
-                        还可以结合其它组件，实现更复杂的业务功能，比如示例的密码强度。
+                            各组件都有默认的校验规则 rules，不过也可以根据场景自定义，比如实现一个密码二次确认的校验。
+                            还可以结合其它组件，实现更复杂的业务功能，比如示例的密码强度。
                         </Paragraph>
-                        <DemoCode data={codes['login_custom_rule']}/>
+                        <DemoCode data={codes['login_custom_rule']} />
                     </Card>
                 </Space>
 
@@ -184,6 +186,6 @@ export default function LoginPage () {
             </Space>
         </div>
 
-        <CompAnchor data={anchorData}/>
+        <CompAnchor data={anchorData} />
     </>
 }

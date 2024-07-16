@@ -3,6 +3,7 @@ import { InnerCheckbox } from "../inner/Checkbox";
 import type { ColumnProps } from ".";
 import { useTableContext } from ".";
 import { Icon } from "../Icon";
+import { Popover } from "../Popover";
 
 export function Cell (props: any) {
     let cell: any;
@@ -167,7 +168,16 @@ export function Cell (props: any) {
                             <Icon name={treeIcon()} class="cm-table-tree-icon" onClick={onShowChildren}/>
                         </Show>
                     </Show>
-                    {text()}
+                    <Show when={col.ellipsis || col.tooltip} fallback={text()}>
+                        <Show when={col.tooltip} fallback={<span class="cm-table-cell-ellipsis">{text()}</span>}>
+                            <Popover arrow align={col.tooltipAlign || 'top'} theme={col.tooltipTheme}
+                                class="cm-table-cell-tooltip"
+                                style={{...col.tooltipStyle, "max-width": `${col.tooltipMaxWidth || 200}px`}}
+                                content={<div>{text()}</div>}>
+                                <span class="cm-table-cell-tooltip-content">{text()}</span>
+                            </Popover>
+                        </Show>
+                    </Show>
                 </div>
             </td>
         </Match>

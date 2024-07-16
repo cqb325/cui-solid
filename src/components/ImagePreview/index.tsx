@@ -2,7 +2,7 @@ import type { Signal } from "solid-js";
 import { Show, onCleanup, onMount, createEffect } from "solid-js";
 import { Spin } from "../Spin";
 import usePortal from "../utils/usePortal";
-import { Portal } from "solid-js/web";
+import { isServer, Portal } from "solid-js/web";
 import { createStore } from "solid-js/store";
 import { Space } from "../Layout";
 import { Icon } from "../Icon";
@@ -23,8 +23,9 @@ type ImagePreviewProps = {
     initIndex?: number
 };
 
-export async function downloadFile (url: string, name = 'unnamed') {
+export async function downloadFile(url: string, name = 'unnamed') {
     try {
+        if (isServer) return;
         const res = await fetch(url);
         const blob = await res.blob();
 
@@ -42,13 +43,13 @@ export async function downloadFile (url: string, name = 'unnamed') {
     }
 }
 
-export function ImagePreview (props: ImagePreviewProps) {
+export function ImagePreview(props: ImagePreviewProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
     const zindex = usezIndex();
     const [store, setStore] = createStore({
         transition: true,
         original: false,
-        translate: {x: 0, y: 0},
+        translate: { x: 0, y: 0 },
         currentIndex: props.initIndex || 0,
         scale: 1,
         degree: 0,
@@ -146,11 +147,13 @@ export function ImagePreview (props: ImagePreviewProps) {
     }
 
     onMount(() => {
-        document.addEventListener('wheel', handleWheel, {passive: false});
+        if (isServer) return;
+        document.addEventListener('wheel', handleWheel, { passive: false });
         document.addEventListener('keydown', handleKeydown);
         document.addEventListener('keyup', handleKeyup);
     })
     onCleanup(() => {
+        if (isServer) return;
         document.removeEventListener('mousemove', handleMousemove);
         document.removeEventListener('mouseup', handleMouseup);
         document.removeEventListener('wheel', handleWheel);
@@ -274,8 +277,8 @@ export function ImagePreview (props: ImagePreviewProps) {
         return infinite ? false : store.currentIndex >= len - 1;
     }
 
-    const leftClasses = () => ({'cm-image-preview-arrow-left': true, 'cm-image-preview-arrow-disabled': hasLeftSwitchEnd()})
-    const rightClasses = () => ({'cm-image-preview-arrow-right': true, 'cm-image-preview-arrow-disabled': hasRightSwitchEnd()})
+    const leftClasses = () => ({ 'cm-image-preview-arrow-left': true, 'cm-image-preview-arrow-disabled': hasLeftSwitchEnd() })
+    const rightClasses = () => ({ 'cm-image-preview-arrow-right': true, 'cm-image-preview-arrow-disabled': hasRightSwitchEnd() })
 
     const currentSrc = () => props.previewList[store.currentIndex];
 
@@ -287,8 +290,8 @@ export function ImagePreview (props: ImagePreviewProps) {
     const id = 'cm-image-preview-portal';
     return <Portal mount={usePortal(id, id)}>
         <Show when={visible()}>
-            <div class="cm-image-preview-mask" style={{"z-index": (zindex - 1)}} />
-            <div class="cm-image-preview-wrap" style={{"z-index": zindex}}>
+            <div class="cm-image-preview-mask" style={{ "z-index": (zindex - 1) }} />
+            <div class="cm-image-preview-wrap" style={{ "z-index": zindex }}>
                 <div class="cm-image-preview" onClick={handleClickMask}>
                     <Show when={store.status === 'loading'}>
                         <Spin class="cm-image-preview-loading" />
@@ -298,7 +301,7 @@ export function ImagePreview (props: ImagePreviewProps) {
                     </Show>
                     <img classList={imgClasses()} style={imageStyle()} src={currentSrc()}
                         onMouseDown={handleMousedown} onLoad={handleImageLoad}
-                        onError={handleImageError} onClick={stop}/>
+                        onError={handleImageError} onClick={stop} />
                     <Space dir="h" class="cm-image-preview-operations" size={0}>
                         <span>
                             <svg class="cm-image-preview-operations-item" onClick={(e: any) => handleOperation(e, 'zoomIn')} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7197" width="200" height="200"><path d="M637 443H519V309c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v134H325c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h118v134c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V519h118c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z" p-id="7198" fill="#ffffff" /><path d="M921 867L775 721c122.1-148.9 113.6-369.5-26-509-148-148.1-388.4-148.1-537 0-148.1 148.6-148.1 389 0 537 139.5 139.6 360.1 148.1 509 26l146 146c3.2 2.8 8.3 2.8 11 0l43-43c2.8-2.7 2.8-7.8 0-11zM696 696c-118.8 118.7-311.2 118.7-430 0-118.7-118.8-118.7-311.2 0-430 118.8-118.7 311.2-118.7 430 0 118.7 118.8 118.7 311.2 0 430z" p-id="7199" fill="#ffffff" /></svg>
@@ -329,10 +332,10 @@ export function ImagePreview (props: ImagePreviewProps) {
                     </Space>
 
                     <Show when={props.previewList.length > 1}>
-                        <Icon classList={leftClasses()} name="chevron-left" size={26} onClick={(e) => {stop(e); handleSwitch(false)}} />
-                        <Icon classList={rightClasses()} name="chevron-right" size={26} onClick={(e) => {stop(e); handleSwitch(true)}} />
+                        <Icon classList={leftClasses()} name="chevron-left" size={26} onClick={(e) => { stop(e); handleSwitch(false) }} />
+                        <Icon classList={rightClasses()} name="chevron-right" size={26} onClick={(e) => { stop(e); handleSwitch(true) }} />
                     </Show>
-                    <Icon class="cm-image-preview-arrow-close" name="x" onClick={handleClose} size={26}/>
+                    <Icon class="cm-image-preview-arrow-close" name="x" onClick={handleClose} size={26} />
                 </div>
             </div>
         </Show>

@@ -91,7 +91,7 @@ export default function QRCodePage () {
                         <Button type="primary" onClick={() => {
                             qrcode.download();
                         }}>下载</Button>
-                        <Divider align="left"><Text type="primary">纠错比例</Text></Divider>
+                        <Divider align="left"><Text type="primary">下载</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             通过设置 level 调整不同的容错等级。
                         </Paragraph>

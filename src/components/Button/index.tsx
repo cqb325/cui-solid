@@ -18,6 +18,7 @@ export type ButtonProps = {
     loading?: boolean,
     ghost?: boolean,
     icon?: any,
+    danger?: boolean,
     iconAlign?: 'left' | 'right',
     ref?: any,
     onClick?: (e: any) => void
@@ -35,6 +36,7 @@ export const Button = (props: ButtonProps) => {
             [`cm-button-icon-${iconPosition}`]: true,
             'cm-click-animating': animating(),
             'cm-button-ghost': props.ghost,
+            'cm-button-danger': props.danger,
             'cm-button-block': props.block,
             [`cm-button-${type()}`]: type(),
             [`cm-button-${size()}`]: size(),

@@ -127,17 +127,15 @@ export function Spinner (props: SpinnerProps) {
         return (num1 * m + num2 * m) / m;
     }
 
-    return <div classList={classList()} style={props.style}>
-        <InnerInput size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]}
-            onChange={_onChange} onKeyDown={_onKeyDown} append={
-                <>
-                    <span class="cm-spinner-plus" onClick={plus}>
-                        <Icon name="chevron-up" size={12}/>
-                    </span>
-                    <span class="cm-spinner-subs" onClick={sub}>
-                        <Icon name="chevron-down" size={12}/>
-                    </span>
-                </>
-            }/>
-    </div>
+    return <InnerInput classList={classList()} style={props.style} size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]}
+        onChange={_onChange} onKeyDown={_onKeyDown} append={
+            <>
+                <span class="cm-spinner-plus" onClick={plus}>
+                    <Icon name="chevron-up" size={12}/>
+                </span>
+                <span class="cm-spinner-subs" onClick={sub}>
+                    <Icon name="chevron-down" size={12}/>
+                </span>
+            </>
+        }/>
 }

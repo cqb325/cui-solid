@@ -1,0 +1,23 @@
+import type { Signal } from "solid-js";
+export type TreeProps = {
+    classList?: any;
+    class?: string;
+    style?: any;
+    data?: any[];
+    onSelect?: (data: any) => void;
+    opened?: any[];
+    selected?: string | number | Signal<any>;
+    ref?: any;
+    gutter?: number;
+    value?: any[];
+    multi?: boolean;
+    directory?: boolean;
+    onChange?: (vals: any) => void;
+    loadData?: (data: any) => any;
+    onContextMenu?: (data: any) => void;
+    contextMenu?: any;
+    onSelectMenu?: ((name: string) => void);
+    checkRelation?: 'related' | 'unRelated';
+};
+export declare function Tree(props: TreeProps): import("solid-js").JSX.Element;
+export declare const useTreeContext: () => unknown;

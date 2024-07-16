@@ -1,18 +1,20 @@
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import { toRGBAString } from "./utils";
+import { isServer } from "solid-js/web";
 
-export function Alpha (props: any) {
+export function Alpha(props: any) {
     const [left, setLeft] = createSignal(props.value.hsl.a * 100);
 
     const gradientStyle = () => {
-        const {r, g, b} = props.value.rgba;
-        const start = toRGBAString({r, g, b, a: 0});
-        const finish = toRGBAString({r, g, b, a: 1});
+        const { r, g, b } = props.value.rgba;
+        const start = toRGBAString({ r, g, b, a: 0 });
+        const finish = toRGBAString({ r, g, b, a: 1 });
         return { background: `linear-gradient(to right, ${start} 0%, ${finish} 100%)` };
     }
 
     let container: any;
     const handleMouseDown = (e: any) => {
+        if (isServer) return;
         if (typeof e.button === 'number' && e.button !== 0) return false;
         handleChange(e);
 
@@ -21,12 +23,14 @@ export function Alpha (props: any) {
     }
 
     const onDragEnd = (e: any) => {
+        if (isServer) return;
         handleChange(e);
         document.removeEventListener('mousemove', handleChange);
         document.removeEventListener('mouseup', onDragEnd);
     }
 
     onCleanup(() => {
+        if (isServer) return;
         document.removeEventListener('mousemove', handleChange);
         document.removeEventListener('mouseup', onDragEnd);
     })
@@ -54,9 +58,9 @@ export function Alpha (props: any) {
     const change = (newAlpha: number) => {
         setLeft(newAlpha * 100);
 
-        const {h, s, l, a} = props.value.hsl;
+        const { h, s, l, a } = props.value.hsl;
         if (a !== newAlpha) {
-            props.onChange && props.onChange({h, s, l, a: newAlpha, source: 'rgba'});
+            props.onChange && props.onChange({ h, s, l, a: newAlpha, source: 'rgba' });
         }
     }
 
@@ -66,7 +70,7 @@ export function Alpha (props: any) {
 
     return <div class="cm-color-picker-alpha" ref={container}>
         <div class="cm-color-picker-alpha-wrap" style={gradientStyle()} onMouseDown={handleMouseDown}>
-            <div class="cm-color-picker-alpha-picker" style={{left: `${left()}%`, top: '0px'}} />
+            <div class="cm-color-picker-alpha-picker" style={{ left: `${left()}%`, top: '0px' }} />
         </div>
     </div>
 }

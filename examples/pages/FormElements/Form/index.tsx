@@ -136,18 +136,18 @@ function FormPage () {
     });
 
     const cityData = [
-        {value: '1', label: '北京'},
-        {value: '2', label: '上海'},
-        {value: '3', label: '杭州'},
-        {value: '4', label: '武汉'},
-        {value: '5', label: '天津'},
+        { value: '1', label: '北京' },
+        { value: '2', label: '上海' },
+        { value: '3', label: '杭州' },
+        { value: '4', label: '武汉' },
+        { value: '5', label: '天津' },
     ];
 
     const data3 = [];
     for (let i = 0; i < 3; i++) {
         const c = [];
         for (let j = 0; j < 3; j++) {
-            c.push({id: `${i + 1}_${j + 1}`, title: `node_${i + 1}_${j + 1}`});
+            c.push({ id: `${i + 1}_${j + 1}`, title: `node_${i + 1}_${j + 1}` });
         }
         // patch: <div style={{
         //     display: 'flex',
@@ -156,16 +156,16 @@ function FormPage () {
         //     <Text type="success">查看</Text>
         // </div>
 
-        data3.push({id: `${i + 1}`, title: `node_${i + 1}`, children: c});
+        data3.push({ id: `${i + 1}`, title: `node_${i + 1}`, children: c });
     }
 
     const cascaderData = [
         {
             value: 'beijing', title: '北京',
             children: [
-                {value: 'gugong', title: '故宫'},
-                {value: 'tiantan', title: '天坛'},
-                {value: 'wangfujing', title: '王府井'},
+                { value: 'gugong', title: '故宫' },
+                { value: 'tiantan', title: '天坛' },
+                { value: 'wangfujing', title: '王府井' },
             ]
         },
         {
@@ -246,17 +246,17 @@ function FormPage () {
                     <Card bordered>
                         <Form form={form1} inline>
                             <FormItem name="u" label="用户名：">
-                                <Input type="text"/>
+                                <Input type="text" />
                             </FormItem>
                             <FormItem name="p" label="密码：">
-                                <Input type="password"/>
+                                <Input type="password" />
                             </FormItem>
                         </Form>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             设置属性 inline，表单元素可以水平排列。
                         </Paragraph>
-                        <DemoCode data={codes['form_base']}/>
+                        <DemoCode data={codes['form_base']} />
                     </Card>
                 </Space>
 
@@ -265,17 +265,17 @@ function FormPage () {
                     <Card bordered>
                         <Form form={form2}>
                             <FormItem name="select" label="选项：">
-                                <RadioGroup data={[{label: '手机号验证', value: 1}, {label: '邮箱验证', value: 2}]}/>
+                                <RadioGroup data={[{ label: '手机号验证', value: 1 }, { label: '邮箱验证', value: 2 }]} />
                             </FormItem>
-                            <FormItem name="value" label="校验值：" rules={form2.select === 1 ? {required: true, mobile: true} : {required: true, email: true}}>
-                                <Input type="text"/>
+                            <FormItem name="value" label="校验值：" rules={form2.select === 1 ? { required: true, mobile: true } : { required: true, email: true }}>
+                                <Input type="text" />
                             </FormItem>
                         </Form>
                         <Divider align="left"><Text type="primary">动态校验</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                        FormItem 组件支持动态设置 rules ,可根据不同条件对数据进行校验, 默认使用内置校验方式，支持自定义校验规则。
+                            FormItem 组件支持动态设置 rules ,可根据不同条件对数据进行校验, 默认使用内置校验方式，支持自定义校验规则。
                         </Paragraph>
-                        <DemoCode data={codes['form_dynamic_rule']}/>
+                        <DemoCode data={codes['form_dynamic_rule']} />
                     </Card>
                 </Space>
 
@@ -284,8 +284,8 @@ function FormPage () {
                     <Card bordered>
                         <Modal title="新增" visible={[addModal, setAddModal]}>
                             <Form form={form4} errorTransfer errorAlign="right">
-                                <FormItem name="value" label="校验值：" rules={{required: true, mobile: true}}>
-                                    <Input type="text"/>
+                                <FormItem name="value" label="校验值：" rules={{ required: true, mobile: true }}>
+                                    <Input type="text" />
                                 </FormItem>
                             </Form>
                         </Modal>
@@ -294,10 +294,10 @@ function FormPage () {
                         }}>打开</Button>
                         <Divider align="left"><Text type="primary">错误提示位置</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                        Form 和 FormItem 组件支持指定位置显示错误信息, 设置errorTransfer，将使用popover显示错误信息
-                        errorAlign可以设置错误提示的位置，默认是right
+                            Form 和 FormItem 组件支持指定位置显示错误信息, 设置errorTransfer，将使用popover显示错误信息
+                            errorAlign可以设置错误提示的位置，默认是right
                         </Paragraph>
-                        <DemoCode data={codes['form_dynamic_rule']}/>
+                        <DemoCode data={codes['form_dynamic_rule']} />
                     </Card>
                 </Space>
 
@@ -305,10 +305,10 @@ function FormPage () {
                     <Card bordered>
                         <Form form={form3} labelWidth={80}>
                             <FormItem name="name" label="Name">
-                                <Input type="text" placeholder="Enter your name"/>
+                                <Input type="text" placeholder="Enter your name" />
                             </FormItem>
                             <FormItem name="mail" label="E-mail">
-                                <Input type="text" placeholder="Enter your e-mail"/>
+                                <Input type="text" placeholder="Enter your e-mail" />
                             </FormItem>
                             <FormItem name="city" label="City">
                                 <Select placeholder="Select your city">
@@ -318,14 +318,14 @@ function FormPage () {
                                 </Select>
                             </FormItem>
                             <FormItem label="Gender" name="gender">
-                                <RadioGroup data={[{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}]} />
+                                <RadioGroup data={[{ label: 'Male', value: 'male' }, { label: 'Female', value: 'female' }]} />
                             </FormItem>
                             <FormItem label="Hobby" name="interest">
                                 <CheckboxGroup data={[
-                                    {label: 'Eat', value: 'Eat'},
-                                    {label: 'Sleep', value: 'Sleep'},
-                                    {label: 'Run', value: 'Run'},
-                                    {label: 'Movie', value: 'Movie'},
+                                    { label: 'Eat', value: 'Eat' },
+                                    { label: 'Sleep', value: 'Sleep' },
+                                    { label: 'Run', value: 'Run' },
+                                    { label: 'Movie', value: 'Movie' },
                                 ]} />
                             </FormItem>
                             <FormItem label="Desc" name="desc">
@@ -350,14 +350,14 @@ function FormPage () {
                                         desc: ''
                                     });
                                     form3.resetFieldsValidate();
-                                }} style={{"margin-left": "8px"}}>Reset</Button>
+                                }} style={{ "margin-left": "8px" }}>Reset</Button>
                             </FormItem>
                         </Form>
                         <Divider align="left"><Text type="primary">async-validator</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            Form 组件支持  <Text type="primary"><Icon name="github"/> <a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</a></Text> 方式实现的数据验证，给在 useForm 中设置的 validation 各属性校验规则为数组格式。
+                            Form 组件支持  <Text type="primary"><Icon name="github" /> <a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</a></Text> 方式实现的数据验证，给在 useForm 中设置的 validation 各属性校验规则为数组格式。
                         </Paragraph>
-                        <DemoCode data={codes['form_async_validate']}/>
+                        <DemoCode data={codes['form_async_validate']} />
                     </Card>
                 </Space>
 
@@ -372,7 +372,7 @@ function FormPage () {
                                 <Col grid={0.33}>
                                     <FormItem label="是否选择:" name="check">
                                         <Space dir="h" align="baseline">
-                                            <Checkbox label="是否选择"/>
+                                            <Checkbox label="是否选择" />
                                             <Button onClick={() => {
                                                 form.check = !form.check;
                                                 console.log(form.getFormData());
@@ -383,7 +383,7 @@ function FormPage () {
                                 <Col grid={0.33}>
                                     <FormItem label="水果:" name="fruit">
                                         <Space dir="h" align="baseline">
-                                            <Input type="checkbox" data={[{label: '苹果', value: '1'}, {label: '桃子', value: '2'}]}/>
+                                            <Input type="checkbox" data={[{ label: '苹果', value: '1' }, { label: '桃子', value: '2' }]} />
                                             <Button onClick={() => {
                                                 form.fruit = ['2'];
                                                 console.log(form.getFormData());
@@ -394,7 +394,7 @@ function FormPage () {
                                 <Col grid={0.33}>
                                     <FormItem label="性别:" name="sex">
                                         <Space dir="h" align="baseline">
-                                            <Input type="radio" data={[{label: '男', value: 1}, {label: '女', value: 2}]}/>
+                                            <Input type="radio" data={[{ label: '男', value: 1 }, { label: '女', value: 2 }]} />
                                             <Button onClick={() => {
                                                 form.sex = 2;
                                                 console.log(form.getFormData());
@@ -461,7 +461,7 @@ function FormPage () {
                                         <Space dir="h" align="center">
                                             <Input type="cascader" data={cascaderData} />
                                             <Button onClick={() => {
-                                                form.cascader = ['beijing','gugong'];
+                                                form.cascader = ['beijing', 'gugong'];
                                                 console.log(form.getFormData());
                                             }}>改变</Button>
                                         </Space>
@@ -575,9 +575,9 @@ function FormPage () {
                                     </FormItem>
                                 </Col>
                                 <Col grid={0.33}>
-                                    <FormItem label="地点：" name="tree">
+                                    <FormItem label="地点：" name="tree" labelAlign="start" labelStyle={{'margin-top': '8px'}}>
                                         <Space dir="h" align="center">
-                                            <Input type="treeSelect" data={data3} multi/>
+                                            <Input type="treeSelect" data={data3} multi />
                                             <Button onClick={() => {
                                                 form.tree = ['2_1'];
                                                 console.log(form.getFormData());
@@ -637,10 +637,10 @@ function FormPage () {
                             、<Text code>Search</Text>、<Text code>Textarea</Text>、<Text code>AutoComplete</Text>、<Text code>Cascader</Text>
                             、<Text code>Datepicker</Text>、<Text code>Timepicker</Text>、<Text code>Progress</Text>、<Text code>Rate</Text>
                             、<Text code>Slider</Text>、<Text code>Spinner</Text>、<Text code>Switch</Text>、<Text code>Transfer</Text>、<Text code>TreeSelect</Text>
-                            、<Text code>Upload</Text><br/>
+                            、<Text code>Upload</Text><br />
                             form绑定数据使用useForm创建对象并传递给From， useForm 包含 data validation 和 messages 参数，data 中的数据字段和FormItem的name对应
                         </Paragraph>
-                        <DemoCode data={codes['form_fields']}/>
+                        <DemoCode data={codes['form_fields']} />
                     </Card>
                 </Space>
 
@@ -658,7 +658,7 @@ function FormPage () {
             </Space>
         </div>
 
-        <CompAnchor data={anchorData}/>
+        <CompAnchor data={anchorData} />
     </>
 }
 export default FormPage;

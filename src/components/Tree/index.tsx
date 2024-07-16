@@ -1,284 +1,240 @@
-import type { Signal} from "solid-js";
-import { Show, batch, createContext, createEffect, createMemo, untrack, useContext } from "solid-js";
-import { createStore, produce } from "solid-js/store";
-import createModel from "../utils/createModel";
-import { useClassList } from "../utils/useProps";
-import Datum from "./Datum";
-import { SubNodes } from "./SubNodes";
-import { Dropdown } from "../Dropdown";
+import { VirtualList } from '../virtual-list';
+import { Node } from './Node';
+import type { Signal} from 'solid-js';
+import { createContext, createEffect, createSignal, Show, useContext, type JSXElement } from 'solid-js';
+import type { TreeCheckMod, TreeNode} from './store';
+import { TreeStore } from './store';
+import { Dropdown } from '../Dropdown';
+import { useStyle } from '../utils/useProps';
 
-export type TreeProps = {
-    classList?: any,
-    class?: string,
-    style?: any,
-    data?: any[],
-    onSelect?: (data: any) => void,
-    opened?: any[],
-    selected?: string | number | Signal<any>,
-    ref?: any,
-    gutter?: number,
-    value?: any[],
-    multi?: boolean,
-    directory?: boolean,
-    onChange?: (vals: any) => void,
-    loadData?: (data: any) => any,
-    onContextMenu?: (data: any) => void,
-    contextMenu?: any,
-    onSelectMenu?: ((name: string) => void),
-    checkRelation?: 'related'|'unRelated'
+export * from './store';
+
+export type NodeKeyType = string | number
+
+export interface TreeContextProps {
+    onOpenClose: (node: any) => void
+    onNodeSelect: (node: any) => void
+    store: any, // 存储树状结构的数据
+    draggable?: boolean
+    checkable: boolean
+    directory?: boolean
+    contextMenu?: JSXElement
+    selectedClass?: string;
+    dragHoverClass?: string;
+    draggingClass?: string;
+    onContextMenu?: (data: any) => void
+    onDragStart?: (e: any, node: any) => void
+    onDragEnter?: (e: any, node: any, hoverPart: dragHoverPartEnum) => void
+    onDragOver?: (e: any, node: any, hoverPart: dragHoverPartEnum) => void
+    onDragLeave?: (e: any, node: any, hoverPart: dragHoverPartEnum) => void
+    onDrop: (e: any, targetKey: NodeKeyType, dropPosition: dragHoverPartEnum) => void
+    onNodeCheck: (node: NodeKeyType | TreeNode, checked: boolean) => void
+    customIcon?: (node: TreeNode) => JSXElement;
+    arrowIcon?: () => JSXElement;
 }
 
-const TreeContext = createContext();
+export interface TreeInstanceProps {
+    prepend: (parentKey: NodeKeyType, nodeId: NodeKeyType|TreeNode) => void
+    append: (parentKey: NodeKeyType, nodeId: NodeKeyType|TreeNode) => void
+    insertBefore: (targetKey: NodeKeyType, nodeId: NodeKeyType|TreeNode) => void
+    insertAfter: (targetKey: NodeKeyType, nodeId: NodeKeyType|TreeNode) => void
+    getNode: (nodeId: NodeKeyType) => TreeNode
+    remove: (nodeId: NodeKeyType|TreeNode) => void
+    filter: (keyword: string, filterMethod: any) => void
+    expandAll: () => void
+    collapseAll: () => void
+    expandNode: (nodeId: TreeNode | NodeKeyType, expand: boolean) => Promise<void>
+    scrollTo: (nodeId: TreeNode | NodeKeyType, position : 'top'|'center'|'bottom') => void
+    rename: (nodeId: TreeNode | NodeKeyType, title: string) => void
+    checkNode: (node: TreeNode | NodeKeyType, checked: boolean) => void
+    checkAll: () => void
+    uncheckAll: () => void
+    loadData: (nodeId: TreeNode | NodeKeyType, loadDataMethod: (node: TreeNode) => Promise<TreeNode[]>) => void
+    selectNode: (nodeId: NodeKeyType | TreeNode, silence?: boolean) => void
+    getChecked: (mode: TreeCheckMod) => TreeNode[]
+    getCheckedKeys: (mode: TreeCheckMod) => NodeKeyType[]
+}
+
+export interface TreeProps {
+    emptyText?: string;
+    data: TreeNode[];
+    checkable?: boolean;
+    checkRelation?: 'related' | 'unRelated';
+    directory?: boolean;
+    contextMenu?: JSXElement;
+    onContextMenu?: (data: TreeNode) => void;
+    onNodeCheck?: (node: NodeKeyType | TreeNode, checked: boolean) => void;
+    onNodeSelect?: (node: TreeNode) => void;
+    onOpenClose?: (node: NodeKeyType | TreeNode) => void;
+    ref?: any;
+    draggable?: boolean;
+    style?: any;
+    class?: string;
+    classList?: any;
+    loadData?: (node: NodeKeyType | TreeNode) => Promise<any>;
+    beforeDropMethod?: (node: TreeNode, dragNode: TreeNode, hoverPart: dragHoverPartEnum) => Promise<boolean>;
+    beforeExpand?: (node: TreeNode, expand: boolean) => Promise<boolean>;
+    onNodeDrop?: (e: any, node: TreeNode, dragNode: TreeNode, hoverPart: dragHoverPartEnum) => void;
+    onNodeDragStart?: (e: any, node: TreeNode) => void;
+    onNodeDragEnter?: (e: any, node: any, hoverPart: dragHoverPartEnum) => void
+    onNodeDragOver?: (e: any, node: any, hoverPart: dragHoverPartEnum) => void
+    onNodeDragLeave?: (e: any, node: any, hoverPart: dragHoverPartEnum) => void
+    onSelectMenu?: (name: string) => void;
+    onNodeExpand?: (node: TreeNode) => void;
+    onNodeCollapse?: (node: TreeNode) => void;
+    onChange?: (value: NodeKeyType[]) => void;
+    selected?: NodeKeyType | Signal<NodeKeyType>;
+    value?: NodeKeyType[] | Signal<NodeKeyType[]>;
+    keyField?: string;
+    titleField?: string;
+    selectedClass?: string;
+    dragHoverClass?: string;
+    draggingClass?: string;
+    customIcon?: (node: TreeNode) => JSXElement;
+    arrowIcon?: () => JSXElement;
+    mode?: TreeCheckMod;
+}
+
+export enum dragHoverPartEnum {
+    before = 'before',
+    body = 'body',
+    after = 'after'
+}
+
+export const TreeContext = createContext<TreeContextProps>({} as TreeContextProps);
+export const useTreeContext = () => useContext(TreeContext);
 
 export function Tree (props: TreeProps) {
-    const classList = () => useClassList(props, 'cm-tree');
-    const [value, setValue] = createModel(props, 'value', '');
-    const [opened, setOpened] = createModel<any[]>(props, 'opened', []);
-    const [selected, setSelected] = createModel(props, 'selected', '');
-    const gutter = props.gutter ?? 24;
-    const checkRelation = props.checkRelation ?? 'related';
-
-    let datum: any = new Datum({
-        value: value() || [],
-        checkRelation,
-        data: props.data
-    });
+    let vir: any;
+    const [visible, setVisible] = createSignal<boolean>(false);
+    const emptyText = props.emptyText ?? '暂无数据';
+    const treeStore = new TreeStore(props);
+    const store = treeStore.getStore();
 
     createEffect(() => {
-        datum = new Datum({
-            value: [],
-            checkRelation,
-            data: props.data
-        });
-
-        batch(() => {
-            setStore('data', props.data);
-            setStore('dataMap', datum.dataMap);
-            setStore('selected', '');
-            setStore('openIds', []);
-            setStore('checkedMap', {...datum.valueMap});
-        });
-        untrack(() => {
-            // setSelected(selected() || '');
-        })
+        treeStore.init(props.data);
     })
 
-    const [store, setStore] = createStore({
-        data: props.data,
-        dataMap: datum.dataMap,
-        selected: '',
-        openIds: [],
-        checkedMap: {...datum.valueMap}
-    } as any);
+    const onNodeCheck = (node: TreeNode | NodeKeyType, checked: boolean) => {
+        treeStore.checkNode(node, checked);
+        props.onNodeCheck && props.onNodeCheck(node, checked);
+    }
 
-    /**
-     * 打开某个id
-     * @param id
-     */
-    const openNode = (id: any) => {
-        const openIds = opened();
-        if (!openIds.includes(id)) {
-            openIds.push(id);
-            setOpened([...openIds]);
+    const onNodeExpandCollapse = async (node: TreeNode) => {
+        const valid = props.beforeExpand ? await props.beforeExpand(node, !node.expand) : true;
+        if (!valid) {
+            return;
         }
-    }
-
-    const closeNode = (id: any) => {
-        const openIds = opened();
-        if (openIds.includes(id)) {
-            const index = openIds.indexOf(id);
-            openIds.splice(index, 1);
-            setOpened(openIds);
+        if (node.loading && props.loadData) {
+            await treeStore.loadData(node, props.loadData);
         }
-    }
-
-    const checkNode = (id: any, checked: boolean) => {
-        datum.set(id, checked ? 1 : 0, '');
-        const vals = datum.getAllChecked();
-        setValue(vals);
-    }
-
-    // 展开控制
-    createEffect(() => {
-        const openIds = opened();
-
-        untrack(() => {
-            store.openIds.forEach((lastOpenId: any) => {
-                if (!openIds.includes(lastOpenId)) {
-                    setStore('dataMap', lastOpenId, produce((item: any) => {
-                        if (item._opened) {
-                            item._opened = false;
-                        }
-                    }))
-                }
-            })
-        })
-
-        openIds.forEach((openId: any) => {
-            setStore('dataMap', openId, produce((item: any) => {
-                if (!item._opened) {
-                    item._opened = true;
-                }
-            }))
-        })
-        setStore('openIds', openIds.concat([]));
-    });
-
-    // 选择控制
-    createEffect(() => {
-        const selectedId = selected();
-        setStore('dataMap', store.selected, produce((item: any) => {
-            item._selected = false;
-        }))
-        setStore('dataMap', selectedId, produce((item: any) => {
-            item._selected = true;
-        }))
-        setStore('selected', selectedId);
-    });
-
-    // 选择框选择
-    createEffect(() => {
-        let vals: any = value();
-        if (props.multi && typeof vals === 'string') {
-            vals = vals.split(',');
-        }
-
-        datum.setValue(vals);
-        const all = datum.getAllChecked();
-
-        const lastChecked: any[] = [];
-        untrack(() => {
-            for (const i in store.checkedMap) {
-                if (store.checkedMap[i] && !vals.includes(i)) {
-                    lastChecked.push(i);
-                }
-            }
-        })
-        lastChecked.forEach((lastChecked: any) => {
-            setStore('checkedMap', lastChecked, datum.valueMap[lastChecked]);
-        })
-
-        all && all.forEach((val: string | number) => {
-            setStore('checkedMap', val, datum.valueMap[val]);
-        })
-    });
-
-    const onOpenClose = (id: any) => {
-        const openIds = opened();
-        if (openIds.includes(id)) {
-            const index = openIds.indexOf(id);
-            openIds.splice(index, 1);
-        } else {
-            openIds.push(id);
-        }
-        setOpened([...openIds]);
-    }
-
-    const onSelect = (data: any) => {
-        setSelected(data.id);
-        props.onSelect && props.onSelect(data);
-    }
-
-    const selectNode = (id: any) => {
-        setSelected(id);
-    }
-
-    // 选择框选中修改value值
-    const onChecked = (id: any, checked: boolean) => {
-        datum.set(id, checked ? 1 : 0, '');
-        const vals = datum.getAllChecked();
-        setValue(vals);
-        props.onChange && props.onChange(vals);
-    }
-
-    /**
-     * 动态添加子节点
-     * @param id
-     * @param item
-     * @param children
-     */
-    const addChildren = (id: any, item: any, children: any[]) => {
-        const aitem = store.dataMap[id];
-        if (aitem) {
-            datum.addChildren(id, children);
-            datum.set(id, 0, '');
-            const vals = datum.getAllChecked();
-            setValue(vals);
-            setStore('dataMap', id, produce((node: any) => {
-                node.children = [];
-                setTimeout(() => {
-                    node.children = children;
-                });
-            }));
-
-            setStore('dataMap', produce((map: any) => {
-                children.map((child: any) => {
-                    map[child.id] = child;
-                });
-            }))
-        }
-    }
-
-    const cancelLoading = (id: any) => {
-        setStore('dataMap', id, 'loading', false);
-    }
-
-    /**
-     * 获取选中的节点
-     * @returns
-     */
-    const getSelectNode = () => {
-        return store.dataMap[store.selected];
+        treeStore.expandNode(node, !node.expand);
     }
 
     props.ref && props.ref({
-        openNode,
-        closeNode,
-        checkNode,
-        getAllChecked: () => {
-            return datum.getValue(0)
+        prepend: treeStore.prepend,
+        append: treeStore.append,
+        insertBefore: treeStore.insertBefore,
+        insertAfter: treeStore.insertAfter,
+        getNode: treeStore.getNode,
+        remove: treeStore.remove,
+        filter: treeStore.filter,
+        expandAll: treeStore.expandAll,
+        collapseAll: treeStore.collapseAll,
+        expandNode: async (nodeId: TreeNode | NodeKeyType, expand: boolean) => {
+            const node = treeStore._getNode(nodeId);
+            if (!node) return;
+            if (node.expand !== expand) {
+                onNodeExpandCollapse(node);
+            }
         },
-        getAllCheckedData: (ids: any[]) => {
-            return datum.getAllCheckedData(ids);
+        scrollTo: (nodeId: TreeNode | NodeKeyType, position : 'top'|'center'|'bottom' = 'top') => {
+            const index = treeStore.getNodeIndexInShow(nodeId);
+            const nodeHeight = 22;
+            let top = index * nodeHeight;
+            if (position === 'center') {
+                top = top - vir.getScrollElement().getBoundingClientRect().height / 2 + nodeHeight / 2;
+            }
+            if (position === 'bottom') {
+                top = top - vir.getScrollElement().getBoundingClientRect().height + nodeHeight;
+            }
+            vir.getScrollElement().scrollTo({top, behavior: 'smooth'});
         },
-        getHalfChecked: () => {
-            return datum.getValue(1)
+        rename: treeStore.rename,
+        checkNode: onNodeCheck,
+        checkAll: treeStore.checkAll,
+        uncheckAll: treeStore.uncheckAll,
+        loadData: (nodeId: TreeNode | NodeKeyType, loadDataMethod: (node: TreeNode) => Promise<TreeNode[]>) => {
+            const node = treeStore._getNode(nodeId);
+            if (!node) return;
+            treeStore.loadData(node, loadDataMethod);
         },
-        getChildChecked: () => {
-            return datum.getValue(2)
-        },
-        getShallowChecked: () => {
-            return datum.getValue(3)
-        },
-        getText: (ids: any[]) => {
-            return datum.getText(ids);
-        },
-        disabledNode: datum.disabledNode,
-        selectNode,
-        getSelectNode,
-        setValue: (ids: any) => {
-            setValue(ids);
-        },
-        getIfSets: (ids: any[]) => {
-            return datum.ifSets(ids)
-        }
-    });
+        selectNode: treeStore.selectNode,
+        getChecked: treeStore.getChecked,
+        getCheckedKeys: treeStore.getCheckedKeys,
+    })
 
-    return <TreeContext.Provider value={{signal: [store, setStore], onSelect , onOpenClose, onChecked,
-        loadData: props.loadData, addChildren, cancelLoading, onContextMenu: props.onContextMenu,
-        contextMenu: props.contextMenu}}>
+    const handleDrop = async (e: any, targetKey: NodeKeyType, hoverPart: dragHoverPartEnum) => {
+        if (e.dataTransfer) {
+            try {
+                const node: TreeNode = treeStore._getNode(targetKey);
+                const dragNodeKey = e.dataTransfer.getData('node');
+                const dragNode: TreeNode = treeStore._getNode(dragNodeKey);
+                const shouldDrop: boolean = props.beforeDropMethod ? await props.beforeDropMethod(
+                    node,
+                    dragNode,
+                    hoverPart
+                ) : true;
+
+                if (shouldDrop) {
+                    if (targetKey === dragNodeKey) return
+                    if (hoverPart === dragHoverPartEnum.before) {
+                        treeStore.insertBefore(targetKey, dragNodeKey);
+                        // 如果是拖拽到父节点，并且父节点是展开的，则不管 hoverPart 是不是 after 都拖入为子节点
+                    } else if (hoverPart === dragHoverPartEnum.body || node.expand) {
+                        treeStore.prepend(targetKey, dragNodeKey)
+                    } else if (hoverPart === dragHoverPartEnum.after) {
+                        treeStore.insertAfter(targetKey, dragNodeKey)
+                    }
+                    props.onNodeDrop?.(e, node, dragNode, hoverPart);
+                }
+            } catch (err: any) {
+                throw new Error(err)
+            }
+        }
+    }
+
+    const style = () => useStyle(props, {});
+
+    return <TreeContext.Provider value={{onOpenClose: onNodeExpandCollapse, onNodeSelect: treeStore.selectNode,
+        store: treeStore, draggable: props.draggable, checkable: props.checkable || false, onDrop: handleDrop,
+        directory: props.directory, onContextMenu: props.onContextMenu, contextMenu: props.contextMenu,
+        onNodeCheck: onNodeCheck, onDragStart: props.onNodeDragStart, onDragEnter: props.onNodeDragEnter,
+        onDragLeave: props.onNodeDragLeave, onDragOver: props.onNodeDragOver, selectedClass: props.selectedClass,
+        dragHoverClass: props.dragHoverClass, draggingClass: props.draggingClass, customIcon: props.customIcon,
+        arrowIcon: props.arrowIcon}}>
         <Show when={props.contextMenu} fallback={
-            <div classList={classList()}>
-                <SubNodes store={store} data={store.data} level={0} gutter={gutter} multi={props.multi} directory={props.directory}/>
+            <div class="cm-tree" style={style()}>
+                <Show when={props.data && props.data.length} fallback={
+                    <div class="cm-tree-empty">{emptyText}</div>
+                }>
+                    <VirtualList ref={vir} items={store.nodeList} itemEstimatedSize={22} itemComponent={{component: NodeWrap, props: {}}} />
+                </Show>
             </div>
         }>
-            <Dropdown trigger="contextMenu" handler=".cm-tree-text" align="bottomLeft" menu={props.contextMenu} onSelect={props.onSelectMenu}>
-                <div classList={classList()}>
-                    <SubNodes store={store} data={store.data} level={0} gutter={gutter} multi={props.multi} directory={props.directory}/>
-                </div>
-            </Dropdown>
+            <Show when={props.data && props.data.length} fallback={
+                <div class="cm-tree-empty">{emptyText}</div>
+            }>
+                <Dropdown visible={[visible, setVisible]} transfer trigger="contextMenu" handler=".cm-tree-text" align="bottomLeft" menu={props.contextMenu} onSelect={props.onSelectMenu}>
+                    <div class="cm-tree" style={style()}>
+                        <VirtualList onScroll={() => setVisible(false)} ref={vir} items={store.nodeList} itemEstimatedSize={22} itemComponent={{component: NodeWrap, props: {}}} />
+                    </div>
+                </Dropdown>
+            </Show>
         </Show>
     </TreeContext.Provider>
 }
 
-export const useTreeContext = () => useContext(TreeContext);
+const NodeWrap = (props: any) => {
+    return <Node data={props.item} ref={props.ref}/>
+}

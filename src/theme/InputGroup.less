@@ -1,0 +1,40 @@
+.cm-input-group {
+    display: inline-flex;
+    align-items: center;
+}
+
+.cm-input-compact-item:not(.cm-input-compact-last-item):not(.cm-input-compact-first-item),
+.cm-input-compact-item:not(.cm-input-compact-last-item):not(.cm-input-compact-first-item) .cm-field-value {
+    border-start-end-radius: 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+}
+
+.cm-input-compact-item:not(.cm-input-compact-last-item).cm-input-compact-first-item,
+.cm-input-compact-item:not(.cm-input-compact-last-item).cm-input-compact-first-item .cm-field-value {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+}
+
+.cm-input-compact-item:not(.cm-input-compact-first-item).cm-input-compact-last-item,
+.cm-input-compact-item:not(.cm-input-compact-first-item).cm-input-compact-last-item .cm-field-value {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+}
+
+.cm-input-compact-item:not(.cm-input-compact-last-item),
+.cm-input-compact-item:not(.cm-input-compact-last-item) .cm-field-value {
+    margin-inline-end: -1px;
+}
+
+.cm-input-compact-item:hover,
+.cm-input-compact-item:focus,
+.cm-input-compact-item:focus-within,
+.cm-input-compact-item:active {
+    z-index: 2;
+}
+
+.cm-input-compact-item:not(.cm-spinner):not(.cm-button.cm-button-empty):not(.cm-button.cm-button-icon-only) {
+    width: auto;
+}

@@ -116,3 +116,6 @@ dist-doc
 .yarn/install-state.gz
 .pnp.*
 .history
+
+
+dist-jsx/

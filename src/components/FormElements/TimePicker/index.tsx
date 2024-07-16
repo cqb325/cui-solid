@@ -3,7 +3,7 @@ import { Value } from "../../inner/Value";
 import { TimePane } from "./TimePane";
 import { TimeRange } from "./TimeRange";
 import { Dropdown } from "../../Dropdown";
-import type { JSXElement, Signal} from "solid-js";
+import type { JSXElement, Signal } from "solid-js";
 import { createContext, createEffect, createSignal, Show, useContext } from "solid-js";
 import dayjs from "dayjs";
 import createField from "../../utils/createField";
@@ -14,10 +14,10 @@ type TimePickerProps = {
     class?: any,
     type?: 'timeRange',
     disabled?: boolean,
-    theme?: 'light'|'dark',
-    size?: 'small'|'large',
+    theme?: 'light' | 'dark',
+    size?: 'small' | 'large',
     clearable?: boolean,
-    align?: 'bottomLeft'|'bottomRight',
+    align?: 'bottomLeft' | 'bottomRight',
     format?: string,
     value?: string | Date | string[] | Date[] | Signal<any>,
     prepend?: string | JSXElement,
@@ -36,7 +36,7 @@ type TimePickerProps = {
 
 const TimepickerContext = createContext();
 
-export function Timepicker (props: TimePickerProps) {
+export function Timepicker(props: TimePickerProps) {
     const [value, setValue] = createField<any>(props, props.type === 'timeRange' ? [] : '');
     // 内部value，防止类似form调用的setValue后重复执行effect
     const [v, setV]: any[] = createSignal(value());
@@ -49,8 +49,7 @@ export function Timepicker (props: TimePickerProps) {
         'cm-time-picker-disabled': props.disabled,
         [`cm-time-picker-${props.theme}`]: props.theme,
         [`cm-time-picker-${props.size}`]: props.size,
-        'cm-time-picker-clearable': !props.disabled && props.clearable && (value() !== '' && value().length !== 0),
-        'cm-time-picker-open': open
+        'cm-time-picker-clearable': !props.disabled && props.clearable && (value() !== '' && value().length !== 0)
     });
 
     createEffect(() => {
@@ -154,23 +153,23 @@ export function Timepicker (props: TimePickerProps) {
         return '';
     }
 
-    return <TimepickerContext.Provider value={{onSelect, disabledTime: props.disabledTime, visible}}>
+    return <TimepickerContext.Provider value={{ onSelect, disabledTime: props.disabledTime, visible }}>
         <div classList={classList()} x-placement={align} tabIndex="1">
             <Dropdown transfer={props.transfer} align={align} trigger="click"
                 disabled={props.disabled} visible={[visible, setVisible]} menu={<div class="cm-time-picker-wrap">
-                <Show when={props.type === 'timeRange'} fallback={
-                    <TimePane value={v()} format={format} minuteStep={props.minuteStep} secondStep={props.secondStep}
-                        hourStep={props.hourStep} header={header} footer={props.footer}/>
-                }>
-                    <TimeRange value={v()} format={format} minuteStep={props.minuteStep} secondStep={props.secondStep}
-                        hourStep={props.hourStep} header={header} footer={props.footer}/>
-                </Show>
-            </div>}>
+                    <Show when={props.type === 'timeRange'} fallback={
+                        <TimePane value={v()} format={format} minuteStep={props.minuteStep} secondStep={props.secondStep}
+                            hourStep={props.hourStep} header={header} footer={props.footer} />
+                    }>
+                        <TimeRange value={v()} format={format} minuteStep={props.minuteStep} secondStep={props.secondStep}
+                            hourStep={props.hourStep} header={header} footer={props.footer} />
+                    </Show>
+                </div>}>
                 <Show when={!props.trigger} fallback={props.trigger && props.trigger()}>
                     {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
                         clearable={props.clearable} type={props.type} seperator={seperator}/> */}
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name="clock"/>}/>
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name="clock" />} />
                 </Show>
             </Dropdown>
         </div>

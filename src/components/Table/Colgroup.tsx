@@ -11,10 +11,7 @@ export function Colgroup (props: ColgroupProps) {
     return <colgroup class="cm-table-colgroup">
         <For each={props.data.columns}>
             {(col: ColumnProps, index: Accessor<number>) => {
-                const style = () => ({
-                    width: col.width
-                });
-                return <col class="cm-table-col" style={style()}/>
+                return <col class="cm-table-col" width={col._width}/>
             }}
         </For>
     </colgroup>

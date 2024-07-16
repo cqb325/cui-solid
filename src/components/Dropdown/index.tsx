@@ -1,6 +1,6 @@
-import type { Signal} from "solid-js";
-import { createComputed, createContext, createSignal, onCleanup, onMount, Show, useContext } from "solid-js";
-import { Portal } from "solid-js/web";
+import type { Signal } from "solid-js";
+import { createComputed, createContext, createSignal, createUniqueId, onCleanup, onMount, Show, useContext } from "solid-js";
+import { isServer, Portal } from "solid-js/web";
 import { useClassList } from "../utils/useProps";
 import createModel from "../utils/createModel";
 import usePortal from "../utils/usePortal";
@@ -8,6 +8,7 @@ import useAlignPostion from "../utils/useAlignPostion";
 import { useClickOutside } from "../utils/useClickOutside";
 import usezIndex from "../utils/usezIndex";
 import { useTransition } from "../utils/useTransition";
+import { useMoveObserver } from "../utils/useMoveObserver";
 
 export * from './DropdownMenu';
 export * from './DropdownItem';
@@ -17,27 +18,29 @@ const DropdownContext = createContext();
 export const useDropdownConext = () => useContext(DropdownContext);
 
 type DropdownProps = {
-    trigger?: 'hover'|'click'|'contextMenu'|'custom',
-    align?: 'bottom'|'bottomLeft'|'bottomRight'|'right'|'left'|'rightTop'|'leftTop',
-    classList?:any,
-    class?:any,
-    style?:any,
+    trigger?: 'hover' | 'click' | 'contextMenu' | 'custom',
+    align?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'right' | 'left' | 'rightTop' | 'leftTop',
+    classList?: any,
+    class?: any,
+    style?: any,
     onSelect?: (name: string) => void,
     children: any,
     menu?: any,
-    visible?: boolean|Signal<any>,
+    visible?: boolean | Signal<any>,
     transfer?: boolean,
-    theme?: 'dark'|'light',
+    theme?: 'dark' | 'light',
     disabled?: boolean,
     revers?: boolean,
     handler?: string,
     fixWidth?: boolean,
+    ref?: any,
     onBeforeDrop?: (visible: boolean) => boolean,
 }
 
-export function Dropdown (props: DropdownProps){
+export function Dropdown(props: DropdownProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
     const [opened, setOpened] = createSignal(visible());
+    const [_, setUpdate] = createSignal("");
     let targetEle: any;
     let target: any;
     const trigger = props.trigger || 'hover';
@@ -51,15 +54,23 @@ export function Dropdown (props: DropdownProps){
         [`cm-dropdown-${props.theme}`]: props.theme,
     });
 
+    let cleanup: any = null;
     const transition = useTransition({
-        el: ()=> wrap,
+        el: () => wrap,
         startClass: 'cm-dropdown-visible',
         activeClass: 'cm-dropdown-open',
         onLeave: () => {
             setOpened(false);
+            if (cleanup) {
+                cleanup();
+            }
         },
         onEnter: () => {
             setOpened(true);
+            // 监控元素移动
+            cleanup = useMoveObserver(wrap, () => {
+                setUpdate(createUniqueId());
+            });
         }
     })
 
@@ -125,7 +136,7 @@ export function Dropdown (props: DropdownProps){
             return;
         }
         if (trigger === 'hover') {
-            timer = setTimeout( () => {
+            timer = setTimeout(() => {
                 setVisible(false);
             }, 200);
         }
@@ -169,10 +180,11 @@ export function Dropdown (props: DropdownProps){
 
     const posStyle = () => {
         opened()
+        _();
         if (target && target.nextElementSibling) {
             let te = target.nextElementSibling;
             if (props.handler) {
-                te = targetEle.closest(props.handler);
+                te = targetEle?.closest(props.handler);
             }
             if (!te) {
                 return;
@@ -235,8 +247,20 @@ export function Dropdown (props: DropdownProps){
         }
     };
 
+    props.ref && props.ref({
+        update: () => {
+            setUpdate(createUniqueId())
+        }
+    })
+
+    // 响应尺寸变化更新位置
+    const onWrapEntry = async (entry: ResizeObserverEntry) => {
+        setUpdate(createUniqueId());
+    }
+
     let removeClickOutside: () => void;
     onMount(() => {
+        if (isServer) return;
         if (target.nextElementSibling) {
             if (trigger === 'hover') {
                 target.nextElementSibling.addEventListener('mouseenter', onMouseEnter, false);
@@ -260,10 +284,21 @@ export function Dropdown (props: DropdownProps){
                     setVisible(false);
                 });
             }
+
+            const ro = new ResizeObserver((entries) => {
+                entries.forEach((entry) => onWrapEntry(entry));
+            });
+            // 目标元素尺寸变化需要更新位置
+            ro.observe(target.nextElementSibling);
+            // 清除监听
+            onCleanup(() => {
+                ro.disconnect();
+            })
         }
     });
 
     onCleanup(() => {
+        if (isServer) return;
         if (target.nextElementSibling) {
             if (trigger === 'hover') {
                 target.nextElementSibling.removeEventListener('mouseenter', onMouseEnter);
@@ -279,6 +314,9 @@ export function Dropdown (props: DropdownProps){
             }
         }
         removeClickOutside && removeClickOutside();
+        if (cleanup) {
+            cleanup();
+        }
     });
 
     const onSelect = (name: string) => {
@@ -289,20 +327,20 @@ export function Dropdown (props: DropdownProps){
 
     const id = 'cm-dropdown-portal';
     return <>
-        <span ref={target} style={{display: 'none'}} />
+        <span ref={target} style={{ display: 'none' }} />
         {props.children}
         <Show when={props.transfer} fallback={
-            <DropdownContext.Provider value={{onSelect}}>
+            <DropdownContext.Provider value={{ onSelect }}>
                 <div style={posStyle()} classList={classList()} x-placement={align}
-                onMouseEnter={onMouseEnter} ref={wrap}>
+                    onMouseEnter={onMouseEnter} ref={wrap}>
                     {props.menu}
                 </div>
             </DropdownContext.Provider>
         }>
             <Portal mount={usePortal(id, id)}>
-                <DropdownContext.Provider value={{onSelect}}>
+                <DropdownContext.Provider value={{ onSelect }}>
                     <div style={posStyle()} classList={classList()} x-placement={align}
-                    onMouseEnter={onMouseEnter} ref={wrap}>
+                        onMouseEnter={onMouseEnter} ref={wrap}>
                         {props.menu}
                     </div>
                 </DropdownContext.Provider>

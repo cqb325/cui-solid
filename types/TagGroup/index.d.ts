@@ -14,6 +14,7 @@ export interface TagGroupProps {
     max?: number;
     showMore?: boolean;
     size?: 'small' | 'large';
+    extra?: JSXElement;
     onClose?(item: TagConfig, e: any): void;
 }
 export declare function TagGroup(props: TagGroupProps): import("solid-js").JSX.Element;

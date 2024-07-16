@@ -1,4 +1,4 @@
-.cm-divider{
+.cm-divider {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -9,68 +9,83 @@
     list-style: none;
     -webkit-font-feature-settings: "tnum";
     font-feature-settings: "tnum";
-    .cm-divider-text{
+
+    .cm-divider-text {
         display: inline-block;
         padding: 0 1em;
     }
 }
-.cm-divider-h{
+
+.cm-divider-h {
     display: flex;
     clear: both;
     width: 100%;
     min-width: 100%;
     margin: 20px 0;
-    .cm-divider-text{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    .cm-divider-text {
         white-space: nowrap;
     }
+
     &:after,
     &:before {
         position: relative;
         top: 50%;
         width: 50%;
-        border-top: 1px solid rgba(var(--cui-grey-9),.18);
+        border-top: 1px solid rgba(var(--cui-grey-9), .18);
         border-bottom: 0;
         transform: scaleY(0.5);
         align-self: center;
         content: "";
     }
-    &.cm-divider-dashed{
+
+    &.cm-divider-dashed {
+
         &:after,
         &:before {
             border-top-style: dashed;
         }
     }
-    &.cm-divider-left{
+
+    &.cm-divider-left {
         &:before {
             width: 8%;
         }
+
         &:after {
             width: 92%;
         }
     }
-    &.cm-divider-right{
+
+    &.cm-divider-right {
         &:before {
             width: 92%;
         }
+
         &:after {
             width: 8%;
         }
     }
 }
 
-.cm-divider-v{
+.cm-divider-v {
     position: relative;
     top: -.06em;
     display: inline-block;
     height: .9em;
     margin: 0 8px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     vertical-align: middle;
     border-top: 0;
+
     &:before {
         position: relative;
         display: block;
         height: 100%;
-        border-left: 1px solid rgba(var(--cui-grey-9),.18);
+        border-left: 1px solid rgba(var(--cui-grey-9), .18);
         transform: scaleX(0.5);
         align-self: center;
         content: "";
