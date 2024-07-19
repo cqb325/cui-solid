@@ -1,4 +1,4 @@
-import { useClassList } from "@/components/utils/useProps"
+import { useClassList } from "../../utils/useProps"
 import { children, createEffect, onMount } from "solid-js";
 
 export function InputGroup (props: any) {
