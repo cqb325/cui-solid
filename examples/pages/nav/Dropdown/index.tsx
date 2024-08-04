@@ -18,7 +18,10 @@ useDirective(hljs);
 
 export default function DropdownPage () {
     const [visible, setVisible] = createSignal(false);
-
+    const [visible1, setVisible1] = createSignal(false);
+    const [x, setX] = createSignal(0);
+    const [y, setY] = createSignal(0);
+    let area;
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -27,16 +30,27 @@ export default function DropdownPage () {
                 </Title>
                 <Space id="dropdown_base" dir="v">
                     <Card bordered>
-                        <Dropdown align="bottomLeft" menu={<DropdownMenu>
-                            <DropdownItem>驴打滚</DropdownItem>
-                            <DropdownItem>炸酱面</DropdownItem>
-                            <DropdownItem disabled>豆汁儿</DropdownItem>
-                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
+                        <Dropdown trigger="click" align="bottomLeft" gradient={['45deg', '#9B59B6', '#3498DB']}
+                            color="#ffffff"
+                            menu={<DropdownMenu>
+                            <DropdownItem icon={<Icon name="edit"/>} arrow>Edit
                                 <DropdownMenu>
-                                    <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
-                                    <DropdownItem>焖炉烤鸭</DropdownItem>
+                                    <DropdownItem>Color</DropdownItem>
+                                    <DropdownItem>Size</DropdownItem>
                                 </DropdownMenu>
                             </DropdownItem>
+                            <DropdownItem icon={<Icon name="cart"/>}>Add to Cart</DropdownItem>
+                            <DropdownItem disabled icon={<Icon name="heart"/>}>Save to Wishlist</DropdownItem>
+                            <DropdownItem divided arrow icon={<Icon name="share-2"/>}>Share
+                                <DropdownMenu>
+                                    <DropdownItem>微信</DropdownItem>
+                                    <DropdownItem>微博</DropdownItem>
+                                    <DropdownItem>短视频</DropdownItem>
+                                </DropdownMenu>
+                            </DropdownItem>
+                            <DropdownItem icon={<Icon name="copy"/>}>Copy link</DropdownItem>
+                            <DropdownItem divided icon={<Icon name="image"/>}>View image</DropdownItem>
+                            <DropdownItem icon={<Icon name="cog"/>}>Settings</DropdownItem>
                         </DropdownMenu>} onSelect={(name: string) => {
                             console.log(name);
                         }}>
@@ -230,6 +244,41 @@ export default function DropdownPage () {
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             设置 <Text code>disabled</Text> 属性可以禁用菜单
+                        </Paragraph>
+                        <DemoCode data={codes['dropdown_disabled']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="dropdown_mouse_pos" dir="v">
+                    <Card bordered>
+                        <div class="context-area" style={{width: '300px', height: '400px', background: '#f0f0f0'}}></div>
+                        <Dropdown
+                            align="bottomLeft" trigger="contextMenu" handler=".context-area"
+                            onMouseClick={(e) => {
+                                setX(e.pageX);
+                                setY(e.pageY);
+                            }}
+                            position={{x: x(), y: y()}}
+                            transfer
+                            menu={<DropdownMenu>
+                            <DropdownItem>驴打滚</DropdownItem>
+                            <DropdownItem>炸酱面</DropdownItem>
+                            <DropdownItem disabled>豆汁儿</DropdownItem>
+                            <DropdownItem divided>北京烤鸭<Icon name="chevron-right" />
+                                <DropdownMenu>
+                                    <DropdownItem name="挂炉烤鸭">挂炉烤鸭</DropdownItem>
+                                    <DropdownItem>焖炉烤鸭</DropdownItem>
+                                </DropdownMenu>
+                            </DropdownItem>
+                        </DropdownMenu>} onSelect={(name: string) => {
+                            console.log(name);
+                        }}>
+                            <div></div>
+                        </Dropdown>
+                        <Divider align="left"><Text type="primary">手动定位</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            传入position的话会根据position进行定位
                         </Paragraph>
                         <DemoCode data={codes['dropdown_disabled']}/>
                     </Card>

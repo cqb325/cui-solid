@@ -5,7 +5,7 @@ type TagProps = {
     theme?: 'primary' | 'danger' | 'warning' | 'success' | 'info' | 'magenta' | 'red' | 'volcano' | 'orange' | 'gold' | 'yellow' | 'lime' | 'green' | 'cyan' | 'blue' | 'geekblue' | 'purple';
     value?: any;
     circle?: boolean;
-    size?: 'small' | 'large';
+    size?: 'small' | 'large' | 'xlarge';
     avatar?: any;
     onBeforeClose?: (e: any) => boolean;
     onClose?: (e: any) => void;

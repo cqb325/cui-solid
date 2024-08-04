@@ -107,6 +107,8 @@ export const useTreeContext = () => useContext(TreeContext);
 export function Tree (props: TreeProps) {
     let vir: any;
     const [visible, setVisible] = createSignal<boolean>(false);
+    const [x, setX] = createSignal<number>(0);
+    const [y, setY] = createSignal<number>(0);
     const emptyText = props.emptyText ?? '暂无数据';
     const treeStore = new TreeStore(props);
     const store = treeStore.getStore();
@@ -225,7 +227,12 @@ export function Tree (props: TreeProps) {
             <Show when={props.data && props.data.length} fallback={
                 <div class="cm-tree-empty">{emptyText}</div>
             }>
-                <Dropdown visible={[visible, setVisible]} transfer trigger="contextMenu" handler=".cm-tree-text" align="bottomLeft" menu={props.contextMenu} onSelect={props.onSelectMenu}>
+                <Dropdown visible={[visible, setVisible]} transfer trigger="contextMenu" position={{x: x(), y: y()}}
+                    onMouseClick={(e) => {
+                        setX(e.pageX);
+                        setY(e.pageY + 5);
+                    }}
+                    handler=".cm-tree-text" align="bottomLeft" menu={props.contextMenu} onSelect={props.onSelectMenu}>
                     <div class="cm-tree" style={style()}>
                         <VirtualList onScroll={() => setVisible(false)} ref={vir} items={store.nodeList} itemEstimatedSize={22} itemComponent={{component: NodeWrap, props: {}}} />
                     </div>

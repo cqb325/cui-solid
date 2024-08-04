@@ -39,6 +39,7 @@ export const menuData = [
             { name: 'split', title: 'Split 面板分割', path: 'split', component: lazy(() => import('./pages/layout/Split')) },
             { name: 'skeleton', title: 'Skeleton 骨架屏', path: 'skeleton', component: lazy(() => import('./pages/layout/Skeleton')) },
             { name: 'table-style-layout', title: 'TableStyleLayout 类表格布局', path: 'table-style-layout', component: lazy(() => import('./pages/layout/TableStyleLayout')) },
+            { name: 'card', title: 'Card 卡片', path: 'card', component: lazy(() => import('./pages/layout/Card')) },
         ]
     },
     {
@@ -81,6 +82,7 @@ export const menuData = [
             { name: 'PageFooter', title: 'PageFooter 页底', path: 'pagefooter', component: lazy(() => import('./pages/view/PageFooter')) },
             { name: 'Banner', title: 'Banner 通知横幅', path: 'banner', component: lazy(() => import('./pages/view/Banner')) },
             { name: 'SideBySide', title: 'SideBySide 对比', path: 'sidebyside', component: lazy(() => import('./pages/view/SideBySide')) },
+            { name: 'Watermark', title: 'Watermark 水印', path: 'watermark', component: lazy(() => import('./pages/view/Watermark')) },
         ]
     },
     {

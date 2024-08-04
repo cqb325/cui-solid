@@ -36,8 +36,42 @@
             z-index: 1;
         }
     }
+
     .cm-card-footer {
         border-top: 1px solid var(--cui-default-border);
         padding: 10px 15px;
+    }
+
+    .cm-card-cover>* {
+        display: block;
+        width: 100%;
+    }
+
+    &.cm-card-small {
+        .cm-card-head {
+            padding: 10px;
+        }
+
+        .cm-card-body {
+            padding: 10px;
+        }
+
+        .cm-card-footer {
+            padding: 10px;
+        }
+    }
+
+    &.cm-card-large {
+        .cm-card-head {
+            padding: 18px 24px;
+        }
+
+        .cm-card-body {
+            padding: 24px;
+        }
+
+        .cm-card-footer {
+            padding: 10px 24px;
+        }
     }
 }

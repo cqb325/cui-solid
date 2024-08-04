@@ -17,7 +17,12 @@ const DropdownContext = createContext();
 
 export const useDropdownConext = () => useContext(DropdownContext);
 
-type DropdownProps = {
+export interface DropdownPosition {
+    x: number
+    y: number
+}
+
+export type DropdownProps = {
     trigger?: 'hover' | 'click' | 'contextMenu' | 'custom',
     align?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'right' | 'left' | 'rightTop' | 'leftTop',
     classList?: any,
@@ -33,7 +38,11 @@ type DropdownProps = {
     revers?: boolean,
     handler?: string,
     fixWidth?: boolean,
+    gradient?: string[],
+    color?: string,
+    position?: DropdownPosition,
     ref?: any,
+    onMouseClick?: (e: MouseEvent) => void,
     onBeforeDrop?: (visible: boolean) => boolean,
 }
 
@@ -94,8 +103,18 @@ export function Dropdown(props: DropdownProps) {
 
     // 点击显示
     const onMouseClick = (e: any) => {
-        if (!target.nextElementSibling.contains(e.target)) {
-            return false;
+        if (props.handler) {
+            const te = document.querySelector(props.handler);
+            if (!te) {
+                return;
+            }
+            if (!e.target.closest(props.handler) && !te.contains(e.target)) {
+                return;
+            }
+        } else {
+            if (!target.nextElementSibling.contains(e.target)) {
+                return false;
+            }
         }
 
         if (props.disabled) {
@@ -105,12 +124,8 @@ export function Dropdown(props: DropdownProps) {
         e.preventDefault && e.preventDefault();
         e.stopPropagation && e.stopPropagation();
         targetEle = e.target;
-        if (props.handler) {
-            const te = targetEle.closest(props.handler);
-            if (!te) {
-                return;
-            }
-        }
+        props.onMouseClick?.(e);
+
         const ret = props.onBeforeDrop && props.onBeforeDrop(visible());
         if (ret === undefined || ret) {
             setVisible(!visible());
@@ -193,6 +208,14 @@ export function Dropdown(props: DropdownProps) {
             if (!parent) {
                 return;
             }
+            if (props.position) {
+                const pos = {
+                    left: props.position.x + 'px',
+                    top: props.position.y + 'px'
+                };
+                Object.assign(pos, props.style || {});
+                return pos;
+            }
             const parentPos = parent.getBoundingClientRect();
             const pos: any = useAlignPostion(align, te);
             const originTop = pos.top;
@@ -242,6 +265,8 @@ export function Dropdown(props: DropdownProps) {
             pos.left = pos.left + 'px'
 
             pos['z-index'] = zindex;
+
+            Object.assign(pos, props.style || {});
 
             return pos;
         }
@@ -330,7 +355,7 @@ export function Dropdown(props: DropdownProps) {
         <span ref={target} style={{ display: 'none' }} />
         {props.children}
         <Show when={props.transfer} fallback={
-            <DropdownContext.Provider value={{ onSelect }}>
+            <DropdownContext.Provider value={{ onSelect, gradient: props.gradient, color: props.color }}>
                 <div style={posStyle()} classList={classList()} x-placement={align}
                     onMouseEnter={onMouseEnter} ref={wrap}>
                     {props.menu}
@@ -338,7 +363,7 @@ export function Dropdown(props: DropdownProps) {
             </DropdownContext.Provider>
         }>
             <Portal mount={usePortal(id, id)}>
-                <DropdownContext.Provider value={{ onSelect }}>
+                <DropdownContext.Provider value={{ onSelect, gradient: props.gradient, color: props.color }}>
                     <div style={posStyle()} classList={classList()} x-placement={align}
                         onMouseEnter={onMouseEnter} ref={wrap}>
                         {props.menu}

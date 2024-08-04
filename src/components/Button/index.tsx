@@ -14,6 +14,7 @@ export type ButtonProps = {
     size?: 'small'|'default'|'large',
     active?: boolean,
     circle?: boolean,
+    round?: boolean,
     disabled?: boolean,
     loading?: boolean,
     ghost?: boolean,
@@ -42,6 +43,7 @@ export const Button = (props: ButtonProps) => {
             [`cm-button-${size()}`]: size(),
             'cm-button-active': props.active,
             'cm-button-circle': props.circle,
+            'cm-button-round': props.round,
             'cm-button-icon-only': !!props.icon && !props.children,
             'cm-button-empty': !props.icon && !props.children
         });

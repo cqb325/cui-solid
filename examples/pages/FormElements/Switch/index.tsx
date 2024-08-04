@@ -14,6 +14,7 @@ import { eventsColumns, propsColumns } from "../../common/columns";
 import { anchorData, codes, eventsData, propsData } from "./config";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Icon } from "@/components";
 useDirective(hljs);
 
 export default function SwitchPage () {
@@ -31,6 +32,9 @@ export default function SwitchPage () {
                                 duration: 1
                             });
                         }}/>
+                        <Switch round={false}/>
+                        <Switch icon={<Icon name="settings" color="var(--cui-primary-color)"/>}/>
+                        <Switch size="large" icon={[<Icon name="arrow-left" size={20} color="var(--cui-color-text-2)"/>, <Icon size={20} name="arrow-right" color="var(--cui-color-text-2)"/>]}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             基础用法
@@ -43,6 +47,8 @@ export default function SwitchPage () {
                 <Space id="switch_disabled" dir="v">
                     <Card bordered>
                         <Switch disabled/>
+                        <Switch disabled size="small"/>
+                        <Switch disabled size="large"/>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         disabled 进行禁用
@@ -88,12 +94,14 @@ export default function SwitchPage () {
                     <Card bordered>
                         <Space dir="h">
                             <Switch labels={['开', '关']}/>
+                            <Switch labels={['去球场打球', '在家中休息']}/>
                             <Switch labels={['ON', 'OFF']} values={[1, 0]} onChange={(v: number) => {
                                 message.info({
                                     content: '值:' + v,
                                     duration: 1
                                 });
                             }}/>
+                            <Switch labels={['去球场打球', '在家中休息']} colors={['red', 'green']}/>
                         </Space>
                         <Divider align="left"><Text type="primary">文字和值</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">

@@ -8,6 +8,7 @@ export type ButtonProps = {
     size?: 'small' | 'default' | 'large';
     active?: boolean;
     circle?: boolean;
+    round?: boolean;
     disabled?: boolean;
     loading?: boolean;
     ghost?: boolean;

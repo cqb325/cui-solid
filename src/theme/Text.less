@@ -2,6 +2,7 @@
     color: var(--cui-color-text-0);
     font-size: var(--font-size-regular);
     line-height: 20px;
+    background-clip: text;
     mark {
         color: inherit;
         background-color: var(--cui-color-primary-light-default);
@@ -67,6 +68,9 @@
 }
 .cm-text-link {
     text-decoration: none;
+    a {
+        background-clip: text;
+    }
 }
 .cm-text-deleted {
     text-decoration: line-through;
@@ -92,7 +96,44 @@
     font-weight: 600;
     margin: 0;
     color: var(--cui-color-text-0);
+    background-clip: text;
 }
+
+.cm-typograghy-title-inline {
+    display: inline-block;
+}
+
+.cm-typograghy-title-prefix-bar {
+    padding-left: calc(var(--cm-title-prefix-gap, 16) * 1px);
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12%;
+        width: calc(var(--cm-title-prefix-width, 4) * 1px);
+        height: 76%;
+        background-color: var(--cm-title-prefix-color, var(--cui-primary-color));
+        background-image: linear-gradient(var(--cm-title-prefix-gradient));
+    }
+}
+
+.cm-typograghy-title-prefix-dot {
+    padding-left: calc(var(--cm-title-prefix-gap, 16) * 1px);
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: calc(50% - calc(var(--cm-title-prefix-width, 4) * 1px) / 2);
+        width: calc(var(--cm-title-prefix-width, 4) * 1px);
+        height: calc(var(--cm-title-prefix-width, 4) * 1px);
+        border-radius: 50%;
+        background-color: var(--cm-title-prefix-color, var(--cui-primary-color));
+        background-image: linear-gradient(var(--cm-title-prefix-gradient));
+    }
+}
+
 .cm-typograghy-h1, 
 h1.cm-typograghy-title{
     font-size: 32px;

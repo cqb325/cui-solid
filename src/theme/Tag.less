@@ -20,7 +20,7 @@
             }
         }
         .cm-tag-content{
-            border-radius: var(--cui-border-radius-small) 0 0 var(--cui-border-radius-small);
+            border-radius: var(--cui-border-radius-mini) 0 0 var(--cui-border-radius-mini);
             border-right: 0;
             &:hover{
                 opacity: 1;
@@ -36,9 +36,32 @@
             height: 24px;
             width: 24px;
         }
+        .cm-tag-badge-text {
+            padding: 0 6px;
+        }
         &.cm-tag-has-avatar {
             .cm-tag-content {
                 padding-left: 32px;
+            }
+        }
+    }
+    &.cm-tag-xlarge {
+        height: 28px;
+        .cm-tag-content {
+            padding: 4px 8px;
+            font-size: 14px;
+        }
+        .cm-avatar {
+            height: 28px;
+            width: 28px;
+        }
+        .cm-tag-badge-text {
+            padding: 0 7px;
+            font-size: 14px;
+        }
+        &.cm-tag-has-avatar {
+            .cm-tag-content {
+                padding-left: 36px;
             }
         }
     }
@@ -181,7 +204,7 @@
         top: 0;
         left: 0;
         z-index: 2;
-        border-radius: var(--cui-border-radius-small) 0 0 var(--cui-border-radius-small);
+        border-radius: var(--cui-border-radius-mini) 0 0 var(--cui-border-radius-mini);
         > * {
             line-height: 16px;
         }
@@ -205,7 +228,7 @@
     position: relative;
     z-index: 1;
     padding: 2px 8px;
-    border-radius: var(--cui-border-radius-small);
+    border-radius: var(--cui-border-radius-mini);
     // border: 1px solid rgba(var(--cui-grey-6), 0.15);
     background: rgba(var(--cui-grey-5), 0.1);
     font-size: 12px;
@@ -244,7 +267,7 @@
     height: 100%;
     background: var(--cui-primary-color-hover);
     color: #fff;
-    border-radius: 0 var(--cui-border-radius-small) var(--cui-border-radius-small) 0;
+    border-radius: 0 var(--cui-border-radius-mini) var(--cui-border-radius-mini) 0;
     transition: transform 0.25s linear;
     overflow: hidden;
     flex-direction: row;

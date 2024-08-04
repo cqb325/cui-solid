@@ -4,6 +4,7 @@ type AvatarListProps = {
     class?: string;
     size?: 'small' | 'large';
     align?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
+    gutter?: number;
     max?: number;
     excessStyle?: any;
     children?: JSXElement;

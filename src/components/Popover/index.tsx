@@ -1,4 +1,4 @@
-import { Portal } from "solid-js/web";
+import { isServer, Portal } from "solid-js/web";
 import usePortal from "../utils/usePortal";
 import useAlignPostion from "../utils/useAlignPostion";
 import { createSignal, createUniqueId, onCleanup, onMount } from "solid-js";
@@ -150,6 +150,7 @@ export function Popover (props: PopoverProps) {
     }
 
     onMount(() => {
+        if (isServer) return;
         if (inner.nextElementSibling) {
             if (trigger() === 'hover') {
                 inner.nextElementSibling.addEventListener('mouseenter', onMouseEnter, false);
@@ -165,6 +166,7 @@ export function Popover (props: PopoverProps) {
     })
 
     onCleanup(() => {
+        if (isServer) return;
         if (inner.nextElementSibling) {
             if (trigger() === 'hover') {
                 inner.nextElementSibling.removeEventListener('mouseenter', onMouseEnter);

@@ -1,4 +1,4 @@
-import type { JSXElement } from "solid-js";
+import { Show, type JSXElement } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { Icon } from "../Icon";
 
@@ -68,7 +68,9 @@ export function InnerStep (props: InnerStepProps) {
         </div>
         <div class="cm-step-main">
             <div class="cm-step-title">{props.title}</div>
-            <div class="cm-step-description">{props.description}</div>
+            <Show when={props.description}>
+                <div class="cm-step-description">{props.description}</div>
+            </Show>
         </div>
     </div>;
 }

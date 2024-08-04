@@ -137,6 +137,25 @@ const ButtonPage = () => {
                     </Card>
                 </div>
 
+                <div id="button_shaps">
+                    <Card bordered>
+                        <Space dir="h" align="center">
+                            <Button type="primary" icon={<Icon name="search1"/>}>普通按钮</Button>
+                            <Button type="primary" round icon={<Icon name="search1"/>}>圆角按钮</Button>
+                            <Button type="primary" circle icon={<Icon name="search1"/>} />
+                            <Button type="success" size="large" round>Success</Button>
+                        </Space>
+                        <Divider align="left"><Text type="primary">形状</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            通过设置<Text code>circle</Text>属性，可将按钮置为圆形
+                        </Paragraph>
+                        <Paragraph type="secondary" spacing="extended">
+                            通过设置<Text code>round</Text>属性，可将按钮置为圆角
+                        </Paragraph>
+                        <DemoCode data={codes['button_icon']}/>
+                    </Card>
+                </div>
+
                 <div id="button_icon">
                     <Card bordered>
                         <Space dir="v">

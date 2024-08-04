@@ -20,11 +20,13 @@
     &:last-child {
         width: fit-content;
         flex: none;
+
         .cm-step-title {
             &::after {
                 content: none;
             }
         }
+
         .cm-step-head {
             &::after {
                 content: none;
@@ -60,22 +62,26 @@
         color: var(--cui-color-text-1);
     }
 }
+
 .cm-steps-status-active,
-.cm-steps-status-done{
+.cm-steps-status-done {
     .cm-step-head {
         color: rgb(var(--cui-blue-4));
     }
 }
+
 .cm-steps-status-error {
     .cm-step-head {
         color: rgb(var(--cui-red-5));
     }
 }
+
 .cm-steps-status-warning {
     .cm-step-head {
         color: rgb(var(--cui-yellow-6));
     }
 }
+
 .cm-steps-status-wait {
     .cm-step-head {
         color: rgb(var(--cui-grey-5));
@@ -86,19 +92,21 @@
 .cm-step-main {
     position: relative;
 }
+
 .cm-step-main {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .cm-step-title {
-    height: 20px;
     font-size: 14px;
     color: var(--cui-color-text-2);
     font-weight: bold;
     display: inline-flex;
     flex-direction: row;
+
     &::after {
         display: block;
         content: " ";
@@ -140,6 +148,7 @@
         border-radius: 18px;
         font-size: 12px;
     }
+
     .cm-step-title {
         font-size: 13px;
     }
@@ -147,6 +156,7 @@
 
 &.cm-steps-vertical {
     flex-direction: column;
+
     .cm-steps-item {
         display: inline-flex;
         min-height: 62px;
@@ -159,10 +169,12 @@
     .cm-step-description {
         padding-bottom: 12px;
     }
+
     .cm-step-head {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         &::after {
             display: block;
             content: " ";
@@ -177,6 +189,7 @@
             clip-path: inset(5px 0);
         }
     }
+
     .cm-steps-status-done {
         .cm-step-head {
             &::after {

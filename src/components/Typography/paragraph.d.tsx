@@ -16,7 +16,13 @@ export type ParagraphProps = {
     children?: any,
     spacing?: 'extended',
     copyable?: boolean,
+    inline?: boolean,
+    prefix?: "bar"|"dot",
+    prefixWidth?: number,
+    prefixGap?: number,
+    prefixColor?: string | string[],
     style?: any,
+    gradient?: string[],
     onCopy?: () => void,
     copyText?: string,
     heading?: 1|2|3|4|5|6

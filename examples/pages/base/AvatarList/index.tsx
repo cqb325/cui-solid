@@ -45,6 +45,24 @@ export default function AvatarListPage () {
                     </Card>
                 </Space>
 
+                <Space id="avatar_gutter" dir="v">
+                    <Card bordered>
+                        <Space dir="h" align="center">
+                            <AvatarList gutter={12}>
+                                <Avatar asProps title="头像1" src={img1}/>
+                                <Avatar asProps title="头像2" src={img2}/>
+                                <Avatar asProps title="头像3" src={img3}/>
+                                <Avatar asProps title="头像4" src={img4}/>
+                            </AvatarList>
+                        </Space>
+                        <Divider align="left"><Text type="primary">间隔</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            gutter 设置元素间的间隔
+                        </Paragraph>
+                        <DemoCode data={codes['avatar_gutter']}/>
+                    </Card>
+                </Space>
+
                 <Space id="avatar_max" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">

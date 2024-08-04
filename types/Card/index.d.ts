@@ -1,3 +1,4 @@
+import type { JSXElement } from "solid-js";
 type CardProps = {
     classList?: any;
     class?: any;
@@ -5,7 +6,10 @@ type CardProps = {
     bordered?: boolean;
     rised?: boolean;
     title?: any;
+    size?: 'small' | 'default' | 'large';
+    cover?: JSXElement;
     style?: any;
+    headStyle?: any;
     bodyStyle?: any;
     footer?: any;
 };

@@ -1,6 +1,6 @@
 import { useClassList } from "../utils/useProps";
 import type { JSX, JSXElement} from 'solid-js';
-import { Match, Show, Switch, createSignal, onMount } from 'solid-js'
+import { Match, Show, Switch, createSignal, onCleanup, onMount } from 'solid-js'
 
 export interface AvatarProps {
     classList?: any,
@@ -31,24 +31,45 @@ export function Avatar (props: AvatarProps) {
         'cm-avatar-square': props.shape === 'square'
     });
 
+    const onMutate = () => {
+        string.style.Transform = '';
+        string.style.webkitTransform = '';
+        string.style.mozTransform = '';
+        const wrapW = wrap.clientWidth;
+        const strRect = string.getBoundingClientRect();
+        const strW = strRect.width;
+        const strH = 21;
+        const theta = Math.acos(strH / wrapW);
+        const w = Math.sin(theta) * wrapW;
+        const ratio = strW > wrapW ? w / strW : 1;
+        string.style.Transform = `scale(${ratio})`;
+        string.style.webkitTransform = `scale(${ratio})`;
+        string.style.mozTransform = `scale(${ratio})`;
+    }
+
     let string: any;
     let wrap: any;
+    let observer: MutationObserver | null;
 
     onMount(() => {
         if (wrap && string) {
-            string.style.Transform = '';
-            string.style.webkitTransform = '';
-            string.style.mozTransform = '';
-            const wrapW = wrap.clientWidth;
-            const strRect = string.getBoundingClientRect();
-            const strW = strRect.width;
-            const strH = 21;
-            const theta = Math.acos(strH / wrapW);
-            const w = Math.sin(theta) * wrapW;
-            const ratio = strW > wrapW ? w / strW : 1;
-            string.style.Transform = `scale(${ratio})`;
-            string.style.webkitTransform = `scale(${ratio})`;
-            string.style.mozTransform = `scale(${ratio})`;
+            onMutate();
+
+            if (MutationObserver) {
+                observer = new MutationObserver(onMutate);
+                observer.observe(string, {
+                    subtree: true,
+                    childList: true,
+                    characterData: true
+                });
+            }
+
+            onCleanup(() => {
+                if (observer) {
+                    observer?.disconnect();
+                    observer = null;
+                }
+            })
         }
     })
 

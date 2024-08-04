@@ -13,6 +13,7 @@ import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { createSignal } from "solid-js";
 import { RadioGroup } from "@/components/FormElements/RadioGroup";
+import { Link } from "@/components/Typography/Link";
 useDirective(hljs);
 
 function TextDemo () {
@@ -31,6 +32,53 @@ function TextDemo () {
                         <Title heading={4} style={{ margin: '8px 0' }}>h4. Typography Title</Title>
                         <Title heading={5} style={{ margin: '8px 0' }}>h5. Typography Title</Title>
                         <Title heading={6} style={{ margin: '8px 0' }}>h6. Typography Title</Title>
+                        <Title heading={1} style={{ margin: '8px 0' }} gradient={['-45deg', '#ff0000', '#2080f0']}>Gradient Typography Title</Title>
+                        <div>
+                        <Title heading={1} inline style={{ margin: '8px 0' }} gradient={['219deg',
+                            '#186cb8 19%',
+                            'transparent 19%','transparent 20%',
+                            '#2a9a9f 20%', '#2a9a9f  39%',
+                            'transparent 39%','transparent 40%',
+                            '#f1b211 40%','#f1b211 59%' ,
+                            'transparent 59%','transparent 60%',
+                            '#e83611 60%', '#e83611 79%',
+                            'transparent 79%', 'transparent 80%',
+                            '#f9002f 80%']}>Gradient Typography Title</Title>
+                        </div>
+                        <Title style={{ margin: '8px 0' }} inline>h1. Inline Typography Title</Title>
+                        <div>
+                            <Title heading={3} style={{ margin: '8px 0' }} inline prefix="bar" gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={3} style={{ margin: '8px 0' }} inline prefix="bar" prefixWidth={2} gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="bar" gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="bar" prefixColor='#ff0000' gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="bar" prefixColor={['-45deg', '#ff0000', '#2080f0']} gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="bar" prefixGap={24} gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={3} style={{ margin: '8px 0' }} inline prefix="dot" gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Dot</Title>
+                        </div>
+                        <div>
+                            <Title heading={3} style={{ margin: '8px 0' }} inline prefix="dot" prefixWidth={6} gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Dot</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="dot" prefixColor='#ff0000' gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="dot" prefixColor={['-45deg', '#ff0000', '#2080f0']} gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
+                        <div>
+                            <Title heading={6} style={{ margin: '8px 0' }} inline prefix="dot" prefixGap={24} gradient={['-45deg', '#ff0000', '#2080f0']}>中文Typography Title With Bar</Title>
+                        </div>
                         <Divider align="left"><Text type="primary">标题</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             各个级别的标题
@@ -40,7 +88,7 @@ function TextDemo () {
                 </Space>
                 <Space id="typography_text" dir="v">
                     <Card bordered>
-                        <Space dir="v">
+                        <Space dir="v" inline>
                             <Text>Text</Text>
                             <Text type="primary">Primary</Text>
                             <Text type="secondary">Secondary</Text>
@@ -55,10 +103,13 @@ function TextDemo () {
                             <Text deleted>Deleted</Text>
                             <Text strong>Strong</Text>
                             <Text link="http://www.baidu.com">链接</Text>
+                            <Link icon={<Icon name="link"/>}>Link</Link>
+                            <Link icon={<Icon name="link"/>} strong gradient={['45deg', '#9B59B6', '#3498DB']}>Link Gradient</Link>
                             <Text icon={<Icon name="link"/>} strong underline link="http://www.baidu.com">链接</Text>
                             <Text size="small">Small</Text>
                             <Text size={size()}>Normal</Text>
                             <Text size="large">Large</Text>
+                            <Text size="large" strong gradient={['45deg', '#9B59B6', '#3498DB']}>Gradient Color</Text>
                             <RadioGroup stick value={[size, setSize]} data={[{label: 'Small', value: 'small'}, {label: 'Default', value: ''}, {label: 'Large', value: 'large'}]}
                                 onChange={(v: string) => {
                                     setSize(v);

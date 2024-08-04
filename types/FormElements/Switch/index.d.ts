@@ -1,3 +1,4 @@
+import { JSXElement } from "solid-js";
 type SwitchProps = {
     size?: 'small' | 'default' | 'large';
     disabled?: boolean;
@@ -8,6 +9,9 @@ type SwitchProps = {
     checked?: any;
     labels?: any[];
     values?: any[];
+    round?: boolean;
+    icon?: JSXElement | JSXElement[];
+    colors?: string[];
     onBeforeChange?: (currentStatus: boolean) => Promise<boolean>;
     onChange?: (value: any) => void;
     loading?: boolean;

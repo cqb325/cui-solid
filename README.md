@@ -12,13 +12,13 @@ CUI-SOLID
 [![CUI SolidJS](https://img.shields.io/npm/v/cui-solid.svg?style=flat-square)](https://www.npmjs.org/package/cui-solid)
 [![NPM downloads](https://img.shields.io/npm/dm/cui-solid.svg?style=flat-square)](https://npmjs.org/package/cui-solid)
 [![NPM downloads](https://img.shields.io/npm/dt/cui-solid.svg?style=flat-square)](https://npmjs.org/package/cui-solid)
-![JS gzip size](https://img.badgesize.io/https:/unpkg.com/cui-solid/dist/cui.min.esm.js?label=gzip%20size%3A%20JS&compression=gzip&style=flat-square)
-![CSS gzip size](https://img.badgesize.io/https://unpkg.com/cui-solid/dist/styles/cui.css?compression=gzip&label=gzip%20size:%20CSS&style=flat-square)
+![JS gzip size](https://img.shields.io/bundlejs/size/cui-solid?label=gzip%20JS%20&style=flat-square)
+![CSS gzip size](https://img.badgesize.io/https://gitee.com/cqb325/cui-solid/blob/master/dist/styles/cui.css?compression=gzip&label=gzip%20size%20CSS&style=flat-square)
 
 ## Docs
 
-[documents on github](https://cqb325.github.io/cui-solid-doc 'cui-solid-doc')
-[documents](https://cui-solid.vercel.app/ 'cui-solid')
+[documents on vercel](https://cui-solid.vercel.app/ 'cui-solid')
+
 [documents 国内](https://cui.cqb325.cn/ 'cui-solid')
 
 ## Repository
@@ -43,6 +43,21 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+
+    v1.0.3
+    1、Button 支持round属性
+    2、Card支持size和cover属性
+    3、DropdownMenu支持背景色和字体颜色、支持自定义位置
+    4、修复tree右键菜单显示位置问题
+    5、Text、Title、Link支持渐变色
+    6、Tag添加xlarge的尺寸
+    7、Title支持inline模式和添加前缀
+    8、Switch支持自定义图标和底色，支持方形，large尺寸修改
+
+    v1.0.2
+    1、添加Watermark组件
+    2、添加Link组件
+
     v1.0.1
     1、fix: export new components
     

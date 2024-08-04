@@ -1,6 +1,6 @@
 {
   "name": "cui-solid",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "An UI component library and front-end solution based on solidjs",
   "type": "module",
   "author": "cqb325",

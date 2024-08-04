@@ -14,6 +14,8 @@ import { propsData, anchorData, eventsData, codes } from "./config";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Input } from "@/components";
+import { createSignal } from "solid-js";
 useDirective(hljs);
 
 function AvatarDemo () {
@@ -25,6 +27,7 @@ function AvatarDemo () {
         'align-items': 'center',
         'justify-content': 'center',
     };
+    const [value, setValue] = createSignal('Name');
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -69,11 +72,12 @@ function AvatarDemo () {
                         <Space dir="h" align="center">
                             <Avatar icon={<Icon name="settings"/>} />
                             <Avatar>A</Avatar>
-                            <Avatar>Name</Avatar>
+                            <Avatar>{value()}</Avatar>
                             <Avatar src={img} />
                             <Avatar style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>U</Avatar>
                             <Avatar style={{'background-color': 'rgb(135, 208, 104)'}} icon={<Icon name="settings"/>} />
                         </Space>
+                        <Input value={[value, setValue]} trigger="input"/>
                         <Divider align="left"><Text type="primary">类型</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             头像支持文字、图片和图标，可以自定义背景色和文字颜色
