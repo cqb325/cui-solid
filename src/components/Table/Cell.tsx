@@ -4,6 +4,7 @@ import type { ColumnProps } from ".";
 import { useTableContext } from ".";
 import { Icon } from "../Icon";
 import { Popover } from "../Popover";
+import dayjs from "dayjs";
 
 export function Cell (props: any) {
     let cell: any;
@@ -61,8 +62,6 @@ export function Cell (props: any) {
                     let w = 0;
                     for (let i = colIndex + 2; i <= length; i++) {
                         const th = head.querySelector('th:nth-child('+i+')');
-                        console.log(th);
-
                         w += th.getBoundingClientRect().width;
                     }
 
@@ -116,8 +115,20 @@ export function Cell (props: any) {
     const text = () => {
         const column = props.column;
         if (props.type === 'td') {
+            if (props.summary) {
+                return props.data[column.name];
+            }
             if (column.type === 'index') {
                 return props.index + 1;
+            }
+            if (column.type === 'date') {
+                return dayjs(props.data[column.name]).format('YYYY-MM-DD');
+            }
+            if (column.type === 'datetime') {
+                return dayjs(props.data[column.name]).format('YYYY-MM-DD HH:mm:ss');
+            }
+            if (column.type === 'enum') {
+                return column.enum?.[props.data[column.name]];
             }
             if (column.type === 'checkbox') {
                 return <InnerCheckbox disabled={props.data._disabled} checked={props.data._checked} onChange={onRowChecked}/>;
@@ -142,7 +153,7 @@ export function Cell (props: any) {
 
     return <Switch>
         <Match when={props.type === 'th'}>
-            <th classList={cellClassList()} ref={(el) => {cell = el; props.ref && props.ref(el)}} data-index={props.colIndex}>
+            <th classList={cellClassList()} ref={(el) => {cell = el; props.ref && props.ref(el)}} colSpan={props.colSpan} rowSpan={props.rowSpan} data-index={props.colIndex}>
                 <div class="cm-table-cell">
                     {text()}
                     <Show when={col.sort}>

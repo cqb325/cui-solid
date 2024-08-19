@@ -11,8 +11,49 @@ import type { ColumnProps, TableStore } from '.';
 export function initColumns (columns: ColumnProps[]) {
     let maxFixedLeft = -1;
     let minFixedRight = Number.MAX_VALUE;
-    if (columns) {
-        columns.forEach((col: ColumnProps, index: number) => {
+    const cols: ColumnProps[] = [];
+    getFlatColumns(columns, cols, undefined);
+    let maxLevel: number = 1;
+    const calculateSpans = (columns: ColumnProps[], parent?: ColumnProps) => {
+        let colspan = 0;
+        columns.forEach((col: ColumnProps) => {
+            if (parent) {
+                col._level = parent._level! + 1;
+                if (maxLevel < col._level) {
+                    maxLevel = col._level;
+                }
+            }
+            if (col.children) {
+                const cspan = calculateSpans(col.children, col);
+                colspan += cspan;
+                col._colspan = cspan;
+            } else {
+                col._colspan = 1;
+                colspan += 1;
+            }
+        });
+        return colspan;
+    }
+    columns.forEach((column) => {
+        column._level = 1;
+    });
+    calculateSpans(columns, undefined);
+    // 构建rows
+    const rows: any[] = [];
+    for (let i = 0; i < maxLevel; i++) {
+        rows.push([]);
+    }
+    const allColumns = getAllColumns(columns);
+    allColumns.forEach((column) => {
+        if (!column.children) {
+            column._rowspan = maxLevel - column._level! + 1;
+        } else {
+            column._rowspan = 1;
+        }
+        rows[column._level! - 1].push(column);
+    });
+    if (cols) {
+        cols.forEach((col: ColumnProps, index: number) => {
             col.id = col.id ?? createUniqueId();
             if (col.fixed === 'left') {
                 maxFixedLeft = Math.max(maxFixedLeft, index);
@@ -22,13 +63,13 @@ export function initColumns (columns: ColumnProps[]) {
             }
         });
         if (maxFixedLeft > -1) {
-            columns[maxFixedLeft] ? columns[maxFixedLeft].fixedLeftLast = true : void(0);
+            cols[maxFixedLeft] ? cols[maxFixedLeft].fixedLeftLast = true : void(0);
         }
         if (minFixedRight < Number.MAX_VALUE) {
-            columns[minFixedRight] ? columns[minFixedRight].fixedRightFirst = true : void(0);
+            cols[minFixedRight] ? cols[minFixedRight].fixedRightFirst = true : void(0);
         }
     }
-    return {maxFixedLeft, minFixedRight};
+    return {maxFixedLeft, minFixedRight, columnsRows: rows, calcColumns: cols};
 }
 
 /**
@@ -292,4 +333,36 @@ export const observerSizeChange = (store: TableStore, setStore: SetStoreFunction
             c._width = w;
         }));
     });
+}
+
+/**
+ * 获取占用宽度的列
+ * @param columns 列
+ * @param flatColumns
+ * @returns
+ */
+export const getFlatColumns = (columns: ColumnProps[], flatColumns: ColumnProps[] = [], parent?: ColumnProps) => {
+    columns.forEach((col: ColumnProps) => {
+        col.id = col.id ?? createUniqueId();
+        if (!col.name) {
+            col.name = col.id;
+        }
+        col._parent = parent;
+        if (col.children) {
+            getFlatColumns(col.children, flatColumns, col);
+        } else {
+            flatColumns.push(col);
+        }
+    });
+}
+
+
+export const getAllColumns = (columns: ColumnProps[]) => {
+    return columns.flatMap((col: ColumnProps) : ColumnProps[] => {
+        if (col.children) {
+            return [col, ...getAllColumns(col.children)];
+        } else {
+            return [col];
+        }
+    })
 }

@@ -76,9 +76,10 @@ export function Row (props: RowProps) {
 }
 
 function EmprtyRow (props: any) {
+    const ctx: any = useTableContext();
     return <tr>
         <td colSpan={props.store.columns.length}>
-            <div class="cm-table-emprty-cell">暂无数据</div>
+            <div class="cm-table-emprty-cell">{ctx?.empty || '暂无数据'}</div>
         </td>
     </tr>
 }
@@ -99,15 +100,17 @@ export function Body (props: BodyProps) {
         // 数据改变也需要重刷
         props.data.data;
         const hh = props.data.headerSize.height;
+        const summaryH = props.data.summarySize.height;
+
         if (props.virtual) {
             const scrollElHeight = props.height ?? document.documentElement.clientHeight;
-            setHeight(scrollElHeight - hh);
+            setHeight(scrollElHeight - hh - summaryH);
         } else {
             Promise.resolve().then(() => {
                 const content = body.querySelector('.cm-table-body-wrap');
                 const contentH = content.getBoundingClientRect().height;
-                if (props.height && contentH > props.height - hh) {
-                    const bodyH = props.height - hh;
+                if (props.height && contentH > props.height - hh - summaryH) {
+                    const bodyH = props.height - hh - summaryH;
                     setHeight(bodyH);
                 }
             });
@@ -137,13 +140,6 @@ export function Body (props: BodyProps) {
                             </tr>
                         </thead>
                         <tbody ref={bodyElement}>
-                            {/* <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement}
-                                items={props.data.data} itemEstimatedSize={50} maxHeight={height() || props.height}>
-                                {(params: any) => {
-                                    const rowData = params.item;
-                                    return <Row data={rowData} index={params.index} store={props.data} ref={params.ref}/>
-                                }}
-                            </VirtualListCore> */}
                             <VirtualListCore scrollElement={body} contentElement={contentElement} bodyElement={bodyElement}
                                 items={props.data.data} itemEstimatedSize={50} maxHeight={height() || props.height}
                                 itemComponent={{component: RowWrap, props: {

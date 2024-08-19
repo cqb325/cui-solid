@@ -24,7 +24,7 @@ export interface IMeasuredDataMap {
     [key: number]: MeasuredData
 }
 
-export function VirtualListCore(props: VirtualListCoreProps) {
+export function VirtualListCore (props: VirtualListCoreProps) {
     const wrap = props.scrollElement;
     const content = props.bodyElement;
 
@@ -324,7 +324,7 @@ export function VirtualListCore(props: VirtualListCoreProps) {
     return <For each={list}>
         {(item: any, index) => {
             const a = createComponent(props.itemComponent.component, {
-                ...props.itemComponent.props, item: item, ref: (el: HTMLElement) => {
+                ...props.itemComponent.props, item: item, index: index(), ref: (el: HTMLElement) => {
                     Promise.resolve().then(() => {
                         measureElement(el, indexes[index()])
                     })

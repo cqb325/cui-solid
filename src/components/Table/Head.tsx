@@ -1,5 +1,5 @@
 import type { Accessor} from "solid-js";
-import { For, createComputed, createEffect, onCleanup, onMount } from "solid-js"
+import { For, createEffect, onCleanup, onMount } from "solid-js"
 import { Cell } from "./Cell";
 
 import type { TableStore, ColumnProps } from '.';
@@ -107,18 +107,26 @@ export function Head (props: HeadProps) {
         <table>
             <Colgroup data={props.data}/>
             <thead ref={thead}>
-                <tr>
-                    <For each={props.data.columns}>
-                        {(col: ColumnProps, index: Accessor<number>) => {
-                            return <Cell column={col} type="th" showFixedLeft={props.data.showFixedLeft} colIndex={index()}
-                            showFixedRight={props.data.showFixedRight} checkedAll={props.data.checkedAll} ref={(el: Element) => {
-                                // Promise.resolve().then(() => {
-                                //     props.onInitColumnWidth(index(), el.getBoundingClientRect().width);
-                                // })
-                            }}/>
-                        }}
-                    </For>
-                </tr>
+                <For each={props.data.columnsRows}>
+                    {
+                        (row: ColumnProps[], rowIndex: Accessor<number>) => {
+                            return <tr>
+                                <For each={row}>
+                                    {
+                                        (col: ColumnProps, index: Accessor<number>) => {
+                                            return <Cell colSpan={col._colspan} rowSpan={col._rowspan} column={col} type="th" showFixedLeft={props.data.showFixedLeft} colIndex={index()}
+                                                showFixedRight={props.data.showFixedRight} checkedAll={props.data.checkedAll} ref={(el: Element) => {
+                                                    // Promise.resolve().then(() => {
+                                                    //     props.onInitColumnWidth(index(), el.getBoundingClientRect().width);
+                                                    // })
+                                                }}/>
+                                        }
+                                    }
+                                </For>
+                            </tr>
+                        }
+                    }
+                </For>
             </thead>
         </table>
     </div>

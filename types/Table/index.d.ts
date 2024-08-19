@@ -12,6 +12,7 @@ type TableProps = {
     border?: boolean;
     stripe?: boolean;
     highlight?: boolean;
+    showHeader?: boolean;
     selectedRowKeys?: Signal<KeyType[]>;
     onRowSelect?: (row: any, preRow: any) => void;
     onRowChecked?: (row: any, checked: boolean) => void;
@@ -20,18 +21,25 @@ type TableProps = {
     ref?: any;
     size?: 'small';
     spanMethod?: (data: any, column: any, index: number, columnIndex: number) => any;
+    showSummary?: boolean;
+    summaryMethod?: (columns: ColumnProps[], data: any[]) => any;
     loading?: boolean;
     loadingText?: string | JSXElement;
+    title?: JSXElement;
+    footer?: JSXElement;
+    empty?: JSXElement;
     virtual?: boolean;
 };
 export type TableStore = {
     columns: ColumnProps[];
+    columnsRows: any[];
     data: any[];
     showFixedLeft: boolean;
     showFixedRight: boolean;
     checkedAll: boolean | string;
     resizing: boolean;
     headerSize: any;
+    summarySize: any;
     headerLeft: number;
     x: number;
     posX: number;
@@ -42,7 +50,7 @@ export type ColumnProps = {
     name?: string;
     title?: string | JSXElement;
     render?: (value: any, column: any, row: any) => any;
-    type?: string;
+    type?: 'index' | 'date' | 'datetime' | 'enum' | 'checkbox' | 'expand';
     width?: string;
     minWidth?: number;
     maxWidth?: number;
@@ -61,6 +69,11 @@ export type ColumnProps = {
     tooltipStyle?: any;
     fixedLeftLast?: boolean;
     fixedRightFirst?: boolean;
+    children?: ColumnProps[];
+    _colspan?: number;
+    _rowspan?: number;
+    _parent?: ColumnProps;
+    _level?: number;
     id: string;
     _index: number;
     _: string;

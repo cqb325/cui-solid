@@ -15,6 +15,7 @@ import { anchorData, codes, columnData, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Exception } from "@/components";
 useDirective(hljs);
 
 export default function TablePage () {
@@ -256,6 +257,48 @@ export default function TablePage () {
     createEffect(() => {
         console.log(selectedRowKeys());
     })
+
+
+    const mergeColumns = [
+        {name: 'name', title: '姓名', width: 90},
+        {name: 'subject', title: '科目', children: [
+            {name: 'mainSubject', title: '主课', children: [
+                {name: 'chinese', title: '语文', width: 200, resize: true, sort: true},
+                {name: 'math', title: '数学', width: 200, minWidth: 100, resize: true, sort: true},
+                {name: 'english', title: '英语', minWidth: 200}
+            ]},
+            {name: 'minorSubject', title: '副课', children: [
+                {name: 'physics', title: '物理', minWidth: 200},
+                {name: 'chemistry', title: '化学', minWidth: 200}
+            ]},
+            {name: 'tiyu', title: '体育', minWidth: 200}
+        ]},
+        {name: 'date', title: '日期', width: '200px'},
+    ];
+
+    const mergeData = [
+        {name: '张三', chinese: 90, math: 80, english: 70, physics: 60, chemistry: 50, tiyu: 20, date: '2020-01-01'},
+        {name: '李四', chinese: 80, math: 90, english: 70, physics: 60, chemistry: 50, tiyu: 20, date: '2020-01-02'},
+        {name: '王五', chinese: 70, math: 80, english: 90, physics: 60, chemistry: 50, tiyu: 20, date: '2020-01-03'},
+        {name: '赵六', chinese: 90, math: 80, english: 70, physics: 60, chemistry: 50, tiyu: 20, date: '2020-01-01'},
+        {name: '赵六', chinese: 90, math: 80, english: 70, physics: 60, chemistry: 50, tiyu: 20, date: '2020-01-01'},
+        {name: '赵六', chinese: 90, math: 80, english: 70, physics: 60, chemistry: 50, tiyu: 20, date: '2020-01-01'},
+    ]
+
+
+    const typeColumns = [
+        {type: 'index', title: '序号', width: 90},
+        {name: 'name', title: '姓名', width: 90},
+        {type: 'enum', enum: {0: '禁用', 1: '启用'}, name: 'status', title: '状态', width: 90},
+        {type: 'date', name: 'date', title: '日期', width: '200px'},
+        {type: 'datetime',name: 'datetime', title: '时间', width: '200px'},
+    ];
+
+    const typeData = [
+        {name: '张三', status: 0, date: new Date('2020-01-01'), datetime: '2020-01-01 12:00:00'},
+        {name: '李四', status: 1, date: '2020-01-02', datetime: '2020-01-02 12:30:00'},
+        {name: '王五', status: 0, date: '2020-01-03 00:00:00', datetime: '2020-01-03 13:00:00'},
+    ]
 
     return <>
         <div class="sys-ctx-main-left" style={{width: 0}} use:hljs={''}>
@@ -535,6 +578,117 @@ export default function TablePage () {
                         <Divider align="left"><Text type="primary">大列表</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         当表格数据量较大时为了提升渲染性能，可以使用虚拟列表  通过指定 virtual 属性并设置 height，即可高性能渲染表格<br/>
+                        </Paragraph>
+                        <DemoCode data={codes['table_largedata']}/>
+                    </Card>
+                </Space>
+
+                <Space id="table_mergeColumns" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Table columns={mergeColumns} data={mergeData} border height={300}/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">合并表头</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        合并表头
+                        </Paragraph>
+                        <DemoCode data={codes['table_largedata']}/>
+                    </Card>
+                </Space>
+
+                <Space id="table_showHeader" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Table columns={mergeColumns} data={mergeData} border height={300} showHeader={false}/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">合并表头</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        合并表头
+                        </Paragraph>
+                        <DemoCode data={codes['table_largedata']}/>
+                    </Card>
+                </Space>
+
+                <Space id="table_header_footer" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Table columns={mergeColumns} data={mergeData} border height={300} title={<div>header</div>}
+                            footer={<div>footer</div>}/>
+
+                            <Table columns={mergeColumns} data={mergeData} height={300} title={<div>header</div>}
+                            footer={<div>footer</div>}/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">头部底部</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        头部底部
+                        </Paragraph>
+                        <DemoCode data={codes['table_largedata']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="table_empty" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Table columns={columns} data={[]} border height={300} empty={<Exception type="empty" showAction={false} showDesc={false}/>}/>
+
+                        </Space>
+                        <Divider align="left"><Text type="primary">自定义空内容</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        自定义空内容
+                        </Paragraph>
+                        <DemoCode data={codes['table_largedata']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="table_summary" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Table columns={columns} data={data2} border height={300} showSummary/>
+                            <Table columns={columns2} data={data2} border height={300} showSummary summaryMethod={(columns, data) => {
+                                const row: any = {};
+                                columns.forEach((col: ColumnProps, index: number) => {
+                                    const key = col.name!;
+                                    if (index === 0) {
+                                        row[key] = '共计';
+                                        return;
+                                    }
+                                    const values = data.map(item => Number(item[key]));
+                                    if (!values.every(value => isNaN(value))) {
+                                        const v = values.reduce((prev, curr) => {
+                                            const value = Number(curr);
+                                            if (!isNaN(value)) {
+                                                return prev + curr;
+                                            } else {
+                                                return prev;
+                                            }
+                                        }, 0);
+                                        row[key] = v + '元';
+                                    } else {
+                                        row[key] = 'N/A';
+                                    }
+                                });
+                                return row;
+                            }}/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">合计</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        合计
+                        </Paragraph>
+                        <DemoCode data={codes['table_largedata']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="table_type" dir="v">
+                    <Card bordered>
+                        <Space dir="v">
+                            <Table columns={typeColumns} data={typeData} height={300} border/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">合计</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        合计
                         </Paragraph>
                         <DemoCode data={codes['table_largedata']}/>
                     </Card>

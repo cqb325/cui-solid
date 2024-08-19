@@ -8,6 +8,8 @@ import type { ColumnProps, TableStore } from '.';
 export declare function initColumns(columns: ColumnProps[]): {
     maxFixedLeft: number;
     minFixedRight: number;
+    columnsRows: any[];
+    calcColumns: ColumnProps[];
 };
 /**
  * 滚动条滚动后更新固定列的样式
@@ -51,3 +53,11 @@ export declare const onResizeStart: (setStore: SetStoreFunction<TableStore>, col
 export declare const onResizeMove: (store: any, setStore: SetStoreFunction<TableStore>, e: any) => void;
 export declare const onResizeEnd: (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => void;
 export declare const observerSizeChange: (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => void;
+/**
+ * 获取占用宽度的列
+ * @param columns 列
+ * @param flatColumns
+ * @returns
+ */
+export declare const getFlatColumns: (columns: ColumnProps[], flatColumns?: ColumnProps[], parent?: ColumnProps) => void;
+export declare const getAllColumns: (columns: ColumnProps[]) => ColumnProps[];

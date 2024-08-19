@@ -43,6 +43,15 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+    v1.05
+    1、表格支持showHeader参数可隐藏表头
+    2、Table支持合计功能
+    3、Table支持复杂合并表头
+    4、Table字段支持date datetime enum类型
+
+    v1.0.4
+    1、Table添加title、footer、empty自定义空内容
+    2、修改Exception图片地址
 
     v1.0.3
     1、Button 支持round属性
