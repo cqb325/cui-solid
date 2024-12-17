@@ -1,14 +1,12 @@
 import { Collapase } from "../inner/Collapase";
-// import CTitle from "./Title";
-import { Icon } from "../Icon";
 import { useAccordionContext } from ".";
 import { useClassList } from "../utils/useProps";
-import type { JSXElement} from "solid-js";
-import { createEffect, createSignal } from "solid-js";
+import type { JSX, JSXElement} from "solid-js";
+import { createEffect, createSignal, splitProps } from "solid-js";
+import { FeatherChevronRight } from "cui-solid-icons/feather";
 
-type AccordionItemProps = {
+export interface AccordionItemProps extends JSX.HTMLAttributes<HTMLDivElement> {
     name?: string,
-    style?: any,
     title?: any,
     icon?: JSXElement,
     children?: any
@@ -23,50 +21,52 @@ export function Item (props: AccordionItemProps) {
     const [opened, setOpened] = createSignal(false);
     const [end, setEnd] = createSignal(false);
 
+    const [local, rest] = splitProps(props, ['name', 'title', 'icon', 'children', 'class', 'classList']);
+
     const onTitleClick = () => {
         let v;
         let open = false;
         if (!multi) {
-            if (activeKey() === props.name) {
+            if (activeKey() === local.name) {
                 if (ctx?.flex) {
                     return;
                 }
                 v = '';
                 open = false;
             } else {
-                v = props.name;
+                v = local.name;
                 open = true;
             }
         } else {
             const currentKey = activeKey();
-            if (currentKey.includes(props.name)) {
-                const index = currentKey.indexOf(props.name);
+            if (currentKey.includes(local.name)) {
+                const index = currentKey.indexOf(local.name);
                 currentKey.splice(index, 1);
                 v = [].concat(currentKey);
                 open = false;
             } else {
-                currentKey.push(props.name);
+                currentKey.push(local.name);
                 v = [].concat(currentKey);
                 open = true;
             }
         }
         setActiveKey(v);
-        onSelect && onSelect(props.name, open, v);
+        onSelect && onSelect(local.name, open, v);
     }
 
     createEffect(() => {
         let open = false;
         const currentKey = activeKey();
         if (!multi) {
-            open = currentKey === props.name;
+            open = currentKey === local.name;
         } else {
-            open = currentKey.includes(props.name);
+            open = currentKey.includes(local.name);
         }
         setEnd(false);
         setOpened(open);
     });
 
-    const classList = () => useClassList(props, 'cm-accordion-item', {
+    const classList = () => useClassList(local, 'cm-accordion-item', {
         'cm-accordion-item-active': opened(),
         'cm-accordion-item-full': opened() && end()
     });
@@ -74,14 +74,14 @@ export function Item (props: AccordionItemProps) {
     const onEnd = () => {
         setEnd(true);
     }
-    return <div classList={classList()} style={props.style}>
+    return <div classList={classList()} {...rest}>
         <div class="cm-accordion-title" onClick={onTitleClick}>
-            {props.icon}
-            <div class="cm-accordion-item-title-text">{props.title}</div>
-            <Icon class="cm-accordion-title-arrow" name="chevron-right"/>
+            {local.icon}
+            <div class="cm-accordion-item-title-text">{local.title}</div>
+            <FeatherChevronRight class="cm-accordion-title-arrow" size={14}/>
         </div>
         <Collapase open={opened()} onEnd={onEnd}>
-            <div class="cm-accordion-content">{props.children}</div>
+            <div class="cm-accordion-content">{local.children}</div>
         </Collapase>
     </div>
 }

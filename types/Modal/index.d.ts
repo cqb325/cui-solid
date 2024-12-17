@@ -1,27 +1,32 @@
+import type { ButtonProps } from "../Button";
 import type { JSXElement, Signal } from "solid-js";
-type Position = {
+export interface Position {
     top?: string;
     bottom?: string;
     left?: string;
     right?: string;
-};
-type ModalProps = {
+}
+export interface ModalProps {
     bounds?: string;
     disabled?: boolean;
     style?: any;
     classList?: any;
     class?: string;
     title?: any;
+    headerStyle?: any;
     bodyStyle?: any;
     children?: any;
     footer?: boolean;
     footerAlign?: 'start' | 'center' | 'end';
+    footerReverse?: boolean;
     loading?: boolean | Signal<boolean>;
-    onOk?: () => boolean | Promise<boolean> | undefined | void;
+    onOk?: () => boolean | Promise<boolean | void> | undefined | void;
     onCancel?: () => void;
     onClosed?: () => void;
     onClickClose?: () => void;
     okText?: any;
+    okButtonType?: keyof ButtonProps['type'];
+    cancleButtonType?: keyof ButtonProps['type'];
     cancleText?: any;
     visible?: boolean | Signal<boolean>;
     defaultPosition?: Position;
@@ -30,7 +35,8 @@ type ModalProps = {
     resetPostion?: boolean;
     hasCloseIcon?: boolean;
     fullScreen?: boolean;
-};
+    destroyOnClose?: boolean;
+}
 export declare function Modal(props: ModalProps): import("solid-js").JSX.Element;
 export interface ModalConfig extends ModalProps {
     content?: JSXElement | (() => any);
@@ -45,4 +51,3 @@ export declare const modal: {
     confirm(config: ModalConfig): void;
     remove(): void;
 };
-export {};

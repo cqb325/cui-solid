@@ -1,17 +1,13 @@
-import { useClassList } from "../utils/useProps";
+import { useClassList, useStyle } from "../utils/useProps";
 import type { JSX, JSXElement} from 'solid-js';
 import { Match, Show, Switch, createSignal, onCleanup, onMount } from 'solid-js'
 
-export interface AvatarProps {
-    classList?: any,
-    class?: string,
+export interface AvatarProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "title">{
     size?: number|'small'|'large'
-    icon?: any
+    icon?: JSXElement
     src?: string
     shape?: string
-    style?: any
     onClick?: JSX.EventHandlerUnion<HTMLSpanElement, MouseEvent>
-    children?: any
     title?: string | number | JSXElement
     asProps?: boolean
     onMouseEnter?(e: any): void
@@ -74,7 +70,7 @@ export function Avatar (props: AvatarProps) {
     })
 
     const style = () => {
-        const obj = {...props.style};
+        const obj = useStyle(props, {});
         if (typeof props.size === 'number') {
             obj.width = props.size + 'px';
             obj.height = props.size + 'px';

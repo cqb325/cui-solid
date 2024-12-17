@@ -1,12 +1,4 @@
-type TooltipProps = {
-    classList?: any;
-    class?: string;
-    align?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
-    theme?: string;
-    style?: any;
-    children?: any;
-    content?: any;
-    disabled?: boolean;
-};
+import type { InnerPopupProps } from "../inner/InnerPopup";
+export interface TooltipProps extends Omit<InnerPopupProps, 'title'> {
+}
 export declare function Tooltip(props: TooltipProps): import("solid-js").JSX.Element;
-export {};

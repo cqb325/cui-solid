@@ -29,7 +29,7 @@ export default function DatepickerPage () {
                 </Title>
                 <Space id="date_base" dir="v">
                     <Card bordered>
-                        <Input type="date"/>
+                        <Datepicker/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         基础用法
@@ -164,13 +164,13 @@ export default function DatepickerPage () {
                 <Space id="date_shortcut" dir="v">
                     <Card bordered>
                         <Datepicker clearable value={[value, setValue]} stick shortCuts={<Space dir="v">
-                            <Button type="text" onClick={() => {
+                            <Button theme="borderless" onClick={() => {
                                 const now = new Date();
                                 const start = new Date();
                                 start.setDate(start.getDate() - 6);
                                 setValue([start, now]);
                             }}>一周</Button>
-                            <Button type="text" onClick={() => {
+                            <Button theme="borderless" onClick={() => {
                                 const now = new Date();
                                 const start = new Date();
                                 start.setDate(start.getDate() - 30);

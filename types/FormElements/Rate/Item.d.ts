@@ -1,5 +1,5 @@
 import type { Signal } from "solid-js";
-type RateItemProps = {
+export interface RateItemProps {
     onMouseEnter?: (value: number) => void;
     onMouseEnterHalf?: (value: number, e: any) => void;
     onClickHalfStar?: (value: number, e: any) => void;
@@ -8,6 +8,5 @@ type RateItemProps = {
     index: number;
     allowHalf?: boolean;
     current: Signal<any>;
-};
+}
 export declare function RateItem(props: RateItemProps): import("solid-js").JSX.Element;
-export {};

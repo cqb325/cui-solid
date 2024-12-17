@@ -1,5 +1,5 @@
 export declare const CheckboxGroupContext: import("solid-js").Context<unknown>;
-type CheckboxGroupProps = {
+export interface CheckboxGroupProps {
     classList?: any;
     class?: string;
     block?: boolean;
@@ -12,6 +12,6 @@ type CheckboxGroupProps = {
     data?: any;
     textField?: string;
     valueField?: string;
-};
+    asFormField?: boolean;
+}
 export declare function CheckboxGroup(props: CheckboxGroupProps): import("solid-js").JSX.Element;
-export {};

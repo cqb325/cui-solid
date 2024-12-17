@@ -1,9 +1,7 @@
 import { createSignal } from "solid-js";
 import { TreeSelect } from "@/components/FormElements/TreeSelect"
 import { Space } from "@/components/Layout"
-import { Button } from "@/components/Button";
 import { Title } from "@/components/Typography/Title";
-import { Icon } from "@/components/Icon";
 import { Card } from "@/components/Card";
 import { Divider } from "@/components/Divider";
 import { Text } from "@/components/Typography/Text";
@@ -16,7 +14,8 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { TreeCheckMod } from "@/components";
+import { Button, TreeCheckMod } from "@/components";
+import { F7TagFill } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 export default function TreeSelectPage () {
@@ -91,6 +90,8 @@ export default function TreeSelectPage () {
     const data12 = JSON.parse(JSON.stringify(data1));
     const data13 = JSON.parse(JSON.stringify(data1));
     const data14 = JSON.parse(JSON.stringify(data1));
+    const [data15, setData15] = createSignal(JSON.parse(JSON.stringify(data1)));
+    const [data16, setData16] = createSignal(JSON.parse(JSON.stringify(data1)));
 
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
@@ -101,6 +102,19 @@ export default function TreeSelectPage () {
                 <Space id="tree_base" dir="v">
                     <Card bordered>
                         <TreeSelect data={data1}/>
+                        <TreeSelect data={data15()}/>
+                        <Button onClick={() => {
+                            setData15([
+        {id: 'beijing', title: '北京1', children: [
+            {id: 'gugong', title: '故宫1'},
+            {id: 'tiantan', title: '天坛1'},
+        ]},
+        {id: 'zhejiang', title: '浙江1', children: [
+            {id: 'xihu', title: '西湖1'},
+            {id: 'linyin', title: '灵隐1'},
+        ]},
+    ]);
+                        }}>设置数据</Button>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         基础用法
@@ -156,7 +170,7 @@ export default function TreeSelectPage () {
 
                 <Space id="tree_prepend" dir="v">
                     <Card bordered>
-                        <TreeSelect prepend={<Icon name="tag"/>} data={data6} clearable/>
+                        <TreeSelect prepend={<F7TagFill />} data={data6} clearable/>
                         <Divider align="left"><Text type="primary">前缀</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         使用 prepend 可添加前缀
@@ -169,6 +183,19 @@ export default function TreeSelectPage () {
                 <Space id="tree_multi" dir="v">
                     <Card bordered>
                         <TreeSelect multi data={data7} clearable/>
+                        <TreeSelect multi data={data16()} clearable/>
+                        <Button onClick={() => {
+                            setData16([
+                                {id: 'beijing', title: '北京1', children: [
+                                    {id: 'gugong', title: '故宫1'},
+                                    {id: 'tiantan', title: '天坛1'},
+                                ]},
+                                {id: 'zhejiang', title: '浙江1', children: [
+                                    {id: 'xihu', title: '西湖1'},
+                                    {id: 'linyin', title: '灵隐1'},
+                                ]}
+                            ])
+                        }}>设置数据</Button>
                         <Divider align="left"><Text type="primary">多选</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         使用 multi 为多选模式, 多选默认级联选择

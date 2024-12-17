@@ -15,7 +15,7 @@ export default defineConfig({
         rollupOptions: {
             context: 'globalThis',
             preserveEntrySignatures: 'strict',
-            external: ['solid-js', 'solid-js/web', 'solid-js/store', 'countup.js', 'tinycolor2', 'cui-virtual-list', 'dayjs'],
+            external: ['solid-js', 'solid-js/web', 'solid-js/store', 'countup.js', 'tinycolor2', 'cui-solid-icons/feather', 'cui-solid-icons/f7', 'cui-virtual-list', 'dayjs'],
             output: [
                 {
                     format: 'es',

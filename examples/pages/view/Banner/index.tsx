@@ -89,7 +89,7 @@ export default function BannerPage () {
                                 <Slot name="extra">
                                     <div style={{margin: '16px 0 0', "text-align": 'right'}}>
                                         <Space justify="end">
-                                            <Button type="text">No, thanks.</Button>
+                                            <Button theme="borderless">No, thanks.</Button>
                                             <Button type="warning">Sounds great!</Button>
                                         </Space>
                                     </div>

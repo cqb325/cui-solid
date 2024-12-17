@@ -1,5 +1,5 @@
 import type { JSXElement } from "solid-js";
-type ImageProps = {
+export interface ImageProps {
     classList?: any;
     class?: string;
     style?: any;
@@ -23,6 +23,5 @@ type ImageProps = {
     onClose?: () => void;
     onSwitch?: (index: number) => void;
     previewIndex?: number;
-};
+}
 export declare function Image(props: ImageProps): import("solid-js").JSX.Element;
-export {};

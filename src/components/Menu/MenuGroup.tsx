@@ -4,7 +4,7 @@ import { useClassList } from "../utils/useProps";
 import { MenuItem } from "./MenuItem";
 import { useMenuContext } from ".";
 
-type MenuGroupProps = {
+export interface MenuGroupProps {
     name?: string,
     icon?: JSXElement,
     title?: any,

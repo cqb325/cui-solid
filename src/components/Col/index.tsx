@@ -5,11 +5,11 @@ import { useClassList } from '../utils/useProps';
 import type { responsiveType } from '../utils/createGridOffset';
 import { createGrid, createOffset } from '../utils/createGridOffset';
 
-type ColResponsiveProps = {
+export interface ColResponsiveProps {
     grid?: number,
     offset?: number
 }
-type ColProps = {
+export interface ColProps {
     classList?: any,
     class?: any,
     children?: any,

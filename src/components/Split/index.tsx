@@ -5,7 +5,7 @@ import { createStore } from "solid-js/store";
 import { useSlots } from "../utils/useSlots";
 import { isServer } from "solid-js/web";
 
-type SplitProps = {
+export interface SplitProps {
     classList?: any,
     class?: any,
     dir?: 'v' | 'h',

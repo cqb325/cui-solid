@@ -2,8 +2,8 @@ import { DatePane } from "./DatePane"
 import { TimePane } from "../TimePicker/TimePane"
 import { createSignal, Show } from "solid-js"
 import dayjs from "dayjs";
-import { Icon } from "../../Icon";
 import { useDatepickerContext } from ".";
+import { FeatherCalendar, FeatherClock } from "cui-solid-icons/feather";
 
 export function DateTimePane (props: any) {
     const [tab, setTab] = createSignal('date');
@@ -47,11 +47,11 @@ export function DateTimePane (props: any) {
         </div>
         <div class="cm-datetime-switch">
             <div classList={{"cm-datetime-switch-item": true, 'active': tab() === 'date'}} onClick={selectTab.bind(null, 'date')}>
-                <Icon name="calendar1" size={12}/>
+                <FeatherCalendar size={12}/>
                 {displayDate()}
             </div>
             <div classList={{"cm-datetime-switch-item": true, 'active': tab() === 'time'}} onClick={selectTab.bind(null, 'time')}>
-                <Icon name="clock" size={12}/>
+                <FeatherClock size={12} />
                 {displayTime()}
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { Show, type JSXElement } from "solid-js";
 import { useClassList } from "../utils/useProps";
-import { Icon } from "../Icon";
+import { FeatherAlertTriangle, FeatherCheck, FeatherXCircle } from "cui-solid-icons/feather";
 
 export interface InnerStepProps {
     title?: JSXElement | string
@@ -48,11 +48,11 @@ export function InnerStep (props: InnerStepProps) {
         let ret:JSXElement = '';
         if (!props.icon) {
             if (status() === 'finished') {
-                ret = <div class="cm-step-head-inner"><Icon name="check" /></div>;
+                ret = <div class="cm-step-head-inner"><FeatherCheck/></div>;
             } else if (status() === 'error') {
-                ret = <Icon name="x-circle" size={26}/>;
+                ret = <FeatherXCircle size={26}/>;
             } else if (status() === 'warning') {
-                ret = <Icon name="alert-triangle" size={26}/>;
+                ret = <FeatherAlertTriangle size={26}/>;
             } else {
                 ret = <div class="cm-step-head-inner"><span>{props.index}</span></div>;
             }

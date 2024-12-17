@@ -1,10 +1,8 @@
-import type { JSXElement } from "solid-js";
-type AccordionItemProps = {
+import type { JSX, JSXElement } from "solid-js";
+export interface AccordionItemProps extends JSX.HTMLAttributes<HTMLDivElement> {
     name?: string;
-    style?: any;
     title?: any;
     icon?: JSXElement;
     children?: any;
-};
-export declare function Item(props: AccordionItemProps): import("solid-js").JSX.Element;
-export {};
+}
+export declare function Item(props: AccordionItemProps): JSX.Element;

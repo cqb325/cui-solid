@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: var(--cui-color-text-0);
+    color: var(--cui-divider-border-color, var(--cui-color-text-0));
     font-size: 14px;
     font-variant: tabular-nums;
     line-height: 1.5715;
@@ -34,7 +34,7 @@
         position: relative;
         top: 50%;
         width: 50%;
-        border-top: 1px solid rgba(var(--cui-grey-9), .18);
+        border-top: 1px solid var(--cui-divider-border-color, rgba(var(--cui-grey-9), .18));
         border-bottom: 0;
         transform: scaleY(0.5);
         align-self: center;
@@ -85,9 +85,37 @@
         position: relative;
         display: block;
         height: 100%;
-        border-left: 1px solid rgba(var(--cui-grey-9), .18);
+        border-left: 1px solid var(--cui-divider-border-color, rgba(var(--cui-grey-9), .18));
         transform: scaleX(0.5);
         align-self: center;
         content: "";
     }
 }
+
+@themes: primary, success, warning, error, info, blue, green, red, yellow, magenta, pink, volcano, orange, gold, lime, cyan, geekblue, purple;
+
+each(@themes, {
+        .cm-divider-@{value} {
+            &.cm-divider-h {
+
+                &:after,
+                &:before {
+                    border-top-color: lch(from var(~"--cui-theme-color-@{value}") calc(l ~"+"10) c h / 0.5);
+                }
+            }
+
+            &.cm-divider-v {
+
+                &:after,
+                &:before {
+                    border-left-color: lch(from var(~"--cui-theme-color-@{value}") calc(l ~"+"10) c h / 0.5);
+                }
+            }
+
+            .cm-divider-text {
+                color: var(~"--cui-theme-color-@{value}");
+            }
+        }
+    }
+
+);

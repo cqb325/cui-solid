@@ -1,6 +1,5 @@
 import { Space } from "@/components/Layout";
 import { Badge } from "@/components/Badge";
-import { Icon } from "@/components/Icon";
 import './style.less'
 import { Title } from "@/components/Typography/Title";
 import { Card } from "@/components/Card";
@@ -13,6 +12,9 @@ import { CompAnchor } from "../../common/CompAnchor";
 import { propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { F7BellFill } from "cui-solid-icons/f7";
+import { BadgeRibbon } from "@/components";
+import { For } from "solid-js";
 useDirective(hljs);
 
 export default function BadgePage () {
@@ -45,7 +47,7 @@ export default function BadgePage () {
                                 <a href="#" class="demo-badge" />
                             </Badge>
                             <Badge dot>
-                                <Icon name="bell1" size={26} />
+                                <F7BellFill size={26} />
                             </Badge>
                             <Badge dot>
                                 <a href="#">可以是一个链接</a>
@@ -196,6 +198,36 @@ export default function BadgePage () {
                             使用 <Text code>type</Text> 属性，可以设置不同的颜色。
                         </Paragraph>
                         <DemoCode data={codes['badge_type']}/>
+                    </Card>
+                </Space>
+
+
+                <Space dir="v">
+                    <Card bordered>
+                        <Space dir="h" size={24}>
+                            <BadgeRibbon text="Ribbon">
+                                <Card title="Card Title" bordered>Card Content 飘带徽标 飘带徽标</Card>
+                            </BadgeRibbon>
+                            <BadgeRibbon text="Ribbon" align="start">
+                                <Card title="Card Title" bordered>Card Content 飘带徽标 飘带徽标</Card>
+                            </BadgeRibbon>
+                        </Space>
+                        <Space size={24}>
+                            <Space dir="v" inline>
+                                <For each={['primary', 'success', 'warning', 'info', 'error']}>
+                                    {color => <BadgeRibbon text="Ribbon" color={color}>
+                                        <Card style={{width: '300px'}} title="Card Title" bordered>Card Content 飘带徽标 飘带徽标</Card>
+                                    </BadgeRibbon>}
+                                </For>
+                            </Space>
+                            <Space dir="v" inline>
+                                <For each={['blue', 'green', 'red', 'yellow', 'magenta', 'pink', 'volcano', 'orange', 'gold', 'lime', 'cyan', 'geekblue', 'purple']}>
+                                    {color => <BadgeRibbon text={color} color={color}>
+                                        <Card style={{width: '300px'}} title="Card Title" bordered>Card Content 飘带徽标 飘带徽标</Card>
+                                    </BadgeRibbon>}
+                                </For>
+                            </Space>
+                        </Space>
                     </Card>
                 </Space>
 

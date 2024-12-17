@@ -14,7 +14,7 @@ import { eventsColumns, propsColumns } from "../../common/columns";
 import { anchorData, codes, eventsData, propsData } from "./config";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { Icon } from "@/components";
+import { FeatherArrowLeft, FeatherArrowRight, FeatherSettings } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 export default function SwitchPage () {
@@ -26,15 +26,15 @@ export default function SwitchPage () {
                 </Title>
                 <Space id="switch_base" dir="v">
                     <Card bordered>
-                        <Input type="switch" onChange={(v: boolean) => {
+                        <Switch onChange={(v: boolean) => {
                             message.info({
                                 content: '状态改变:' + v,
                                 duration: 1
                             });
                         }}/>
                         <Switch round={false}/>
-                        <Switch icon={<Icon name="settings" color="var(--cui-primary-color)"/>}/>
-                        <Switch size="large" icon={[<Icon name="arrow-left" size={20} color="var(--cui-color-text-2)"/>, <Icon size={20} name="arrow-right" color="var(--cui-color-text-2)"/>]}/>
+                        <Switch icon={<FeatherSettings color="var(--cui-primary-color)"/>}/>
+                        <Switch size="large" icon={[<FeatherArrowLeft size={20} color="var(--cui-color-text-2)"/>, <FeatherArrowRight size={20} color="var(--cui-color-text-2)"/>]}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             基础用法

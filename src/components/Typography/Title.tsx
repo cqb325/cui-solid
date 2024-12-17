@@ -11,7 +11,7 @@ export function Title (props: ParagraphProps) {
 
     const style = () => useStyle(props, {
         'background-image': props.gradient ? `linear-gradient(${props.gradient.join(',')})` : '',
-        color: props.gradient ? 'transparent' : '',
+        '-webkit-text-fill-color': props.gradient ? 'transparent' : '',
         [`--cm-title-prefix-width`]: props.prefixWidth ?? (props.prefix === 'bar' ? 4 : 8),
         [`--cm-title-prefix-gap`]: props.prefixGap ?? 16,
         [`--cm-title-prefix-color`]: typeof props.prefixColor === 'string' ? props.prefixColor : "",

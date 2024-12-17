@@ -1,7 +1,6 @@
-import type { Accessor, Setter } from "solid-js";
-import { type JSXElement } from "solid-js";
+import type { Accessor, Setter, JSXElement } from "solid-js";
 import type { TreeProps } from ".";
-export type NodeKeyType = string | number;
+export declare type NodeKeyType = string | number;
 export interface TreeNode {
     id: NodeKeyType;
     title: string | JSXElement;
@@ -38,6 +37,7 @@ export declare class TreeStore {
     setSelectedKey: Setter<NodeKeyType>;
     setSelected: Setter<NodeKeyType>;
     setValue: Setter<NodeKeyType[]>;
+    value: Accessor<NodeKeyType[]>;
     checkable: boolean;
     draggable: boolean;
     checkRelation: string;
@@ -72,7 +72,7 @@ export declare class TreeStore {
      * @param node
      * @param silence 不触发回调
      */
-    selectNode: (nodeId: NodeKeyType | TreeNode, silence?: boolean) => void;
+    selectNode: (nodeId: NodeKeyType | TreeNode, silence?: boolean | undefined) => void;
     clearSelect: () => void;
     _storeNode: (node: TreeNode, map: Record<NodeKeyType, TreeNode>) => void;
     storeNode: (node: TreeNode) => void;

@@ -2,6 +2,7 @@ import { batch, createUniqueId } from "solid-js";
 import type { SetStoreFunction} from "solid-js/store";
 import { produce } from "solid-js/store";
 import type { ColumnProps, TableStore } from '.';
+import { useDebounce } from "../utils/useDebounce";
 
 /**
  * 初始化表头
@@ -289,7 +290,7 @@ export const onResizeEnd = (store: TableStore, setStore: SetStoreFunction<TableS
     setStore('posX', 0);
 }
 
-export const observerSizeChange = (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => {
+export const observerSizeChange = useDebounce((store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => {
     let wrapWidth = wrap.querySelector('.cm-table')!.getBoundingClientRect().width;
     const body = wrap.querySelector('.cm-table-body')! as HTMLElement;
     const hasScroll = body.offsetHeight < body.scrollHeight;
@@ -333,7 +334,7 @@ export const observerSizeChange = (store: TableStore, setStore: SetStoreFunction
             c._width = w;
         }));
     });
-}
+}, 100);
 
 /**
  * 获取占用宽度的列

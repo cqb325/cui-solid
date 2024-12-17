@@ -1,9 +1,10 @@
 import type { JSXElement} from "solid-js";
 import { Show } from "solid-js"
 import { useClassList } from "../utils/useProps"
-import { Icon } from "../Icon"
 import { useSlots } from "../utils/useSlots"
 import createModel from "../utils/createModel"
+import { FeatherX } from 'cui-solid-icons/feather';
+import { F7ExclamationmarkTriangleFill, F7CheckmarkAltCircleFill, F7XmarkCircleFill, F7InfoCircleFill } from "cui-solid-icons/f7";
 
 export interface BannerProps {
     type: 'warning'|'info'|'success'|'error'
@@ -28,29 +29,29 @@ export function Banner (props: BannerProps) {
         [`cm-banner-not-full`]: props.fullMode === false,
     })
     const getIconByType = () => {
-        let icon = '';
+        let icon = null;
         switch (props.type) {
             case 'info': {
-                icon = 'info';
+                icon = <F7InfoCircleFill />;
                 break;
             }
             case 'success': {
-                icon = 'check-circle';
+                icon = <F7CheckmarkAltCircleFill/>;
                 break;
             }
             case 'warning': {
-                icon = 'alert-circle';
+                icon = <F7ExclamationmarkTriangleFill />;
                 break;
             }
             case 'error': {
-                icon = 'x-circle';
+                icon = <F7XmarkCircleFill/>;
                 break;
             }
             default: {
-                icon = 'info';
+                icon = <F7InfoCircleFill/>;
             }
         }
-        return <Icon name={icon} size={20}/>;
+        return icon;
     }
 
     const onClickClose = () => {
@@ -82,7 +83,7 @@ export function Banner (props: BannerProps) {
                     </div>
                 </div>
                 <Show when={props.closeIcon !== null}>
-                    <span class="cm-banner-close" onClick={onClickClose}>{props.closeIcon ?? <Icon name="x"/>}</span>
+                    <span class="cm-banner-close" onClick={onClickClose}>{props.closeIcon ?? <FeatherX />}</span>
                 </Show>
             </div>
             <Show when={slots.extra}>

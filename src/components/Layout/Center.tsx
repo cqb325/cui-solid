@@ -1,7 +1,7 @@
 import { splitProps } from "solid-js";
 import { useClassList, useStyle } from "../utils/useProps";
 
-type CenterProps = {
+export interface CenterProps {
     classList?: any,
     class?: any,
     children?: any,

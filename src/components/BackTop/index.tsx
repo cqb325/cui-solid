@@ -2,7 +2,7 @@ import { createSignal, onCleanup, onMount } from "solid-js";
 import { useClassList } from "../utils/useProps"
 import { scrollTop } from "../utils/utils";
 
-type BackTopProps = {
+export interface BackTopProps {
     classList?: any,
     class?: string,
     style?: any,
@@ -13,6 +13,7 @@ type BackTopProps = {
     duration?: number,
     onClick?: () => void
 }
+
 export function BackTop (props: BackTopProps) {
     const [backTop, setBackTop] = createSignal(false);
     const classList = () => useClassList(props, 'cm-back-top', {

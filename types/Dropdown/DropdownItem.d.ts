@@ -1,4 +1,4 @@
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 export interface DropdownItemProps {
     class?: string;
     classList?: any;
@@ -9,5 +9,8 @@ export interface DropdownItemProps {
     divided?: boolean;
     icon?: JSXElement;
     arrow?: boolean;
+    data?: any;
+    theme?: string | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'info' | 'light';
+    selected?: boolean;
 }
 export declare function DropdownItem(props: DropdownItemProps): import("solid-js").JSX.Element;

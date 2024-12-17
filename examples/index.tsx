@@ -4,6 +4,7 @@ import { menuData } from './menuData';
 import { createRouter, createWebHashHistory } from 'solid-vue-router';
 import { Page } from './Page';
 import '../src/theme/theme.less';
+import 'cui-solid-icons/style.css';
 import 'highlight.js/styles/xcode.css'
 import { loadingBar } from '@/components/LoadingBar';
 

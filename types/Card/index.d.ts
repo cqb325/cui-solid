@@ -1,5 +1,5 @@
 import type { JSXElement } from "solid-js";
-type CardProps = {
+export interface CardProps {
     classList?: any;
     class?: any;
     children?: any;
@@ -12,6 +12,5 @@ type CardProps = {
     headStyle?: any;
     bodyStyle?: any;
     footer?: any;
-};
+}
 export declare function Card(props: CardProps): import("solid-js").JSX.Element;
-export {};

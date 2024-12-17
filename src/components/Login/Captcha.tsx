@@ -1,14 +1,14 @@
 import { createSignal } from "solid-js";
 import { Button } from "../Button";
-import { InnerInput } from "../FormElements/Input/input";
+import { Input } from "../FormElements/Input";
 import { FormItem } from "../FormItem";
-import { Icon } from "../Icon";
 import { Image } from "../Image";
 import { Space } from "../Layout";
 import useValidation from "../utils/useValidation";
 import type { UserNameProps } from "./UserName";
 import { useLoginContext } from "./Login";
 import { CountDown } from "./CountDown";
+import { FeatherKey } from "cui-solid-icons/feather";
 
 export interface CaptchaProps extends UserNameProps {
     action?: string
@@ -21,7 +21,7 @@ export function Captcha (props: CaptchaProps) {
     const [action, setAction] = createSignal<string>(props.action ?? '');
     const [counting, setCounting] = createSignal<boolean>(false);
     const name = props.name ?? 'captcha';
-    const icon = props.icon ?? <Icon name="key"/>;
+    const icon = props.icon ?? <FeatherKey/>;
     const rules = {require: useValidation().required, ...props.rules};
     const messages = {require: "请输入验证码！", ...props.messages};
     const placeholder = props.placeholder ?? '请输入验证码';
@@ -54,8 +54,8 @@ export function Captcha (props: CaptchaProps) {
     }
     return <FormItem label={props.label} name={name} rules={rules} messages={messages}>
         <Space>
-            <InnerInput prepend={icon} size={size} placeholder={placeholder}/>
-            <Button size={size} onClick={onGetCaptcha} disabled={counting()} style={{flex: '0 0 120px'}}>{text()}</Button>
+            <Input prepend={icon} size={size} placeholder={placeholder}/>
+            <Button theme="light" size={size} onClick={onGetCaptcha} disabled={counting()} style={{flex: '0 0 120px'}}>{text()}</Button>
         </Space>
     </FormItem>
 }

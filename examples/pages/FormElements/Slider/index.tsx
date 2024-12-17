@@ -22,7 +22,7 @@ export default function SliderPage () {
                 </Title>
                 <Space id="slider_base" dir="v">
                     <Card bordered>
-                        <Slider />
+                        <Slider style={{"width": "300px"}}/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         基础用法

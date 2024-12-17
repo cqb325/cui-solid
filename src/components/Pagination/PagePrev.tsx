@@ -1,4 +1,4 @@
-import { Icon } from "../Icon";
+import { FeatherChevronLeft } from "cui-solid-icons/feather";
 
 export function PagePrev (props: any) {
     const classList = () => ({
@@ -7,6 +7,6 @@ export function PagePrev (props: any) {
         'cm-pagination-num-disabled': props.current === 1
     });
     return (<li onClick={props.onClick} classList={classList()}>
-        <Icon name="chevron-left" size={14}/>
+        <FeatherChevronLeft />
     </li>);
 }

@@ -116,6 +116,6 @@ dist-doc
 .yarn/install-state.gz
 .pnp.*
 .history
-
+SymbolTree/
 
 dist-jsx/

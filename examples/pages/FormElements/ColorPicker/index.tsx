@@ -85,6 +85,20 @@ export default function ColorPickerPage () {
                 </Space>
 
 
+                <Space id="cp_inline" dir="v">
+                    <Card bordered>
+                        <Space dir="h" align="center">
+                            <ColorPicker value={'#19be6b'} inline alpha recommend/>
+                        </Space>
+                        <Divider align="left"><Text type="primary">inline</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        inline
+                        </Paragraph>
+                        <DemoCode data={codes['cp_size']}/>
+                    </Card>
+                </Space>
+
+
                 <Space dir="v" size={24} id="comp_api">
                     <Title type="primary" heading={3}>API</Title>
                     <Space id="comp_props" dir="v">

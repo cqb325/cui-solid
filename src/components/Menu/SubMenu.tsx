@@ -5,7 +5,7 @@ import { MenuItem } from "./MenuItem";
 import { useMenuContext } from ".";
 import { Dropdown } from "../Dropdown";
 
-type SubMenuProps = {
+export interface SubMenuProps {
     name?: string,
     align?: "bottom" | "right" | "bottomLeft" | "bottomRight" | "rightTop" | "left" | "leftTop",
     icon?: JSXElement,

@@ -2,7 +2,7 @@ import type { JSXElement } from "solid-js";
 import { Show, batch, createEffect, createSignal, onCleanup, onMount } from "solid-js"
 import { ImagePreview } from "../ImagePreview";
 
-type ImageProps = {
+export interface ImageProps {
     classList?: any,
     class?: string,
     style?: any,
@@ -98,7 +98,7 @@ export function Image(props: ImageProps) {
     // watch src 重新加载
     createEffect(() => {
         props.src;
-        loadImage();
+        props.lazy ? false : loadImage();
     });
 
     let observer: any;

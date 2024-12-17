@@ -1,0 +1,70 @@
+.cm-badge-ribbon {
+    position: relative;
+}
+
+.cm-badge-ribbon-inner {
+    position: absolute;
+    padding: 0 8px;
+    font-size: 14px;
+    line-height: 22px;
+    top: 8px;
+    white-space: nowrap;
+    color: var(--cui-color-primary);
+    background-color: var(--cui-color-primary);
+    border-radius: var(--cui-border-radius-small);
+}
+
+.cm-badge-ribbon-text {
+    color: #fff;
+}
+
+.cm-badge-ribbon-corner {
+    position: absolute;
+    top: 100%;
+    width: 8px;
+    height: 8px;
+    color: currentcolor;
+    border: 4px solid;
+    transform: scaleY(0.75);
+    transform-origin: top;
+    filter: brightness(75%);
+}
+
+.cm-badge-ribbon-end {
+    .cm-badge-ribbon-inner {
+        inset-inline-end: -8px;
+        border-end-end-radius: 0;
+    }
+
+    .cm-badge-ribbon-corner {
+        inset-inline-end: 0;
+        border-inline-end-color: transparent;
+        border-block-end-color: transparent;
+    }
+}
+
+.cm-badge-ribbon-start {
+    .cm-badge-ribbon-inner {
+        inset-inline-start: -8px;
+        border-end-start-radius: 0;
+    }
+
+    .cm-badge-ribbon-corner {
+        inset-inline-start: 0;
+        border-inline-start-color: transparent;
+        border-block-end-color: transparent;
+    }
+}
+
+@themes: primary, success, warning, error, info, blue, green, red, yellow, magenta, pink, volcano, orange, gold, lime, cyan, geekblue, purple;
+
+each(@themes, {
+        .cm-badge-ribbon-@{value} {
+            .cm-badge-ribbon-inner {
+                color: var(~"--cui-theme-color-@{value}");
+                background-color: var(~"--cui-theme-color-@{value}");
+            }
+        }
+    }
+
+);

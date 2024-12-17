@@ -1,11 +1,11 @@
 import type { JSXElement} from "solid-js";
 import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { useClassList } from "../utils/useProps";
-import { Icon } from "../Icon";
 import { useMenuContext } from ".";
 import { Popover } from "../Popover";
+import { FeatherChevronDown } from "cui-solid-icons/feather";
 
-type MenuItemProps = {
+export interface MenuItemProps {
     name?: string,
     disabled?: boolean,
     isSubmenuTitle?: boolean,
@@ -86,12 +86,12 @@ export function MenuItem (props: MenuItemProps) {
             <div class="cm-menu-item-text">{props.children}</div>
             <Show when={props.cert}>
                 <div class="cm-menu-item-cert">
-                    <Icon name="chevron-down" size={14}/>
+                    <FeatherChevronDown size={14}/>
                 </div>
             </Show>
         </li>
     }>
-        <Popover align="right" arrow content={
+        <Popover align="right" arrow theme={ctx.theme} content={
             <div class="cm-menu-item-text">{props.children}</div>
         }>
             <li classList={classList()} ref={self} onClick={onSelect}>

@@ -17,7 +17,7 @@ export function Link (props: ParagraphProps) {
     });
     const style = () => useStyle(props, {
         'background-image': local.gradient ? `linear-gradient(${local.gradient.join(',')})` : '',
-        color: props.gradient ? 'transparent' : ''
+        '-webkit-text-fill-color': props.gradient ? 'transparent' : ''
     })
     return <span classList={classList()}><a {...others} style={style()} href={local.link}>{local.icon}{local.children}</a></span>
 }

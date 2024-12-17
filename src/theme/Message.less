@@ -1,12 +1,16 @@
-
-.cm-messages-wrap{
+.cm-messages-wrap {
     position: fixed;
     left: 50%;
     top: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transform: translate(-50%, 0);
 }
-.cm-message{
-    display: block;
+
+.cm-message {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
     text-align: center;
     transform: translate(0, -80px);
@@ -15,41 +19,50 @@
     transition: all .2s ease-in-out;
 }
 
-.cm-message-visible{
+.cm-message-visible {
     transform: translate(0, 0);
     opacity: 1;
     height: 37px;
 }
-.cm-message-inner{
+
+.cm-message-inner {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    gap: 8px;
     background-color: var(--cui-color-bg-3);
     padding: 8px 16px;
     border-radius: var(--cui-border-radius-small);
-    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
 }
+
 .cm-message-background {
-    .cm-message-inner{
+    .cm-message-inner {
         box-shadow: none;
     }
 }
-.cm-message-close{
-    display: inline-block;
+
+.cm-message-close {
+    display: inline-flex;
     cursor: pointer;
-    margin-left: 8px;
     color: rgb(var(--cui-grey-2));
-    &:hover{
+    display: inline-flex;
+    border-radius: 2px;
+    padding: 2px;
+    transition: all 0.2s;
+
+    &:hover {
         color: var(--cui-primary-color-hover);
+        background: var(--cui-color-fill-1);
     }
 }
 
-.cm-message-content{
+.cm-message-content {
     display: inline-flex;
     min-width: max-content;
 }
-.cm-message-icon{
-    margin-right: 8px;
+
+.cm-message-icon {
     color: var(--cui-primary-color);
     font-size: 16px;
     vertical-align: middle;
@@ -57,69 +70,80 @@
     top: 1px;
 }
 
-.cm-message-info{
-    &.cm-message-background{
-        .cm-message-inner{
+.cm-message-info {
+    &.cm-message-background {
+        .cm-message-inner {
             background-color: var(--cui-primary-1);
             border: 1px solid var(--cui-primary-2);
         }
+
         .cm-message-icon,
-        .cm-message-content{
+        .cm-message-content {
             color: var(--cui-primary-color-hover);
         }
     }
 }
-.cm-message-success{
-    .cm-message-icon{
-        color: var(--cui-success-color);
+
+.cm-message-success {
+    .cm-message-icon {
+        color: var(--cui-color-success);
     }
-    &.cm-message-background{
-        .cm-message-inner{
+
+    &.cm-message-background {
+        .cm-message-inner {
             background-color: rgb(var(--cui-green-0));
             border: 1px solid rgb(var(--cui-green-1));
         }
+
         .cm-message-icon,
-        .cm-message-content{
-            color: var(--cui-success-color);
-        }
-    }
-}
-.cm-message-warning{
-    .cm-message-icon{
-        color: var(--cui-warning-color);
-    }
-    &.cm-message-background{
-        .cm-message-inner{
-            background-color: rgb(var(--cui-yellow-0));
-            border: 1px solid rgb(var(--cui-yellow-2));
-        }
-        .cm-message-icon,
-        .cm-message-content{
-            color: var(--cui-warning-color);
-        }
-    }
-}
-.cm-message-error{
-    .cm-message-icon{
-        color: var(--cui-error-color);
-    }
-    &.cm-message-background{
-        .cm-message-inner{
-            background-color: rgb(var(--cui-red-0));
-            border: 1px solid rgb(var(--cui-red-1));
-        }
-        .cm-message-icon,
-        .cm-message-content{
-            color: var(--cui-error-color);
+        .cm-message-content {
+            color: var(--cui-color-success);
         }
     }
 }
 
-.cm-message{
+.cm-message-warning {
+    .cm-message-icon {
+        color: var(--cui-color-warning);
+    }
+
+    &.cm-message-background {
+        .cm-message-inner {
+            background-color: rgb(var(--cui-yellow-0));
+            border: 1px solid rgb(var(--cui-yellow-2));
+        }
+
+        .cm-message-icon,
+        .cm-message-content {
+            color: var(--cui-color-warning);
+        }
+    }
+}
+
+.cm-message-error {
+    .cm-message-icon {
+        color: var(--cui-color-error);
+    }
+
+    &.cm-message-background {
+        .cm-message-inner {
+            background-color: rgb(var(--cui-red-0));
+            border: 1px solid rgb(var(--cui-red-1));
+        }
+
+        .cm-message-icon,
+        .cm-message-content {
+            color: var(--cui-color-error);
+        }
+    }
+}
+
+.cm-message {
     .cm-loading {
         margin-right: 4px;
         display: inline;
         vertical-align: middle;
+
         svg {
             stroke: var(--cui-primary-color);
             display: inline;

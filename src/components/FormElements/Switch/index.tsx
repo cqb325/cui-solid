@@ -1,9 +1,9 @@
 import createField from "../../utils/createField";
 import { useClassList, useStyle } from "../../utils/useProps";
 import { Loading } from "../../inner/Loading";
-import { JSXElement } from "solid-js";
+import type { JSXElement } from "solid-js";
 
-type SwitchProps = {
+export interface SwitchProps {
     size?: 'small'|'default'|'large',
     disabled?: boolean,
     style?: any,
@@ -19,6 +19,7 @@ type SwitchProps = {
     onBeforeChange?: (currentStatus: boolean) => Promise<boolean>,
     onChange?: (value: any) => void,
     loading?: boolean
+    asFormField?: boolean
 }
 export function Switch (props: SwitchProps) {
     const classList = () => useClassList(props, 'cm-switch', {
@@ -75,8 +76,8 @@ export function Switch (props: SwitchProps) {
         {/* 文字对齐辅助 */}
         <span style={{width: '0px', "font-size": '12px', visibility: 'hidden'}}>A</span>
         <span class="cm-switch-inner-placeholder">
-            <span><span class="cm-switch-inner-button-placeholder"></span>{labels[0]}</span>
-            <span><span class="cm-switch-inner-button-placeholder"></span>{labels[1]}</span>
+            <span><span class="cm-switch-inner-button-placeholder" />{labels[0]}</span>
+            <span><span class="cm-switch-inner-button-placeholder" />{labels[1]}</span>
         </span>
         <span class="cm-switch-inner">
             {

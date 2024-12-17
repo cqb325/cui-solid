@@ -9,6 +9,7 @@ export interface VirtualListCoreProps {
     scrollElement: HTMLDivElement;
     contentElement: HTMLDivElement;
     bodyElement: HTMLDivElement;
+    displayDelay?: number;
     onScroll?: (scrollTop: number) => void;
     ref?: any;
 }

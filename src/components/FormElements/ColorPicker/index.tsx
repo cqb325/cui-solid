@@ -19,12 +19,14 @@ interface ColorPickerProps {
     classList?: any
     class?: string
     transfer?: boolean
+    inline?: boolean
     align?: 'bottomLeft'|'bottomRight'
     disabled?: boolean
     alpha?: boolean
     size?: 'small'|'large'
     recommend?: boolean
     colors?: string[]
+    asFormField?: boolean
     onChange?(v: string): void
 }
 
@@ -38,6 +40,9 @@ export function ColorPicker (props: ColorPickerProps) {
     let oldHue: any = val();
     const classList = () => useClassList(props, 'cm-color-picker', {
         [`cm-color-picker-${props.size}`]: props.size,
+    });
+    const inlineClassList = () => useClassList(props, 'cm-color-picker-wrap', {
+        'cm-color-picker-inline': props.inline
     });
 
     const onColorChange = (data: any) => {
@@ -74,28 +79,38 @@ export function ColorPicker (props: ColorPickerProps) {
         setVal(v);
     })
 
-    return <div classList={classList()} style={props.style}>
-        <Dropdown transfer={props.transfer} align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
-            menu={<div class="cm-color-picker-wrap">
-                <Space dir="v">
-                    <Saturation value={val()} onChange={onColorChange}/>
-                    <Hue value={val()} onChange={onColorChange}/>
-                    <Show when={props.alpha}>
-                        <Alpha value={val()} onChange={onColorChange}/>
-                    </Show>
-                    <Show when={props.recommend}>
-                        <Recommend colors={props.colors} onChange={onColorChange}/>
-                    </Show>
-                    <div class="cm-color-picker-confirm">
-                        <Space dir="h">
-                            <Input size="small" class="cm-color-picker-input" value={[confirmVal, setConfirmVal]}/>
-                            <Button size="small" type="default" onClick={onClear}>清除</Button>
-                            <Button size="small" type="primary" onClick={onConfirm}>确定</Button>
-                        </Space>
-                    </div>
+    const renderMain = () => {
+        return <Space dir="v">
+            <Saturation value={val()} onChange={onColorChange}/>
+            <Hue value={val()} onChange={onColorChange}/>
+            <Show when={props.alpha}>
+                <Alpha value={val()} onChange={onColorChange}/>
+            </Show>
+            <Show when={props.recommend}>
+                <Recommend colors={props.colors} onChange={onColorChange}/>
+            </Show>
+            <div class="cm-color-picker-confirm">
+                <Space dir="h">
+                    <Input size="small" class="cm-color-picker-input" value={[confirmVal, setConfirmVal]}/>
+                    <Button size="small" type="default" onClick={onClear}>清除</Button>
+                    <Button size="small" type="primary" onClick={onConfirm}>确定</Button>
                 </Space>
-            </div>}>
-            <Value disabled={props.disabled} size={props.size} currentValue={val()} value={value()} open={open()}/>
-        </Dropdown>
-    </div>
+            </div>
+        </Space>
+    }
+
+    return <Show when={props.inline} fallback={
+        <div classList={classList()} style={props.style}>
+            <Dropdown transfer={props.transfer} align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
+                menu={<div class="cm-color-picker-wrap">
+                    {renderMain()}
+                </div>}>
+                <Value disabled={props.disabled} size={props.size} currentValue={val()} value={value()} open={open()}/>
+            </Dropdown>
+        </div>
+        }>
+        <div classList={inlineClassList()}>
+            {renderMain()}
+        </div>
+    </Show>
 }

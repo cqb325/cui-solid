@@ -1,4 +1,4 @@
-type SelectOptions = {
+export interface AutoCompleteOptions {
     name?: string;
     value?: any;
     disabled?: boolean;
@@ -20,6 +20,6 @@ type SelectOptions = {
     onSearch?: (query: string) => void;
     transfer?: boolean;
     align?: 'bottomLeft' | 'bottomRight';
-};
-export declare function AutoComplete(props: SelectOptions): import("solid-js").JSX.Element;
-export {};
+    asFormField?: boolean;
+}
+export declare function AutoComplete(props: AutoCompleteOptions): import("solid-js").JSX.Element;

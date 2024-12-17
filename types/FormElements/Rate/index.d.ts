@@ -1,5 +1,5 @@
 import type { Signal } from "solid-js";
-type RateProps = {
+export interface RateProps {
     classList?: any;
     class?: string;
     disabled?: boolean;
@@ -11,6 +11,6 @@ type RateProps = {
     allowHalf?: boolean;
     onChange?: (value: number) => void;
     name?: string;
-};
+    asFormField?: boolean;
+}
 export declare function Rate(props: RateProps): import("solid-js").JSX.Element;
-export {};

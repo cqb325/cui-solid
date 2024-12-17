@@ -1,5 +1,5 @@
 import type { TableStore } from '.';
-type HeadProps = {
+declare type HeadProps = {
     data: TableStore;
     sticky?: boolean;
     onInitColumnWidth: (idx: number, width: number) => void;

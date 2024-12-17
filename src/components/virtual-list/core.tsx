@@ -12,6 +12,7 @@ export interface VirtualListCoreProps {
     scrollElement: HTMLDivElement,
     contentElement: HTMLDivElement,
     bodyElement: HTMLDivElement,
+    displayDelay?: number,
     onScroll?: (scrollTop: number) => void,
     ref?: any
 }
@@ -217,18 +218,19 @@ export function VirtualListCore (props: VirtualListCoreProps) {
     }
 
     // 子元素项尺寸计算并重新计算offset
-    const measureElement = (el: Element, index: number) => {
-        const rect = el.getBoundingClientRect();
+    const measureElement = (el: HTMLElement, index: number) => {
+        const h = el.offsetHeight;
         const item = getMeasuredData(index);
         // 元素未显示或父元素未显示，则不进行计算
-        if (rect.height === 0) {
+        if (h === 0) {
             return;
         }
-        if (item && item.size === rect.height) {
+        if (item && item.size === h) {
             return;
         }
+
         if (item) {
-            item.size = rect.height;
+            item.size = h;
         }
         const itemCount = props.items.length;
         for (let i = index + 1; i < itemCount; i++) {
@@ -265,7 +267,12 @@ export function VirtualListCore (props: VirtualListCoreProps) {
     let indexes: number[] = [];
     // 子元素
     const getCurrentChildren = createMemo(() => {
+        const wrapRect = wrap.getBoundingClientRect();
         const [startIndex, endIndex] = getRangeToRender(Math.ceil(scrollOffset()));
+        // 高度为0可能是隐藏状态，不渲染
+        if (wrapRect.height === 0 && wrapRect.width === 0) {
+            return [];
+        }
         setStart({ value: startIndex });
 
         const items = [];
@@ -303,10 +310,33 @@ export function VirtualListCore (props: VirtualListCoreProps) {
         const ro = new ResizeObserver((entries) => {
             entries.forEach((entry) => onWrapEntry(entry));
         });
+
+        // 容器初始隐藏的情况下，不渲染，需要监听容器显示状态，显示后触发重新渲染，并停止监控
+        const wrapRect = wrap.getBoundingClientRect();
+        let observer: IntersectionObserver|null = null;
+        if (wrapRect.height === 0 && wrapRect.width === 0) {
+            observer = new IntersectionObserver((entries) => {
+                if (entries[0]?.isIntersecting) {
+                    queueMicrotask(()=> {
+                        setScrollOffset(scrollOffset() + 0.0000001);
+                        observer?.disconnect();
+                        observer = null;
+                    });
+                }
+            }, {
+                root: props.scrollElement,
+                threshold: 0.5,
+            });
+            observer.observe(props.contentElement)
+        }
+
+
         // 容器尺寸变化
         ro.observe(wrap);
         onCleanup(() => {
-            ro.unobserve(wrap);
+            ro.disconnect();
+            observer?.disconnect();
+            observer = null;
         });
 
         // 列表元素大小变化时，导致容器高度不够或超长问题

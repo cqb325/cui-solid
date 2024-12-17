@@ -8,9 +8,9 @@ export function InnerItem (props: BreadcrumbItemProps) {
     const classList = () => useClassList(props, 'cm-breadcrumb-item');
     return <span class="cm-breadcrumb-wrap">
         <a classList={classList()} href={props.link}>
-            <Space size={4}>
+            <Space size={4} align="center">
                 <Show when={local.icon}>
-                    <span>{local.icon}</span>
+                    {local.icon}
                 </Show>
                 <span>{local.children}</span>
             </Space>

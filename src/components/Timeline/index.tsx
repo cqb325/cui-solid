@@ -1,7 +1,7 @@
 import { useClassList } from "../utils/useProps"
 import { TimelineItem } from "./TimelineItem"
 
-type TimelineProps = {
+export interface TimelineProps {
     children?: any,
     classList?: any,
     class?: string,

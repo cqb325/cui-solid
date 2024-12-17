@@ -1,6 +1,5 @@
 import { BothSide, Space } from "@/components/Layout";
 import { Input } from "@/components/FormElements/Input";
-import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { For, createSignal } from "solid-js";
 import { Title } from "@/components/Typography/Title";
@@ -17,13 +16,20 @@ import { Option, OptionGroup, Select } from "@/components/FormElements/Select";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { FeatherTag } from "cui-solid-icons/feather";
+import { Avatar, Link, message } from "@/components";
+import { F7ChevronDown } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 export default function SelectPage () {
     const [city, setCity] = createSignal<number>();
 
     let select;
-    const largeArray = new Array(1000).fill(0).map((_, index) => ({value: index, num: 1 + Math.round(Math.random() * 20) }))
+    const largeArray = new Array(1000).fill(0).map((_, index) => ({
+        value: index,
+        num: 1 + Math.round(Math.random() * 20),
+        label: `${new Array(1 + Math.round(Math.random() * 20)).fill(true).map(() => 'Row').join(" ")} Row ` + index
+    }))
     const [filteredData, setFilteredData] = createSignal<any[]>([]);
     const [filteredData2, setFilteredData2] = createSignal<any[]>([]);
     const [loading, setLoading] = createSignal<boolean>(false);
@@ -44,6 +50,58 @@ export default function SelectPage () {
         setLoading(false)
     }
 
+    const list: any = {
+        component: [
+            { value: 'select', label: '选择器' },
+            { value: 'tabs', label: '标签' },
+            { value: 'avatar', label: '头像' },
+            { value: 'button', label: '按钮' },
+        ],
+        design: [
+            { value: 'color', label: '颜色' },
+            { value: 'dark', label: '暗色模式' },
+            { value: 'icon', label: '图标' },
+            { value: 'font', label: '字体' },
+        ],
+        feedback: [
+            { value: 'faq', label: '常见问题' },
+            { value: 'join', label: '加入用户群' },
+            { value: 'hornbill', label: '犀鸟反馈问题' },
+        ],
+    };
+    const [key, setKey] = createSignal<string>('component');
+
+    const tabOptions = [
+        { itemKey: 'component', label: '组件' },
+        { itemKey: 'design', label: '设计' },
+        { itemKey: 'feedback', label: '反馈' },
+    ];
+
+    const tabStyle = {
+        cursor: 'pointer',
+        'margin-right': '12px',
+        'padding-bottom': '4px',
+    };
+    const tabActiveStyle = {
+        ...tabStyle,
+        'border-bottom': '1px solid var(--cui-color-primary)',
+        'font-weight': 700,
+    };
+    const tabWrapper = {
+        display: 'flex',
+        'padding-top': '8px',
+        'padding-left': '16px',
+        'border-bottom': '0.5px solid var(--cui-color-border)',
+    };
+
+    const [list2, setList2] = createSignal([
+        {label: '北京', value: 1},
+        {label: '上海', value: 2},
+        {label: '杭州', value: 3},
+        {label: '武汉', value: 4},
+    ])
+    const [myVal, setMyVal] = createSignal();
+
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -52,13 +110,13 @@ export default function SelectPage () {
                 </Title>
                 <Space id="select_base" dir="v">
                     <Card bordered>
-                        <Input type="select">
+                        <Select>
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             基础用法
@@ -69,14 +127,14 @@ export default function SelectPage () {
 
                 <Space id="select_disabled" dir="v">
                     <Card bordered>
-                        <Input type="select" disabled/>
-                        <Input type="select">
+                        <Select disabled/>
+                        <Select>
                             <Option value={1} label="北京" />
                             <Option value={2} disabled label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             使用disabled禁用选择框
@@ -89,31 +147,31 @@ export default function SelectPage () {
                     <Card bordered>
                         <Row>
                             <Col grid={0.33}>
-                                <Input type="select" size="large">
+                                <Select size="large">
                                     <Option value={1} label="北京" />
                                     <Option value={2} label="上海" />
                                     <Option value={3} label="杭州" />
                                     <Option value={4} label="武汉" />
                                     <Option value={5} label="天津" />
-                                </Input>
+                                </Select>
                             </Col>
                             <Col grid={0.33}>
-                                <Input type="select">
+                                <Select>
                                     <Option value={1} label="北京" />
                                     <Option value={2} label="上海" />
                                     <Option value={3} label="杭州" />
                                     <Option value={4} label="武汉" />
                                     <Option value={5} label="天津" />
-                                </Input>
+                                </Select>
                             </Col>
                             <Col grid={0.33}>
-                                <Input type="select" size="small">
+                                <Select size="small">
                                     <Option value={1} label="北京" />
                                     <Option value={2} label="上海" />
                                     <Option value={3} label="杭州" />
                                     <Option value={4} label="武汉" />
                                     <Option value={5} label="天津" />
-                                </Input>
+                                </Select>
                             </Col>
                         </Row>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
@@ -126,13 +184,13 @@ export default function SelectPage () {
 
                 <Space id="select_clearable" dir="v">
                     <Card bordered>
-                        <Input type="select" clearable placeholder="请选择">
+                        <Select clearable placeholder="请选择">
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">可清空</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             设置 clearable 后选择框选择后可清空
@@ -144,13 +202,13 @@ export default function SelectPage () {
 
                 <Space id="select_multi" dir="v">
                     <Card bordered>
-                        <Input type="select" multi style={{'width': '200px'}}>
+                        <Select multi style={{'width': '200px'}} clearable>
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">多选</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             设置 multi 选择框可进行多选
@@ -162,13 +220,29 @@ export default function SelectPage () {
 
                 <Space id="select_showmax" dir="v">
                     <Card bordered>
-                        <Input type="select" multi showMax={2}>
+                        <Select multi showMax={2}>
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
+                        <Select multi showMax="auto" style={{'width': '205px'}} clearable>
+                            <Option value={1} label="北京" />
+                            <Option value={2} label="上海" />
+                            <Option value={3} label="杭州" />
+                            <Option value={4} label="武汉" />
+                            <Option value={5} label="天津" />
+                        </Select>
+                        <Select multi max={2} onExceed={() => {
+                            message.warning('超出限制')
+                        }} style={{'width': '205px'}} clearable>
+                            <Option value={1} label="北京" />
+                            <Option value={2} label="上海" />
+                            <Option value={3} label="杭州" />
+                            <Option value={4} label="武汉" />
+                            <Option value={5} label="天津" />
+                        </Select>
                         <Divider align="left"><Text type="primary">显示个数</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             多选场景下可限制最多显示个数， 超出的显示n+
@@ -180,13 +254,13 @@ export default function SelectPage () {
 
                 <Space id="select_valueClosable" dir="v">
                     <Card bordered>
-                        <Input type="select" multi showMax={2} valueClosable>
+                        <Select multi showMax={2} valueClosable>
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">值可关闭</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             设置 valueClosable 选中的值可消除
@@ -198,7 +272,7 @@ export default function SelectPage () {
 
                 <Space id="select_group" dir="v">
                     <Card bordered>
-                        <Input type="select" clearable >
+                        <Select clearable >
                             <OptionGroup label="直辖市" value={1}>
                                 <Option value={11} label="北京"/>
                                 <Option value={5} label="天津"/>
@@ -208,7 +282,7 @@ export default function SelectPage () {
                                 <Option value={31} label="杭州"/>
                             </OptionGroup>
                             <Option value={4} label="武汉"/>
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">分组显示</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             设置 data 中使用children进行分组
@@ -292,18 +366,20 @@ export default function SelectPage () {
 
                 <Space id="select_renderOption" dir="v">
                     <Card bordered>
-                        <Input type="select" clearable renderOption={(item: any) => {
+                        <Select clearable renderOption={(item: any) => {
                             return <BothSide>
-                                <div>{item.label}</div>
+                                <Space align="center">{item.avatar}{item.label}</Space>
                                 <div>{item.value}</div>
                             </BothSide>
+                        }} renderSelectedItem={(item?: any) => {
+                            return item ? <Space align="center">{item.avatar}{item.label}</Space> : '';
                         }}>
-                            <Option value={1} label="北京" />
-                            <Option value={2} label="上海" />
-                            <Option value={3} label="杭州" />
-                            <Option value={4} label="武汉" />
-                            <Option value={5} label="天津" />
-                        </Input>
+                            <Option value={1} label="北京" avatar={<Avatar size={24} style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>北</Avatar>}/>
+                            <Option value={2} label="上海" avatar={<Avatar size={24} style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>上</Avatar>}/>
+                            <Option value={3} label="杭州" avatar={<Avatar size={24} style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>杭</Avatar>}/>
+                            <Option value={4} label="武汉" avatar={<Avatar size={24} style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>武</Avatar>}/>
+                            <Option value={5} label="天津" avatar={<Avatar size={24} style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>天</Avatar>}/>
+                        </Select>
                         <Divider align="left"><Text type="primary">自定义渲染</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         renderOption 属性可以自定义选项的渲染方式
@@ -315,13 +391,13 @@ export default function SelectPage () {
 
                 <Space id="select_prefix" dir="v">
                     <Card bordered>
-                        <Input type="select" clearable prefix={<Icon name="tag"/>}>
+                        <Select clearable prefix={<FeatherTag />}>
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">前缀</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         prefix 属性可以添加前缀
@@ -332,13 +408,13 @@ export default function SelectPage () {
 
                 <Space id="select_emptyOption" dir="v">
                     <Card bordered>
-                        <Input type="select" clearable prefix={<Icon name="tag"/>} emptyOption="全部">
+                        <Select clearable prefix={<FeatherTag />} emptyOption="全部">
                             <Option value={1} label="北京" />
                             <Option value={2} label="上海" />
                             <Option value={3} label="杭州" />
                             <Option value={4} label="武汉" />
                             <Option value={5} label="天津" />
-                        </Input>
+                        </Select>
                         <Divider align="left"><Text type="primary">空选项</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         emptyOption 支持空选项,并指定文案
@@ -367,7 +443,7 @@ export default function SelectPage () {
                 <Space id="select_control" dir="v">
                     <Card bordered>
                         <Space>
-                            <Input type="select" value={[city, setCity]} clearable emptyOption="全部" onChange={(v: any) => {
+                            <Select value={[city, setCity]} clearable emptyOption="全部" onChange={(v: any) => {
                                 console.log(v);
                             }}>
                                 <Option value={1} label="北京" />
@@ -375,7 +451,7 @@ export default function SelectPage () {
                                 <Option value={3} label="杭州" />
                                 <Option value={4} label="武汉" />
                                 <Option value={5} label="天津" />
-                            </Input>
+                            </Select>
                             <Button type="primary" onClick={() => {
                                 setCity(2);
                             }}>改变值</Button>
@@ -388,22 +464,156 @@ export default function SelectPage () {
                     </Card>
                 </Space>
 
+                <Space id="select_status" dir="v">
+                    <Card bordered>
+                        <Space>
+                            <Select status="error">
+                                <Option value={1} label="北京" />
+                                <Option value={2} label="上海" />
+                                <Option value={3} label="杭州" />
+                                <Option value={4} label="武汉" />
+                                <Option value={5} label="天津" />
+                            </Select>
+                            <Select status="warning">
+                                <Option value={1} label="北京" />
+                                <Option value={2} label="上海" />
+                                <Option value={3} label="杭州" />
+                                <Option value={4} label="武汉" />
+                                <Option value={5} label="天津" />
+                            </Select>
+                        </Space>
+                        <Divider align="left"><Text type="primary">状态</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        状态
+                        </Paragraph>
+                        <DemoCode data={codes['select_control']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="select_footer" dir="v">
+                    <Card bordered>
+                        <Space>
+                            <Select footer={
+                                <div style={{
+                                    padding: '0 16px',
+                                    'background-color': 'var(--cui-color-fill-0)',
+                                    height: '36px',
+                                    display: 'flex',
+                                    "align-items": 'center',
+                                    cursor: 'pointer'
+                                }}><Link>查询更多信息</Link></div>
+                            }>
+                                <Option value={1} label="北京" />
+                                <Option value={2} label="上海" />
+                                <Option value={3} label="杭州" />
+                                <Option value={4} label="武汉" />
+                                <Option value={5} label="天津" />
+                                <Option value={5} label="成都" />
+                                <Option value={5} label="重庆" />
+                                <Option value={5} label="乌鲁木齐" />
+                                <Option value={5} label="台湾" />
+                            </Select>
+
+                            <Select header={
+                                <div style={tabWrapper}>
+                                    <For each={tabOptions}>
+                                        {
+                                            (item) => {
+                                                const style = () => item.itemKey === key() ? tabActiveStyle : tabStyle;
+                                                return <div style={style()} onClick={() => setKey(item.itemKey)}>
+                                                    {item.label}
+                                                </div>
+                                            }
+                                        }
+                                    </For>
+                                </div>
+                            } data={list[key()]} />
+                        </Space>
+                        <Divider align="left"><Text type="primary">footer</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        footer
+                        </Paragraph>
+                        <DemoCode data={codes['select_control']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="select_trigger" dir="v">
+                    <Card bordered>
+                        <Select triggerRender={(value) => {
+                            return <div style={{
+                                'min-width': '112px',
+                                height: '32px',
+                                display: 'flex',
+                                'align-items': 'center',
+                                'padding-left': '8px',
+                                'border-radius': '3px',
+                            }}>
+                                {value || '请选择'}
+                                <F7ChevronDown />
+                            </div>
+                        }} style={{width: '250px'}}>
+                            <Option value={1} label="北京" />
+                            <Option value={2} label="上海" />
+                            <Option value={3} label="杭州" />
+                            <Option value={4} label="武汉" />
+                            <Option value={5} label="天津" />
+                            <Option value={5} label="成都" />
+                            <Option value={5} label="重庆" />
+                            <Option value={5} label="乌鲁木齐" />
+                            <Option value={5} label="台湾" />
+                        </Select>
+                        <Divider align="left"><Text type="primary">triggerRender</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        triggerRender
+                        </Paragraph>
+                        <DemoCode data={codes['select_control']}/>
+                    </Card>
+                </Space>
+
                 <Space id="select_largelist" dir="v">
                     <Card bordered>
-                        <Input type="select" filter onChange={(v: any) => {
+                        <Select filter data={largeArray} onChange={(v: any) => {
                             console.log(v);
                         }}>
-                            <For each={largeArray}>
+                            {/* <For each={largeArray}>
                                 {(item, index) => {
                                     return <Option value={item.value} label={`${new Array(item.num).fill(true).map(() => 'Row').join(" ")} Row ` + index()} />
                                 }}
-                            </For>
-                        </Input>
+                            </For> */}
+                        </Select>
                         <Divider align="left"><Text type="primary">超大列表</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             支持超大列表
                         </Paragraph>
                         <DemoCode data={codes['select_largelist']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="select_trigger" dir="v">
+                    <Card bordered>
+                        <Select style={{width: '250px'}} value={[myVal, setMyVal]}>
+                            <For each={list2()}>{item => <Option value={item.value} label={item.label} />}</For>
+                        </Select>
+                        <Button onClick={() => {
+                            setMyVal(1);
+                        }}>设置值</Button>
+                        <Button onClick={() => {
+                            setList2([
+                                {value: 1, label: '天津'},
+                                {value: 2, label: '成都'},
+                                {value: 3, label: '重庆'},
+                                {value: 4, label: '乌鲁木齐'},
+                                {value: 5, label: '台湾'},
+                            ]);
+                        }}>设置数据</Button>
+                        <Divider align="left"><Text type="primary">先设置值再更新数据</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                        triggerRender
+                        </Paragraph>
+                        <DemoCode data={codes['select_control']}/>
                     </Card>
                 </Space>
 

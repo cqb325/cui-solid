@@ -1,7 +1,9 @@
+import { splitProps } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
 export function TableStyleLayoutRow (props: any) {
-    const classList = () => useClassList(props, 'cm-table-style-layout-row');
+    const [local, rest] = splitProps(props, ['class', 'classList']);
+    const classList = () => useClassList(local, 'cm-table-style-layout-row');
 
-    return <div classList={classList()}>{props.children}</div>
+    return <div classList={classList()} {...rest} />
 }

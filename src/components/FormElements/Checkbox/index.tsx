@@ -1,8 +1,9 @@
+import type { JSX} from "solid-js";
 import { splitProps} from "solid-js";
 import { InnerCheckbox } from '../../inner/Checkbox';
 import createField from '../../utils/createField';
 
-export type CheckboxProps = {
+export interface CheckboxProps {
     classList?: any,
     class?: any,
     checked?: any,
@@ -11,8 +12,9 @@ export type CheckboxProps = {
     onChange?: (checked: boolean, value: any) => void,
     value?: any,
     name?: string,
-    label?: string,
+    label?: JSX.Element,
     inner?: boolean
+    asFormField?: boolean
 }
 
 export function Checkbox (props: CheckboxProps){

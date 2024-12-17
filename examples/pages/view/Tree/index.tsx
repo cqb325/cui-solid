@@ -14,11 +14,12 @@ import { anchorData, codes, dataItemData, eventsData, propsData } from "./config
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { Icon, Input } from "@/components";
+import { Input } from "@/components";
 import arrow from './arrow.png';
 import { TreeCheckMod } from "@/components/Tree";
-import type { NodeKeyType, TreeInstanceProps, TreeNode } from "@/components/Tree";
+import type { NodeKeyType, TreeInstanceProps } from "@/components/Tree";
 import genData from './utils';
+import { FeatherBox, FeatherFileText, FeatherLoader } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 export default function TreePage () {
@@ -148,11 +149,11 @@ export default function TreePage () {
     ]
 
     const data13 = [
-        {id: 'beijing', title: '北京', icon: <Icon name="box1"/>, children: [
-            {id: 'gugong', title: '故宫', icon: <Icon name="file-text"/>},
-            {id: 'tiantan', title: '天坛', icon: <Icon name="file-text"/>},
+        {id: 'beijing', title: '北京', icon: <FeatherBox />, children: [
+            {id: 'gugong', title: '故宫', icon: <FeatherFileText />},
+            {id: 'tiantan', title: '天坛', icon: <FeatherFileText />},
         ]},
-        {id: 'zhejiang', title: '浙江', icon: <Icon name="loader"/>, children: [
+        {id: 'zhejiang', title: '浙江', icon: <FeatherLoader />, children: [
             {id: 'xihu', title: '西湖'},
             {id: 'linyin', title: '灵隐'},
         ]},
@@ -304,7 +305,7 @@ export default function TreePage () {
                         <Space dir="v">
                             <Input onChange={(keyword: string) => {
                                 treeSearch.filter(keyword);
-                            }}/>
+                            }} trigger="input"/>
                             <Tree ref={treeSearch} data={data12} checkable directory/>
                         </Space>
                         <Divider align="left"><Text type="primary">搜索</Text></Divider>

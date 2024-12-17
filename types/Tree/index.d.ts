@@ -1,8 +1,7 @@
-import type { Signal } from 'solid-js';
-import { type JSXElement } from 'solid-js';
+import type { Signal, JSXElement } from 'solid-js';
 import type { TreeCheckMod, TreeNode } from './store';
 export * from './store';
-export type NodeKeyType = string | number;
+export declare type NodeKeyType = string | number;
 export interface TreeContextProps {
     onOpenClose: (node: any) => void;
     onNodeSelect: (node: any) => void;

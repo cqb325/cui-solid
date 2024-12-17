@@ -7,6 +7,7 @@ import img1 from './1.jpg';
 import img2 from './2.jpg';
 import img3 from './3.jpg';
 import img4 from './4.jpg';
+import img5 from './5.jpg';
 import { createSignal } from "solid-js";
 import { Button } from "@/components/Button";
 import { Title } from "@/components/Typography/Title";
@@ -24,6 +25,18 @@ import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 useDirective(hljs);
 
+import t0 from './t0.png';
+import t1 from './t1.png';
+import t2 from './t2.png';
+import t3 from './t3.png';
+import t4 from './t4.png';
+import t5 from './t5.png';
+import t6 from './t6.png';
+import t7 from './t7.png';
+import t8 from './t8.png';
+
+const data = [t0, t1, t2, t3, t4, t5, t6, t7, t8];
+
 
 export default function CarouselPage (props: any) {
     const [index, setIndex] = createSignal(0);
@@ -35,7 +48,7 @@ export default function CarouselPage (props: any) {
                 </Title>
                 <Space id="carousel_base" dir="v">
                     <Card bordered>
-                        <Carousel>
+                        <Carousel draggable dir="h" effect="card" dotType="line" dotAlign="bottom" dotColor="red" dotActiveColor="green">
                             <Carousel.Item>
                                 <div class="demo-carousel">
                                     <Image src={img1} fit="cover"/>
@@ -56,6 +69,33 @@ export default function CarouselPage (props: any) {
                                     <Image src={img4} fit="cover"/>
                                 </div>
                             </Carousel.Item>
+                            <Carousel.Item>
+                                <div class="demo-carousel">
+                                    <Image src={img5} fit="cover"/>
+                                </div>
+                            </Carousel.Item>
+                        </Carousel>
+                        <Divider align="left"><Text type="primary">基本用法</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            基本用法
+                        </Paragraph>
+                        <DemoCode data={codes['carousel_base']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="carousel_card" dir="v">
+                    <Card bordered>
+                        <Carousel draggable arrow effect="card" style={{width: '600px'}}>
+                            {
+                                data.map((item, index) => {
+                                    return <Carousel.Item>
+                                        <div class="demo-carousel">
+                                            <Image src={item} fit="cover"/>
+                                        </div>
+                                    </Carousel.Item>
+                                })
+                            }
                         </Carousel>
                         <Divider align="left"><Text type="primary">基本用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">

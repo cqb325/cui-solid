@@ -1,4 +1,4 @@
-type MessageProps = {
+export interface MessageProps {
     key?: string;
     duration?: number;
     type?: 'info' | 'success' | 'warning' | 'error';
@@ -9,7 +9,7 @@ type MessageProps = {
     background?: any;
     loading?: boolean;
     onClose?: (item?: any) => void;
-};
+}
 export declare const message: {
     close: (key: string) => void;
     open: (config: string | MessageProps, type: 'info' | 'success' | 'warning' | 'error') => void;
@@ -18,4 +18,3 @@ export declare const message: {
     warning(config: string | MessageProps): void;
     error(config: string | MessageProps): void;
 };
-export {};

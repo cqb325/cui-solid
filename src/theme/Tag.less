@@ -1,10 +1,11 @@
-.cm-tag{
+.cm-tag {
     position: relative;
     display: inline-flex;
     flex-direction: row;
     height: 20px;
     cursor: pointer;
     align-self: center;
+
     &.cm-tag-border {
         .cm-tag-content {
             border-style: solid;
@@ -13,190 +14,217 @@
         }
     }
 
-    &.cm-tag-has-badge{
-        &:hover{
+    &.cm-tag-has-badge {
+        &:hover {
             .cm-tag-badge {
                 transform: translate(0, 0);
             }
         }
-        .cm-tag-content{
+
+        .cm-tag-content {
             border-radius: var(--cui-border-radius-mini) 0 0 var(--cui-border-radius-mini);
             border-right: 0;
-            &:hover{
+
+            &:hover {
                 opacity: 1;
             }
         }
     }
+
     &.cm-tag-large {
         height: 24px;
+
         .cm-tag-content {
             padding: 4px 8px;
         }
+
         .cm-avatar {
             height: 24px;
             width: 24px;
         }
+
         .cm-tag-badge-text {
             padding: 0 6px;
         }
+
         &.cm-tag-has-avatar {
             .cm-tag-content {
                 padding-left: 32px;
             }
         }
     }
+
     &.cm-tag-xlarge {
         height: 28px;
+
         .cm-tag-content {
             padding: 4px 8px;
             font-size: 14px;
         }
+
         .cm-avatar {
             height: 28px;
             width: 28px;
         }
+
         .cm-tag-badge-text {
             padding: 0 7px;
             font-size: 14px;
         }
+
         &.cm-tag-has-avatar {
             .cm-tag-content {
                 padding-left: 36px;
             }
         }
     }
-    &.cm-tag-primary{
-        .cm-tag-content{
+
+    &.cm-tag-primary {
+        .cm-tag-content {
             color: #fff;
             background-color: var(--cui-primary-color);
             border-color: var(--cui-primary-color);
         }
     }
 
-    &.cm-tag-success{
-        .cm-tag-content{
+    &.cm-tag-success {
+        .cm-tag-content {
             color: #fff;
-            background-color: var(--cui-success-color);
-            border-color: var(--cui-success-color);
+            background-color: var(--cui-color-success);
+            border-color: var(--cui-color-success);
         }
     }
 
-    &.cm-tag-danger{
-        .cm-tag-content{
+    &.cm-tag-danger {
+        .cm-tag-content {
             color: #fff;
-            background-color: var(--cui-error-color);
-            border-color: var(--cui-error-color);
+            background-color: var(--cui-color-error);
+            border-color: var(--cui-color-error);
         }
     }
 
-    &.cm-tag-warning{
-        .cm-tag-content{
+    &.cm-tag-warning {
+        .cm-tag-content {
             color: #fff;
-            background-color: var(--cui-warning-color);
-            border-color: var(--cui-warning-color);
+            background-color: var(--cui-color-warning);
+            border-color: var(--cui-color-warning);
         }
     }
 
-    &.cm-tag-info{
-        .cm-tag-content{
+    &.cm-tag-info {
+        .cm-tag-content {
             color: #fff;
-            background-color: var(--cui-info-color);
-            border-color: var(--cui-info-color);
+            background-color: var(--cui-color-info);
+            border-color: var(--cui-color-info);
         }
     }
-    &.cm-tag-magenta{
-        .cm-tag-content{
+
+    &.cm-tag-magenta {
+        .cm-tag-content {
             color: #eb2f96;
             background-color: #fff0f6;
             border-color: #ffadd2;
         }
     }
-    &.cm-tag-red{
-        .cm-tag-content{
+
+    &.cm-tag-red {
+        .cm-tag-content {
             color: #f5222d;
             background-color: #fff1f0;
             border-color: #ffa39e;
         }
     }
-    &.cm-tag-volcano{
-        .cm-tag-content{
+
+    &.cm-tag-volcano {
+        .cm-tag-content {
             color: #fa541c;
             background-color: #fff2e8;
             border-color: #ffbb96;
         }
     }
-    &.cm-tag-orange{
-        .cm-tag-content{
+
+    &.cm-tag-orange {
+        .cm-tag-content {
             color: #fa8c16;
             background-color: #fff7e6;
             border-color: #ffd591;
         }
     }
-    &.cm-tag-gold{
-        .cm-tag-content{
+
+    &.cm-tag-gold {
+        .cm-tag-content {
             color: #faad14;
             background-color: #fffbe6;
             border-color: #ffe58f;
         }
     }
-    &.cm-tag-yellow{
-        .cm-tag-content{
+
+    &.cm-tag-yellow {
+        .cm-tag-content {
             color: #fadb14;
             background-color: #feffe6;
             border-color: #fffb8f;
         }
     }
-    &.cm-tag-lime{
-        .cm-tag-content{
+
+    &.cm-tag-lime {
+        .cm-tag-content {
             color: #a0d911;
             background-color: #fcffe6;
             border-color: #eaff8f;
         }
     }
-    &.cm-tag-green{
-        .cm-tag-content{
+
+    &.cm-tag-green {
+        .cm-tag-content {
             color: #52c41a;
             background-color: #f6ffed;
             border-color: #b7eb8f;
         }
     }
-    &.cm-tag-cyan{
-        .cm-tag-content{
+
+    &.cm-tag-cyan {
+        .cm-tag-content {
             color: #13c2c2;
             background-color: #e6fffb;
             border-color: #87e8de;
         }
     }
-    &.cm-tag-blue{
-        .cm-tag-content{
+
+    &.cm-tag-blue {
+        .cm-tag-content {
             color: #1890ff;
             background-color: #e6f7ff;
             border-color: #91d5ff;
         }
     }
-    &.cm-tag-geekblue{
-        .cm-tag-content{
+
+    &.cm-tag-geekblue {
+        .cm-tag-content {
             color: #2f54eb;
             background-color: #f0f5ff;
             border-color: #adc6ff;
         }
     }
-    &.cm-tag-purple{
-        .cm-tag-content{
+
+    &.cm-tag-purple {
+        .cm-tag-content {
             color: #722ed1;
             background-color: #f9f0ff;
             border-color: #d3adf7;
         }
     }
 
-    &.cm-tag-circle{
-        .cm-tag-content{
+    &.cm-tag-circle {
+        .cm-tag-content {
             border-radius: 26px;
         }
+
         .cm-avatar {
             border-radius: 12px;
         }
     }
+
     .cm-avatar {
         width: 20px;
         height: 20px;
@@ -205,18 +233,21 @@
         left: 0;
         z-index: 2;
         border-radius: var(--cui-border-radius-mini) 0 0 var(--cui-border-radius-mini);
-        > * {
+
+        >* {
             line-height: 16px;
         }
     }
+
     &.cm-tag-has-avatar {
         .cm-tag-content {
             padding-left: 26px;
         }
     }
 }
+
 .cm-tag-content {
-    color: rgba(var(--semi-grey-8),1);
+    color: rgba(var(--semi-grey-8), 1);
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
@@ -236,33 +267,37 @@
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
     opacity: 1;
     white-space: nowrap;
-    &:hover{
+
+    &:hover {
         opacity: 0.8;
     }
 
-    .cm-tag-close{
-        color: rgba(var(--semi-grey-8),1);
+    .cm-tag-close {
+        color: rgba(var(--semi-grey-8), 1);
         transition: all .3s;
         width: 12px;
         font-size: 12px;
         display: block;
-        &:hover{
-            color: rgba(var(--semi-grey-8),1);
+
+        &:hover {
+            color: rgba(var(--semi-grey-8), 1);
         }
     }
 
-    &.cm-tag-closing{
+    &.cm-tag-closing {
         transform: scaleX(0);
         transform-origin: 0 center;
     }
 }
+
 .cm-tag-text {
     display: flex;
     height: 0;
     align-items: center;
     line-height: 1px;
 }
-.cm-tag-badge{
+
+.cm-tag-badge {
     display: inline-flex;
     height: 100%;
     background: var(--cui-primary-color-hover);
@@ -273,13 +308,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     // transform: translate(-90%, 0);
-    .cm-tag-badge-text{
+    .cm-tag-badge-text {
         display: inline-block;
         padding: 0 4px;
         font-size: 12px;
     }
 }
+
 .cm-tag-group-more-wrap,
 .cm-tag-group {
     display: inline-flex;
@@ -287,11 +324,31 @@
     align-items: center;
     gap: 5px;
 }
+
+.cm-tag-group {
+    flex-wrap: wrap;
+    width: 100%;
+
+    &.cm-tag-group-overflow {
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+}
+
+.cm-tag-group-more-wrap {
+    flex-wrap: wrap;
+}
+
+.cm-tag-group-more-popover {
+    min-width: 200px;
+}
+
 .cm-tag-more {
     span {
         display: inline-flex;
         align-self: end;
     }
+
     .cm-tag-content {
         border-color: transparent;
         background-color: transparent;

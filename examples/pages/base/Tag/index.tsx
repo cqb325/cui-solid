@@ -15,11 +15,12 @@ import { CompAnchor } from "../../common/CompAnchor";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Slider } from "@/components";
 useDirective(hljs);
 
 export default function TagPage () {
     const [visible, setVisible] = createSignal(true);
-
+    const [width, setWidth] = createSignal(40);
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -156,7 +157,7 @@ export default function TagPage () {
                 <Space id="tag_group" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Space dir="v">
+                            <Space dir="v" align="baseline">
                                 <div style={{'background-color': 'var(--cui-color-fill-0)', padding: '5px'}}>
                                     <TagGroup data={[
                                         {id: '1', title: '标签一'},
@@ -175,10 +176,40 @@ export default function TagPage () {
                                         {id: '2', title: '标签二'},
                                         {id: '3', title: '标签三'},
                                         {id: '4', title: '标签四'},
-                                    ]} closable max={2}/>
+                                        {id: '5', title: '标签五'},
+                                        {id: '6', title: '标签六'},
+                                        {id: '7', title: '标签七'},
+                                    ]} closable showMore max={2} tooltipTrigger="click"/>
+                                </div>
+                                <div style={{'background-color': 'var(--cui-color-fill-0)', padding: '5px'}}>
+                                    <TagGroup data={[
+                                        {id: '1', title: '标签一'},
+                                        {id: '2', title: '标签二'},
+                                        {id: '3', title: '标签三'},
+                                        {id: '4', title: '标签四'},
+                                        {id: '5', title: '标签五'},
+                                        {id: '6', title: '标签六'},
+                                        {id: '7', title: '标签七'},
+                                    ]} closable showMore max={2} tooltipTrigger="click" moreCloseable/>
                                 </div>
                             </Space>
                         </Space>
+
+                        <div style={{'background-color': 'var(--cui-color-fill-0)', padding: '5px', 'margin-top': '5px', width: `${width()}%`}}>
+                            <TagGroup data={[
+                                {id: '1', title: '标签一'},
+                                {id: '2', title: '标签二'},
+                                {id: '3', title: '标签三'},
+                                {id: '4', title: '标签四'},
+                                {id: '5', title: '标签五'},
+                                {id: '6', title: '标签六'},
+                                {id: '7', title: '标签七'},
+                                {id: '8', title: '标签八'},
+                                {id: '9', title: '标签九'},
+                                {id: '10', title: '标签十'},
+                            ]} closable showMore max="auto" tooltipTrigger="click"/>
+                        </div>
+                        <Slider value={[width, setWidth]}/>
                         <Divider align="left"><Text type="primary">标签组</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         标签组

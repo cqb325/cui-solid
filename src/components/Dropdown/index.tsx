@@ -1,5 +1,5 @@
 import type { Signal } from "solid-js";
-import { createComputed, createContext, createSignal, createUniqueId, onCleanup, onMount, Show, useContext } from "solid-js";
+import { createComputed, createContext, createSignal, createUniqueId, For, onCleanup, onMount, Show, splitProps, useContext } from "solid-js";
 import { isServer, Portal } from "solid-js/web";
 import { useClassList } from "../utils/useProps";
 import createModel from "../utils/createModel";
@@ -9,6 +9,11 @@ import { useClickOutside } from "../utils/useClickOutside";
 import usezIndex from "../utils/usezIndex";
 import { useTransition } from "../utils/useTransition";
 import { useMoveObserver } from "../utils/useMoveObserver";
+import { isColor } from "../utils/utils";
+import type { DropdownItemProps } from "./DropdownItem";
+import { DropdownItem } from "./DropdownItem";
+import { DropdownMenu } from "./DropdownMenu";
+import { useDebounce } from "../utils/useDebounce";
 
 export * from './DropdownMenu';
 export * from './DropdownItem';
@@ -22,46 +27,60 @@ export interface DropdownPosition {
     y: number
 }
 
-export type DropdownProps = {
+export interface DropdownNode extends DropdownItemProps {
+    title: string
+    children?: DropdownNode[]
+    [key: string]: any
+}
+
+export interface DropdownProps {
     trigger?: 'hover' | 'click' | 'contextMenu' | 'custom',
-    align?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'right' | 'left' | 'rightTop' | 'leftTop',
+    align?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'right' | 'rightBottom' | 'left' | 'leftBottom' | 'top' |'topLeft'|'topRight'| 'rightTop' | 'leftTop',
     classList?: any,
     class?: any,
     style?: any,
-    onSelect?: (name: string) => void,
+    onSelect?: (name: string, data: any) => void,
     children: any,
     menu?: any,
     visible?: boolean | Signal<any>,
     transfer?: boolean,
-    theme?: 'dark' | 'light',
+    theme?: string|'dark'|'light'|'primary'|'success'|'warning'|'error'|'info'|'blue'|'green'|'red'|'yellow'|'pink'|'magenta'|'volcano'|'orange'|'gold'|'lime'|'cyan'|'geekblue'|'purple',
+    data?: DropdownNode[]
     disabled?: boolean,
     revers?: boolean,
     handler?: string,
     fixWidth?: boolean,
     gradient?: string[],
     color?: string,
+    arrow?: boolean
+    offset?: number
     position?: DropdownPosition,
     ref?: any,
     onMouseClick?: (e: MouseEvent) => void,
     onBeforeDrop?: (visible: boolean) => boolean,
 }
 
-export function Dropdown(props: DropdownProps) {
+export function Dropdown (props: DropdownProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
     const [opened, setOpened] = createSignal(visible());
     const [_, setUpdate] = createSignal("");
     let targetEle: any;
     let target: any;
+    const offset = () => props.offset || 0;
+    let nextElementSibling: any;
     const trigger = props.trigger || 'hover';
     let timer: any;
     const align = props.align || 'bottom';
+    const [placement, setPlacement] = createSignal(align);
     let wrap: any;
     const zindex = usezIndex();
     const revers = props.revers ?? true;
+    const theme = isColor(props.theme) ? '' : props.theme;
     const classList = () => useClassList(props, 'cm-dropdown', {
-        // 'cm-dropdown-open': visible(),
-        [`cm-dropdown-${props.theme}`]: props.theme,
+        [`cm-dropdown-${theme}`]: theme,
+        'cm-dropdown-with-arrow': props.arrow,
     });
+    let lastEventTriggerTarget: any;
 
     let cleanup: any = null;
     const transition = useTransition({
@@ -87,7 +106,6 @@ export function Dropdown(props: DropdownProps) {
         const v = visible();
         if (v) {
             transition.enter();
-            // props.onShow && props.onShow();
         } else {
             transition.leave();
         }
@@ -103,6 +121,9 @@ export function Dropdown(props: DropdownProps) {
 
     // 点击显示
     const onMouseClick = (e: any) => {
+        if (!nextElementSibling.contains(e.target)) {
+            return false;
+        }
         if (props.handler) {
             const te = document.querySelector(props.handler);
             if (!te) {
@@ -110,10 +131,6 @@ export function Dropdown(props: DropdownProps) {
             }
             if (!e.target.closest(props.handler) && !te.contains(e.target)) {
                 return;
-            }
-        } else {
-            if (!target.nextElementSibling.contains(e.target)) {
-                return false;
             }
         }
 
@@ -128,7 +145,14 @@ export function Dropdown(props: DropdownProps) {
 
         const ret = props.onBeforeDrop && props.onBeforeDrop(visible());
         if (ret === undefined || ret) {
-            setVisible(!visible());
+            // 触发的对象不一致，则重新定位，可能是使用handle进行触发,有多个触发元素的情况
+            if (lastEventTriggerTarget !== e.target.closest(props.handler)) {
+                setUpdate(createUniqueId());
+            }
+            setVisible(true);
+            if (props.handler) {
+                lastEventTriggerTarget = e.target.closest(props.handler);
+            }
         }
     }
 
@@ -193,11 +217,29 @@ export function Dropdown(props: DropdownProps) {
         }
     }
 
+    const getPositionByPlacement = (align: DropdownProps['align'], te: any) => {
+        const parent = te.offsetParent;
+        if (!parent) {
+            return;
+        }
+        const parentPos = parent.getBoundingClientRect();
+        const pos: any = useAlignPostion(align as string, te);
+        if (props.transfer) {
+            const targetReact = te.getBoundingClientRect();
+            pos.top = pos.top + document.documentElement.scrollTop;
+            pos.left = pos.left + document.documentElement.scrollLeft;
+            props.fixWidth ? pos['min-width'] = targetReact.width + 'px' : false;
+        } else {
+            pos.top = pos.top + parent.scrollTop - parentPos.top;
+            pos.left = pos.left + parent.scrollLeft - parentPos.left;
+        }
+        return pos;
+    }
+
     const posStyle = () => {
-        opened()
         _();
-        if (target && target.nextElementSibling) {
-            let te = target.nextElementSibling;
+        if (opened() && nextElementSibling) {
+            let te = nextElementSibling;
             if (props.handler) {
                 te = targetEle?.closest(props.handler);
             }
@@ -213,11 +255,15 @@ export function Dropdown(props: DropdownProps) {
                     left: props.position.x + 'px',
                     top: props.position.y + 'px'
                 };
-                Object.assign(pos, props.style || {});
+                Object.assign(pos, props.style || {}, {
+                    '--cui-dropdown-background-color': isColor(props.theme) ? props.theme : '',
+                    '--cui-dropdown-text-color': props.color,
+                    '--cui-dropdown-offset': `${offset()}px`,
+                });
                 return pos;
             }
             const parentPos = parent.getBoundingClientRect();
-            const pos: any = useAlignPostion(align, te);
+            let pos: any = useAlignPostion(align, te);
             const originTop = pos.top;
             const originLeft = pos.left;
             if (props.transfer) {
@@ -241,24 +287,38 @@ export function Dropdown(props: DropdownProps) {
             const targetRect = te.getBoundingClientRect();
 
             if (revers) {
+                let newAlign: DropdownProps['align'] = align;
                 if (h > containerHeight) {
                     if (align === 'bottom' || align === 'bottomLeft' || align === 'bottomRight') {
-                        pos.top = pos.top - rect.height - targetRect.height - 12;
-                    } else if (align === 'left' || align === 'right') {
-                        pos.top = pos.top - (rect.height - targetRect.height) / 2;
-                    } else if (align === 'leftTop' || align === 'rightTop') {
-                        pos.top = pos.top - (rect.height - targetRect.height);
+                        newAlign = align.replace('bottom', 'top') as DropdownProps['align'];
+                    } else if (align === 'leftTop' || align === 'left') {
+                        newAlign = 'leftBottom' as DropdownProps['align'];
+                    } else if (align === 'right' || align === 'rightTop') {
+                        newAlign = 'rightBottom' as DropdownProps['align'];
                     }
                 }
                 // align 为 top bottom topLeft bottomLeft right rightTop rightBottom 存在该情况
                 if (w > containerWidth - 5) {
-                    if (align === 'bottom') {
-                        pos.left = pos.left - (rect.width - targetRect.width) / 2;
-                    } else if (align === 'bottomLeft') {
-                        pos.left = pos.left - rect.width + targetRect.width;
-                    } else if (align === 'right' || align === 'rightTop') {
-                        pos.left = pos.left - rect.width - targetRect.width;
+                    if (align === 'bottom' || align === 'bottomLeft') {
+                        // pos.left = pos.left - (rect.width - targetRect.width) / 2;
+                        newAlign = 'bottomRight' as DropdownProps['align'];
+                    } else if (align === 'top' || align === 'topLeft') {
+                        // pos.left = pos.left - rect.width + targetRect.width;
+                        newAlign = 'topRight' as DropdownProps['align'];
+                    } else if (align === 'right') {
+                        // pos.left = pos.left - rect.width - targetRect.width;
+                        newAlign = 'left' as DropdownProps['align'];
+                    } else if (align === 'rightTop') {
+                        // pos.left = pos.left - rect.width - targetRect.width;
+                        newAlign = 'leftTop' as DropdownProps['align'];
                     }
+                }
+                if (newAlign !== align) {
+                    pos = getPositionByPlacement(newAlign, te);
+                    setPlacement(newAlign!);
+                } else {
+                    pos = getPositionByPlacement(align, te);
+                    setPlacement(align);
                 }
             }
             pos.top = pos.top + 'px'
@@ -266,7 +326,11 @@ export function Dropdown(props: DropdownProps) {
 
             pos['z-index'] = zindex;
 
-            Object.assign(pos, props.style || {});
+            Object.assign(pos, props.style || {}, {
+                '--cui-dropdown-background-color': isColor(props.theme) ? props.theme : '',
+                '--cui-dropdown-text-color': props.color,
+                '--cui-dropdown-offset': `${offset()}px`,
+            });
 
             return pos;
         }
@@ -279,23 +343,24 @@ export function Dropdown(props: DropdownProps) {
     })
 
     // 响应尺寸变化更新位置
-    const onWrapEntry = async (entry: ResizeObserverEntry) => {
+    const onWrapEntry = useDebounce((entry: ResizeObserverEntry) => {
         setUpdate(createUniqueId());
-    }
+    }, 100);
 
     let removeClickOutside: () => void;
     onMount(() => {
         if (isServer) return;
-        if (target.nextElementSibling) {
+        nextElementSibling = target.nextElementSibling;
+        target.parentNode.removeChild(target);
+        if (nextElementSibling) {
             if (trigger === 'hover') {
-                target.nextElementSibling.addEventListener('mouseenter', onMouseEnter, false);
-                target.nextElementSibling.addEventListener('mouseleave', onMouseLeave, false);
+                nextElementSibling.addEventListener('mouseenter', onMouseEnter, false);
+                nextElementSibling.addEventListener('mouseleave', onMouseLeave, false);
             }
             if (trigger === 'click' || trigger === 'custom') {
                 document.addEventListener('click', onMouseClick);
-                // target.nextElementSibling.addEventListener('click', onMouseClick);
                 if (trigger === 'click') {
-                    const other = props.handler ? target.nextElementSibling.querySelectorAll(props.handler) : target.nextElementSibling;
+                    const other = props.handler ? nextElementSibling.querySelectorAll(props.handler) : nextElementSibling;
                     removeClickOutside = useClickOutside([wrap, other], () => {
                         setVisible(false);
                     });
@@ -303,8 +368,7 @@ export function Dropdown(props: DropdownProps) {
             }
             if (trigger === 'contextMenu') {
                 document.addEventListener('contextmenu', onMouseClick);
-                // target.nextElementSibling.addEventListener('contextmenu', onMouseClick);
-                const other = props.handler ? target.nextElementSibling.querySelectorAll(props.handler) : target.nextElementSibling;
+                const other = props.handler ? nextElementSibling.querySelectorAll(props.handler) : nextElementSibling;
                 removeClickOutside = useClickOutside([wrap, other], () => {
                     setVisible(false);
                 });
@@ -314,7 +378,7 @@ export function Dropdown(props: DropdownProps) {
                 entries.forEach((entry) => onWrapEntry(entry));
             });
             // 目标元素尺寸变化需要更新位置
-            ro.observe(target.nextElementSibling);
+            ro.observe(nextElementSibling);
             // 清除监听
             onCleanup(() => {
                 ro.disconnect();
@@ -324,18 +388,16 @@ export function Dropdown(props: DropdownProps) {
 
     onCleanup(() => {
         if (isServer) return;
-        if (target.nextElementSibling) {
+        if (nextElementSibling) {
             if (trigger === 'hover') {
-                target.nextElementSibling.removeEventListener('mouseenter', onMouseEnter);
-                target.nextElementSibling.removeEventListener('mouseleave', onMouseLeave);
+                nextElementSibling.removeEventListener('mouseenter', onMouseEnter);
+                nextElementSibling.removeEventListener('mouseleave', onMouseLeave);
             }
             if (trigger === 'click' || trigger === 'custom') {
                 document.removeEventListener('click', onMouseClick);
-                // target.nextElementSibling.removeEventListener('click', onMouseClick, false);
             }
             if (trigger === 'contextMenu') {
                 document.removeEventListener('contextmenu', onMouseClick);
-                // target.nextElementSibling.removeEventListener('contextmenu', onMouseClick, false);
             }
         }
         removeClickOutside && removeClickOutside();
@@ -344,10 +406,28 @@ export function Dropdown(props: DropdownProps) {
         }
     });
 
-    const onSelect = (name: string) => {
-        props.onSelect && props.onSelect(name);
+    const onSelect = (name: string, data?: any) => {
+        props.onSelect && props.onSelect(name, data);
         wrap.removeEventListener('mouseleave', onMouseLeave);
         setVisible(false);
+    }
+
+    const renderMenu = (arr?: DropdownNode[]) => {
+        if (arr) {
+            return <DropdownMenu>
+                <For each={arr}>
+                    {(item) => {
+                        const [p, rest] = splitProps(item, ['children', 'title']);
+                        return <DropdownItem {...rest} data={item} arrow={!!p.children?.length}>
+                            {p.title}
+                            <Show when={p.children?.length}>
+                                {renderMenu(p.children!)}
+                            </Show>
+                        </DropdownItem>}}
+                </For>
+            </DropdownMenu>
+        }
+        return null;
     }
 
     const id = 'cm-dropdown-portal';
@@ -356,17 +436,33 @@ export function Dropdown(props: DropdownProps) {
         {props.children}
         <Show when={props.transfer} fallback={
             <DropdownContext.Provider value={{ onSelect, gradient: props.gradient, color: props.color }}>
-                <div style={posStyle()} classList={classList()} x-placement={align}
+                <div style={posStyle()} classList={classList()} x-placement={placement()}
                     onMouseEnter={onMouseEnter} ref={wrap}>
                     {props.menu}
+                    {renderMenu(props.data)}
+                    {
+                        props.arrow ? <svg width="24" height="8" xmlns="http://www.w3.org/2000/svg" class="cm-dropdown-arrow">
+                            <path d="M0.5 0L1.5 0C1.5 4, 3 5.5, 5 7.5S8,10 8,12S7 14.5, 5 16.5S1.5,20 1.5,24L0.5 24L0.5 0z" opacity="1" />
+                            <path d="M0 0L1 0C1 4, 2 5.5, 4 7.5S7,10 7,12S6 14.5, 4 16.5S1,20 1,24L0 24L0 0z" />
+                        </svg>
+                        : null
+                    }
                 </div>
             </DropdownContext.Provider>
         }>
             <Portal mount={usePortal(id, id)}>
                 <DropdownContext.Provider value={{ onSelect, gradient: props.gradient, color: props.color }}>
-                    <div style={posStyle()} classList={classList()} x-placement={align}
+                    <div style={posStyle()} classList={classList()} x-placement={placement()}
                         onMouseEnter={onMouseEnter} ref={wrap}>
                         {props.menu}
+                        {renderMenu(props.data)}
+                        {
+                            props.arrow ? <svg width="24" height="8" xmlns="http://www.w3.org/2000/svg" class="cm-dropdown-arrow">
+                                <path d="M0.5 0L1.5 0C1.5 4, 3 5.5, 5 7.5S8,10 8,12S7 14.5, 5 16.5S1.5,20 1.5,24L0.5 24L0.5 0z" opacity="1" />
+                                <path d="M0 0L1 0C1 4, 2 5.5, 4 7.5S7,10 7,12S6 14.5, 4 16.5S1,20 1,24L0 24L0 0z" />
+                            </svg>
+                            : null
+                        }
                     </div>
                 </DropdownContext.Provider>
             </Portal>

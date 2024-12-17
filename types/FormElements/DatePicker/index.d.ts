@@ -1,5 +1,5 @@
 import type { JSXElement, Signal } from "solid-js";
-type DatepickerProps = {
+export interface DatepickerProps {
     classList?: any;
     class?: any;
     style?: any;
@@ -24,12 +24,12 @@ type DatepickerProps = {
     revers?: boolean;
     placeholder?: string;
     stick?: boolean;
-};
-export type DatepickerStore = {
+    asFormField?: boolean;
+}
+export interface DatepickerStore {
     currentMonth: Date[];
     range: Date[];
     hoverDate?: Date;
-};
+}
 export declare function Datepicker(props: DatepickerProps): import("solid-js").JSX.Element;
 export declare const useDatepickerContext: () => unknown;
-export {};

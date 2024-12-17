@@ -2,9 +2,9 @@ import { Match, Show, Switch, createEffect, onMount } from "solid-js";
 import { InnerCheckbox } from "../inner/Checkbox";
 import type { ColumnProps } from ".";
 import { useTableContext } from ".";
-import { Icon } from "../Icon";
 import { Popover } from "../Popover";
 import dayjs from "dayjs";
+import { FeatherChevronDown, FeatherChevronRight, FeatherChevronUp, FeatherMinusSquare, FeatherPlusSquare } from 'cui-solid-icons/feather';
 
 export function Cell (props: any) {
     let cell: any;
@@ -78,8 +78,10 @@ export function Cell (props: any) {
     }
 
     // 树型图标
-    const treeIcon = (): string => {
-        return props.data._showChildren ? 'minus-square' : 'plus-square';
+    const treeIcon = () => {
+        return props.data._showChildren
+            ? <FeatherMinusSquare class="cm-table-tree-icon" onClick={onShowChildren}/>
+            : <FeatherPlusSquare class="cm-table-tree-icon" onClick={onShowChildren}/>;
     }
 
     // 选择框选择事件
@@ -137,10 +139,10 @@ export function Cell (props: any) {
                 return props.data.render ? props.data.render() : null;
             }
             if (column.type === 'expand') {
-                return <Icon name="chevron-right" class={`cm-table-expand ${props.data._expand ? 'cm-table-expand-open' : ''}`} onClick={onExpand}/>;
+                return <FeatherChevronRight class={`cm-table-expand ${props.data._expand ? 'cm-table-expand-open' : ''}`} onClick={onExpand}/>;
             }
             if (column.render && typeof column.render === 'function') {
-                return column.render(props.data[column.name], column, props.data);
+                return column.render(props.data[column.name], column, props.data, props.index);
             }
             return props.data[column.name];
         } else {
@@ -158,8 +160,8 @@ export function Cell (props: any) {
                     {text()}
                     <Show when={col.sort}>
                         <span class="cm-table-sort">
-                            <Icon name="chevron-up" class={col.sortType === 'asc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'asc')}/>
-                            <Icon name="chevron-down" class={col.sortType === 'desc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'desc')}/>
+                            <FeatherChevronUp class={col.sortType === 'asc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'asc')}/>
+                            <FeatherChevronDown class={col.sortType === 'desc' ? 'cm-table-sort-active' : ''} onClick={onSort.bind(null, 'desc')}/>
                         </span>
                     </Show>
                     <Show when={col.resize && col.width && ctx && ctx.border}>
@@ -176,12 +178,12 @@ export function Cell (props: any) {
                         <Show when={props.data.children && props.data.children.length} fallback={
                             <span class="cm-table-tree-icon-empty" />
                         }>
-                            <Icon name={treeIcon()} class="cm-table-tree-icon" onClick={onShowChildren}/>
+                            {treeIcon()}
                         </Show>
                     </Show>
                     <Show when={col.ellipsis || col.tooltip} fallback={text()}>
                         <Show when={col.tooltip} fallback={<span class="cm-table-cell-ellipsis">{text()}</span>}>
-                            <Popover arrow align={col.tooltipAlign || 'top'} theme={col.tooltipTheme}
+                            <Popover arrow align={col.tooltipAlign || 'top'} color={col.tooltipTheme}
                                 class="cm-table-cell-tooltip"
                                 style={{...col.tooltipStyle, "max-width": `${col.tooltipMaxWidth || 200}px`}}
                                 content={<div>{text()}</div>}>

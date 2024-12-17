@@ -1,6 +1,6 @@
 import { Show } from "solid-js";
 
-type SelectOptions = {
+type SelectInnerOptions = {
     data: any,
     checked?: boolean,
     disabled?: boolean,
@@ -13,7 +13,7 @@ type SelectOptions = {
     renderOption?: (item: any) => any
 }
 
-export function Option (props: SelectOptions) {
+export function Option (props: SelectInnerOptions) {
     const classList = () => ({
         'cm-select-option': true,
         'cm-select-group-wrap': props.data.group,

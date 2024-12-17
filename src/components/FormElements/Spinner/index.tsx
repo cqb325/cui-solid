@@ -1,10 +1,10 @@
-import { InnerInput } from "../Input/input";
-import { Icon } from "../../Icon";
+import { Input } from "../Input";
 import { useClassList } from "../../utils/useProps";
 import createField from "../../utils/createField";
 import type { Signal } from "solid-js";
+import { FeatherChevronDown, FeatherChevronUp } from "cui-solid-icons/feather";
 
-type SpinnerProps = {
+export interface SpinnerProps {
     classList?: any,
     class?: string,
     size?: 'small'|'default'|'large',
@@ -20,6 +20,7 @@ type SpinnerProps = {
     onPlus?: (value: number, step: number) => void,
     onSub?: (value: number, step: number) => void,
     disabled?: boolean
+    asFormField?: boolean
 }
 export function Spinner (props: SpinnerProps) {
     const classList = () => useClassList(props, 'cm-spinner', {
@@ -127,14 +128,14 @@ export function Spinner (props: SpinnerProps) {
         return (num1 * m + num2 * m) / m;
     }
 
-    return <InnerInput classList={classList()} style={props.style} size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} notCreateFiled value={[value, setValue]}
+    return <Input classList={classList()} style={props.style} size={props.size} placeholder={props.placeholder} disabled={props.disabled} onInput={_onInput} value={[value, setValue]}
         onChange={_onChange} onKeyDown={_onKeyDown} append={
             <>
                 <span class="cm-spinner-plus" onClick={plus}>
-                    <Icon name="chevron-up" size={12}/>
+                    <FeatherChevronUp />
                 </span>
                 <span class="cm-spinner-subs" onClick={sub}>
-                    <Icon name="chevron-down" size={12}/>
+                    <FeatherChevronDown />
                 </span>
             </>
         }/>

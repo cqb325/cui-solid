@@ -1,10 +1,9 @@
-import { createUniqueId } from "solid-js"
 import { VirtualListCore } from "./core";
 import { isServer } from "solid-js/web";
 
 export * from './core';
 
-const CONTAINER_CLASSNAME = `cm-virtual-${createUniqueId()}`
+const CONTAINER_CLASSNAME = `cm-virtual-list`
 let globalContainerStylesheet: HTMLStyleElement;
 
 const insertGlobalStylesheet = () => {
@@ -45,7 +44,8 @@ export interface VirtualListProps {
     items: any[],
     onScroll?: (scrollTop: number) => void,
     itemComponent: CustomComponentProps, // 列表项组件
-    ref?: any
+    ref?: any,
+    displayDelay?: number,
 }
 
 export interface MeasuredData {
@@ -56,7 +56,7 @@ export interface IMeasuredDataMap {
     [key: number]: MeasuredData
 }
 
-export function VirtualList(props: VirtualListProps) {
+export function VirtualList (props: VirtualListProps) {
     insertGlobalStylesheet();
     let scrollElement: any;
     let contentElement: any;

@@ -1,8 +1,5 @@
-export interface TableStyleLayoutColProps {
+import { type JSX } from "solid-js";
+export interface TableStyleLayoutColProps extends JSX.HTMLAttributes<HTMLDivElement> {
     flex?: number;
-    children?: any;
-    classList?: any;
-    class?: string;
-    style?: any;
 }
-export declare function TableStyleLayoutCol(props: TableStyleLayoutColProps): import("solid-js").JSX.Element;
+export declare function TableStyleLayoutCol(props: TableStyleLayoutColProps): JSX.Element;

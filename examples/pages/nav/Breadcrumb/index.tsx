@@ -1,6 +1,5 @@
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { View, Space } from "@/components/Layout";
-import { Icon } from "@/components/Icon";
+import { Space } from "@/components/Layout";
 import { Title } from "@/components/Typography/Title";
 import { Card } from "@/components/Card";
 import { Divider } from "@/components/Divider";
@@ -12,6 +11,7 @@ import { CompAnchor } from "../../common/CompAnchor";
 import { propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { F7House, F7LogoApple } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 function BreadcrumbDemo () {
@@ -38,8 +38,8 @@ function BreadcrumbDemo () {
                 <Space id="breadcrumb_icon" dir="v">
                     <Card bordered>
                         <Breadcrumb>
-                            <Breadcrumb.Item icon={<Icon name="anchor" size={12}/>}>首页</Breadcrumb.Item>
-                            <Breadcrumb.Item icon={<Icon name="dashboard" size={12}/>} link="#/nav/breadcrumb">面板</Breadcrumb.Item>
+                            <Breadcrumb.Item icon={<F7House />}>首页</Breadcrumb.Item>
+                            <Breadcrumb.Item icon={<F7LogoApple />} link="#/nav/breadcrumb">面板</Breadcrumb.Item>
                             <Breadcrumb.Item>管理</Breadcrumb.Item>
                         </Breadcrumb>
                         <Divider align="left"><Text type="primary">带图标</Text></Divider>

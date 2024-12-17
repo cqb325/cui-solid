@@ -1,4 +1,4 @@
-interface CountDownProps {
+export interface CountDownProps {
     classList?: any;
     class?: string;
     style?: any;
@@ -9,4 +9,3 @@ interface CountDownProps {
     onEnd?: () => void;
 }
 export declare function CountDown(props: CountDownProps): import("solid-js").JSX.Element;
-export {};

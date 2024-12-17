@@ -1,7 +1,7 @@
 import { Show } from "solid-js";
 import { useClassList } from "../utils/useProps"
 
-type BadgeProps = {
+export interface BadgeProps {
     classList?: any,
     class?: string,
     count?: number,

@@ -1,5 +1,5 @@
 import type { Signal } from "solid-js";
-type SpinnerProps = {
+export interface SpinnerProps {
     classList?: any;
     class?: string;
     size?: 'small' | 'default' | 'large';
@@ -15,6 +15,6 @@ type SpinnerProps = {
     onPlus?: (value: number, step: number) => void;
     onSub?: (value: number, step: number) => void;
     disabled?: boolean;
-};
+    asFormField?: boolean;
+}
 export declare function Spinner(props: SpinnerProps): import("solid-js").JSX.Element;
-export {};

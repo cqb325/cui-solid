@@ -1,5 +1,7 @@
+import type { JSX } from "solid-js";
+import type { AnchorLinkProps } from './AnchorLink';
 import { AnchorLink } from './AnchorLink';
-type AnchorProps = {
+export interface AnchorProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
     children?: any;
     classList?: any;
     class?: string;
@@ -11,9 +13,17 @@ type AnchorProps = {
     showInk?: boolean;
     mode?: 'hash' | 'history';
     onChange?: (id: string) => void;
-};
-export declare function Anchor(props: AnchorProps): import("solid-js").JSX.Element;
+}
+export interface AnchorStore {
+    inkTop: number;
+    inkHeight: number;
+    currentId: string;
+    currentLink: string;
+    animating: boolean;
+    links: AnchorLinkProps[];
+    upperFirstTitle?: boolean;
+}
+export declare function Anchor(props: AnchorProps): JSX.Element;
 export declare namespace Anchor {
     var Link: typeof AnchorLink;
 }
-export {};

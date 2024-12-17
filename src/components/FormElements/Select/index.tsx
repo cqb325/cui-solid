@@ -6,45 +6,55 @@ import { EmptyOption } from './EmptyOption';
 import { Value } from '../../inner/Value';
 import createField from "../../utils/createField";
 import { useClassList } from '../../utils/useProps';
-import { Icon } from '../../Icon';
-import type { TagConfig } from '../../TagGroup';
+import type { TagConfig, TagGroupProps } from '../../TagGroup';
 import { Dropdown } from '../../Dropdown';
 import type { SelectOptionProps } from './Option';
 import { VirtualList } from '../../virtual-list';
+import { Exception, NO_DATA_IMAGE } from '../../Exception';
+import { FeatherChevronDown } from 'cui-solid-icons/feather';
 export * from './Option'
 export * from './OptionGroup'
 
-type SelectOptions = {
-    name?: string,
-    value?: any,
-    disabled?: boolean,
-    size?: 'small' | 'large',
-    clearable?: boolean,
-    multi?: boolean,
-    prefix?: any,
-    style?: any,
-    placeholder?: string,
-    data?: Array<any>,
-    textField?: string,
-    valueField?: string,
-    class?: any,
-    classList?: any,
-    filter?: boolean,
-    renderOption?: (data: any) => any,
-    ref?: any,
-    emptyOption?: any,
-    onChange?: (value: any, option?: any) => void,
-    showMax?: number,
-    valueClosable?: boolean,
-    transfer?: boolean,
-    align?: 'bottomLeft' | 'bottomRight',
-    showMore?: boolean,
-    loading?: boolean,
-    children?: any,
-    remoteMethod?: (queryStr: any) => void,
-    maxHeight?: number,
+export interface SelectOptions {
+    name?: string
+    value?: any
+    disabled?: boolean
+    size?: 'small' | 'large'
+    clearable?: boolean
+    multi?: boolean
+    prefix?: any
+    style?: any
+    placeholder?: string
+    data?: Array<any>
+    textField?: string
+    valueField?: string
+    class?: any
+    classList?: any
+    filter?: boolean
+    renderOption?: (data: any) => any
+    renderSelectedItem?: (data: any) => JSXElement
+    ref?: any
+    emptyText?: string
+    emptyOption?: any
+    onChange?: (value: any, option?: any) => void
+    showMax?: TagGroupProps['max']
+    max?: number
+    status?: 'warning'|'error'
+    footer?: JSXElement
+    header?: JSXElement
+    triggerRender?: (text: string|JSXElement|any[]) => JSXElement
+    onExceed?: () => void
+    valueClosable?: boolean
+    transfer?: boolean
+    align?: 'bottomLeft' | 'bottomRight'
+    showMore?: boolean
+    loading?: boolean
+    children?: any
+    remoteMethod?: (queryStr: any) => void
+    maxHeight?: number
     debounceTime?: number
-    defaultLabel?: string | string[],
+    asFormField?: boolean
+    defaultLabel?: string | string[]
 }
 
 export function Select (props: SelectOptions) {
@@ -56,6 +66,8 @@ export function Select (props: SelectOptions) {
     const items = children(() => props.children)
     const evaluatedItems = () => items.toArray() as unknown as SelectOptionProps[];
     const [value, setValue] = createField<any>(props, props.multi ? [] : '');
+    const allTextNodes: Node[] = [];
+    let filterWrap: any;
 
     let initLabels: any[] = [];
     if (props.filter && props.defaultLabel) {
@@ -68,7 +80,7 @@ export function Select (props: SelectOptions) {
         }
     }
     let isClickChanging = true;
-    const [query, setQuery] = createSignal(props.filter && props.multi ? '' : props.defaultLabel);
+    const [query, setQuery] = createSignal('');
     // 当单选且有默认label时先禁止查询，后放开
     queueMicrotask(() => {
         isClickChanging = false;
@@ -83,6 +95,7 @@ export function Select (props: SelectOptions) {
         'cm-select-multi': props.multi,
         'cm-select-open': open(),
         'cm-select-with-prefix': props.prefix,
+        [`cm-select-status-${props.status}`]: props.status,
         // 'cm-select-hasEmptyOption': !props.multi && hasEmptyOption
     });
 
@@ -101,7 +114,7 @@ export function Select (props: SelectOptions) {
 
     // 传入的data变化同步更新
     const newData: Accessor<any[]> = createMemo<any[]>(() => {
-        const data = evaluatedItems();
+        const data = props.data || evaluatedItems() || [];
         dataMap = {};
         const newData: any[] = [];
         if (props.emptyOption) {
@@ -123,6 +136,7 @@ export function Select (props: SelectOptions) {
     createEffect(() => {
         const val = untrack(() => value());
         setStore("list", newData());
+        const labels: string[] = [];
         setStore(
             'list',
             item => item,
@@ -132,8 +146,12 @@ export function Select (props: SelectOptions) {
                 } else {
                     item._checked = val === item[valueField];
                 }
+                if (item._checked) {
+                    labels.push(item);
+                }
             }),
         );
+        setShowLabels(labels);
     })
 
     // 将选中的数据同步至store的数据项中
@@ -164,7 +182,7 @@ export function Select (props: SelectOptions) {
                 return;
             }
         }
-        let arr: any[] = showLabels();
+        let arr: any[] = untrack(() => showLabels());
         if (props.multi) {
             let val = value();
             const index = val.indexOf(v);
@@ -172,6 +190,10 @@ export function Select (props: SelectOptions) {
                 val.splice(index, 1);
                 arr.splice(index, 1);
             } else {
+                if (props.max && val.length >= props.max) {
+                    props.onExceed?.();
+                    return;
+                }
                 val = [...val]
                 val.push(v);
                 arr.push(option);
@@ -185,7 +207,8 @@ export function Select (props: SelectOptions) {
             isClickChanging = true;
             arr = [option]
             setValue(v);
-            setQuery(option[textField]);
+            setQuery('');
+            // setQuery(option[textField]);
             setShowLabels([...arr]);
             Promise.resolve().then(() => {
                 isClickChanging = false;
@@ -195,18 +218,21 @@ export function Select (props: SelectOptions) {
         }
     }
 
-    const labels = () => {
+    const labels = createMemo(() => {
         const arr: any[] = [];
         const showLabelsData = showLabels();
         showLabelsData.map(item => {
-            arr.push({ id: item[valueField], title: item[textField] });
+            arr.push({ data: item, id: item[valueField], title: item[textField] });
         });
         if (props.multi) {
-            return arr.length ? arr : (props.emptyOption ? [{ id: '', title: props.emptyOption }] : []);
+            return arr.length ? arr.map(item => {
+                item.title = props.renderSelectedItem?.(item.data) || item.title;
+                return item;
+            }) : (props.emptyOption ? [{ id: '', title: props.renderSelectedItem?.(null) || props.emptyOption }] : []);
         } else {
-            return arr.length ? arr[0].title : (props.emptyOption ? props.emptyOption : '');
+            return arr.length ? (props.renderSelectedItem?.(arr[0].data) || arr[0].title) : (props.emptyOption ? props.emptyOption : '');
         }
-    }
+    });
 
     // 清空数据
     const onClear = (e: any) => {
@@ -225,11 +251,11 @@ export function Select (props: SelectOptions) {
     // 过滤查询
     createEffect(() => {
         const queryStr = query();
-        if (isClickChanging) {
-            return;
-        }
         // 远程查询
         if (props.remoteMethod) {
+            if (isClickChanging) {
+                return;
+            }
             if (queryStr) {
                 initLabels = [];
                 clearTimeout(debounceTimer);
@@ -247,26 +273,88 @@ export function Select (props: SelectOptions) {
                     item._show = item[textField].indexOf(queryStr) > -1;
                 }),
             );
+            // 高亮搜索字符
+            queueMicrotask(() => {
+                buildNodes();
+                hilightKeyword(queryStr as string);
+            })
         }
     })
 
-    createEffect(() => {
-        if (!open() && props.filter) {
-            if (!props.multi) {
-                const labels = untrack(() => showLabels());
-                const queryStr = untrack(() => query());
-                if (labels.length && labels[0][textField] !== queryStr) {
-                    isClickChanging = true;
-                    setQuery(labels[0][textField]);
-                    queueMicrotask(() => {
-                        isClickChanging = false;
-                    })
-                }
-            } else {// 多选关闭的时候过滤值置空
-                setQuery('');
-            }
+    /**
+     * 构建搜索的节点
+     * @returns
+     */
+    const buildNodes = () => {
+        // 不支持高亮则返回
+        if (!CSS.highlights) {
+            return;
         }
-    })
+
+        const treeWalker = document.createTreeWalker(filterWrap, NodeFilter.SHOW_TEXT);
+        let currentNode = treeWalker.nextNode()
+        while (currentNode) {
+            allTextNodes.push(currentNode)
+            currentNode = treeWalker.nextNode()
+        }
+    }
+
+    // 高亮关键字
+    const hilightKeyword = (queryStr: string) => {
+        // 不支持高亮则返回
+        if (!CSS.highlights) {
+            return;
+        }
+
+        CSS.highlights.delete('cm-search-results');
+
+        const str = queryStr.trim().toLowerCase();
+        if (!str) {
+            return
+        }
+
+        const ranges = allTextNodes
+            .map((el) => {
+                return { el, text: el.textContent?.toLowerCase() }
+            })
+            .map(({ text, el }) => {
+                const indices = []
+                let startPos = 0
+                while (text && startPos < text.length) {
+                    const index = text.indexOf(str, startPos)
+                    if (index === -1) break
+                    indices.push(index)
+                    startPos = index + str.length
+                }
+                return indices.map((index) => {
+                    const range = new Range()
+                    range.setStart(el, index)
+                    range.setEnd(el, index + str.length)
+                    return range
+                })
+            });
+
+        const searchResultsHighlight = new window.Highlight(...ranges.flat());
+        CSS.highlights.set('cm-search-results', searchResultsHighlight)
+    }
+
+    // createEffect(() => {
+    //     if (!open() && props.filter) {
+    //         if (!props.multi) {
+    //             const labels = untrack(() => showLabels());
+    //             const queryStr = untrack(() => query());
+    //             if (labels.length && labels[0][textField] !== queryStr) {
+    //                 isClickChanging = true;
+    //                 // setQuery(labels[0][textField]);
+    //                 queueMicrotask(() => {
+    //                     isClickChanging = false;
+    //                 })
+    //             }
+    //         } else {// 多选关闭的时候过滤值置空
+    //             setQuery('');
+    //         }
+    //     }
+    // })
 
     // 多选场景下删除value
     const onValueClose = (item: TagConfig, e: any) => {
@@ -307,44 +395,45 @@ export function Select (props: SelectOptions) {
     return <div classList={classList()} style={props.style} ref={wrap}>
         <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
             menu={<div class="cm-select-options-wrap">
-                <div class="cm-select-options" style={{ 'max-height': props.maxHeight ? `${props.maxHeight}px` : '' }}>
-                    {/* {
-                    props.filter ? <div class='cm-select-filter-wrap'>
-                        <InnerInput notCreateFiled class='cm-select-filter' trigger='input' size='small' clearable value={[query, setQuery]} onInput={onFilter}/>
-                    </div>
+                {
+                    props.header
+                    ? <div class="cm-select-header">{props.header}</div>
                     : null
-                } */}
+                }
+                <div class="cm-select-options" style={{ 'max-height': props.maxHeight ? `${props.maxHeight}px` : '' }}>
                     <Show when={!props.loading} fallback={<div class="cm-select-loading">加载中</div>}>
-                        <ul class="cm-select-option-list">
-                            {/* <VirtualList items={displayItems()} itemEstimatedSize={30} maxHeight={200}>
-                                {(props: any): JSXElement => {
-                                    const item = props.item;
-                                    if (item.emptyOption) {
-                                        return <EmptyOption visible data={{ label: item[textField], value: '' }} checked={value() === ''} onClick={onClear} />
-                                    } else {
-                                        return <Option ref={props.ref} renderOption={props.renderOption} visible={item._show} disabled={item.disabled} data={item} checked={item._checked}
-                                            textField={textField} valueField={valueField} onClick={(v: any) => onOptionClick(v, item)} />
+                        <ul class="cm-select-option-list" ref={filterWrap}>
+                            <Show when={displayItems().length} fallback={
+                                <Exception width={100} type="empty" typeImage={NO_DATA_IMAGE} desc={props.emptyText}/>
+                            }>
+                                <VirtualList items={displayItems()} itemEstimatedSize={30} maxHeight={props.maxHeight ?? 200} itemComponent={{
+                                    component: OptionWrap,
+                                    props: {
+                                        textField, valueField,
+                                        renderOption: props.renderOption,
+                                        onClear,
+                                        onOptionClick,
+                                        value,
                                     }
-                                }}
-                            </VirtualList> */}
-                            <VirtualList items={displayItems()} itemEstimatedSize={30} maxHeight={props.maxHeight ?? 200} itemComponent={{
-                                component: OptionWrap,
-                                props: {
-                                    textField, valueField,
-                                    renderOption: props.renderOption,
-                                    onClear,
-                                    onOptionClick,
-                                    value,
-                                }
-                            }} />
+                                }} />
+                            </Show>
                         </ul>
                     </Show>
                 </div>
+                {
+                    props.footer
+                    ? <div class="cm-select-footer">{props.footer}</div>
+                    : null
+                }
             </div>}>
-            <Value text={labels()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
-                valueClosable={props.valueClosable || (props.filter)} clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
-                prepend={props.prefix} size={props.size} icon={<Icon name="chevron-down" class="cm-select-cert" />} onClose={onValueClose}
-                query={[query, setQuery]} filter={props.filter} onDeleteLastValue={onDeleteLastValue} />
+            <Show when={props.triggerRender} fallback={
+                <Value text={labels()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
+                    valueClosable={props.valueClosable || (props.filter)} clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
+                    prepend={props.prefix} size={props.size} icon={<FeatherChevronDown class="cm-select-cert"/>} onClose={onValueClose}
+                    query={[query, setQuery]} filter={props.filter} onDeleteLastValue={onDeleteLastValue} />
+            }>
+                <span class="cm-select-trigger">{props.triggerRender?.(labels())}</span>
+            </Show>
         </Dropdown>
 
     </div>

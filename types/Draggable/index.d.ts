@@ -1,5 +1,5 @@
 import type { DraggableData } from './utils';
-type DraggableProps = {
+export interface DraggableProps {
     classList?: any;
     class?: string;
     defaultPosition?: any;
@@ -17,6 +17,5 @@ type DraggableProps = {
     disabled?: boolean;
     handle?: string | HTMLElement;
     children?: any;
-};
+}
 export declare function Draggable(props: DraggableProps): import("solid-js").JSX.Element;
-export {};

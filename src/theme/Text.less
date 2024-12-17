@@ -18,6 +18,7 @@
         color: var(--cui-color-link);
         cursor: pointer;
         text-decoration: none;
+
         &:hover {
             color: var(--cui-color-link-hover);
         }
@@ -25,7 +26,7 @@
             text-decoration: none;
             color: var(--cui-color-link-active);
         }
-        .cm-icon {
+        .cui-icon {
             margin-right: 3px;
         }
     }
@@ -44,15 +45,15 @@
 }
 .cm-typograghy-paragraph-warning,
 .cm-text-warning {
-    color: var(--cui-warning-color);
+    color: var(--cui-color-warning);
 }
 .cm-typograghy-paragraph-error,
 .cm-text-error {
-    color: var(--cui-error-color);
+    color: var(--cui-color-error);
 }
 .cm-typograghy-paragraph-success,
 .cm-text-success {
-    color: var(--cui-success-color);
+    color: var(--cui-color-success);
 }
 .cm-typograghy-paragraph-disabled,
 .cm-text-disabled {
@@ -171,9 +172,15 @@ p.cm-typograghy-extended {
 }
 
 .cm-typograghy-copy {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
     cursor: pointer;
     color: var(--cui-primary-color);
 }
 .cm-typograghy-copyed {
-    color: var(--cui-success-color);
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    color: var(--cui-color-success);
 }

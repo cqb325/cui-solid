@@ -1,5 +1,5 @@
-import type { JSXElement } from "solid-js";
-import { For, children, createEffect, onCleanup, onMount, untrack } from "solid-js";
+import type { JSX, JSXElement } from "solid-js";
+import { For, children, createEffect, onCleanup, onMount, splitProps, untrack } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useClassList } from "../utils/useProps"
 import { scrollTop } from "../utils/utils";
@@ -8,7 +8,7 @@ import type { AnchorLinkProps } from './AnchorLink';
 import { AnchorLink } from './AnchorLink';
 import { isServer } from "solid-js/web";
 
-type AnchorProps = {
+export interface AnchorProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'>{
     children?: any,
     classList?: any,
     class?: string,
@@ -22,7 +22,7 @@ type AnchorProps = {
     onChange?: (id: string) => void,
 }
 
-type AnchorStore = {
+export interface AnchorStore {
     inkTop: number,
     inkHeight: number,
     currentId: string,
@@ -32,10 +32,11 @@ type AnchorStore = {
     upperFirstTitle?: boolean
 }
 
-export function Anchor(props: AnchorProps) {
-    const classList = () => useClassList(props, 'cm-anchor');
+export function Anchor (props: AnchorProps) {
+    const [local, rest] = splitProps(props, ['children', 'classList', 'class', 'container', 'scrollContainer', 'scrollOffset', 'offsetTop', 'bounds', 'showInk', 'mode', 'onChange']);
+    const classList = () => useClassList(local, 'cm-anchor');
 
-    const links = children(() => props.children)
+    const links = children(() => local.children)
     const evaluatedLinks = () => links.toArray() as unknown as AnchorLinkProps[]
 
     const [store, setStore] = createStore({
@@ -53,16 +54,16 @@ export function Anchor(props: AnchorProps) {
     })
 
     createEffect(() => {
-        props.onChange?.(store.currentId);
+        local.onChange?.(store.currentId);
     })
 
     let scrollContainer: any = null;
     let scrollElement: any = null;
     let wrapperTop = 0;
-    const bounds: number = props.bounds || 5;
+    const bounds: number = local.bounds || 5;
     let titlesOffsetArr: any = [];
-    const mode = props.mode ?? 'hash';
-    const showInk = props.showInk ?? false;
+    const mode = local.mode ?? 'hash';
+    const showInk = local.showInk ?? false;
 
     const handleHashChange = () => {
         let sharpLinkMatch: any;
@@ -111,7 +112,7 @@ export function Anchor(props: AnchorProps) {
     const handleScrollTo = () => {
         const anchor = document.getElementById(store.currentId);
         const currentLinkElementA: any = document.querySelector(`a[data-href="${store.currentLink}"]`);
-        let offset = props.scrollOffset || 0;
+        let offset = local.scrollOffset || 0;
         if (currentLinkElementA) {
             offset = parseFloat(currentLinkElementA.getAttribute('data-scroll-offset'));
         }
@@ -133,7 +134,7 @@ export function Anchor(props: AnchorProps) {
         const elementAHeight = currentLinkElementA.getBoundingClientRect().height;
         const offset = elementAHeight / 4;
 
-        const top = (elementATop < 0 ? (props.offsetTop || 0) : elementATop);
+        const top = (elementATop < 0 ? (local.offsetTop || 0) : elementATop);
         untrack(() => {
             setStore('inkTop', top + offset / 2);
             setStore('inkHeight', elementAHeight * 3 / 4);
@@ -141,8 +142,8 @@ export function Anchor(props: AnchorProps) {
     })
 
     const getContainer = () => {
-        scrollContainer = props.container ? (typeof props.container === 'string' ? document.querySelector(props.container) : props.container) : window;
-        scrollElement = props.container ? scrollContainer : (document.documentElement || document.body);
+        scrollContainer = local.container ? (typeof local.container === 'string' ? document.querySelector(local.container) : local.container) : window;
+        scrollElement = local.container ? scrollContainer : (document.documentElement || document.body);
     }
 
     const getCurrentScrollAtTitleId = (scrollTop: number) => {
@@ -271,7 +272,7 @@ export function Anchor(props: AnchorProps) {
             return <For each={arr}>
                 {(link: AnchorLinkProps) => {
                     return <div class="cm-anchor-link">
-                        <a class="cm-anchor-link-title" href={link.href} data-scroll-offset={props.scrollOffset || 0} data-href={link.href}
+                        <a class="cm-anchor-link-title" href={link.href} data-scroll-offset={local.scrollOffset || 0} data-href={link.href}
                             onClick={(e: any) => {
                                 gotoAnchor(link.href, e);
                             }} title={link.title as string}>{link.title}</a>
@@ -286,7 +287,7 @@ export function Anchor(props: AnchorProps) {
         }
     }
 
-    return <div classList={classList()}>
+    return <div classList={classList()} {...rest}>
         <div class="cm-anchor-wrapper">
             <div class="cm-anchor-inner">
                 <div class={"cm-anchor-ink " + (showInk ? 'cm-anchor-show' : '')}>

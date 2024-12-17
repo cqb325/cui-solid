@@ -1,7 +1,6 @@
 import { createSignal } from "solid-js";
 import { Button } from "@/components/Button";
 import { Upload } from "@/components/FormElements/Upload";
-import { Icon } from "@/components/Icon";
 import { Space } from "@/components/Layout";
 import { Title } from "@/components/Typography/Title";
 import './style.less'
@@ -15,6 +14,8 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { FeatherPlus, FeatherUpload } from "cui-solid-icons/feather";
+import { F7CloudUploadFill } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 export default function UploadPage () {
@@ -39,7 +40,7 @@ export default function UploadPage () {
                             }} onError={(e: any) => {
                                 console.log(e);
                             }}>
-                            <Button icon={<Icon name="upload"/>} type="primary">Upload Files</Button>
+                            <Button icon={<FeatherUpload />} type="primary">Upload Files</Button>
                         </Upload>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -70,7 +71,7 @@ export default function UploadPage () {
                             }} onError={(e: any) => {
                                 console.log(e);
                             }}>
-                            <Button icon={<Icon name="upload"/>} type="primary">Upload Files</Button>
+                            <Button icon={<FeatherUpload />} type="primary">Upload Files</Button>
                         </Upload>
                         <Divider align="left"><Text type="primary">默认列表</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -87,7 +88,7 @@ export default function UploadPage () {
                         <Space dir="v">
                             <Upload action="https://cqb325.gitee.io/cui-solid-doc/" name="file" type="drag" data={data()} headers={headers} accept="jpg">
                                 <div class="cm-upload-drag-wrap">
-                                    <Icon name="upload" size={32}/>
+                                    <F7CloudUploadFill size={32} color="#1890ff" />
                                     <p>Click or drag files here to upload</p>
                                 </div>
                             </Upload>
@@ -115,7 +116,7 @@ export default function UploadPage () {
                                         url: 'https://cqb325.gitee.io/cui-solid-doc/logo.svg',
                                     }
                                 ]}>
-                                    <Icon name="plus1" size={20}/>
+                                    <FeatherPlus size={24}/>
                             </Upload>
                         </Space>
                         <Divider align="left"><Text type="primary">照片墙</Text></Divider>
@@ -145,7 +146,7 @@ export default function UploadPage () {
                             }} onError={(e: any) => {
                                 console.log(e);
                             }}>
-                                <Button icon={<Icon name="upload"/>} type="primary">Upload Files</Button>
+                                <Button icon={<FeatherUpload />} type="primary">Upload Files</Button>
                         </Upload>
 
                         <Button type="primary" onClick={() => {

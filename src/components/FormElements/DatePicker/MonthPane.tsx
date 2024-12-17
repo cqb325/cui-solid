@@ -1,8 +1,8 @@
 import { Show } from "solid-js";
 import { useDatepickerContext } from ".";
 import { Button } from "../../Button";
-import { Icon } from "../../Icon";
 import { Cell } from "./Cell";
+import { FeatherChevronLeft } from "cui-solid-icons/feather";
 
 export function MonthPane (props: any) {
     const [store, setStore] = props.store;
@@ -70,7 +70,7 @@ export function MonthPane (props: any) {
     return <div class="cm-date-picker-month">
         <Show when={props.type === 'date' || props.type === 'dateRange' || props.type === 'dateTime' || props.type === 'dateTimeRange'}>
             <div class="cm-date-picker-month-header">
-                <Button type="text" onClick={onBack} ghost icon={<Icon name="chevron-left" size={16}/>}>返回选择日期</Button>
+                <Button class="cm-date-picker-month-back-btn" theme="borderless" onClick={onBack} icon={<FeatherChevronLeft size={16}/>}>返回选择日期</Button>
             </div>
         </Show>
         <div class="cm-date-picker-month-body">

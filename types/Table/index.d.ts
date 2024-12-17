@@ -1,7 +1,7 @@
 import type { JSXElement, Signal } from "solid-js";
 import type { PopoverProps } from "../Popover";
-type KeyType = string | number;
-type TableProps = {
+declare type KeyType = string | number;
+export interface TableProps {
     columns: any[];
     data: any[];
     rowKey?: string;
@@ -29,8 +29,8 @@ type TableProps = {
     footer?: JSXElement;
     empty?: JSXElement;
     virtual?: boolean;
-};
-export type TableStore = {
+}
+export declare type TableStore = {
     columns: ColumnProps[];
     columnsRows: any[];
     data: any[];
@@ -46,10 +46,10 @@ export type TableStore = {
     startX: number;
     resizeId?: string;
 };
-export type ColumnProps = {
+export interface ColumnProps {
     name?: string;
     title?: string | JSXElement;
-    render?: (value: any, column: any, row: any) => any;
+    render?: (value: any, column: any, row: any, index: number) => any;
     type?: 'index' | 'date' | 'datetime' | 'enum' | 'checkbox' | 'expand';
     width?: string;
     minWidth?: number;
@@ -64,7 +64,7 @@ export type ColumnProps = {
     ellipsis?: boolean;
     tooltip?: boolean;
     tooltipAlign?: PopoverProps['align'];
-    tooltipTheme?: PopoverProps['theme'];
+    tooltipTheme?: PopoverProps['color'];
     tooltipMaxWidth?: number;
     tooltipStyle?: any;
     fixedLeftLast?: boolean;
@@ -77,7 +77,7 @@ export type ColumnProps = {
     id: string;
     _index: number;
     _: string;
-};
+}
 export declare function Table(props: TableProps): import("solid-js").JSX.Element;
 export declare const useTableContext: () => unknown;
 export {};

@@ -4,11 +4,11 @@ import { InnerCheckbox } from "../../inner/Checkbox";
 import { ListItem } from "./ListItem";
 import type { SetStoreFunction} from "solid-js/store";
 import { produce } from "solid-js/store";
-import { InnerInput } from "../Input/input";
-import { Icon } from "../../Icon";
+import { Input } from "../Input";
 import type { TransferStore } from ".";
+import { FeatherSearch } from "cui-solid-icons/feather";
 
-type TransferListProps = {
+export interface TransferListProps {
     width?: number,
     height?: number,
     store?: any,
@@ -130,7 +130,7 @@ export function List (props: TransferListProps) {
         <div class="cm-transfer-list-body">
             <Show when={props.filter}>
                 <div class="cm-transfer-filter-wrap">
-                    <InnerInput append={<Icon name="search"/>} size="small" onInput={onFilter}/>
+                    <Input append={<FeatherSearch/>} size="small" onInput={onFilter}/>
                 </div>
             </Show>
             <div class="cm-transfer-list-content">

@@ -1,4 +1,4 @@
-type ListItemProps = {
+export interface ListItemProps {
     id: string | number;
     data?: any;
     style?: any;
@@ -8,6 +8,5 @@ type ListItemProps = {
     children?: any;
     title?: any;
     desc?: any;
-};
+}
 export declare function Item(props: ListItemProps): import("solid-js").JSX.Element;
-export {};

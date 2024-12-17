@@ -1,5 +1,5 @@
 import type { Signal } from "solid-js";
-type ListProps = {
+export interface ListProps {
     classList?: any;
     class?: string;
     border?: boolean;
@@ -8,15 +8,16 @@ type ListProps = {
     head?: any;
     foot?: any;
     children?: any;
+    selectable?: boolean;
     onSelect?: (item: any) => void;
-};
-export type ListContextProps = {
+}
+export interface ListContextProps {
     signal: Signal<any>;
+    selectable?: boolean;
     onSelect?: (item: any) => void;
-};
+}
 export declare function List(props: ListProps): import("solid-js").JSX.Element;
 export declare namespace List {
     var Item: typeof import("./Item").Item;
 }
 export declare const useListContext: () => ListContextProps | undefined;
-export {};

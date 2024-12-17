@@ -1,10 +1,7 @@
-export interface TableStyleLayoutLabelProps {
+import { type JSX } from "solid-js";
+export interface TableStyleLayoutLabelProps extends JSX.HTMLAttributes<HTMLDivElement> {
     verticalAlign?: 'start' | 'center' | 'end';
     width?: number;
     required?: boolean;
-    children?: any;
-    classList?: any;
-    class?: string;
-    style?: any;
 }
-export declare function TableStyleLayoutLabel(props: TableStyleLayoutLabelProps): import("solid-js").JSX.Element;
+export declare function TableStyleLayoutLabel(props: TableStyleLayoutLabelProps): JSX.Element;

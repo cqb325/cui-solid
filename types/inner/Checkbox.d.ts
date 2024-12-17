@@ -1,4 +1,5 @@
-type InnerCheckboxProps = {
+import type { JSX } from "solid-js";
+export interface InnerCheckboxProps {
     classList?: any;
     class?: any;
     checked?: any;
@@ -7,8 +8,7 @@ type InnerCheckboxProps = {
     onChange?: (checked: boolean, value: any) => void;
     value?: any;
     name?: string;
-    label?: string;
+    label?: JSX.Element;
     inner?: boolean;
-};
-export declare function InnerCheckbox(props: InnerCheckboxProps): import("solid-js").JSX.Element;
-export {};
+}
+export declare function InnerCheckbox(props: InnerCheckboxProps): JSX.Element;

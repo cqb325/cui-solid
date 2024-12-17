@@ -1,5 +1,5 @@
 export declare const Context: import("solid-js").Context<unknown>;
-export type GutterProps = {
+export declare type GutterProps = {
     xs?: number | number[];
     sm?: number | number[];
     md?: number | number[];
@@ -7,7 +7,7 @@ export type GutterProps = {
     xl?: number | number[];
     xxl?: number | number[];
 };
-export type RowProps = {
+export interface RowProps {
     classList?: any;
     class?: any;
     children?: any;
@@ -15,5 +15,5 @@ export type RowProps = {
     justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
     align?: 'top' | 'middle' | 'bottom';
     gutter?: number | number[] | GutterProps;
-};
+}
 export declare const Row: (props: RowProps) => import("solid-js").JSX.Element;

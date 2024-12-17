@@ -7,7 +7,7 @@ import { Match, Switch } from 'solid-js';
  * @class Spin
  * @constructor
  */
-type SpinProps = {
+export interface SpinProps {
     classList?: any,
     class?: string,
     style?: any,
@@ -20,7 +20,7 @@ export function Spin (props: SpinProps) {
     const classList = () => useClassList(props, 'cm-spin-wrap', {
         [`cm-spin-${props.size}`]: props.size && typeof props.size === 'string'
     });
-    const type = () => props.type || 'pulse';
+    const type = () => props.type || 'dot';
     return (
         <div classList={classList()}>
             <div class="cm-spin-inner">

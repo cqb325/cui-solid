@@ -1,10 +1,10 @@
 import { TreeCheckMod } from "../../Tree";
-import type { NodeKeyType, TreeProps } from "../../Tree";
-type TreeSelectProps = {
+import type { NodeKeyType, TreeNode, TreeProps } from "../../Tree";
+export interface TreeSelectProps extends TreeProps {
     classList?: any;
     class?: string;
     style?: any;
-    data?: any[];
+    data: TreeNode[];
     transfer?: boolean;
     align?: 'bottomLeft' | 'bottomRight';
     disabled?: boolean;
@@ -17,7 +17,7 @@ type TreeSelectProps = {
     placeholder?: string;
     showMore?: boolean;
     multi?: boolean;
+    asFormField?: boolean;
     onChange?: (value: NodeKeyType | NodeKeyType[]) => void;
-} & TreeProps;
+}
 export declare function TreeSelect(props: TreeSelectProps): import("solid-js").JSX.Element;
-export {};

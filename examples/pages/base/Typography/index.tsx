@@ -1,6 +1,5 @@
 import { Space, View } from "@/components/Layout";
 import { Text } from '@/components/Typography/Text';
-import { Icon } from "@/components/Icon";
 import { CompAnchor } from "../../common/CompAnchor";
 import { Title } from "@/components/Typography/Title";
 import { Card } from "@/components/Card";
@@ -14,6 +13,7 @@ import { DemoCode } from "../../common/code";
 import { createSignal } from "solid-js";
 import { RadioGroup } from "@/components/FormElements/RadioGroup";
 import { Link } from "@/components/Typography/Link";
+import { F7Link } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 function TextDemo () {
@@ -88,7 +88,7 @@ function TextDemo () {
                 </Space>
                 <Space id="typography_text" dir="v">
                     <Card bordered>
-                        <Space dir="v" inline>
+                        <Space dir="v" inline align="baseline">
                             <Text>Text</Text>
                             <Text type="primary">Primary</Text>
                             <Text type="secondary">Secondary</Text>
@@ -103,9 +103,9 @@ function TextDemo () {
                             <Text deleted>Deleted</Text>
                             <Text strong>Strong</Text>
                             <Text link="http://www.baidu.com">链接</Text>
-                            <Link icon={<Icon name="link"/>}>Link</Link>
-                            <Link icon={<Icon name="link"/>} strong gradient={['45deg', '#9B59B6', '#3498DB']}>Link Gradient</Link>
-                            <Text icon={<Icon name="link"/>} strong underline link="http://www.baidu.com">链接</Text>
+                            <Link icon={<F7Link />}>Link</Link>
+                            <Link icon={<F7Link />} strong gradient={['45deg', '#9B59B6', '#3498DB']}>Link Gradient</Link>
+                            <Text icon={<F7Link />} strong underline link="http://www.baidu.com">链接</Text>
                             <Text size="small">Small</Text>
                             <Text size={size()}>Normal</Text>
                             <Text size="large">Large</Text>

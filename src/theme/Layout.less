@@ -3,13 +3,18 @@
     flex: 1;
     flex-wrap: nowrap;
     flex-direction: column;
+    min-width: 0;
+    min-height: 0;
 }
+
 .cm-h-view {
     flex-direction: row;
 }
+
 .cm-v-view {
     flex-direction: column;
 }
+
 .cm-fixed-view {
     position: fixed;
     inset: 0;
@@ -22,6 +27,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
 .cm-view-center {
     position: absolute;
     top: 50%;
@@ -30,15 +36,17 @@
     transform: translate(-50%, -50%);
 }
 
-.cm-drag-handler-v{
+.cm-drag-handler-v {
     width: 5px;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     cursor: col-resize;
+
     .cm-drag-helper {
         cursor: col-resize;
     }
 }
+
 .cm-drag-helper {
     position: relative;
     z-index: -1;
@@ -48,6 +56,7 @@
     background-color: rgba(0, 0, 0, 1);
     transform: translate(0, 0);
 }
+
 .cm-drag-handler-dragging {
     .cm-drag-helper {
         opacity: 1;

@@ -38,7 +38,7 @@ export default function ModalPage () {
                         <Button type="primary" onClick={() => {
                             setVisible(true);
                         }}>打开</Button>
-                        <Modal title="提示" visible={[visible, setVisible]} footerAlign="end">
+                        <Modal title="提示" visible={[visible, setVisible]} footerAlign="end" destroyOnClose>
                             <div>modal 内容</div>
                             <div>modal 内容</div>
                             <div>modal 内容</div>
@@ -225,6 +225,7 @@ export default function ModalPage () {
                             <Button type="primary" onClick={() => {
                                 modal.info({
                                     title: '信息',
+                                    style: {'max-width': '300px'},
                                     content: <div>信息</div>
                                 });
                             }}>信息</Button>
@@ -232,6 +233,7 @@ export default function ModalPage () {
                             <Button type="success" onClick={() => {
                                 modal.success({
                                     title: '成功',
+                                    style: {'max-width': '300px'},
                                     content: <div>成功</div>
                                 });
                             }}>成功</Button>
@@ -239,6 +241,7 @@ export default function ModalPage () {
                             <Button type="warning" onClick={() => {
                                 modal.warning({
                                     title: '警告',
+                                    style: {'max-width': '300px'},
                                     content: <div>警告</div>
                                 });
                             }}>警告</Button>
@@ -246,6 +249,7 @@ export default function ModalPage () {
                             <Button type="error" onClick={() => {
                                 modal.error({
                                     title: '错误',
+                                    style: {'max-width': '300px'},
                                     content: <div>错误提示</div>
                                 });
                             }}>错误</Button>
@@ -254,6 +258,7 @@ export default function ModalPage () {
                                 modal.confirm({
                                     title: '提示',
                                     loading: true,
+                                    style: {'max-width': '300px'},
                                     content: <div>确认信息</div>,
                                     onOk: () => {
                                         return new Promise((resolve) => {

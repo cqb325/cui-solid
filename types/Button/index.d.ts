@@ -1,21 +1,18 @@
-import type { ComponentProps } from "solid-js";
-export type ButtonProps = {
+import type { JSX } from "solid-js";
+export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
     classList?: any;
     class?: string;
-    link?: string;
-    type?: 'primary' | 'success' | 'error' | 'warning' | 'default' | 'dashed' | 'link' | 'text';
+    type?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'error' | 'danger' | 'warning' | 'default';
+    theme?: 'light' | 'solid' | 'borderless' | 'outline' | 'dashed';
     block?: boolean;
     size?: 'small' | 'default' | 'large';
     active?: boolean;
-    circle?: boolean;
-    round?: boolean;
+    shape?: 'square' | 'round' | 'circle';
     disabled?: boolean;
     loading?: boolean;
-    ghost?: boolean;
     icon?: any;
-    danger?: boolean;
     iconAlign?: 'left' | 'right';
     ref?: any;
     onClick?: (e: any) => void;
-} & ComponentProps<any>;
-export declare const Button: (props: ButtonProps) => import("solid-js").JSX.Element;
+}
+export declare const Button: (props: ButtonProps) => JSX.Element;

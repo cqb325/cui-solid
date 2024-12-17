@@ -1,4 +1,4 @@
-type RadioGroupProps = {
+export interface RadioGroupProps {
     classList?: any;
     class?: string;
     block?: boolean;
@@ -13,6 +13,6 @@ type RadioGroupProps = {
     textField?: string;
     valueField?: string;
     stick?: boolean;
-};
+    asFormField?: boolean;
+}
 export declare function RadioGroup(props: RadioGroupProps): import("solid-js").JSX.Element;
-export {};

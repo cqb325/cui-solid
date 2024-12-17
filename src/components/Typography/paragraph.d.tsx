@@ -1,6 +1,6 @@
-import type { ComponentProps } from "solid-js"
+import type { ComponentProps, JSX } from "solid-js"
 
-export type ParagraphProps = {
+export interface ParagraphProps extends JSX.HTMLAttributes<HTMLSpanElement> {
     type?: 'default'|'secondary'|'warning'|'error'|'success'|'primary',
     disabled?: boolean,
     link?: string,
@@ -26,4 +26,4 @@ export type ParagraphProps = {
     onCopy?: () => void,
     copyText?: string,
     heading?: 1|2|3|4|5|6
-} & ComponentProps<any>
+}

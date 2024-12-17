@@ -1,4 +1,6 @@
-type InnerCheckboxProps = {
+import type { JSX } from "solid-js";
+
+export interface InnerCheckboxProps {
     classList?: any,
     class?: any,
     checked?: any,
@@ -7,7 +9,7 @@ type InnerCheckboxProps = {
     onChange?: (checked: boolean, value: any) => void,
     value?: any,
     name?: string,
-    label?: string,
+    label?: JSX.Element,
     inner?: boolean
 }
 
@@ -51,9 +53,10 @@ export function InnerCheckbox (props: InnerCheckboxProps){
             onChange={() => {}}
         />
         <span style={{position: 'relative'}} class="cm-checkbox-outter">
-            &nbsp;
             <span class="cm-checkbox-inner" />
         </span>
-        <label>{props.label}</label>
+        {
+            props.label ? <label>{props.label}</label> : null
+        }
     </div>
 }

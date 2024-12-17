@@ -1,15 +1,14 @@
 import { createEffect, createSignal, For, untrack } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
-import { Collapase } from '../../inner/Collapase';
 import { Option } from './Option';
 import { Value } from '../../inner/Value';
 import createField from "../../utils/createField";
 import { useClassList } from '../../utils/useProps';
-import { Icon } from '../../Icon';
 import { Dropdown } from '../../Dropdown';
+import { FeatherChevronDown } from 'cui-solid-icons/feather';
 
 
-type SelectOptions = {
+export interface AutoCompleteOptions {
     name?: string,
     value?: any,
     disabled?: boolean,
@@ -31,9 +30,10 @@ type SelectOptions = {
     onSearch?: (query: string) =>void,
     transfer?: boolean,
     align?: 'bottomLeft'|'bottomRight'
+    asFormField?: boolean
 }
 
-export function AutoComplete (props: SelectOptions) {
+export function AutoComplete (props: AutoCompleteOptions) {
     const [open, setOpen] = createSignal(false);
     const align = props.align ?? 'bottomLeft';
     const [value, setValue] = createField<any>(props, '');
@@ -147,23 +147,22 @@ export function AutoComplete (props: SelectOptions) {
     <Dropdown transfer={props.transfer} fixWidth align={align} disabled={props.disabled} trigger="click" visible={[open, setOpen]}
     onBeforeDrop={onBeforeDrop}
         menu={<div class="cm-select-options-wrap">
-        <Collapase open={open()}>
-            <div class="cm-select-options">
-                <ul class="cm-select-option-list">
-                    <For each={store.list}>
-                        {(item) => {
-                            return <Option renderOption={props.renderOption} visible={item._show}
-                                disabled={item.disabled} data={item} checked={item._checked}
-                                valueField={valueField} textField={textField} onClick={onOptionClick} />
-                        }}
-                    </For>
-                </ul>
-            </div>
-        </Collapase>
+        <div class="cm-select-options">
+            <ul class="cm-select-option-list">
+                <For each={store.list}>
+                    {(item) => {
+                        return <Option renderOption={props.renderOption} visible={item._show}
+                            disabled={item.disabled} data={item} checked={item._checked}
+                            valueField={valueField} textField={textField} onClick={onOptionClick} />
+                    }}
+                </For>
+            </ul>
+        </div>
     </div>}>
         <Value text={labels()} disabled={props.disabled} filter query={[query, setQuery]}
                 clearable={props.clearable} onClear={onClear} placeholder={props.placeholder}
-                prepend={props.prefix} size={props.size} icon={<Icon name="chevron-down" class="cm-select-cert"/>} />
+                onlyInput
+                prepend={props.prefix} size={props.size} icon={<FeatherChevronDown class="cm-select-cert"/>} />
     </Dropdown>
     </div>
 }

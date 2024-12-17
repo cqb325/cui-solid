@@ -6,4 +6,4 @@ export declare function getPixelRatio(): number;
 /** Rotate with the watermark as the center point */
 export declare function rotateWatermark(ctx: CanvasRenderingContext2D, rotateX: number, rotateY: number, rotate: number): void;
 /** Whether to re-render the watermark */
-export declare const reRendering: (mutation: MutationRecord, watermarkElement?: HTMLElement) => boolean;
+export declare const reRendering: (mutation: MutationRecord, watermarkElement?: HTMLElement | undefined) => boolean;

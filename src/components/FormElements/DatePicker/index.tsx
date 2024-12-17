@@ -4,7 +4,7 @@ import { Dropdown } from "../../Dropdown";
 import { useClassList } from "../../utils/useProps"
 import { Value } from "../../inner/Value";
 import { DatePane } from "./DatePane";
-import { createStore, produce } from "solid-js/store";
+import { createStore } from "solid-js/store";
 import { MonthPane } from "./MonthPane";
 import { MonthRangePane } from "./MonthRangePane";
 import { DateRangePane } from "./DateRangePane";
@@ -12,10 +12,10 @@ import { DateTimePane } from "./DateTimePane";
 import { DateTimeRangePane } from "./DateTimeRangePane";
 import dayjs from "dayjs";
 import createField from "../../utils/createField";
-import { Icon } from "../../Icon";
+import { FeatherCalendar } from "cui-solid-icons/feather";
 
 
-type DatepickerProps = {
+export interface DatepickerProps {
     classList?: any,
     class?: any,
     style?: any,
@@ -41,11 +41,12 @@ type DatepickerProps = {
     placeholder?: string
     // daterange的月份是否粘连
     stick?: boolean
+    asFormField?: boolean
 }
 
 const DatepickerContext = createContext();
 
-export type DatepickerStore = {
+export interface DatepickerStore {
     currentMonth: Date[],
     range: Date[],
     hoverDate?: Date
@@ -370,9 +371,7 @@ export function Datepicker (props: DatepickerProps) {
                 </div>}>
                 <Show when={!props.trigger} fallback={props.trigger && props.trigger()}>
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name="calendar1"/>}/>
-                    {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
-                        clearable={props.clearable} type={props.type} seperator={seperator}/> */}
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<FeatherCalendar />}/>
                 </Show>
             </Dropdown>
         </div>

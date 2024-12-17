@@ -2,7 +2,7 @@ export interface StrokeProps {
     percent: number;
     color: string;
 }
-type ProgressProps = {
+export interface ProgressProps {
     classList?: any;
     class?: string;
     hidePercent?: boolean;
@@ -15,6 +15,5 @@ type ProgressProps = {
     type?: 'line' | 'circle';
     radius?: number;
     max?: number;
-};
+}
 export declare function Progress(props: ProgressProps): import("solid-js").JSX.Element;
-export {};

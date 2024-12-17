@@ -1,4 +1,4 @@
-import type { InputProps } from "../Input/input";
+import type { InputProps } from "../Input";
 interface SearchProps extends InputProps {
     enterButton?: any;
     onSearch?: any;

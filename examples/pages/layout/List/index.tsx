@@ -53,7 +53,7 @@ function ListDemo () {
 
                 <Space id="list_size" dir="v">
                     <Card bordered>
-                        <List border size="small" onSelect={(item: any) => {
+                        <List border size="small" selectable onSelect={(item: any) => {
                             console.log(item);
                         }} head="Header" foot="Footer">
                             <For each={data}>
@@ -79,9 +79,9 @@ function ListDemo () {
                                 {(item) => {
                                     return <List.Item avatar={<Avatar src={img}/>}
                                         id={item.id} title="Title" desc={item.desc} data={item} actions={<Space>
-                                            <Button type="text" size="small" onClick={() => {console.log(item);
+                                            <Button theme="borderless" size="small" onClick={() => {console.log(item);
                                             }}>Edit</Button>
-                                            <Button type="text" size="small">More</Button>
+                                            <Button theme="borderless" size="small">More</Button>
                                         </Space>}>
                                             具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容
                                             具体内容具体内容具体内容具体内容具体内容具体内容

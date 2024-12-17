@@ -5,11 +5,11 @@ import usePortal from "../utils/usePortal";
 import { isServer, Portal } from "solid-js/web";
 import { createStore } from "solid-js/store";
 import { Space } from "../Layout";
-import { Icon } from "../Icon";
 import createModel from "../utils/createModel";
 import usezIndex from "../utils/usezIndex";
+import { FeatherChevronLeft, FeatherChevronRight, FeatherX } from "cui-solid-icons/feather";
 
-type ImagePreviewProps = {
+export interface ImagePreviewProps {
     classList?: any,
     class?: string,
     style?: any,
@@ -294,7 +294,7 @@ export function ImagePreview(props: ImagePreviewProps) {
             <div class="cm-image-preview-wrap" style={{ "z-index": zindex }}>
                 <div class="cm-image-preview" onClick={handleClickMask}>
                     <Show when={store.status === 'loading'}>
-                        <Spin class="cm-image-preview-loading" />
+                        <Spin class="cm-image-preview-loading" type="dot" size="large" />
                     </Show>
                     <Show when={store.status === 'failed'}>
                         <div class="cm-image-preview-fail">{failInfo}</div>
@@ -332,10 +332,10 @@ export function ImagePreview(props: ImagePreviewProps) {
                     </Space>
 
                     <Show when={props.previewList.length > 1}>
-                        <Icon classList={leftClasses()} name="chevron-left" size={26} onClick={(e) => { stop(e); handleSwitch(false) }} />
-                        <Icon classList={rightClasses()} name="chevron-right" size={26} onClick={(e) => { stop(e); handleSwitch(true) }} />
+                        <FeatherChevronLeft classList={leftClasses()} onClick={(e) => { stop(e); handleSwitch(false) }} />
+                        <FeatherChevronRight classList={rightClasses()} onClick={(e) => { stop(e); handleSwitch(true) }} />
                     </Show>
-                    <Icon class="cm-image-preview-arrow-close" name="x" onClick={handleClose} size={26} />
+                    <FeatherX class="cm-image-preview-arrow-close" onClick={handleClose} />
                 </div>
             </div>
         </Show>

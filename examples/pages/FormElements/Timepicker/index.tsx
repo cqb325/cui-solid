@@ -16,6 +16,7 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Timepicker } from "@/components";
 useDirective(hljs);
 
 export default function TimepickerPage () {
@@ -28,7 +29,7 @@ export default function TimepickerPage () {
                 </Title>
                 <Space id="time_base" dir="v">
                     <Card bordered>
-                        <Input type="time"/>
+                        <Timepicker/>
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             基础用法
@@ -39,7 +40,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_disabled" dir="v">
                     <Card bordered>
-                        <Input type="time" value="22:35:11" disabled/>
+                        <Timepicker value="22:35:11" disabled/>
                         <Divider align="left"><Text type="primary">可禁用</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         使用disabled禁用
@@ -53,13 +54,13 @@ export default function TimepickerPage () {
                     <Card bordered>
                         <Row gutter={20}>
                             <Col grid={0.33}>
-                                <Input type="time" value="22:35:11" size="large"/>
+                                <Timepicker value="22:35:11" size="large"/>
                             </Col>
                             <Col grid={0.33}>
-                                <Input type="time" value="22:35:11" />
+                                <Timepicker value="22:35:11" />
                             </Col>
                             <Col grid={0.33}>
-                                <Input type="time" value="22:35:11" size="small"/>
+                                <Timepicker value="22:35:11" size="small"/>
                             </Col>
                         </Row>
                         <Divider align="left"><Text type="primary">尺寸</Text></Divider>
@@ -73,7 +74,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_clearable" dir="v">
                     <Card bordered>
-                        <Input type="time" value="22:35:11" clearable/>
+                        <Timepicker value="22:35:11" clearable/>
                         <Divider align="left"><Text type="primary">可清空</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         设置 clearable 选择后可清空
@@ -85,7 +86,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_format" dir="v">
                     <Card bordered>
-                        <Input type="time" value="22:35:11" clearable format="HH时mm分ss秒"/>
+                        <Timepicker value="22:35:11" clearable format="HH时mm分ss秒"/>
                         <Divider align="left"><Text type="primary">格式化</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         通过 format 可自定义时间显示格式，格式同dayjs
@@ -97,7 +98,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_step" dir="v">
                     <Card bordered>
-                        <Input type="time" hourStep={2} minuteStep={5} secondStep={15}/>
+                        <Timepicker hourStep={2} minuteStep={5} secondStep={15}/>
                         <Divider align="left"><Text type="primary">步长</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         hourStep、minuteStep、secondStep 可分别设置小时分钟秒的显示步长
@@ -109,7 +110,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_head" dir="v">
                     <Card bordered>
-                        <Input type="time" header={'开始时间'} footer="底部"/>
+                        <Timepicker header={'开始时间'} footer="底部"/>
                         <Divider align="left"><Text type="primary">头部底部</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         header/footer 可分别设置头部显示内容和底部显示内容
@@ -120,7 +121,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_disable_time" dir="v">
                     <Card bordered>
-                        <Input type="time" disabledTime={(num: number, type: string) => {
+                        <Timepicker disabledTime={(num: number, type: string) => {
                             if ((type === 'minute' || type === 'second') && num % 3 === 0) {
                                 return true;
                             }
@@ -137,7 +138,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_range" dir="v">
                     <Card bordered>
-                        <Input type="timeRange" format="HH时mm分ss秒"/>
+                        <Timepicker type="timeRange" format="HH时mm分ss秒"/>
                         <Divider align="left"><Text type="primary">时间范围</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                         type 支持time和timeRange， timeRange为时间范围选择
@@ -149,7 +150,7 @@ export default function TimepickerPage () {
 
                 <Space id="time_trigger" dir="v">
                     <Card bordered>
-                        <Input type="time" value={[time, setTime]} trigger={() => {
+                        <Timepicker value={[time, setTime]} trigger={() => {
                             return <Button type="primary" >
                                 {time() ? dayjs(time()).format('HH:mm:ss') : '请选择时间'}
                             </Button>

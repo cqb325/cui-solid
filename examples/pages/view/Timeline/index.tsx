@@ -1,6 +1,5 @@
 import { Card } from "@/components/Card";
 import { Divider } from "@/components/Divider";
-import { Icon } from "@/components/Icon";
 import { Space } from "@/components/Layout";
 import { Table } from "@/components/Table";
 import { Timeline } from "@/components/Timeline";
@@ -13,6 +12,7 @@ import { anchorData, codes, itemPropsData, propsData } from "./config";
 import './style.less'
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { F7Tree } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 export default function TimelinePage () {
@@ -165,7 +165,7 @@ export default function TimelinePage () {
                 <Space id="timeline_icon" dir="v">
                     <Card bordered>
                         <Timeline>
-                            <Timeline.Item color="green" icon={<Icon name="trophy" size={13}/>}>发布1.0版本</Timeline.Item>
+                            <Timeline.Item color="green" icon={<F7Tree size={13}/>}>发布1.0版本</Timeline.Item>
                             <Timeline.Item color="green">发布2.0版本</Timeline.Item>
                             <Timeline.Item color="red">严重故障</Timeline.Item>
                             <Timeline.Item color="blue">发布3.0版本</Timeline.Item>

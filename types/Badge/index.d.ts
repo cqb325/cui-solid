@@ -1,4 +1,4 @@
-type BadgeProps = {
+export interface BadgeProps {
     classList?: any;
     class?: string;
     count?: number;
@@ -10,6 +10,5 @@ type BadgeProps = {
     status?: 'success' | 'error' | 'processing' | 'warning' | 'default';
     color?: string | 'blue' | 'green' | 'red' | 'yellow' | 'pink' | 'magenta' | 'volcano' | 'orange' | 'gold' | 'lime' | 'cyan' | 'geekblue' | 'purple';
     type?: 'primary' | 'success' | 'normal' | 'info' | 'error' | 'warning';
-};
+}
 export declare function Badge(props: BadgeProps): import("solid-js").JSX.Element;
-export {};

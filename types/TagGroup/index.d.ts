@@ -1,9 +1,11 @@
 import type { JSXElement } from "solid-js";
+import type { PopoverProps } from "../Popover";
 export interface TagConfig {
     id: string | number;
     title: string;
     theme?: 'primary' | 'danger' | 'warning' | 'success' | 'info' | 'magenta' | 'red' | 'volcano' | 'orange' | 'gold' | 'yellow' | 'lime' | 'green' | 'cyan' | 'blue' | 'geekblue' | 'purple';
     avatar?: JSXElement;
+    [key: string]: any;
 }
 export interface TagGroupProps {
     style?: any;
@@ -11,9 +13,14 @@ export interface TagGroupProps {
     class?: string;
     data: TagConfig[];
     closable?: boolean;
-    max?: number;
+    max?: number | 'auto';
     showMore?: boolean;
-    size?: 'small' | 'large';
+    moreCloseable?: boolean;
+    tooltipAlign?: PopoverProps['align'];
+    tooltipTheme?: PopoverProps['color'];
+    tooltipTrigger?: PopoverProps['trigger'];
+    tooltipStyle?: PopoverProps['style'];
+    size?: 'small' | 'large' | 'xlarge';
     extra?: JSXElement;
     onClose?(item: TagConfig, e: any): void;
 }

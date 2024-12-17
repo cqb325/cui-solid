@@ -1,4 +1,4 @@
-import { createSignal, For, Switch, Match, onMount, createMemo, createRenderEffect } from 'solid-js';
+import { createSignal, For, Switch, Match, onMount, createMemo, createRenderEffect, Suspense } from 'solid-js';
 import { View, HView, VView, Space, BothSide } from '@/components/Layout';
 import { Menu, MenuItem, SubMenu } from '@/components/Menu';
 import './index.less';
@@ -9,8 +9,9 @@ import { Text } from '@/components/Typography/Text';
 import type { RouteRecordName } from 'solid-vue-router';
 import { RouterView, useRouter, useRoute } from 'solid-vue-router';
 import { Dropdown, DropdownItem, DropdownMenu } from '@/components/Dropdown';
-import { Icon } from '@/components/Icon';
 import { Popover } from '@/components/Popover';
+import { FeatherChevronDown } from 'cui-solid-icons/feather';
+import { Spin } from '@/components';
 
 export const Page = (props: any) => {
     const router = useRouter();
@@ -81,7 +82,7 @@ export const Page = (props: any) => {
                         </DropdownMenu>}>
                             <div style={{'margin-left': '100px'}}>
                                 <Text strong style={{color: '#fff'}}>预览</Text>
-                                <Icon name="chevron-down"/>
+                                <FeatherChevronDown/>
                             </div>
                         </Dropdown>
                     </Space>
@@ -113,7 +114,9 @@ export const Page = (props: any) => {
             </header>
             <HView class="sys-ctx">
                 <HView class="sys-ctx-main">
-                    <RouterView />
+                    <Suspense fallback={<Spin />}>
+                        <RouterView />
+                    </Suspense>
                 </HView>
             </HView>
         </HView>

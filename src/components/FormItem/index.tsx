@@ -7,12 +7,13 @@ import { useClassList } from '../utils/useProps';
 import { Popover } from '../Popover';
 import AsyncValidator from 'async-validator';
 
-export type FormItemContextProps = {
+export interface FormItemContextProps {
     name?: string
+    propagation?: boolean
 }
 export const FormItemContext = createContext<FormItemContextProps>();
 
-type FormItemProps = {
+export interface FormItemProps {
     classList?: any,
     class?: string,
     inline?: boolean,
@@ -115,9 +116,9 @@ export function FormItem (props: FormItemProps) {
             }
         }
 
-        if ((name && ctx && ctx.form?.getValidation && ctx.form?.getValidation(name)) || (ctx && props.rules)) {
-            const rules = ctx.form.getValidation(name) || props.rules;
-            const msgs = ctx.form.getMessage(name) || props.messages;
+        if ((name && ctx?.form?.getValidation(name)) || (ctx && props.rules)) {
+            const rules = ctx?.form?.getValidation(name!) || props.rules;
+            const msgs = ctx?.form?.getMessage(name!) || props.messages;
             if (Array.isArray(rules)) {
                 return validateByAsyncValidator(v, rules);
             } else {
@@ -137,7 +138,7 @@ export function FormItem (props: FormItemProps) {
     props.name && ctx?.form?.setCheckValid && ctx.form?.setCheckValid(props.name, check);
     props.name && ctx?.form?.setClearValid && ctx.form?.setClearValid(props.name, clearError);
 
-    return <FormItemContext.Provider value={{name: props.name}}>
+    return <FormItemContext.Provider value={{name: props.name, propagation: true}}>
         <div classList={clazzName()} style={props.style}>
             <label classList={{
                 "cm-form-label": true,
@@ -149,7 +150,7 @@ export function FormItem (props: FormItemProps) {
                     <div class="cm-form-item-error-tip">{error()}</div>
                 </div>
             }>
-                <Popover class="cm-form-item-error-popover" arrow align={errorAlign} disabled={!error()} content={error()}>
+                <Popover class="cm-form-item-error-popover" arrow align={errorAlign} theme="error" disabled={!error()} content={error()}>
                     <div class="cm-form-item-element" ref={itemRef}>
                         {props.children}
                     </div>

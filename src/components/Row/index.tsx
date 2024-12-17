@@ -11,7 +11,7 @@ export type GutterProps = {
     xl?: number | number[],
     xxl?: number | number[]
 }
-export type RowProps = {
+export interface RowProps {
     classList?: any,
     class?: any,
     children?: any,

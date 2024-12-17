@@ -1,4 +1,4 @@
-import { Icon } from "../Icon";
+import { FeatherChevronRight } from "cui-solid-icons/feather";
 
 export function PageNext (props: any) {
     const classList = () => ({
@@ -7,6 +7,6 @@ export function PageNext (props: any) {
         'cm-pagination-num-disabled': props.disabled
     });
     return (<li onClick={props.onClick} classList={classList()}>
-        <Icon name="chevron-right" size={14}/>
+        <FeatherChevronRight />
     </li>);
 }

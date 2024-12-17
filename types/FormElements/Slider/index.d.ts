@@ -1,5 +1,5 @@
 import type { Signal } from "solid-js";
-type SliderProps = {
+export interface SliderProps {
     classList?: any;
     class?: string;
     style?: any;
@@ -12,6 +12,6 @@ type SliderProps = {
     tipFormatter?: (value: any) => any;
     marks?: any;
     onChange?: (value: any) => void;
-};
+    asFormField?: boolean;
+}
 export declare function Slider(props: SliderProps): import("solid-js").JSX.Element;
-export {};

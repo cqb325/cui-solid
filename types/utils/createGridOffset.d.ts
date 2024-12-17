@@ -1,5 +1,5 @@
 import type { GutterProps } from "../Row";
-export type responsiveType = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export declare type responsiveType = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 /**
  * 创建响应式样式,返回class
  * @param width

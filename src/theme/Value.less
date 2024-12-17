@@ -47,6 +47,10 @@
     }
 }
 
+.cm-form-item-error .cm-field-value {
+    border-color: var(--cui-color-error);
+}
+
 .cm-field-selection,
 .cm-field-text {
     display: block;
@@ -62,7 +66,6 @@
     flex-wrap: wrap;
 
     .cm-tag-group {
-        flex-wrap: wrap;
         margin: 3px 4px 3px 0;
     }
 
@@ -81,6 +84,18 @@
 
 .cm-field-text {
     height: calc(var(--height-control-default) - 2px);
+    position: relative;
+
+    .cm-input-wrapper {
+        position: absolute;
+        inset: 0;
+        left: 8px;
+        background: transparent;
+    }
+
+    &:has(.cm-input-wrapper>input:focus) {
+        color: var(--cui-color-text-3);
+    }
 }
 
 .cm-field-clear,
@@ -94,20 +109,24 @@
     color: rgba(128, 134, 149, 0.5);
     display: inline-flex;
     align-items: center;
+    transition: all 0.25s;
+    opacity: 1;
 }
 
 .cm-field-clear {
     font-size: 14px;
-    display: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .cm-field-clearable:hover {
     .cm-field-clear {
-        display: inline-block;
+        opacity: 1;
+        pointer-events: all;
     }
 
     .cm-field-cert {
-        display: none;
+        opacity: 0;
     }
 }
 

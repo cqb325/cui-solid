@@ -1,5 +1,5 @@
 import type { Signal } from 'solid-js';
-type TagProps = {
+export interface TagProps {
     classList?: any;
     class?: string;
     theme?: 'primary' | 'danger' | 'warning' | 'success' | 'info' | 'magenta' | 'red' | 'volcano' | 'orange' | 'gold' | 'yellow' | 'lime' | 'green' | 'cyan' | 'blue' | 'geekblue' | 'purple';
@@ -13,7 +13,7 @@ type TagProps = {
     children?: any;
     closable?: boolean;
     border?: boolean;
+    ref?: any;
     visible?: boolean | Signal<boolean>;
-};
+}
 export declare function Tag(props: TagProps): import("solid-js").JSX.Element;
-export {};

@@ -1,6 +1,6 @@
 import { Show } from "solid-js";
 
-type SelectOptions = {
+export interface AutoCompleteOptionprops {
     data: any,
     checked?: boolean,
     disabled?: boolean,
@@ -12,7 +12,7 @@ type SelectOptions = {
     renderOption?: (data: any) => any
 }
 
-export function Option (props: SelectOptions) {
+export function Option (props: AutoCompleteOptionprops) {
     const classList = () => ({
         'cm-select-option': true,
         'cm-select-group-wrap': props.data.children && props.data.children.length,

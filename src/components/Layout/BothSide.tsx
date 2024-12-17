@@ -1,7 +1,7 @@
 import type { JSX } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
-type BothSideProps = {
+export interface BothSideProps {
     classList?: any,
     class?: any,
     children?: any,

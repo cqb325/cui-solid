@@ -1,12 +1,12 @@
-import { Popover } from "../../Popover";
 import createField from "../../utils/createField";
 import { useClassList } from "../../utils/useProps"
 import { Draggable } from "../../Draggable";
 import type { Signal } from "solid-js";
-import { createEffect, For, Show } from "solid-js";
-import type { DraggableData } from "@/components/Draggable/utils";
+import { createEffect, For, onCleanup, onMount, Show } from "solid-js";
+import type { DraggableData } from "../../Draggable/utils";
+import { Tooltip } from "../../Tooltip";
 
-type SliderProps = {
+export interface SliderProps {
     classList?: any,
     class?: string,
     style?: any,
@@ -19,6 +19,7 @@ type SliderProps = {
     tipFormatter?: (value: any) => any,
     marks?: any,
     onChange?: (value: any) => void
+    asFormField?: boolean
 }
 
 export function Slider (props: SliderProps) {
@@ -27,6 +28,7 @@ export function Slider (props: SliderProps) {
     let rightDrag: any;
     let pop: any;
     let popRight: any;
+    let wrap: any;
     const min = props.min ?? 0;
     const max = props.max ?? 100;
     const step = props.step ?? 1.00;
@@ -73,24 +75,7 @@ export function Slider (props: SliderProps) {
 
     // 值改变后同步拖拽点的位置
     createEffect(() => {
-        const ret = calculateLeftRight();
-        const rect = rail.getBoundingClientRect();
-
-        const leftX = range ? rect.width * ret.left / 100 : rect.width * ret.right / 100;
-        const rightX = range ? rect.width * (ret.left + ret.width) / 100 : 0;
-
-        if (leftDrag) {
-            leftDrag.setPosition({
-                x: leftX,
-                y: 0
-            });
-        }
-        if (rightDrag) {
-            rightDrag.setPosition({
-                x: rightX,
-                y: 0
-            });
-        }
+        updatePosition();
     });
 
     const toFixed = (num: number) => {
@@ -161,9 +146,16 @@ export function Slider (props: SliderProps) {
             const nearLeft = Math.abs(val[1] - v) > Math.abs(val[0] - v);
             val = nearLeft ? [v, val[1]] : [val[0], v];
             setValue(val);
+            setTimeout(() => {
+                nearLeft ? pop && pop.updatePosition()
+                : popRight && popRight.updatePosition();
+            });
             props.onChange && props.onChange(val);
         } else {
             setValue(v);
+            setTimeout(() => {
+                pop && pop.updatePosition();
+            });
             props.onChange && props.onChange(v);
         }
     }
@@ -195,7 +187,39 @@ export function Slider (props: SliderProps) {
         return [];
     }
 
-    return <div classList={classList()} style={props.style} onMouseDown={onMouseDown}>
+    const updatePosition = () => {
+        const ret = calculateLeftRight();
+        const rect = rail.getBoundingClientRect();
+
+        const leftX = range ? rect.width * ret.left / 100 : rect.width * ret.right / 100;
+        const rightX = range ? rect.width * (ret.left + ret.width) / 100 : 0;
+
+        if (leftDrag) {
+            leftDrag.setPosition({
+                x: leftX,
+                y: 0
+            });
+        }
+        if (rightDrag) {
+            rightDrag.setPosition({
+                x: rightX,
+                y: 0
+            });
+        }
+    }
+
+    onMount(() => {
+        // 容器尺寸变化的时候改变值的位置
+        const ob = new ResizeObserver(() => {
+            updatePosition();
+        });
+
+        ob.observe(wrap);
+
+        onCleanup(() => ob.disconnect());
+    })
+
+    return <div classList={classList()} style={props.style} onMouseDown={onMouseDown} ref={wrap}>
         <div class="cm-slider-rail" ref={rail} />
         <div class="cm-slider-track" style={trackStyle()} />
         <div class="cm-slider-steps">
@@ -213,20 +237,20 @@ export function Slider (props: SliderProps) {
                 }}
             </For>
         </div>
-        <Popover disabled={props.disabled} content={contextLeft()} align="top" ref={pop} arrow>
+        <Tooltip disabled={props.disabled} content={contextLeft()} align="top" ref={pop} arrow>
             <Draggable axis="x" disabled={props.disabled} ref={leftDrag} onDrag={onLeftDrag} bounds="parent" class="cm-slider-handle-drag"
             grid={[snap(), snap()]}>
                 <div class="cm-slider-handle" tabIndex="0" />
             </Draggable>
-        </Popover>
+        </Tooltip>
 
         <Show when={range}>
-            <Popover disabled={props.disabled} content={contextRight()} align="top" ref={popRight} arrow>
+            <Tooltip disabled={props.disabled} content={contextRight()} align="top" ref={popRight} arrow>
                 <Draggable axis="x" disabled={props.disabled} ref={rightDrag} onDrag={onRightDrag} bounds="parent" class="cm-slider-handle-drag"
                 grid={[snap(), snap()]}>
                     <div class="cm-slider-handle" tabIndex="1" />
                 </Draggable>
-            </Popover>
+            </Tooltip>
         </Show>
         <Show when={props.marks}>
             <div class="cm-slider-marks">

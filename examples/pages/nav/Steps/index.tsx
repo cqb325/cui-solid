@@ -13,7 +13,7 @@ import { Divider } from "@/components/Divider";
 import { Paragraph } from "@/components/Typography/Paragraph";
 import { Text } from "@/components/Typography/Text";
 import { Table } from "@/components/Table";
-import { Icon } from "@/components/Icon";
+import { IoniconsCog, IoniconsLockClosed } from "cui-solid-icons/ionicons";
 useDirective(hljs);
 
 export default function StepsPage () {
@@ -89,10 +89,10 @@ export default function StepsPage () {
                         <Space dir="v">
                             <Steps current={current()}>
                                 <Steps.Step title="已完成"/>
-                                <Steps.Step title="进行中" status="process" icon={<Icon name="cog" size={26}/>}/>
+                                <Steps.Step title="进行中" status="process" icon={<IoniconsCog size={26}/>}/>
                                 <Steps.Step title="错误" status="error"/>
                                 <Steps.Step title="告警" status="warning"/>
-                                <Steps.Step title="等待" status="wait" icon={<Icon name="lock" size={26}/>}/>
+                                <Steps.Step title="等待" status="wait" icon={<IoniconsLockClosed size={26}/>}/>
                             </Steps>
                         </Space>
                         <Divider align="left"><Text type="primary">状态和图标</Text></Divider>

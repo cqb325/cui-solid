@@ -10,6 +10,7 @@ import { propsColumns } from "../../common/columns";
 import { anchorData, codes, propsData } from "./config";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { For } from "solid-js";
 useDirective(hljs);
 
 function DividerPage () {
@@ -83,6 +84,33 @@ function DividerPage () {
                         <Divider align="left"><Text type="primary">上下外边距</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             使用 <Text code>margin</Text> 设置divider的上下外边距
+                        </Paragraph>
+                        <DemoCode data={codes['divider_margin']}/>
+                    </Card>
+                </Space>
+
+                <Space id="divider_color" dir="v">
+                    <Card bordered>
+                        <section>
+                            <For each={['primary','success','info', 'warning','error', 'blue', 'green', 'red', 'yellow', 'magenta', 'pink', 'volcano', 'orange', 'gold', 'lime', 'cyan', 'geekblue', 'purple']}>
+                                    {(color) => {
+                                        return <>
+                                            <Divider align="left" theme={color}>{color}</Divider>
+                                        </>
+                                    }}
+                            </For>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
+                            <For each={['#f50', '#2db7f5', '#87d068', '#108ee9']}>
+                                {(color) => {
+                                    return <>
+                                        <Divider align="left" theme={color}>{color}</Divider>
+                                    </>
+                                }}
+                            </For>
+                        </section>
+                        <Divider align="left"><Text type="primary">color</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            color
                         </Paragraph>
                         <DemoCode data={codes['divider_margin']}/>
                     </Card>

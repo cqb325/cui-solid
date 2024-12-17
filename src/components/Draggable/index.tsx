@@ -5,7 +5,7 @@ import { createDraggableData, canDragX, canDragY, createCSSTransform, getBoundPo
 import { onCleanup } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
-type DraggableProps = {
+export interface DraggableProps {
     classList?: any,
     class?: string,
     defaultPosition?: any,

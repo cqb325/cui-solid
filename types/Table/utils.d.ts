@@ -52,12 +52,12 @@ export declare function addRemoveExpand(setStore: SetStoreFunction<TableStore>, 
 export declare const onResizeStart: (setStore: SetStoreFunction<TableStore>, column: ColumnProps, e: any) => false | undefined;
 export declare const onResizeMove: (store: any, setStore: SetStoreFunction<TableStore>, e: any) => void;
 export declare const onResizeEnd: (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => void;
-export declare const observerSizeChange: (store: TableStore, setStore: SetStoreFunction<TableStore>, wrap: Element) => void;
+export declare const observerSizeChange: (...rest: any[]) => void;
 /**
  * 获取占用宽度的列
  * @param columns 列
  * @param flatColumns
  * @returns
  */
-export declare const getFlatColumns: (columns: ColumnProps[], flatColumns?: ColumnProps[], parent?: ColumnProps) => void;
+export declare const getFlatColumns: (columns: ColumnProps[], flatColumns?: ColumnProps[], parent?: ColumnProps | undefined) => void;
 export declare const getAllColumns: (columns: ColumnProps[]) => ColumnProps[];

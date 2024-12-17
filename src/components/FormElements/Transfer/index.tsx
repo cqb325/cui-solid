@@ -1,21 +1,24 @@
 import { createStore } from "solid-js/store"
 import { Button } from "../../Button"
-import { Icon } from "../../Icon"
 import { useClassList } from "../../utils/useProps"
 import { List } from "./List"
 import type { Signal} from "solid-js";
 import { createEffect } from "solid-js"
 import createField from "../../utils/createField"
+import { FeatherChevronLeft, FeatherChevronRight } from "cui-solid-icons/feather"
 
-type TransferProps = {
+export interface TransferProps {
     classList?: any,
     class?: string,
     style?: any,
     width?: number,
     height?: number,
     data?: any[],
+    rightText?: string,
+    leftText?: string,
     value?: any[] | Signal<any>,
     filter?: boolean,
+    asFormField?: boolean
     render?: (item: any) => any,
     onChange?: (value: any[]) => void,
 }
@@ -37,6 +40,9 @@ export function Transfer (props: TransferProps) {
         sourceIds: [],
         targetIds: []
     });
+
+    const rightText = props.rightText || 'To Right';
+    const leftText = props.leftText || 'To Left';
 
     createEffect(() => {
         setStore('data', props.data || []);
@@ -76,8 +82,8 @@ export function Transfer (props: TransferProps) {
         <List width={props.width} height={props.height} store={store} setStore={setStore} name="source"
             value={value()} onSelect={onSelect} filter={props.filter} render={props.render}/>
         <div class="cm-transfer-operation">
-            <Button disabled={store.sourceDisabled} icon={<Icon name="chevron-right"/>} size="small" onClick={transferToTarget}>To Right</Button>
-            <Button disabled={store.targetDisabled} icon={<Icon name="chevron-left"/>} size="small" onClick={transferToSource}>To Left</Button>
+            <Button disabled={store.sourceDisabled} icon={<FeatherChevronRight size={14}/>} size="small" onClick={transferToTarget}>{rightText}</Button>
+            <Button disabled={store.targetDisabled} icon={<FeatherChevronLeft size={14}/>} size="small" onClick={transferToSource}>{leftText}</Button>
         </div>
         <List width={props.width} height={props.height} store={store} setStore={setStore} name="target"
             value={value()} onSelect={onSelect} filter={props.filter} render={props.render}/>

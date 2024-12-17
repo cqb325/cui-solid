@@ -1,14 +1,7 @@
-import { Space, View } from "@/components/Layout";
-import { Icon } from "@/components/Icon";
-import { Row } from "@/components/Row";
-import { Col } from "@/components/Col";
-import { Input } from "@/components/FormElements/Input";
+import { Space } from "@/components/Layout";
 import { Text } from "@/components/Typography/Text";
 import { CompAnchor } from "../../common/CompAnchor";
-import { createEffect, createSignal, For } from "solid-js";
 import './icon.less';
-// @ts-expect-error: 2732
-import data from "./icons.json";
 import { Title } from "@/components/Typography/Title";
 import { Card } from "@/components/Card";
 import { Divider } from "@/components/Divider";
@@ -18,17 +11,10 @@ import { propsData, anchorData, codes } from "./config";
 import { propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { FeatherBox, FeatherLoader, FeatherRefreshCcw, FeatherSettings, FeatherThumbsUp } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 export default function IconPage () {
-    const [keyword, setKeyword] = createSignal('');
-    const [showData, setShowData] = createSignal(data);
-    createEffect(() => {
-        const newData = data.filter((item: any) => {
-            return (item.name.indexOf(keyword()) > -1)
-        });
-        setShowData(newData);
-    });
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -38,9 +24,10 @@ export default function IconPage () {
                 <Space id="icon_size" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Icon name="box1" />
-                            <Icon name="loader" size={16}/>
-                            <Icon name="thumbs-up" size={24}/>
+                            <FeatherBox />
+                            <FeatherBox />
+                            <FeatherLoader size={16}/>
+                            <FeatherThumbsUp size={24}/>
                         </Space>
                         <Divider align="left"><Text type="primary">图标大小</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -52,9 +39,9 @@ export default function IconPage () {
                 <Space id="icon_color" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Icon name="box1" color="#52c41a"/>
-                            <Icon name="loader" color="#ff4d4f"/>
-                            <Icon name="thumbs-up" color="#1890ff"/>
+                            <FeatherBox color="#52c41a"/>
+                            <FeatherLoader color="#ff4d4f"/>
+                            <FeatherThumbsUp color="#1890ff"/>
                         </Space>
                         <Divider align="left"><Text type="primary">图标颜色</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -67,8 +54,8 @@ export default function IconPage () {
                     <Card bordered>
                         <Space dir="h">
                             <div>
-                                <Icon name="cog" spin/>
-                                <Icon name="loader" spin/>
+                                <FeatherSettings spin size={26}/>
+                                <FeatherRefreshCcw spin size={26}/>
                             </div>
                         </Space>
                         <Divider align="left"><Text type="primary">旋转图标</Text></Divider>
@@ -77,15 +64,6 @@ export default function IconPage () {
                         </Paragraph>
                         <DemoCode data={codes['icon_spin']}/>
                     </Card>
-                </Space>
-
-                <Space dir="v" id="icon_search">
-                    <Input value={[keyword, setKeyword]} trigger="input" placeholder="搜索Icon"/>
-                    <Row gutter={20} class="cm-icons-row">
-                        <For each={showData()}>{(item: any) => {
-                                return <Col grid={0.25}><Icon name={item.name}/><Text>{item.name}</Text></Col>
-                            }}</For>
-                    </Row>
                 </Space>
 
                 <Space dir="v" size={24} id="comp_api">

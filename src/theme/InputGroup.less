@@ -11,16 +11,40 @@
     border-end-end-radius: 0;
 }
 
+.cm-input-compact-item:not(.cm-input-compact-last-item):not(.cm-input-compact-first-item).cm-button-theme-outline {
+    &::after {
+        border-start-end-radius: 0;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
+    }
+}
+
 .cm-input-compact-item:not(.cm-input-compact-last-item).cm-input-compact-first-item,
 .cm-input-compact-item:not(.cm-input-compact-last-item).cm-input-compact-first-item .cm-field-value {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
 }
 
+.cm-input-compact-item:not(.cm-input-compact-last-item).cm-input-compact-first-item.cm-button-theme-outline {
+    &::after {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+    }
+}
+
+
 .cm-input-compact-item:not(.cm-input-compact-first-item).cm-input-compact-last-item,
 .cm-input-compact-item:not(.cm-input-compact-first-item).cm-input-compact-last-item .cm-field-value {
     border-start-start-radius: 0;
     border-end-start-radius: 0;
+}
+
+.cm-input-compact-item:not(.cm-input-compact-first-item).cm-input-compact-last-item.cm-button-theme-outline {
+    &::after {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+    }
 }
 
 .cm-input-compact-item:not(.cm-input-compact-last-item),

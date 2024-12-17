@@ -1,7 +1,7 @@
 import { VirtualList } from '../virtual-list';
 import { Node } from './Node';
-import type { Signal} from 'solid-js';
-import { createContext, createEffect, createSignal, Show, useContext, type JSXElement } from 'solid-js';
+import type { Signal, JSXElement } from 'solid-js';
+import { createContext, createEffect, createSignal, Show, useContext } from 'solid-js';
 import type { TreeCheckMod, TreeNode} from './store';
 import { TreeStore } from './store';
 import { Dropdown } from '../Dropdown';

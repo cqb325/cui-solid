@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { Icon } from "../../Icon";
+import { FeatherEye, FeatherX } from "cui-solid-icons/feather";
 
 export function PictureList (props: any) {
     return <ul class="cm-upload-list cm-upload-picture-list">
@@ -10,12 +10,12 @@ export function PictureList (props: any) {
                     <div class="cm-upload-picture-remove" onClick={() => {
                         props.onRemove && props.onRemove(file);
                     }}>
-                        <Icon name="x-circle"/>
+                        <FeatherX/>
                     </div>
                     <div class="cm-upload-picture-preview" onClick={() => {
                         props.onPreview && props.onPreview(file)
                     }}>
-                        <Icon name="eye" size={20}/>
+                        <FeatherEye size={20}/>
                     </div>
                 </li>
             }}

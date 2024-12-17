@@ -5,7 +5,7 @@ import { Messages } from "./Message";
 import { createUniqueId } from "solid-js";
 import usezIndex from "../utils/usezIndex";
 
-type MessageProps = {
+export interface MessageProps {
     key?: string,
     duration?: number,
     type?: 'info'|'success'|'warning'|'error',

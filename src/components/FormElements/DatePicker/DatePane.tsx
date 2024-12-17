@@ -1,10 +1,10 @@
 import { createSignal, For, Show } from "solid-js";
-import { Icon } from "../../Icon"
 import { Day } from "./Day";
 import dayjs from "dayjs";
 import { MonthPane } from "./MonthPane";
 import type { DatepickerStore } from ".";
 import type { SetStoreFunction } from "solid-js/store";
+import { FeatherChevronLeft, FeatherChevronRight, FeatherChevronsLeft, FeatherChevronsRight } from "cui-solid-icons/feather";
 
 const weeks = ['日', '一', '二', '三', '四', '五', '六'];
 export function clearHms (date: Date): Date {
@@ -146,17 +146,17 @@ export function DatePane (props: any) {
             <div class="cm-date-picker-date-inner">
                 <div class="cm-date-picker-date-header">
                     <div class="cm-date-picker-header-arrow">
-                        <Icon name="chevrons-left" onClick={onPrevYear}/>
+                        <FeatherChevronsLeft onClick={onPrevYear}/>
                     </div>
                     <div class="cm-date-picker-header-arrow">
-                        <Icon name="chevron-left" onClick={onPrevMonth}/>
+                        <FeatherChevronLeft onClick={onPrevMonth}/>
                     </div>
                     <span class="cm-date-picker-date-info" onClick={onShowMonthView}>{text()}</span>
                     <div class="cm-date-picker-header-arrow">
-                        <Icon name="chevron-right" onClick={onNextMonth}/>
+                        <FeatherChevronRight onClick={onNextMonth}/>
                     </div>
                     <div class="cm-date-picker-header-arrow">
-                        <Icon name="chevrons-right" onClick={onNextYear}/>
+                        <FeatherChevronsRight onClick={onNextYear}/>
                     </div>
                 </div>
                 <div class="cm-date-picker-date-body">

@@ -17,7 +17,7 @@ import { message } from "@/components/Message";
 import { Popover } from "@/components/Popover";
 import { Progress } from "@/components/Progress";
 
-export default function LoginPage() {
+export default function LoginPage () {
     const [strong, setStrong] = createSignal('强');
     const [percent, setPercent] = createSignal(0);
     const [color, setColor] = createSignal('');
@@ -127,7 +127,7 @@ export default function LoginPage() {
                                 console.log(valid, u, p);
                             }}>
                                 <Email />
-                                <Popover trigger="click" arrow theme="light" align="right" content={<div class="demo-register-tip" style={{ width: '240px', "white-space": 'normal' }}>
+                                <Popover trigger="click" arrow color="light" align="right" content={<div class="demo-register-tip" style={{ width: '240px', "white-space": 'normal' }}>
                                     <div class="demo-register-tip-title">
                                         强度：{strong()}
                                     </div>

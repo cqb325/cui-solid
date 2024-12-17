@@ -1,13 +1,13 @@
 import { Match, Show, Switch } from "solid-js";
-import { Icon } from "../Icon";
 import { useClassList } from "../utils/useProps"
+import { FeatherCheckCircle, FeatherXCircle } from "cui-solid-icons/feather";
 
 export interface StrokeProps {
     percent: number
     color: string
 }
 
-type ProgressProps = {
+export interface ProgressProps {
     classList?: any,
     class?: string,
     hidePercent?: boolean,
@@ -55,10 +55,10 @@ export function Progress (props: ProgressProps) {
             return props.infoRender(sta, value());
         }
         if (sta === 'finished') {
-            return <Icon name="check-circle" size={size}/>;
+            return <FeatherCheckCircle size={size}/>;
         }
         if (sta === 'error') {
-            return <Icon name="x-circle" size={size}/>;
+            return <FeatherXCircle size={size}/>;
         }
         return `${value()}%`;
     }

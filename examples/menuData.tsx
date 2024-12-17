@@ -69,6 +69,7 @@ export const menuData = [
         children: [
             { name: 'message', title: 'Message 消息提示', path: 'message', component: lazy(() => import('./pages/view/Message')) },
             { name: 'notice', title: 'Notice 通知', path: 'notice', component: lazy(() => import('./pages/view/Notice')) },
+            { name: 'popconfirm', title: 'Popconfirm 气泡确认框', path: 'popconfirm', component: lazy(() => import('./pages/view/Popconfirm')) },
             { name: 'modal', title: 'Modal 对话框', path: 'modal', component: lazy(() => import('./pages/view/Modal')) },
             { name: 'tree', title: 'Tree 树状控件', path: 'tree', component: lazy(() => import('./pages/view/Tree')) },
             // { name: 'tree2', title: 'Tree2 树状控件', path: 'tree2', component: lazy(() => import('./pages/view/Tree2')) },
@@ -83,6 +84,7 @@ export const menuData = [
             { name: 'Banner', title: 'Banner 通知横幅', path: 'banner', component: lazy(() => import('./pages/view/Banner')) },
             { name: 'SideBySide', title: 'SideBySide 对比', path: 'sidebyside', component: lazy(() => import('./pages/view/SideBySide')) },
             { name: 'Watermark', title: 'Watermark 水印', path: 'watermark', component: lazy(() => import('./pages/view/Watermark')) },
+            { name: 'Result', title: 'Result 结果', path: 'result', component: lazy(() => import('./pages/view/Result')) },
         ]
     },
     {
@@ -105,6 +107,7 @@ export const menuData = [
             { name: 'upload', title: 'Upload 上传', path: 'upload', component: lazy(() => import('./pages/FormElements/Upload')) },
             { name: 'progress', title: 'Progress 进度条', path: 'progress', component: lazy(() => import('./pages/FormElements/Progress')) },
             { name: 'Transfer', title: 'Transfer 穿梭框', path: 'transfer', component: lazy(() => import('./pages/FormElements/Transfer')) },
+            { name: 'TeleportBox', title: 'TeleportBox 数据传输框', path: 'teleport', component: lazy(() => import('./pages/FormElements/TeleportBox')) },
             { name: 'Switch', title: 'Switch 开关', path: 'switch', component: lazy(() => import('./pages/FormElements/Switch')) },
             { name: 'Rate', title: 'Rate 评分', path: 'rate', component: lazy(() => import('./pages/FormElements/Rate')) },
             { name: 'Spinner', title: 'Spinner 数字输入框', path: 'spinner', component: lazy(() => import('./pages/FormElements/Spinner')) },
@@ -123,6 +126,7 @@ export const menuData = [
             { name: 'CountDown', title: 'CountDown 倒计时', path: 'countdown', component: lazy(() => import('./pages/other/CountDown')) },
             { name: 'VirtualList', title: 'VirtualList 虚拟列表', path: 'virtuallist', component: lazy(() => import('./pages/other/VirtualList')) },
             { name: 'WordCount', title: 'WordCount 字数统计', path: 'wordcount', component: lazy(() => import('./pages/other/WordCount')) },
+            { name: 'useSwipe', title: 'useSwipe', path: 'useSwipe', component: lazy(() => import('./pages/other/useSwipe')) },
         ]
     }
 ];

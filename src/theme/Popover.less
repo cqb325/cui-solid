@@ -5,109 +5,154 @@
     width: 0;
     height: 0;
 }
+
+.cm-popover-title {
+    margin-bottom: 5px;
+    color: var(--cui-color-bg-0);
+    font-weight: 600;
+}
+
 .cm-popover-inner {
     position: absolute;
     padding: 8px 12px;
     color: var(--cui-color-bg-0);
     text-decoration: none;
-    background-color: rgba(var(--cui-grey-7), 1);
+    background-color: var(--cui-popover-background-color, rgba(var(--cui-grey-7), 1));
     border-radius: var(--cui-border-radius-small);
-    box-shadow: 0 0 1px rgba(0,0,0,0.3),0 4px 14px rgba(0,0,0,0.1);
-    white-space: nowrap;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    white-space: normal;
+    width: max-content;
     opacity: 0;
     z-index: -1;
     display: none;
-    transition: opacity 0.25s linear, z-index 0.25s linear;
+    transition: opacity 0.25s linear;
 
     &.cm-popover-inner-show {
         opacity: 1;
         z-index: 1;
     }
 }
+
 .cm-popover-confirm {
     .cm-popover-body {
         padding: 8px;
     }
+
     .cm-popover-tools {
         padding: 8px;
     }
 }
+
 .cm-popover-inner-visible {
     display: block;
 }
+
 .cm-popover-inner.cm-popover-light {
     color: var(--cui-color-text-0);
-    background-color: #fff;
+    background-color: var(--cui-theme-color-light, #fff);
+
+    .cm-popover-title {
+        color: var(--cui-color-text-0);
+    }
+
     .cm-popover-icon-arrow {
-        fill: #fff;
+        fill: var(--cui-theme-color-light, #fff);
+
         path:first-child {
-            fill: rgba(28,31,35,0.08);
-        }
-        path:last-child {
-            fill: #fff;
+            fill: rgba(28, 31, 35, 0.08);
         }
     }
 }
 
+@themes: primary, success, warning, error, info, blue, green, red, yellow, magenta, pink, volcano, orange, gold, lime, cyan, geekblue, purple;
+
+each(@themes, {
+        .cm-popover-@{value} {
+            background-color: var(~"--cui-theme-color-@{value}");
+
+            .cm-popover-icon-arrow {
+                fill: var(~"--cui-theme-color-@{value}");
+            }
+        }
+    }
+
+);
+
 .cm-popover-inner[x-placement=bottom] {
     transform: translate(-50%, 0);
-    margin-top: 3px;
+    margin-top: calc(3px + var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=bottomLeft] {
-    margin-top: 3px;
+    margin-top: calc(3px + var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=bottomRight] {
     transform: translate(-100%, 0);
-    margin-top: 3px;
+    margin-top: calc(3px + var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=top] {
     transform: translate(-50%, -100%);
-    margin-top: -3px;
+    margin-top: calc(-3px - var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=topLeft] {
     transform: translate(0, -100%);
-    margin-top: -3px;
+    margin-top: calc(-3px - var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=topRight] {
     transform: translate(-100%, -100%);
-    margin-top: -3px;
+    margin-top: calc(-3px - var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=left] {
     transform: translate(-100%, -50%);
-    margin-left: -3px;
+    margin-left: calc(-3px - var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=leftTop] {
     transform: translate(-100%, 0);
-    margin-left: -3px;
+    margin-left: calc(-3px - var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=leftBottom] {
     transform: translate(-100%, -100%);
-    margin-left: -3px;
+    margin-left: calc(-3px - var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=right] {
     transform: translate(0, -50%);
-    margin-left: 3px;
+    margin-left: calc(3px + var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=rightTop] {
     transform: translate(0, 0);
-    margin-left: 3px;
+    margin-left: calc(3px + var(--cui-popover-offset));
 }
+
 .cm-popover-inner[x-placement=rightBottom] {
     transform: translate(0, -100%);
-    margin-left: 3px;
+    margin-left: calc(3px + var(--cui-popover-offset));
 }
+
 .cm-popover-with-arrow[x-placement^=right] {
-    margin-left: 8px;
+    margin-left: calc(8px + var(--cui-popover-offset));
 }
+
 .cm-popover-with-arrow[x-placement^=left] {
-    margin-left: -8px;
+    margin-left: calc(-8px - var(--cui-popover-offset));
 }
+
 .cm-popover-with-arrow[x-placement^=top] {
-    margin-top: -8px;
+    margin-top: calc(-8px - var(--cui-popover-offset));
 }
+
 .cm-popover-with-arrow[x-placement^=bottom] {
-    margin-top: 8px;
+    margin-top: calc(8px + var(--cui-popover-offset));
 }
+
 .cm-popover-icon-arrow {
     position: absolute;
     width: 8px;
@@ -116,8 +161,9 @@
     top: 50%;
     -webkit-transform: translateY(-50%) rotate(180deg);
     transform: translateY(-50%) rotate(180deg);
-    fill: rgba(var(--cui-grey-7), 1);
+    fill: var(--cui-popover-background-color, rgba(var(--cui-grey-7), 1));
 }
+
 .cm-popover-with-arrow[x-placement^=left] {
     .cm-popover-icon-arrow {
         left: auto;
@@ -126,11 +172,13 @@
         transform: translateY(-50%);
     }
 }
+
 .cm-popover-with-arrow[x-placement$=Top] {
     .cm-popover-icon-arrow {
         top: 18px;
     }
 }
+
 .cm-popover-with-arrow[x-placement^=top] {
     .cm-popover-icon-arrow {
         top: auto;
@@ -141,11 +189,13 @@
         transform: translateX(-50%) rotate(90deg);
     }
 }
+
 .cm-popover-with-arrow[x-placement$=Bottom] {
     .cm-popover-icon-arrow {
         top: calc(100% - 18px);
     }
 }
+
 .cm-popover-with-arrow[x-placement^=bottom] {
     .cm-popover-icon-arrow {
         top: -14px;
@@ -155,13 +205,31 @@
         transform: translateX(-50%) rotate(-90deg);
     }
 }
+
 .cm-popover-with-arrow[x-placement$=Left] {
     .cm-popover-icon-arrow {
         left: 18px;
     }
 }
+
 .cm-popover-with-arrow[x-placement$=Right] {
     .cm-popover-icon-arrow {
         left: calc(100% - 18px);
     }
+}
+
+.cm-popover-with-arrow-center[x-placement$=Top] {
+    margin-top: -18px;
+}
+
+.cm-popover-with-arrow-center[x-placement$=Bottom] {
+    margin-top: 18px;
+}
+
+.cm-popover-with-arrow-center[x-placement$=Left] {
+    margin-left: -18px;
+}
+
+.cm-popover-with-arrow-center[x-placement$=Right] {
+    margin-left: 18px;
 }

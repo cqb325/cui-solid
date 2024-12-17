@@ -1,5 +1,5 @@
 import type { JSXElement } from "solid-js";
-type TimelineItemProps = {
+export interface TimelineItemProps {
     children?: any;
     classList?: any;
     class?: string;
@@ -7,6 +7,5 @@ type TimelineItemProps = {
     fill?: boolean;
     icon?: JSXElement;
     time?: string;
-};
+}
 export declare function TimelineItem(props: TimelineItemProps): import("solid-js").JSX.Element;
-export {};

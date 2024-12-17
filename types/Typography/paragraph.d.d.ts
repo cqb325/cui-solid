@@ -1,5 +1,5 @@
-import type { ComponentProps } from "solid-js";
-export type ParagraphProps = {
+import type { JSX } from "solid-js";
+export interface ParagraphProps extends JSX.HTMLAttributes<HTMLSpanElement> {
     type?: 'default' | 'secondary' | 'warning' | 'error' | 'success' | 'primary';
     disabled?: boolean;
     link?: string;
@@ -25,4 +25,4 @@ export type ParagraphProps = {
     onCopy?: () => void;
     copyText?: string;
     heading?: 1 | 2 | 3 | 4 | 5 | 6;
-} & ComponentProps<any>;
+}

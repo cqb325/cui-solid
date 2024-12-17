@@ -159,3 +159,27 @@
         opacity: 1;
     }
 }
+
+
+
+@keyframes cm-loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cm-loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}

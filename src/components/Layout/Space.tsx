@@ -27,7 +27,7 @@ export const Space = (props: SpaceOptions) => {
         'cm-space-wrap': wrap(),
         'cm-space-inline': inline()
     });
-    const newStyle = () => useStyle(props, {[dir() === 'h' ? 'column-gap': 'row-gap']: size() + 'px'});
+    const newStyle = () => useStyle(props, {['gap']: size() + 'px'});
     return <div classList={classList()} style={newStyle()} id={props.id} title={props.title}>
         {
             props.children

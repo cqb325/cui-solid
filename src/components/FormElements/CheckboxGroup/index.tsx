@@ -5,7 +5,7 @@ import createField from '../../utils/createField';
 
 export const CheckboxGroupContext = createContext();
 
-type CheckboxGroupProps = {
+export interface CheckboxGroupProps {
     classList?: any,
     class?: string,
     block?: boolean,
@@ -18,6 +18,7 @@ type CheckboxGroupProps = {
     data?: any,
     textField?: string,
     valueField?: string,
+    asFormField?: boolean
 }
 
 export function CheckboxGroup (props: CheckboxGroupProps) {

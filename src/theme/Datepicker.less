@@ -65,6 +65,7 @@
         cursor: pointer;
         flex: 1;
         text-align: center;
+        justify-content: center;
         color: var(--cui-color-text-2);
         transition: all 0.2s linear;
         font-size: 13px;
@@ -278,6 +279,9 @@
     padding: 11px;
     height: 56px;
 }
+.cm-date-picker-month-back-btn {
+    box-shadow: none;
+}
 
 
 .cm-date-picker-inhover{
@@ -332,16 +336,15 @@
 }
 .cm-datetime-switch-item {
     flex: 1;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 15px 0;
     color: rgb(var(--cui-grey-5));
     cursor: pointer;
     transition: all 0.2s linear;
     font-size: 12px;
-    .cm-icon {
-        margin-right: 5px;
-        font-size: 12px;
-    }
+    gap: 5px;
     &:hover {
         background-color: rgb(var(--cui-grey-1));
     }

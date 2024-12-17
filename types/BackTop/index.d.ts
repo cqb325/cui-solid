@@ -1,4 +1,4 @@
-type BackTopProps = {
+export interface BackTopProps {
     classList?: any;
     class?: string;
     style?: any;
@@ -8,6 +8,5 @@ type BackTopProps = {
     height?: number;
     duration?: number;
     onClick?: () => void;
-};
+}
 export declare function BackTop(props: BackTopProps): import("solid-js").JSX.Element;
-export {};

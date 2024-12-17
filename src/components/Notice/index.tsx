@@ -1,3 +1,4 @@
+import type { JSXElement } from "solid-js";
 import { createUniqueId } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import { render } from "solid-js/web";
@@ -5,14 +6,14 @@ import usePortal from "../utils/usePortal";
 import { Notices } from "./Notices";
 import usezIndex from "../utils/usezIndex";
 
-export type NoticeConfig = {
+export interface NoticeConfig {
     dock?: 'topRight'|'topLeft'|'bottomLeft'|'bottomRight',
     key?: string,
     duration?: number,
     content?: any,
     title?: any,
-    icon?: any,
-    theme?: 'success' | 'warning' | 'error' | 'info',
+    icon?: JSXElement,
+    theme?: 'success' | 'warning' | 'error' | 'info' | 'help',
     btn?: any,
     style?: any,
     onClose?: () => void
@@ -62,28 +63,23 @@ function Notice () {
             ele.style.zIndex = usezIndex();
         },
         info (config: NoticeConfig) {
-            config.icon = 'info';
             config.theme = 'info';
             this.open(config);
         },
         success (config: NoticeConfig) {
-            config.icon = 'check-circle';
             config.theme = 'success';
             this.open(config);
         },
         warning (config: NoticeConfig) {
-            config.icon = 'alert-circle';
             config.theme = 'warning';
             this.open(config);
         },
         error (config: NoticeConfig) {
-            config.icon = 'x-circle';
             config.theme = 'error';
             this.open(config);
         },
         help (config: NoticeConfig) {
-            config.icon = 'help-circle';
-            config.theme = 'info';
+            config.theme = 'help';
             this.open(config);
         }
     }

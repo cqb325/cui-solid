@@ -1,4 +1,4 @@
-import type { ComponentProps } from "solid-js";
+import type { ComponentProps, JSX } from "solid-js";
 
 export function useClassList (props: ComponentProps<any>, ...customClassList: any) {
     const obj = {
@@ -22,13 +22,21 @@ export function useClassList (props: ComponentProps<any>, ...customClassList: an
     return obj;
 }
 
-export function useStyle (props: any | ComponentProps<'div'>, customStyle: any) {
+export function useStyle (props: any | ComponentProps<'div'>, customStyle: JSX.CSSProperties) {
     let obj = {
         ...customStyle,
     };
     if (props.style) {
         if (typeof props.style === 'string') {
-            obj[props.style] = true;
+            const tempEl = document.createElement('div');
+            tempEl.setAttribute('style', props.style);
+            const style = tempEl.style;
+            const styleObj: any = {};
+            for (let i = 0; i < style.length; i++) {
+                const prop = style[i];
+                styleObj[prop] = style.getPropertyValue(prop);
+            }
+            Object.assign(obj, styleObj);
         } else if (typeof props.style === 'object') {
             obj = {...obj, ...props.style};
         }

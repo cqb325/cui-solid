@@ -1,11 +1,9 @@
 import { View, VView, HView, Space } from "@/components/Layout"
 import { Accordion } from "@/components/Accordion";
-import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { createSignal } from "solid-js";
 import { BothSide } from "@/components/Layout";
 import { Tag } from "@/components/Tag";
-// import FlexAccordion from "../../components/FlexAccordion";
 import '../../layout/demo.less';
 import { Title } from "@/components/Typography/Title";
 import { Card } from "@/components/Card";
@@ -18,6 +16,7 @@ import { CompAnchor } from "../../common/CompAnchor";
 import { propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { F7FlagFill, F7GearAltFill, F7Speedometer } from "cui-solid-icons/f7";
 useDirective(hljs);
 
 const centerStyle = {
@@ -41,11 +40,11 @@ function AccordionDemo () {
                                 <Accordion onSelect={(name: string, open: boolean, v: any) => {
                                     console.log(name, open, v);
                                 }}>
-                                    <Accordion.Item name="a1" title="Title1" icon={<Icon name="dashboard"/>}>content1</Accordion.Item>
+                                    <Accordion.Item name="a1" title="Title1" icon={<F7Speedometer />}>content1</Accordion.Item>
                                     <Accordion.Item name="a2" title={<BothSide>
                                         <span>Title2</span>
                                         <Tag size="small" theme="success">1234</Tag>
-                                    </BothSide>} icon={<Icon name="cog"/>}>
+                                    </BothSide>} icon={<F7GearAltFill />}>
                                         <p>content2</p>
                                         <p>content2</p>
                                         <p>content2</p>
@@ -76,14 +75,14 @@ function AccordionDemo () {
                                     <Accordion activeKey={[activeKey, setActiveKey]} multi onSelect={(name: string, open: boolean, v: any) => {
                                         console.log(name, open, v);
                                     }}>
-                                        <Accordion.Item name="a1" title="Title1" icon={<Icon name="dashboard"/>}>content1</Accordion.Item>
-                                        <Accordion.Item name="a2" title="Title2" icon={<Icon name="cog"/>}>
+                                        <Accordion.Item name="a1" title="Title1" icon={<F7Speedometer />}>content1</Accordion.Item>
+                                        <Accordion.Item name="a2" title="Title2" icon={<F7GearAltFill />}>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                         </Accordion.Item>
-                                        <Accordion.Item name="a3" title="Title3" icon={<Icon name="flag"/>}>
+                                        <Accordion.Item name="a3" title="Title3" icon={<F7FlagFill />}>
                                             <p>content3</p>
                                             <p>content3</p>
                                             <p>content3</p>
@@ -120,14 +119,14 @@ function AccordionDemo () {
                                     <Accordion activeKey="a1" flex onSelect={(name: string, open: boolean, v: any) => {
                                         console.log(name, open, v);
                                     }}>
-                                        <Accordion.Item name="a1" title="Title1" icon={<Icon name="dashboard"/>}>content1</Accordion.Item>
-                                        <Accordion.Item name="a2" title="Title2" icon={<Icon name="cog"/>}>
+                                        <Accordion.Item name="a1" title="Title1" icon={<F7Speedometer />}>content1</Accordion.Item>
+                                        <Accordion.Item name="a2" title="Title2" icon={<F7GearAltFill />}>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                             <p>content2</p>
                                         </Accordion.Item>
-                                        <Accordion.Item name="a3" title="Title3" icon={<Icon name="flag"/>}>
+                                        <Accordion.Item name="a3" title="Title3" icon={<F7FlagFill />}>
                                             <p>content3</p>
                                             <p>content3</p>
                                             <p>content3</p>

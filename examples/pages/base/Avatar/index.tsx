@@ -1,6 +1,5 @@
 import { Space } from "@/components/Layout/Space";
 import { Avatar } from "@/components/Avatar";
-import { Icon } from "@/components/Icon";
 import { Title } from "@/components/Typography/Title";
 import { CompAnchor } from "../../common/CompAnchor";
 import { Card } from "@/components/Card";
@@ -16,6 +15,7 @@ import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
 import { Input } from "@/components";
 import { createSignal } from "solid-js";
+import { FeatherCamera, FeatherSettings } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 function AvatarDemo () {
@@ -37,10 +37,10 @@ function AvatarDemo () {
                 <Space id="avatar_base" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Avatar size="small" icon={<Icon name="settings"/>} />
-                            <Avatar icon={<Icon name="settings"/>} />
-                            <Avatar size="large" icon={<Icon name="settings"/>} />
-                            <Avatar size={48} icon={<Icon name="settings" size={24}/>} />
+                            <Avatar size="small" icon={<FeatherSettings />} />
+                            <Avatar icon={<FeatherSettings />} />
+                            <Avatar size="large" icon={<FeatherSettings />} />
+                            <Avatar size={48} icon={<FeatherSettings size={24}/>} />
                         </Space>
                         <Divider align="left"><Text type="primary">头像尺寸</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -56,8 +56,8 @@ function AvatarDemo () {
                 <Space id="avatar_shape" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Avatar icon={<Icon name="settings"/>} />
-                            <Avatar shape="square" icon={<Icon name="settings"/>} />
+                            <Avatar icon={<FeatherSettings/>} />
+                            <Avatar shape="square" icon={<FeatherSettings/>} />
                         </Space>
                         <Divider align="left"><Text type="primary">形状</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -70,12 +70,12 @@ function AvatarDemo () {
                 <Space id="avatar_type" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Avatar icon={<Icon name="settings"/>} />
+                            <Avatar icon={<FeatherSettings/>} />
                             <Avatar>A</Avatar>
                             <Avatar>{value()}</Avatar>
                             <Avatar src={img} />
                             <Avatar style={{'background-color': 'rgb(253, 227, 207)', color: 'rgb(245, 106, 0)'}}>U</Avatar>
-                            <Avatar style={{'background-color': 'rgb(135, 208, 104)'}} icon={<Icon name="settings"/>} />
+                            <Avatar style={{'background-color': 'rgb(135, 208, 104)'}} icon={<FeatherSettings/>} />
                         </Space>
                         <Input value={[value, setValue]} trigger="input"/>
                         <Divider align="left"><Text type="primary">类型</Text></Divider>
@@ -89,8 +89,8 @@ function AvatarDemo () {
                 <Space id="avatar_hover" dir="v">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Avatar size={48} icon={<Icon name="settings" size={24}/>} style={{'background-color': 'rgb(242 168 113)', color: 'rgb(245, 106, 0)'}}
-                            hoverMask={<div style={style}><Icon name="camera"/></div>} />
+                            <Avatar size={48} icon={<FeatherSettings size={24}/>} style={{'background-color': 'rgb(242 168 113)', color: 'rgb(245, 106, 0)'}}
+                            hoverMask={<div style={style}><FeatherCamera /></div>} />
                         </Space>
                         <Divider align="left"><Text type="primary">遮罩</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">

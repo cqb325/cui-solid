@@ -1,21 +1,21 @@
 import { For, Show } from "solid-js";
 import { Text } from "../../Typography/Text";
-import { Icon } from "../../Icon";
 import { Button } from "../../Button";
 import { Progress } from "../../Progress";
+import { FeatherAlertCircle, FeatherFileText, FeatherFilm, FeatherImage, FeatherMusic, FeatherX } from "cui-solid-icons/feather";
 
 export function List (props: any) {
     const format = (file: any) => {
         const format = file.name.split('.').pop().toLocaleLowerCase() || '';
-        let type = 'file-text';
+        let type = <FeatherFileText size={20}/>;
         if (['gif','jpg','jpeg','png','bmp','webp'].indexOf(format) > -1) {
-            type = 'image';
+            type = <FeatherImage size={20} />;
         }
         if (['mp4','m3u8','rmvb','avi','swf','3gp','mkv','flv'].indexOf(format) > -1) {
-            type = 'film1';
+            type = <FeatherFilm size={20} />;
         }
         if (['mp3','wav','wma','ogg','aac','flac'].indexOf(format) > -1) {
-            type = 'music';
+            type = <FeatherMusic size={20} />;
         }
         return type;
     }
@@ -47,7 +47,7 @@ export function List (props: any) {
                 {(file: any) => {
                     return <li class="cm-upload-file-card">
                         <div class="cm-upload-file-preview">
-                            <Show when={file.url} fallback={<Icon name={format(file)} size={20} />}>
+                            <Show when={file.url} fallback={format(file)}>
                                 <img class="cm-upload-file-preview-img" src={file.url} alt="" onClick={() => {
                                     props.onPreview && props.onPreview(file)
                                 }}/>
@@ -63,7 +63,7 @@ export function List (props: any) {
                             </Show>
                             <Show when={file.status === 'fail'}>
                                 <div class="cm-upload-error">
-                                    <Icon name="alert-circle" size={12} />
+                                    <FeatherAlertCircle size={12}/>
                                     <Text type="error" size="small" class="cm-upload-error-text">上传失败</Text>
                                     <Text type="primary" class="cm-upload-retry" size="small" onClick={() => {
                                         props.onRetry && props.onRetry(file);
@@ -72,7 +72,7 @@ export function List (props: any) {
                             </Show>
                         </div>
                         <div class="cm-upload-file-control">
-                            <Button size="small" ghost icon={<Icon name="x"/>} onClick={() => {
+                            <Button size="small" theme="borderless" icon={<FeatherX />} onClick={() => {
                                 props.onRemove && props.onRemove(file);
                             }} />
                         </div>

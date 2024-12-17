@@ -1,4 +1,5 @@
-export type CheckboxProps = {
+import type { JSX } from "solid-js";
+export interface CheckboxProps {
     classList?: any;
     class?: any;
     checked?: any;
@@ -7,7 +8,8 @@ export type CheckboxProps = {
     onChange?: (checked: boolean, value: any) => void;
     value?: any;
     name?: string;
-    label?: string;
+    label?: JSX.Element;
     inner?: boolean;
-};
-export declare function Checkbox(props: CheckboxProps): import("solid-js").JSX.Element;
+    asFormField?: boolean;
+}
+export declare function Checkbox(props: CheckboxProps): JSX.Element;

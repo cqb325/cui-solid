@@ -12,10 +12,11 @@ import { propsColumns } from "../../common/columns"
 import { anchorData, codes, propsData } from "./config"
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import type { JSX } from "solid-js"
 useDirective(hljs);
 
 export default function TooltipPage () {
-    const style = {width: '120px', 'text-align': 'center'}
+    const style:JSX.CSSProperties = {width: '120px', 'text-align': 'center'}
 
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
@@ -26,7 +27,7 @@ export default function TooltipPage () {
                 <Space id="tooltip_base" dir="v">
                     <Card bordered>
                         <Space dir="h">
-                            <Tooltip content={<div>Tip Content</div>}>
+                            <Tooltip content={<p>CSS 是开放 Web 的核心语言之一，并根据 W3C 规范在 Web 浏览器中进行了标准化。</p>}>
                                 <span>mouse over show tips</span>
                             </Tooltip>
                         </Space>

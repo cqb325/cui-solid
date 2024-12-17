@@ -1,4 +1,5 @@
-import { createContext, useContext } from "solid-js"
+import type { JSX} from "solid-js";
+import { createContext, splitProps, useContext } from "solid-js"
 import { useClassList } from "../utils/useProps"
 
 export * from './Row';
@@ -6,12 +7,8 @@ export * from './Col';
 export * from './Label';
 export * from './Value';
 
-export interface TableStyleLayoutProps {
+export interface TableStyleLayoutProps extends JSX.HTMLAttributes<HTMLDivElement> {
     labelWidth?: number
-    children?: any
-    classList?: any
-    class?: string
-    style?: any
 }
 
 export interface TableStyleLayoutContextProps {
@@ -23,8 +20,9 @@ const TableStyleLayoutContext = createContext<TableStyleLayoutContextProps>({ la
 export const useTableStyleLayoutContext = () => useContext(TableStyleLayoutContext);
 
 export function TableStyleLayout (props: TableStyleLayoutProps) {
-    const classList = () => useClassList(props, 'cm-table-style-layout');
+    const [local, rest] = splitProps(props, ['children', 'class', 'classList']);
+    const classList = () => useClassList(local, 'cm-table-style-layout');
     return <TableStyleLayoutContext.Provider value={{ labelWidth: props.labelWidth || 100 }}>
-        <div classList={classList()} style={props.style}>{props.children}</div>
+        <div classList={classList()} {...rest}>{local.children}</div>
     </TableStyleLayoutContext.Provider>
 }

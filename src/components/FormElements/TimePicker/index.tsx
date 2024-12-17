@@ -7,9 +7,9 @@ import type { JSXElement, Signal } from "solid-js";
 import { createContext, createEffect, createSignal, Show, useContext } from "solid-js";
 import dayjs from "dayjs";
 import createField from "../../utils/createField";
-import { Icon } from "../../Icon";
+import { FeatherClock } from "cui-solid-icons/feather";
 
-type TimePickerProps = {
+export interface TimePickerProps {
     classList?: any,
     class?: any,
     type?: 'timeRange',
@@ -30,13 +30,14 @@ type TimePickerProps = {
     seperator?: string,
     transfer?: boolean,
     trigger?: () => any,
+    asFormField?: boolean
     placeholder?: string,
     onChange?: (value: any) => void
 }
 
 const TimepickerContext = createContext();
 
-export function Timepicker(props: TimePickerProps) {
+export function Timepicker (props: TimePickerProps) {
     const [value, setValue] = createField<any>(props, props.type === 'timeRange' ? [] : '');
     // 内部value，防止类似form调用的setValue后重复执行effect
     const [v, setV]: any[] = createSignal(value());
@@ -166,10 +167,8 @@ export function Timepicker(props: TimePickerProps) {
                     </Show>
                 </div>}>
                 <Show when={!props.trigger} fallback={props.trigger && props.trigger()}>
-                    {/* <Value prepend={props.prepend} value={v()} format={format} onClear={onClear}
-                        clearable={props.clearable} type={props.type} seperator={seperator}/> */}
                     <Value prepend={props.prepend} text={text()} onClear={onClear} clearable={props.clearable}
-                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<Icon name="clock" />} />
+                        placeholder={props.placeholder} disabled={props.disabled} size={props.size} icon={<FeatherClock />} />
                 </Show>
             </Dropdown>
         </div>

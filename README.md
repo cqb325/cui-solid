@@ -43,6 +43,28 @@ CUI-SOLID
     yarn add cui-solid
 
 ## changeLog
+
+    v2.1.1
+    1、表单元素更新data后无法更新选中问题
+    2、增加useDebounce，使用resizeObserver的地方使用
+    3、carousel 报错问题
+
+    v2.1.0
+    1、Table的render添加index索引参数
+    2、form表单支持动态表单项
+    3、Tabs支持标题限宽、右键菜单
+    4、Upload支持customRequest自定义上传
+
+    v2.0.0
+    1、icon使用cui-solid-icons库
+    2、新增Result、Popconfirm、BadgeRibbon、TeleportBox组件
+    3、formitem表单项多表单元素的验证
+    4、新增一些组件的特性和bug修改
+
+    v1.0.6
+    1、Carousel 重构
+    2、Loading 修改
+
     v1.05
     1、表格支持showHeader参数可隐藏表头
     2、Table支持合计功能

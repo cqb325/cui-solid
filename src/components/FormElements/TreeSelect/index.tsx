@@ -5,14 +5,14 @@ import { Value } from "../../inner/Value";
 import type { NodeKeyType, TreeInstanceProps, TreeNode, TreeProps } from "../../Tree";
 import createField from "../../utils/createField";
 import { createEffect, createMemo, createSignal } from "solid-js";
-import { Icon } from "../../Icon";
 import type { TagConfig } from "../../TagGroup";
+import { FeatherChevronDown } from "cui-solid-icons/feather";
 
-type TreeSelectProps = {
+export interface TreeSelectProps extends TreeProps {
     classList?: any,
     class?: string,
     style?: any,
-    data?: any[],
+    data: TreeNode[],
     transfer?: boolean,
     align?: 'bottomLeft'|'bottomRight',
     disabled?: boolean,
@@ -25,8 +25,9 @@ type TreeSelectProps = {
     placeholder?: string,
     showMore?: boolean
     multi?: boolean,
+    asFormField?: boolean
     onChange?: (value: NodeKeyType|NodeKeyType[]) => void,
-} & TreeProps;
+}
 
 export function TreeSelect (props: TreeSelectProps) {
     const [value, setValue] = createField<NodeKeyType|NodeKeyType[]>(props, props.multi ? [] : '');
@@ -76,6 +77,7 @@ export function TreeSelect (props: TreeSelectProps) {
 
     createMemo(() => {
         let vals = value();
+        props.data;
         if (props.multi) {
             if (typeof vals === 'string') {
                 vals = vals.split(',');
@@ -113,7 +115,7 @@ export function TreeSelect (props: TreeSelectProps) {
         </div>}>
             <Value text={text()} multi={props.multi} showMax={props.showMax} disabled={props.disabled} showMore={props.showMore}
                 valueClosable={props.valueClosable} clearable={props.clearable} onClear={onClear}
-                prepend={props.prepend} size={props.size} icon={<Icon name="chevron-down"/>} onClose={onValueClose}/>
+                prepend={props.prepend} size={props.size} icon={<FeatherChevronDown/>} onClose={onValueClose}/>
         </Dropdown>
     </div>
 }

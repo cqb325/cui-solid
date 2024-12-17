@@ -1,5 +1,5 @@
 import type { JSXElement, Signal } from "solid-js";
-type TimePickerProps = {
+export interface TimePickerProps {
     classList?: any;
     class?: any;
     type?: 'timeRange';
@@ -20,9 +20,9 @@ type TimePickerProps = {
     seperator?: string;
     transfer?: boolean;
     trigger?: () => any;
+    asFormField?: boolean;
     placeholder?: string;
     onChange?: (value: any) => void;
-};
+}
 export declare function Timepicker(props: TimePickerProps): import("solid-js").JSX.Element;
 export declare const useTimepickerContext: () => unknown;
-export {};

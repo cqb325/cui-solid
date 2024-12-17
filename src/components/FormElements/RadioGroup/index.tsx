@@ -3,7 +3,7 @@ import { useClassList } from "../../utils/useProps";
 import { InnerCheckbox } from "../../inner/Checkbox";
 import createField from "../../utils/createField";
 
-type RadioGroupProps = {
+export interface RadioGroupProps {
     classList?: any,
     class?: string,
     block?: boolean,
@@ -18,6 +18,7 @@ type RadioGroupProps = {
     textField?: string,
     valueField?: string,
     stick?: boolean
+    asFormField?: boolean
 }
 
 export function RadioGroup (props: RadioGroupProps) {

@@ -12,9 +12,35 @@ import { anchorData, codes, eventsData, groupPropsData, propsData } from "./conf
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { createStore } from "solid-js/store";
+import { createEffect, createSignal } from "solid-js";
+import { Button } from "@/components";
 useDirective(hljs);
 
 function CheckboxPage () {
+    const data = [{label: '苹果', value: '1'}, {label: '桃子', value: '2'}, {label: '柚子', value: '3'}];
+    const [checkedList, setCheckedList] = createSignal(['1', '2']);
+    const [checked, setChecked] = createSignal<boolean | 'indeterminate'>(false);
+    const onCheckChange = (checked: boolean) => {
+        if (checked) {
+            setCheckedList(data.map(item => item.value));
+        } else {
+            setCheckedList([]);
+        }
+    }
+    createEffect(() => {
+        const list = checkedList();
+        if (list.length === data.length) {
+            setChecked(true);
+        } else if (list.length === 0) {
+            setChecked(false);
+        } else {
+            setChecked('indeterminate');
+        }
+    })
+
+    const [data2, setData2] = createSignal([...data]);
+    const [val, setVal] = createSignal(['1']);
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -47,9 +73,29 @@ function CheckboxPage () {
                 <Space id="checkbox_group" dir="v">
                     <Card bordered>
                         <CheckboxGroup data={[{label: '苹果', value: '1'}, {label: '桃子', value: '2'}]} />
+                        <CheckboxGroup data={data2()} value={[val, setVal]} />
+                        <Button onClick={() => {
+                            setData2([{label: 'aa', value: '1'}, {label: 'bb', value: '2'}, {label: 'cc', value: '3'}])
+                        }}>改变数据</Button>
                         <Divider align="left"><Text type="primary">组合</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             使用 CheckboxGroup 组件进行组合
+                        </Paragraph>
+                        <DemoCode data={codes['checkbox_group']}/>
+                    </Card>
+                </Space>
+
+
+                <Space id="checkbox_all" dir="v">
+                    <Card bordered>
+                        <div>
+                            <Checkbox checked={[checked, setChecked]} onChange={onCheckChange} label="全选"/>
+                        </div>
+                        <Divider/>
+                        <CheckboxGroup value={[checkedList, setCheckedList]} data={data} />
+                        <Divider align="left"><Text type="primary">全选</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            全选
                         </Paragraph>
                         <DemoCode data={codes['checkbox_group']}/>
                     </Card>

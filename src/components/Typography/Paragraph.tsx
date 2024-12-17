@@ -1,8 +1,8 @@
 import { createSignal, Show } from "solid-js";
-import { Icon } from "../Icon";
 import useCopy from "../utils/useCopy";
 import type { ParagraphProps } from "./paragraph.d";
 import { useClassList } from "../utils/useProps";
+import { FeatherCheck, FeatherCopy } from "cui-solid-icons/feather";
 
 export function Paragraph (props: ParagraphProps) {
     const [copyed, setCopyed] = createSignal(false);
@@ -28,8 +28,8 @@ export function Paragraph (props: ParagraphProps) {
     return <div style={props.style} classList={classList()} ref={ref}>
         {props.children}
         <Show when={props.copyable}>
-            <Show when={copyed()} fallback={<span class="cm-typograghy-copy" onClick={onCopy}><Icon name="copy" /></span>}>
-                <span class="cm-typograghy-copyed"><Icon name="check" /></span>
+            <Show when={copyed()} fallback={<span class="cm-typograghy-copy" onClick={onCopy}><FeatherCopy /></span>}>
+                <span class="cm-typograghy-copyed"><FeatherCheck /></span>
             </Show>
         </Show>
     </div>;

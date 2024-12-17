@@ -1,6 +1,5 @@
 import { createSignal } from "solid-js";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
 import { Space } from "@/components/Layout";
 import { Progress } from "@/components/Progress";
 import { Title } from "@/components/Typography/Title";
@@ -14,6 +13,7 @@ import { anchorData, codes, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { FeatherMinus, FeatherPlus } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 export default function ProgressPage () {
@@ -91,10 +91,10 @@ export default function ProgressPage () {
                         <Space dir="v">
                             <Progress value={value()} />
                             <Space dir="h">
-                                <Button type="primary" icon={<Icon name="plus"/>} onClick={() => {
+                                <Button type="primary" icon={<FeatherPlus/>} onClick={() => {
                                     setValue(value() + 1);
                                 }} />
-                                <Button type="primary" icon={<Icon name="minus"/>} onClick={() => {
+                                <Button type="primary" icon={<FeatherMinus />} onClick={() => {
                                     setValue(value() - 1);
                                 }} />
                             </Space>
@@ -126,10 +126,10 @@ export default function ProgressPage () {
                             <Progress type="circle" value={value2()}/>
                         </Space>
                         <Space dir="h">
-                            <Button type="primary" icon={<Icon name="plus"/>} onClick={() => {
+                            <Button type="primary" icon={<FeatherPlus />} onClick={() => {
                                 setValue2(value2() + 5);
                             }} />
-                            <Button type="primary" icon={<Icon name="minus"/>} onClick={() => {
+                            <Button type="primary" icon={<FeatherMinus />} onClick={() => {
                                 setValue2(value2() - 5);
                             }} />
                         </Space>
@@ -151,10 +151,10 @@ export default function ProgressPage () {
                             ]}/>
                         </Space>
                         <Space dir="h">
-                            <Button type="primary" icon={<Icon name="plus"/>} onClick={() => {
+                            <Button type="primary" icon={<FeatherPlus />} onClick={() => {
                                 setValue2(value2() + 5);
                             }} />
-                            <Button type="primary" icon={<Icon name="minus"/>} onClick={() => {
+                            <Button type="primary" icon={<FeatherMinus/>} onClick={() => {
                                 setValue2(value2() - 5);
                             }} />
                         </Space>

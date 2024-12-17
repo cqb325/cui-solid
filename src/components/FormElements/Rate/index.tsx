@@ -4,7 +4,7 @@ import { For, createSignal } from "solid-js";
 import { RateItem } from "./Item";
 import createField from "../../utils/createField";
 
-type RateProps = {
+export interface RateProps {
     classList?: any,
     class?: string,
     disabled?: boolean,
@@ -16,6 +16,7 @@ type RateProps = {
     allowHalf?: boolean,
     onChange?: (value: number) => void,
     name?: string
+    asFormField?: boolean
 }
 export function Rate (props: RateProps) {
     const classList = () => useClassList(props, 'cm-rate', {

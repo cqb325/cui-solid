@@ -1,5 +1,5 @@
 import { Select, Option } from "../FormElements/Select";
-import { InnerInput } from "../FormElements/Input/input";
+import { Input } from "../FormElements/Input";
 import { PagePrev } from "./PagePrev";
 import { PageNext } from "./PageNext";
 import { PageItem } from "./PageItem";
@@ -175,7 +175,7 @@ export function Pagination (props: PaginationProps) {
             <Match when={props.mini}>
                 <ul class="cm-pagination-num-list">
                     <PagePrev current={current} onClick={prev} />
-                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class="mr-5"
+                        <Input style={{ width: props.size === 'small' ? '35px' : '50px' }} class="mr-5"
                             value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
                         <span class="cm-pagination-mini-pages">/ {_calcPage()}</span>
                     <PageNext current={current} onClick={next} disabled={current() === _calcPage()} />
@@ -205,7 +205,7 @@ export function Pagination (props: PaginationProps) {
                 <Show when={showJumper}>
                     <span class="cm-pagination-jumper">
                         <span class="cm-pagination-text">跳至</span>
-                        <InnerInput style={{ width: props.size === 'small' ? '35px' : '50px' }} class="mr-5"
+                        <Input style={{ width: props.size === 'small' ? '35px' : '50px' }} class="mr-5"
                             value={[pageNum, setPageNum]} size={props.size} onChange={gotoPage} />
                         <span class="cm-pagination-text">页</span>
                     </span>

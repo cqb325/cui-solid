@@ -2,7 +2,7 @@ import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import { isServer } from "solid-js/web";
 
-type CollapaseProps = {
+export interface CollapaseProps {
     open?: boolean,
     onOpen?: (height: number) => void,
     style?: any,

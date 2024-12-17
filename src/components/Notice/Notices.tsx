@@ -1,9 +1,17 @@
 import type { JSX} from "solid-js";
-import { createSignal, For, onMount, Show } from "solid-js"
+import { createComponent, createSignal, For, onMount, Show } from "solid-js"
 import { useClassList } from "../utils/useProps";
-import { Icon } from "../Icon";
 import type { NoticeConfig } from ".";
 import usezIndex from "../utils/usezIndex";
+import { FeatherX } from "cui-solid-icons/feather";
+import { F7ExclamationmarkTriangleFill, F7CheckmarkAltCircleFill, F7XmarkCircleFill, F7QuestionCircleFill, F7InfoCircleFill } from "cui-solid-icons/f7";
+const icons = {
+    info: F7InfoCircleFill,
+    success: F7CheckmarkAltCircleFill,
+    warning: F7ExclamationmarkTriangleFill,
+    error: F7XmarkCircleFill,
+    help: F7QuestionCircleFill
+}
 
 type NoticesProps = {
     data?: any,
@@ -17,8 +25,10 @@ function NoticePanel (props: any) {
     let wrap: any;
     const data: NoticeConfig = props.data;
     const { style, icon, btn, theme, title, content } = data;
+    const ic = () => icon === undefined ? (icons[theme!] ? createComponent(icons[theme!], {class: `cm-notice-icon-${theme}`}) : null) : icon;
+    const hasIcon = () => icon || (icon === undefined ? icons[theme!] : null);
     const classList = () => useClassList(props, 'cm-notification-item', {
-        'cm-notification-item-width-icon': icon,
+        'cm-notification-item-width-icon': hasIcon(),
         'cm-notification-item-open': visible(),
         'cm-notification-item-close': closed(),
         [`cm-notification-item-${theme}`]: theme,
@@ -54,15 +64,17 @@ function NoticePanel (props: any) {
 
     return <div classList={classList()} style={style} ref={wrap}>
         <div class="cm-notification-item-wrap">
-            <a class="cm-notification-close" onClick={hide}><Icon name="x" size={16}/></a>
-            <Show when={icon}>
+            <Show when={hasIcon()}>
                 <div class="cm-notification-icon">
-                    <Icon name={icon}/>
+                    {ic()}
                 </div>
             </Show>
             <div class="cm-notification-content">
                 <Show when={title}>
-                    <div class="cm-notification-head">{title}</div>
+                    <div class="cm-notification-head">
+                        {title}
+                        <a class="cm-notification-close" onClick={hide}><FeatherX/></a>
+                    </div>
                 </Show>
                 <div class="cm-notification-body">{content}</div>
                 <Show when={btn}>

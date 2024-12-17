@@ -2,7 +2,7 @@ import type { Accessor, JSXElement } from "solid-js";
 import { For } from "solid-js";
 import { useClassList, useStyle } from "../utils/useProps";
 
-export type BasicProps = {
+export interface BasicProps {
     classList?: any;
     class?: string;
     style?: any;

@@ -1,5 +1,5 @@
 import { Show, createEffect, createSignal } from "solid-js";
-import { Icon } from "../../Icon";
+import { FeatherX } from "cui-solid-icons/feather";
 
 export function Value (props: any) {
     const [bgColorStyle, setBgColorStyle] = createSignal<any>({});
@@ -15,7 +15,7 @@ export function Value (props: any) {
         <span style={{width: '0px', "font-size": '12px', visibility: 'hidden', 'line-height': 'initial'}}>A</span>
         <input type="hidden" name={props.name} value={props.value}/>
         <div class="cm-select-color-wrap">
-            <Show when={bgColorStyle().background} fallback={<div class="cm-select-color cm-select-color-empty"><Icon name="x" size={12}/></div>}>
+            <Show when={bgColorStyle().background} fallback={<div class="cm-select-color cm-select-color-empty"><FeatherX/></div>}>
                 <div class="cm-select-color" style={bgColorStyle()} />
             </Show>
         </div>

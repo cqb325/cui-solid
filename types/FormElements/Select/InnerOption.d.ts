@@ -1,4 +1,4 @@
-type SelectOptions = {
+declare type SelectInnerOptions = {
     data: any;
     checked?: boolean;
     disabled?: boolean;
@@ -10,5 +10,5 @@ type SelectOptions = {
     ref?: any;
     renderOption?: (item: any) => any;
 };
-export declare function Option(props: SelectOptions): import("solid-js").JSX.Element;
+export declare function Option(props: SelectInnerOptions): import("solid-js").JSX.Element;
 export {};

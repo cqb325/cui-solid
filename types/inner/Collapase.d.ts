@@ -1,4 +1,4 @@
-type CollapaseProps = {
+export interface CollapaseProps {
     open?: boolean;
     onOpen?: (height: number) => void;
     style?: any;
@@ -7,6 +7,5 @@ type CollapaseProps = {
     classList?: any;
     class?: string;
     ref?: any;
-};
+}
 export declare function Collapase(props: CollapaseProps): import("solid-js").JSX.Element;
-export {};

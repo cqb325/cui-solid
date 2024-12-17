@@ -1,7 +1,7 @@
-import { InnerInput } from "../Input/input";
-import { Icon } from "../../Icon";
+import { Input } from "../Input";
 import { splitProps } from "solid-js";
-import type { InputProps } from "../Input/input";
+import type { InputProps } from "../Input";
+import { FeatherSearch } from "cui-solid-icons/feather";
 
 interface SearchProps extends InputProps {
     enterButton?: any,
@@ -10,10 +10,10 @@ interface SearchProps extends InputProps {
 
 export function Search (props: SearchProps) {
     const [local, others] = splitProps(props, ['enterButton', 'onEnter', 'onSearch']);
-    const suffix = !local.enterButton ? <Icon name="search" style={{cursor: 'pointer'}} onClick={local.onSearch}/> : null;
+    const suffix = !local.enterButton ? <FeatherSearch style={{cursor: 'pointer'}} onClick={local.onSearch}/> : null;
     let append = null;
     if (local.enterButton) {
-        append = typeof local.enterButton === 'string' ? local.enterButton : <Icon name="search" onClick={local.onSearch}/>;
+        append = typeof local.enterButton === 'string' ? local.enterButton : <FeatherSearch onClick={local.onSearch}/>;
     }
-    return <InnerInput onEnter={local.onEnter} suffix={suffix} append={append} {...others}/>
+    return <Input onEnter={local.onEnter} suffix={suffix} append={append} {...others}/>
 }

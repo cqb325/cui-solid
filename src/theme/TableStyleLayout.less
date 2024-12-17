@@ -2,8 +2,8 @@
     width: 100%;
     table-layout: fixed;
     position: relative;
-    border-left: 1px solid #e8eaec;
-    border-top: 1px solid #e8eaec;
+    border-left: 1px solid var(--cui-color-border);
+    border-top: 1px solid var(--cui-color-border);
 
     .cm-table-style-layout-row {
         display: flex;
@@ -20,16 +20,17 @@
     .cm-table-style-layout-label {
         padding: 10px;
         min-height: 45px;
-        border-right: 1px solid #e8eaec;
-        border-bottom: 1px solid #e8eaec;
+        border-right: 1px solid var(--cui-color-border);
+        border-bottom: 1px solid var(--cui-color-border);
         display: flex;
         align-items: center;
     }
 
     .cm-table-style-layout-value {
         flex: 1 1 auto;
-        width: 0;
+        min-width: 0;
         display: flex;
+        word-break: break-all;
 
         &.column {
             flex-direction: column;
@@ -51,8 +52,8 @@
     .cm-table-style-layout-label {
         text-align: right;
         justify-content: flex-end;
-        background: #f2f6fd;
-        color: rgba(0, 0, 0, 0.65);
+        background: var(--cui-color-fill-0);
+        color: var(--cui-color-text-1);
 
         &.required {
             &::after {

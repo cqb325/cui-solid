@@ -5,8 +5,7 @@ import { Item } from "./Item";
 import { useClassList } from "../utils/useProps";
 import { InnerItem } from "./InnerItem";
 
-
-type BreadcrumbProps = {
+export interface BreadcrumbProps {
     classList?: any,
     class?: string,
     separator?: string,

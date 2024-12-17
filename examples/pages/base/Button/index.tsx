@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
+import type { ButtonProps } from "@/components/Button";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
 import { Space } from "@/components/Layout/Space";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { Title } from "@/components/Typography/Title";
@@ -14,10 +14,16 @@ import { propsData, eventsData, groupData, anchorData, codes } from "./config";
 import { eventsColumns, propsColumns } from "../../common/columns";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { F7AntFill, F7Cat, F7HifispeakerFill, F7Plus, F7Search, F7Trash } from "cui-solid-icons/f7";
+import { RadioGroup, Switch } from "@/components";
+import { FeatherChevronRight, FeatherPlus, FeatherSearch } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 const ButtonPage = () => {
     const [loading, setLoading] = createSignal(false);
+    const [theme, setTheme] = createSignal<ButtonProps['theme']>('solid');
+    const [theme2, setTheme2] = createSignal<ButtonProps['theme']>('solid');
+    const [disabled, setDisabled] = createSignal<boolean>(true);
     return <>
         <div class="sys-ctx-main-left" use:hljs={''}>
             <Space dir="v" size={32}>
@@ -29,74 +35,72 @@ const ButtonPage = () => {
                         <Space dir="v">
                             <Space dir="h">
                                 <Button type="primary">Primary</Button>
+                                <Button type="secondary">Secondary</Button>
+                                <Button type="tertiary">Tertiary</Button>
                                 <Button type="success">Success</Button>
-                                <Button type="error">Error</Button>
-                                <Button type="warning">Warning</Button>
                             </Space>
                             <Space dir="h">
+                                <Button type="error">Error</Button>
+                                <Button type="danger">Danger</Button>
+                                <Button type="warning">Warning</Button>
                                 <Button type="default">Default</Button>
-                                <Button type="text">Text Button</Button>
-                                <Button type="link">LINK</Button>
-                                <Button type="dashed">Dashed BUTTON</Button>
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">按钮类型</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            通过设置 type 为 primary、success、warning、error、default、dashed、text、link 创建不同样式的按钮，不设置为默认样式。
+                            通过设置 type 为 primary、secondary、tertiary、success、warning、error、danger、default 创建不同样式的按钮，不设置为默认样式。
                         </Paragraph>
-                        <DemoCode data={codes['button_type']}/>
                     </Card>
                 </div>
 
 
-                <div id="button_danger">
+                <div id="button_theme">
                     <Card bordered>
-                        <Space dir="v">
+                        <Space dir="v" size={24} inline align="baseline">
+                            <RadioGroup stick value={[theme, setTheme]} data={[{value: 'solid', label: 'Solid'}, {value: 'light', label: 'light'},
+                                {value: 'borderless', label: 'borderless'}, {value: 'outline', label: 'outline'},
+                                {value: 'dashed', label: 'dashed'}
+                            ]}/>
                             <Space dir="h">
-                                <Button type="primary" danger>Primary</Button>
-                                <Button type="default" danger>Default</Button>
-                                <Button type="text" danger>Text Button</Button>
-                                <Button type="link" danger>LINK</Button>
-                                <Button type="dashed" danger>Dashed BUTTON</Button>
+                                <Button theme={theme()} type="primary">Primary</Button>
+                                <Button theme={theme()} type="secondary">Secondary</Button>
+                                <Button theme={theme()} type="tertiary">Tertiary</Button>
+                                <Button theme={theme()} type="success">Success</Button>
+                            </Space>
+                            <Space dir="h">
+                                <Button theme={theme()} type="error">Error</Button>
+                                <Button theme={theme()} type="danger">Danger</Button>
+                                <Button theme={theme()} type="warning">Warning</Button>
+                                <Button theme={theme()} type="default">Default</Button>
                             </Space>
                         </Space>
-                        <Divider align="left"><Text type="primary">危险按钮</Text></Divider>
+                        <Divider align="left"><Text type="primary">样式</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
-                            危险按钮， 通过danger属性设置。
+                            theme="solid/light/borderless/outline/dashed"
                         </Paragraph>
-                        <DemoCode data={codes['button_danger']}/>
-                    </Card>
-                </div>
-
-                <div id="button_ghost">
-                    <Card bordered>
-                        <Space dir="h" style={{background: 'var(--cui-color-fill-0)', padding: '10px'}}>
-                            <Button type="primary" ghost>PRIMARY</Button>
-                            <Button type="success" ghost>SUCCESS</Button>
-                            <Button type="error" ghost>ERROR</Button>
-                            <Button type="warning" ghost>WARNING</Button>
-                            <Button type="default" ghost>DEFAULT</Button>
-                            <Button type="dashed" ghost>DASHED</Button>
-                            <Button type="primary" danger ghost>DASHED</Button>
-                        </Space>
-                        <Divider align="left"><Text type="primary">幽灵按钮</Text></Divider>
-                        <Paragraph type="secondary" spacing="extended">
-                            幽灵按钮将其他按钮的内容反色，背景变为透明，常用在有色背景上。
-                        </Paragraph>
-                        <DemoCode data={codes['button_ghost']}/>
                     </Card>
                 </div>
 
                 <div id="button_disabled">
                     <Card bordered>
-                        <Space dir="h">
-                            <Button type="primary" disabled>PRIMARY</Button>
-                            <Button disabled>Default</Button>
-                            <Button type="primary" ghost disabled>Ghost</Button>
-                            <Button type="link" disabled>Link</Button>
-                            <Button type="text" disabled>Text</Button>
-                            <Button type="dashed" disabled>Dashed</Button>
-                            <Button type="primary" disabled danger>Danger</Button>
+                        <Space dir="v" size={24} inline align="baseline">
+                            <RadioGroup stick value={[theme, setTheme]} data={[{value: 'solid', label: 'Solid'}, {value: 'light', label: 'light'},
+                                {value: 'borderless', label: 'borderless'}, {value: 'outline', label: 'outline'},
+                                {value: 'dashed', label: 'dashed'}
+                            ]}/>
+                            <Space>禁用: <Switch checked={[disabled, setDisabled]} /></Space>
+                            <Space dir="h">
+                                <Button theme={theme()} disabled={disabled()} type="primary">Primary</Button>
+                                <Button theme={theme()} disabled={disabled()} type="secondary">Secondary</Button>
+                                <Button theme={theme()} disabled={disabled()} type="tertiary">Tertiary</Button>
+                                <Button theme={theme()} disabled={disabled()} type="success">Success</Button>
+                            </Space>
+                            <Space dir="h">
+                                <Button theme={theme()} disabled={disabled()} type="error">Error</Button>
+                                <Button theme={theme()} disabled={disabled()} type="danger">Danger</Button>
+                                <Button theme={theme()} disabled={disabled()} type="warning">Warning</Button>
+                                <Button theme={theme()} disabled={disabled()} type="default">Default</Button>
+                            </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">禁用按钮</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -113,17 +117,17 @@ const ButtonPage = () => {
                                 <Button type="primary" size="large">LARGE</Button>
                                 <Button type="primary">DEFAULT</Button>
                                 <Button type="primary" size="small">SMALL</Button>
+                                <Button size="small" icon={<FeatherChevronRight/>}>To Right</Button>
                             </Space>
                             <Space dir="h">
-                                <Button type="primary" size="large" icon={<Icon name="search1"/>}>SEARCH</Button>
-                                <Button type="primary" size="large" icon={<Icon name="search1"/>} />
-                                <Button type="primary" size="large" circle icon={<Icon name="search1"/>} />
+                                <Button type="primary" size="large" icon={<F7Search />}>SEARCH</Button>
+                                <Button type="primary" size="large" icon={<F7Search />} />
+                                <Button type="primary" size="large" shape="circle" icon={<F7Search />} />
                             </Space>
                             <Space dir="h">
-                                <Button type="primary" size="small" icon={<Icon name="search1"/>}>SEARCH</Button>
-                                <Button type="primary" size="small" icon={<Icon name="search1"/>} />
-                                <Button type="primary" size="small" circle icon={<Icon name="search1"/>} />
-                                <Button type="text" size="small">Text</Button>
+                                <Button type="primary" size="small" icon={<F7Search />}>SEARCH</Button>
+                                <Button type="primary" size="small" shape="circle" icon={<F7Search />} />
+                                <Button type="primary" size="small" icon={<F7Search />} />
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">按钮尺寸</Text></Divider>
@@ -140,10 +144,10 @@ const ButtonPage = () => {
                 <div id="button_shaps">
                     <Card bordered>
                         <Space dir="h" align="center">
-                            <Button type="primary" icon={<Icon name="search1"/>}>普通按钮</Button>
-                            <Button type="primary" round icon={<Icon name="search1"/>}>圆角按钮</Button>
-                            <Button type="primary" circle icon={<Icon name="search1"/>} />
-                            <Button type="success" size="large" round>Success</Button>
+                            <Button type="primary" icon={<F7Search />}>普通按钮</Button>
+                            <Button type="primary" shape="round" icon={<F7Search />}>圆角按钮</Button>
+                            <Button type="primary" shape="circle" icon={<F7Search />} />
+                            <Button type="success" size="large" shape="round">Success</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">形状</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
@@ -160,14 +164,14 @@ const ButtonPage = () => {
                     <Card bordered>
                         <Space dir="v">
                             <Space dir="h" align="center">
-                                <Button type="primary" icon={<Icon name="search1"/>} />
-                                <Button type="default" icon={<Icon name="search1"/>} />
-                                <Button type="dashed" icon={<Icon name="plus"/>} />
-                                <Button type="primary" circle icon={<Icon name="search1"/>} />
+                                <Button type="primary" icon={<F7Search />} />
+                                <Button type="default" icon={<F7Search />} />
+                                <Button theme="dashed" icon={<F7Plus />} />
+                                <Button type="primary" shape="circle" icon={<F7Search />} />
                             </Space>
                             <Space dir="h" align="center">
-                                <Button type="primary" icon={<Icon name="search1"/>}>Search</Button>
-                                <Button type="primary" icon={<Icon name="search1"/>} iconAlign="right">Search</Button>
+                                <Button type="primary" icon={<F7Search />}>Search</Button>
+                                <Button type="primary" icon={<F7Search />} iconAlign="right">Search</Button>
                             </Space>
                         </Space>
                         <Divider align="left"><Text type="primary">图标按钮</Text></Divider>
@@ -190,11 +194,11 @@ const ButtonPage = () => {
                             <Space dir="h" align="center">
                                 <Button type="primary" loading size="small">Sphinx</Button>
                                 <Button type="success" loading size="small" />
-                                <Button type="success" loading size="small" circle />
+                                <Button type="success" loading size="small" shape="circle" />
                             </Space>
                             <Space dir="h">
                                 <Button type="primary" loading>Loading</Button>
-                                <Button type="primary" loading={loading()} onClick={() => {
+                                <Button type="primary" loading={loading()} icon={<FeatherPlus/>} onClick={() => {
                                     setLoading(true);
                                     setTimeout(() => {
                                         setLoading(false);
@@ -210,10 +214,60 @@ const ButtonPage = () => {
                     </Card>
                 </div>
 
-                <div id="button_group">
+
+                <div id="button_block">
                     <Card bordered>
                         <Space dir="v">
-                            <ButtonGroup type="primary">
+                            <Space dir="h" align="center" style={{width: '400px'}}>
+                                <Button type="primary" block>block button</Button>
+                            </Space>
+                        </Space>
+                        <Divider align="left"><Text type="primary">块状</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            block
+                        </Paragraph>
+                        <DemoCode data={codes['button_loading']}/>
+                    </Card>
+                </div>
+
+                <div id="button_group">
+                    <Card bordered>
+                        <Space dir="v" align="baseline">
+                            <Space dir="h">
+                                <ButtonGroup theme="solid" type="primary">
+                                    <Button>拷贝</Button>
+                                    <Button>复制</Button>
+                                    <Button>粘贴</Button>
+                                </ButtonGroup>
+                            </Space>
+                            <Space dir="h">
+                                <ButtonGroup theme="light" type="secondary">
+                                    <Button>拷贝</Button>
+                                    <Button>复制</Button>
+                                    <Button>粘贴</Button>
+                                </ButtonGroup>
+                            </Space>
+                            <Space dir="h">
+                                <ButtonGroup theme="outline" type="tertiary">
+                                    <Button>拷贝</Button>
+                                    <Button>复制</Button>
+                                    <Button>粘贴</Button>
+                                </ButtonGroup>
+                            </Space>
+                            <Space dir="h">
+                                <ButtonGroup theme="light" type="default">
+                                    <Button>拷贝</Button>
+                                    <Button>复制</Button>
+                                    <Button>粘贴</Button>
+                                </ButtonGroup>
+                            </Space>
+
+                            <ButtonGroup type="primary" size="small">
+                                <Button>Copy</Button>
+                                <Button>Paste</Button>
+                                <Button>Search</Button>
+                            </ButtonGroup>
+                            <ButtonGroup type="primary" size="large">
                                 <Button>Copy</Button>
                                 <Button>Paste</Button>
                                 <Button>Search</Button>
@@ -224,19 +278,19 @@ const ButtonPage = () => {
                                 <Button>Search</Button>
                             </ButtonGroup>
                             <ButtonGroup type="default">
-                                <Button icon={<Icon name="home"/>} />
-                                <Button icon={<Icon name="user"/>} />
-                                <Button icon={<Icon name="search1"/>} />
+                                <Button icon={<F7AntFill />} />
+                                <Button icon={<F7Cat />} />
+                                <Button icon={<F7HifispeakerFill />} />
                             </ButtonGroup>
                             <ButtonGroup type="default" size="large">
-                                <Button icon={<Icon name="home"/>} />
-                                <Button icon={<Icon name="user"/>} />
-                                <Button icon={<Icon name="search1"/>} />
+                                <Button icon={<F7AntFill/>} />
+                                <Button icon={<F7Cat/>} />
+                                <Button icon={<F7HifispeakerFill />} />
                             </ButtonGroup>
                             <ButtonGroup type="default" disabled>
-                                <Button icon={<Icon name="home"/>} />
-                                <Button icon={<Icon name="user"/>} />
-                                <Button icon={<Icon name="search1"/>} />
+                                <Button icon={<F7AntFill/>} />
+                                <Button icon={<F7Cat />} />
+                                <Button icon={<F7HifispeakerFill />} />
                             </ButtonGroup>
                         </Space>
                         <Divider align="left"><Text type="primary">按钮组</Text></Divider>

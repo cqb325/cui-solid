@@ -2,12 +2,12 @@ import { HView, Space, View } from "@/components/Layout";
 import { Anchor } from "@/components/Anchor";
 import { Card } from "@/components/Card";
 import { BackTop } from "@/components/BackTop";
-import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Title } from "@/components/Typography/Title";
 import { Col, Row } from "@/components";
 import { createSignal } from "solid-js";
 import './style.less';
+import { FeatherChevronsUp } from "cui-solid-icons/feather";
 
 export default function () {
     const [currentAnchor, setCurrentAnchor] = createSignal<string>('');
@@ -128,7 +128,7 @@ export default function () {
                 </Space>
 
                 <BackTop>
-                    <Button icon={<Icon name="chevrons-up" size={20}/>} circle />
+                    <Button icon={<FeatherChevronsUp size={20}/>} shape="circle" />
                 </BackTop>
             </Space>
         </div>

@@ -1,26 +1,27 @@
 import { createSignal, For, onMount } from "solid-js";
 import { useClassList } from "../utils/useProps";
-import { Icon } from "../Icon";
 import { Loading } from "../inner/Loading";
 import usezIndex from "../utils/usezIndex";
+import { F7ExclamationmarkTriangleFill, F7CheckmarkAltCircleFill, F7XmarkCircleFill, F7InfoCircleFill } from "cui-solid-icons/f7";
+import { FeatherX } from "cui-solid-icons/feather";
 
 function getIcon (type: string) {
-    let icon = '';
+    let icon = null;
     switch (type) {
         case 'info': {
-            icon = 'info';
+            icon = <F7InfoCircleFill class="cm-message-icon" size={19}/>;
             break;
         }
         case 'success': {
-            icon = 'check-circle';
+            icon = <F7CheckmarkAltCircleFill class="cm-message-icon" size={19}/>;
             break;
         }
         case 'warning': {
-            icon = 'alert-circle';
+            icon = <F7ExclamationmarkTriangleFill class="cm-message-icon" size={19}/>;
             break;
         }
         case 'error': {
-            icon = 'x-circle';
+            icon = <F7XmarkCircleFill class="cm-message-icon" size={19}/>;
             break;
         }
     }
@@ -70,14 +71,14 @@ function Message (props: any) {
     return <div classList={classList()} style={style()} ref={wrap} onTransitionEnd={close}>
         <div class="cm-message-inner">
             {
-                data.loading ? <Loading /> : <Icon name={getIcon(data.type)} class="cm-message-icon" size={16}/>
+                data.loading ? <Loading /> : getIcon(data.type)
             }
             <div class="cm-message-content">
                 {data.content}
             </div>
             {
                 data.closeable ? <div class="cm-message-close">
-                    <Icon name="x" class="cm-message-close-icon" size={14} onClick={hide}/>
+                    <FeatherX class="cm-message-close-icon" size={14} onClick={hide}/>
                 </div> : null
             }
         </div>
@@ -85,11 +86,9 @@ function Message (props: any) {
 }
 
 export function Messages (props: any) {
-    return <div>
-        <For each={props.data}>
+    return <For each={props.data}>
             {(item: any) => {
                 return <Message data={item} onClose={props.onClose}/>
             }}
         </For>
-    </div>;
 }

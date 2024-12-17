@@ -30,7 +30,7 @@ export default function DrawerPage () {
                 </Title>
                 <Space id="drawer_base" dir="v">
                     <Card bordered>
-                        <Drawer visible={[visible, setVisible]} title="侧边栏">
+                        <Drawer visible={[visible, setVisible]} title="侧边栏" destroyOnClose>
                             content
                         </Drawer>
                         <Button type="primary" onClick={() => {

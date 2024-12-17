@@ -4,6 +4,7 @@ import { Cell } from "./Cell";
 
 import type { TableStore, ColumnProps } from '.';
 import { Colgroup } from "./Colgroup";
+import { useDebounce } from "../utils/useDebounce";
 
 type HeadProps = {
     data: TableStore,
@@ -27,7 +28,7 @@ export function Head (props: HeadProps) {
     //         }
     //     }
     // }
-    const onHeadEntry = (entry: ResizeObserverEntry) => {
+    const onHeadEntry = useDebounce((entry: ResizeObserverEntry) => {
         const el = entry.target;
         if (el.tagName === 'THEAD') {
             const rect = el.getBoundingClientRect();
@@ -46,7 +47,7 @@ export function Head (props: HeadProps) {
                 }
             })
         }
-    }
+    }, 100)
 
     // const ro = new ResizeObserver((entries) => {
     //     entries.forEach((entry) => onWrapEntry(entry));

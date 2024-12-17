@@ -13,5 +13,6 @@ export interface DrawerProps {
     onClose?(): void;
     onShow?(): void;
     visible?: Signal<any>;
+    destroyOnClose?: boolean;
 }
 export declare function Drawer(props: DrawerProps): import("solid-js").JSX.Element;

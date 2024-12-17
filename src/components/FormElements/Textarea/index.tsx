@@ -14,6 +14,7 @@ export interface TextareaProps {
     trigger?: 'input'|'blur'
     wordCount?: boolean
     maxLength?: number
+    asFormField?: boolean
     onChange?: (value: any) => void
     onInput?: (value: any, e: any) => void
     onKeyUp?: (value: any, e: any) => void

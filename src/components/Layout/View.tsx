@@ -2,7 +2,7 @@ import type { JSX} from "solid-js";
 import { splitProps } from "solid-js"
 import { useClassList, useStyle } from "../utils/useProps";
 
-type ViewProps = {
+export interface ViewProps {
     classList?: any,
     class?: any,
     children?: any,

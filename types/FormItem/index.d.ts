@@ -1,8 +1,9 @@
-export type FormItemContextProps = {
+export interface FormItemContextProps {
     name?: string;
-};
+    propagation?: boolean;
+}
 export declare const FormItemContext: import("solid-js").Context<FormItemContextProps | undefined>;
-type FormItemProps = {
+export interface FormItemProps {
     classList?: any;
     class?: string;
     inline?: boolean;
@@ -20,7 +21,6 @@ type FormItemProps = {
     };
     errorTransfer?: boolean;
     errorAlign?: 'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
-};
+}
 export declare function FormItem(props: FormItemProps): import("solid-js").JSX.Element;
 export declare const useFormItem: () => FormItemContextProps | undefined;
-export {};

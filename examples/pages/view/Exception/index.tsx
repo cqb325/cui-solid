@@ -11,6 +11,7 @@ import { propsColumns } from "../../common/columns";
 import { anchorData, codes, propsData } from "./config";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { Button } from "@/components";
 useDirective(hljs);
 
 export default function ExceptionPage () {
@@ -22,7 +23,7 @@ export default function ExceptionPage () {
                 </Title>
                 <Space id="exp_base" dir="v">
                     <Card bordered>
-                        <Exception type="403"/>
+                        <Exception type="403" action={<Button>返回首页</Button>}/>
                         <Divider align="left"><Text type="primary">403页面</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             403页面

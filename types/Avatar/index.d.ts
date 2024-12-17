@@ -1,14 +1,10 @@
 import type { JSX, JSXElement } from 'solid-js';
-export interface AvatarProps {
-    classList?: any;
-    class?: string;
+export interface AvatarProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "title"> {
     size?: number | 'small' | 'large';
-    icon?: any;
+    icon?: JSXElement;
     src?: string;
     shape?: string;
-    style?: any;
     onClick?: JSX.EventHandlerUnion<HTMLSpanElement, MouseEvent>;
-    children?: any;
     title?: string | number | JSXElement;
     asProps?: boolean;
     onMouseEnter?(e: any): void;

@@ -8,31 +8,31 @@
 .cm-modal-wrap {
     justify-content: center;
     align-items: center;
-    visibility: hidden;
-    z-index: -999;
-    pointer-events: none;
-    // transition: all 0.2s ease-in-out;
     position: fixed;
+    pointer-events: none;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    display: flex;
     outline: none;
+    display: none;
     &.cm-modal-visible {
-        visibility: visible;
         display: flex;
         z-index: 5000;
         .cm-draggable {
             pointer-events: all;
-            opacity: 1;
         }
     }
     .cm-draggable {
         position: absolute;
         pointer-events: none;
-        transition: opacity 0.2s ease-in-out;
         opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+    &.cm-modal-open {
+        .cm-draggable {
+            opacity: 1;
+        }
     }
     &.cm-modal-fullscreen {
         .cm-draggable {
@@ -59,10 +59,12 @@
     transition: all 0.2s ease-in-out;
     background: rgba(0,0,0,.2);
     opacity: 0;
+    pointer-events: none;
     &.cm-modal-mask-visible {
         visibility: visible;
         display: block;
         opacity: 1;
+        pointer-events: all;
     }
 }
 
@@ -91,19 +93,19 @@
     .cm-modal-left {
         width: 40px;
     }
-    .cm-icon-info {
+    .cm-modal-icon-info {
         color: var(--cui-primary-color);
     }
-    .cm-icon-check-circle{
-        color: var(--cui-success-color);
+    .cm-modal-icon-success{
+        color: var(--cui-color-success);
     }
-    .cm-icon-alert-circle{
-        color: var(--cui-warning-color);
+    .cm-modal-icon-warning{
+        color: var(--cui-color-warning);
     }
-    .cm-icon-x-circle{
-        color: var(--cui-error-color);
+    .cm-modal-icon-error{
+        color: var(--cui-color-error);
     }
-    .cm-icon-help-circle{
+    .cm-modal-icon-confirm{
         color: var(--cui-primary-color);
     }
     .cm-modal-right {
@@ -124,9 +126,13 @@
     transform: translate(0, -50%);
     font-size: 16px;
     cursor: pointer;
-    svg {
-        width: 16px;
-        height: 16px;
+    display: inline-flex;
+    border-radius: 2px;
+    transition: all 0.2s;
+    padding: 2px;
+
+    &:hover {
+        background: var(--cui-color-fill-1);
     }
 }
 .cm-modal-footer{
@@ -144,4 +150,8 @@
 }
 .cm-modal-footer-end {
     justify-content: flex-end;
+}
+
+.cm-modal-footer-reverse {
+    flex-direction: row-reverse;
 }

@@ -1,5 +1,4 @@
 import { Menu, MenuItem, SubMenu, MenuGroup } from "@/components/Menu"
-import { Icon } from "@/components/Icon"
 import { Space } from "@/components/Layout"
 import { Button } from "@/components/Button"
 import { createSignal } from "solid-js"
@@ -14,6 +13,8 @@ import { CompAnchor } from "../../common/CompAnchor"
 import { eventsColumns, propsColumns } from "../../common/columns"
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { FeatherList, FeatherTool } from "cui-solid-icons/feather"
+import { F7PersonFill, F7Person2Fill, F7Gear } from "cui-solid-icons/f7"
 useDirective(hljs);
 
 export default function MenuPage () {
@@ -28,7 +29,7 @@ export default function MenuPage () {
                 <Space id="menu_base" dir="v">
                     <Card bordered>
                         <Menu dir="h">
-                            <SubMenu name="1" icon={<Icon name="users"/>} title="角色管理">
+                            <SubMenu name="1" icon={<F7Person2Fill />} title="角色管理">
                                 <SubMenu name="11" title="添加" align="rightTop">
                                     <MenuItem name="111">添加超管</MenuItem>
                                     <MenuItem name="112">添加职员</MenuItem>
@@ -36,10 +37,10 @@ export default function MenuPage () {
                                 <MenuItem name="12">修改</MenuItem>
                                 <MenuItem name="13">删除</MenuItem>
                             </SubMenu>
-                            <MenuItem name="2" icon={<Icon name="user"/>}>用户管理</MenuItem>
-                            <MenuItem name="31" icon={<Icon name="list"/>}>菜单管理</MenuItem>
-                            <MenuItem name="33" icon={<Icon name="tool"/>}>权限管理</MenuItem>
-                            <SubMenu name="32" title="字典管理" icon={<Icon name="cog"/>}>
+                            <MenuItem name="2" icon={<F7PersonFill />}>用户管理</MenuItem>
+                            <MenuItem name="31" icon={<FeatherList />}>菜单管理</MenuItem>
+                            <MenuItem name="33" icon={<FeatherTool />}>权限管理</MenuItem>
+                            <SubMenu name="32" title="字典管理" icon={<F7Gear />}>
                                 <MenuGroup name="321" title="系统字典">
                                     <MenuItem name="3211">添加</MenuItem>
                                     <MenuItem name="3212">修改</MenuItem>
@@ -67,13 +68,13 @@ export default function MenuPage () {
                     <Card bordered>
                         <div style={{width: '220px', 'border-right': '1px solid var(--cui-color-border)'}}>
                             <Menu dir="v" activeName={[activeName, setActiveName]}>
-                                <SubMenu name="1" icon={<Icon name="users"/>} title="角色管理">
+                                <SubMenu name="1" icon={<F7Person2Fill />} title="角色管理">
                                     <MenuItem name="11">添加</MenuItem>
                                     <MenuItem name="12">修改</MenuItem>
                                     <MenuItem name="13">删除</MenuItem>
                                 </SubMenu>
-                                <MenuItem name="2" icon={<Icon name="user"/>}>用户管理</MenuItem>
-                                <SubMenu name="3" icon={<Icon name="cog"/>} title="系统管理">
+                                <MenuItem name="2" icon={<F7PersonFill/>}>用户管理</MenuItem>
+                                <SubMenu name="3" icon={<F7Gear />} title="系统管理">
                                     <MenuItem name="31">菜单管理</MenuItem>
                                     <SubMenu name="32" title="字典管理">
                                         <MenuGroup name="321" title="系统字典">
@@ -109,13 +110,13 @@ export default function MenuPage () {
                     <Card bordered>
                         <div style={{width: '220px', 'border-right': '1px solid var(--cui-color-border)'}}>
                             <Menu dir="v" accordion>
-                                <SubMenu name="1" icon={<Icon name="users"/>} title="角色管理">
+                                <SubMenu name="1" icon={<F7Person2Fill/>} title="角色管理">
                                     <MenuItem name="11">添加</MenuItem>
                                     <MenuItem name="12">修改</MenuItem>
                                     <MenuItem name="13">删除</MenuItem>
                                 </SubMenu>
-                                <MenuItem name="2" icon={<Icon name="user"/>}>用户管理</MenuItem>
-                                <SubMenu name="3" icon={<Icon name="cog"/>} title="系统管理">
+                                <MenuItem name="2" icon={<F7PersonFill/>}>用户管理</MenuItem>
+                                <SubMenu name="3" icon={<F7Gear/>} title="系统管理">
                                     <MenuItem name="31">菜单管理</MenuItem>
                                     <SubMenu name="32" title="字典管理">
                                         <MenuGroup name="321" title="系统字典">
@@ -146,7 +147,7 @@ export default function MenuPage () {
                     <Card bordered>
                         <Space dir="v">
                             <Menu dir="h" theme="dark">
-                                <SubMenu name="1" icon={<Icon name="users"/>} title="角色管理">
+                                <SubMenu name="1" icon={<F7Person2Fill/>} title="角色管理">
                                     <SubMenu name="11" title="添加" align="rightTop">
                                         <MenuItem name="111">添加超管</MenuItem>
                                         <MenuItem name="112">添加职员</MenuItem>
@@ -154,10 +155,10 @@ export default function MenuPage () {
                                     <MenuItem name="12">修改</MenuItem>
                                     <MenuItem name="13">删除</MenuItem>
                                 </SubMenu>
-                                <MenuItem name="2" icon={<Icon name="user"/>}>用户管理</MenuItem>
-                                <MenuItem name="31" icon={<Icon name="list"/>}>菜单管理</MenuItem>
-                                <MenuItem name="33" icon={<Icon name="tool"/>}>权限管理</MenuItem>
-                                <SubMenu name="32" title="字典管理" icon={<Icon name="cog"/>}>
+                                <MenuItem name="2" icon={<F7PersonFill/>}>用户管理</MenuItem>
+                                <MenuItem name="31" icon={<FeatherList/>}>菜单管理</MenuItem>
+                                <MenuItem name="33" icon={<FeatherTool />}>权限管理</MenuItem>
+                                <SubMenu name="32" title="字典管理" icon={<F7Gear/>}>
                                     <MenuGroup name="321" title="系统字典">
                                         <MenuItem name="3211">添加</MenuItem>
                                         <MenuItem name="3212">修改</MenuItem>
@@ -173,13 +174,13 @@ export default function MenuPage () {
 
                             <div style={{width: '220px', 'border-right': '1px solid #ccc'}}>
                                 <Menu dir="v" theme="dark">
-                                    <SubMenu name="1" icon={<Icon name="users"/>} title="角色管理">
+                                    <SubMenu name="1" icon={<F7Person2Fill/>} title="角色管理">
                                         <MenuItem name="11">添加</MenuItem>
                                         <MenuItem name="12">修改</MenuItem>
                                         <MenuItem name="13">删除</MenuItem>
                                     </SubMenu>
-                                    <MenuItem name="2" icon={<Icon name="user"/>}>用户管理</MenuItem>
-                                    <SubMenu name="3" icon={<Icon name="cog"/>} title="系统管理">
+                                    <MenuItem name="2" icon={<F7PersonFill/>}>用户管理</MenuItem>
+                                    <SubMenu name="3" icon={<F7Gear/>} title="系统管理">
                                         <MenuItem name="31">菜单管理</MenuItem>
                                         <SubMenu name="32" title="字典管理">
                                             <MenuGroup name="321" title="系统字典">
@@ -211,15 +212,15 @@ export default function MenuPage () {
                     <Card bordered>
                         <div style={{width: min() ? '80px' : '280px', 'transition': 'all 0.25s ease-in-out', 'border-right': '1px solid var(--cui-color-border)'}}>
                             <Menu dir="v" accordion min={min()}>
-                                <SubMenu name="1" icon={<Icon name="users"/>} title="角色管理">
+                                <SubMenu name="1" icon={<F7Person2Fill/>} title="角色管理">
                                     <MenuItem name="11">添加</MenuItem>
                                     <MenuItem name="12">修改</MenuItem>
                                     <MenuItem name="13">删除</MenuItem>
                                 </SubMenu>
-                                <MenuItem name="2" icon={<Icon name="user"/>}>用户管理</MenuItem>
-                                <MenuItem name="31" icon={<Icon name="list"/>}>菜单管理</MenuItem>
-                                <MenuItem name="33" icon={<Icon name="tool"/>}>权限管理</MenuItem>
-                                <SubMenu name="32" title="字典管理" icon={<Icon name="cog"/>}>
+                                <MenuItem name="2" icon={<F7PersonFill/>}>用户管理</MenuItem>
+                                <MenuItem name="31" icon={<FeatherList/>}>菜单管理</MenuItem>
+                                <MenuItem name="33" icon={<FeatherTool/>}>权限管理</MenuItem>
+                                <SubMenu name="32" title="字典管理" icon={<F7Gear/>}>
                                     <MenuGroup name="321" title="系统字典">
                                         <MenuItem name="3211">添加</MenuItem>
                                         <MenuItem name="3212">修改</MenuItem>

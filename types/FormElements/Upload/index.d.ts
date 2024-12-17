@@ -1,4 +1,4 @@
-type UploadProps = {
+export interface UploadProps {
     multiple?: boolean;
     webkitdirectory?: boolean;
     accept?: string;
@@ -26,9 +26,10 @@ type UploadProps = {
     defaultFileList?: any[];
     type?: 'select' | 'drag';
     paste?: boolean;
+    asFormField?: boolean;
     getFileUrl?: (res: any, file: any) => void;
     ref?: any;
     listType?: 'picture';
-};
+    customRequest?: (option: any) => void;
+}
 export declare function Upload(props: UploadProps): import("solid-js").JSX.Element;
-export {};

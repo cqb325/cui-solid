@@ -1,6 +1,8 @@
+import type { JSXElement } from 'solid-js';
+import type { TagGroupProps } from '../../TagGroup';
 export * from './Option';
 export * from './OptionGroup';
-type SelectOptions = {
+export interface SelectOptions {
     name?: string;
     value?: any;
     disabled?: boolean;
@@ -17,10 +19,18 @@ type SelectOptions = {
     classList?: any;
     filter?: boolean;
     renderOption?: (data: any) => any;
+    renderSelectedItem?: (data: any) => JSXElement;
     ref?: any;
+    emptyText?: string;
     emptyOption?: any;
     onChange?: (value: any, option?: any) => void;
-    showMax?: number;
+    showMax?: TagGroupProps['max'];
+    max?: number;
+    status?: 'warning' | 'error';
+    footer?: JSXElement;
+    header?: JSXElement;
+    triggerRender?: (text: string | JSXElement | any[]) => JSXElement;
+    onExceed?: () => void;
     valueClosable?: boolean;
     transfer?: boolean;
     align?: 'bottomLeft' | 'bottomRight';
@@ -30,6 +40,7 @@ type SelectOptions = {
     remoteMethod?: (queryStr: any) => void;
     maxHeight?: number;
     debounceTime?: number;
+    asFormField?: boolean;
     defaultLabel?: string | string[];
-};
+}
 export declare function Select(props: SelectOptions): import("solid-js").JSX.Element;

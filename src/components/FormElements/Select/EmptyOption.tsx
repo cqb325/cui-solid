@@ -1,4 +1,4 @@
-type SelectOptions = {
+export interface SelectEmptyOptionProps {
     data: any,
     checked?: boolean,
     disabled?: boolean,
@@ -7,7 +7,7 @@ type SelectOptions = {
     visible?: boolean,
 }
 
-export function EmptyOption (props: SelectOptions) {
+export function EmptyOption (props: SelectEmptyOptionProps) {
     const classList = () => ({
         'cm-select-option': true,
         'cm-select-option-active': props.checked,

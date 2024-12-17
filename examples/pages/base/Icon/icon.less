@@ -6,8 +6,57 @@
         display: inline-flex;
         flex-direction: row;
         align-items: center;
+
         .cm-text {
             padding-left: 10px;
+        }
+    }
+}
+
+.icon-search-wrap {
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    background-color: #fff;
+}
+
+.icon-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.icon-item {
+    width: 150px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e7ede7;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all .2s;
+    gap: 5px;
+
+    .icon-name {
+        font-size: 10px;
+    }
+
+    &:hover {
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.02), 0 1px 4px rgba(0, 0, 0, 0.03);
+
+        .cui-icon-two,
+        .cui-icon-outline,
+        .cui-icon-filled {
+            transition: all .3s;
+            color: #1890ff;
+        }
+
+        .cui-icon-two {
+            --cui-icon-twotone-primary: #1890ff !important;
         }
     }
 }

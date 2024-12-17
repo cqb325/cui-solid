@@ -1,9 +1,9 @@
 import type { JSXElement, Signal} from "solid-js";
-import { Show, createComputed } from "solid-js";
-import { Icon } from "../Icon";
+import { Show, createComputed, createSignal } from "solid-js";
 import { useClassList } from "../utils/useProps";
 import createModel from "../utils/createModel";
 import { useTransition } from "../utils/useTransition";
+import { FeatherX } from "cui-solid-icons/feather";
 
 export interface DrawerProps {
     classList?: any
@@ -19,10 +19,12 @@ export interface DrawerProps {
     onClose?(): void
     onShow?(): void
     visible?: Signal<any>
+    destroyOnClose?: boolean
 }
 
 export function Drawer (props: DrawerProps) {
     const [visible, setVisible] = createModel(props, 'visible', false);
+    const [destroyed, setDestroyed] = createSignal(props.destroyOnClose && !visible());
     const align = () => props.align ?? 'right';
     const maskCloseable = props.maskCloseable ?? true;
     const size = () => (props.size ?? 256) + 'px';
@@ -32,6 +34,7 @@ export function Drawer (props: DrawerProps) {
     });
     let box: any;
     let target: any;
+    let originBodyOverflow: string;
 
     const transition = useTransition({
         el: ()=> box,
@@ -40,6 +43,12 @@ export function Drawer (props: DrawerProps) {
         activeClass: 'cm-drawer-open',
         onLeave: () => {
             props.onClose && props.onClose();
+            document.body.style.overflow = originBodyOverflow;
+            setDestroyed(true);
+        },
+        onEnter: () => {
+            originBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
         }
     })
 
@@ -56,6 +65,7 @@ export function Drawer (props: DrawerProps) {
     createComputed(() => {
         const v = visible();
         if (v) {
+            setDestroyed(false);
             transition.enter();
             props.onShow && props.onShow();
         } else {
@@ -78,10 +88,10 @@ export function Drawer (props: DrawerProps) {
                 </div>
             </Show>
             <Show when={props.hasClose ?? true}>
-                <Icon name="x" size={18} class="cm-drawer-close" onClick={onClose}/>
+                <FeatherX class="cm-drawer-close" onClick={onClose}/>
             </Show>
             <div class="cm-drawer-body">
-                {props.children}
+                {destroyed() ? null : props.children}
             </div>
         </div>
     </div>

@@ -1,10 +1,10 @@
 import type { Signal } from 'solid-js';
-import { Show } from 'solid-js';
-import { Icon } from '../Icon';
+import { onMount, Show } from 'solid-js';
 import { useClassList } from '../utils/useProps';
 import createModel from '../utils/createModel';
+import { FeatherX } from 'cui-solid-icons/feather';
 
-type TagProps = {
+export interface TagProps {
     classList?: any,
     class?: string,
     theme?: 'primary'|'danger'|'warning'|'success'|'info'|'magenta'|'red'|'volcano'|'orange'|'gold'|'yellow'|'lime'|'green'|'cyan'|'blue'|'geekblue'|'purple',
@@ -18,6 +18,7 @@ type TagProps = {
     children?: any,
     closable?: boolean,
     border?: boolean,
+    ref?: any
     visible?: boolean | Signal<boolean>
 }
 
@@ -31,6 +32,7 @@ export function Tag (props: TagProps) {
         [`cm-tag-${props.size}`]: props.size,
         'cm-tag-has-avatar': props.avatar
     });
+    let el: any;
 
     const [visible, setVisible] = createModel(props, 'visible', true);
 
@@ -52,14 +54,20 @@ export function Tag (props: TagProps) {
         }
     }
 
+    onMount(() => {
+        props.ref?.({
+            el
+        });
+    })
+
     return <Show when={visible()} fallback={null}>
-        <div classList={classList()} style={props.style}>
+        <div classList={classList()} ref={el} style={props.style}>
             {props.avatar}
             <div class="cm-tag-content">
                 <div class="cm-tag-text">{props.children}</div>
                 {
                     props.closable
-                        ? <Icon name="x" class="cm-tag-close" size={12} onClick={_onClose}/>
+                        ? <FeatherX class="cm-tag-close" size={12} onClick={_onClose}/>
                         : null
                 }
             </div>

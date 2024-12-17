@@ -1,10 +1,10 @@
 import { createSignal } from "solid-js";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
 import { Space } from "@/components/Layout";
 import { Tooltip } from "@/components/Tooltip";
 import useCopy from "@/components/utils/useCopy";
 import { message } from "@/components/Message";
+import { FeatherCode, FeatherCopy } from "cui-solid-icons/feather";
 
 export function DemoCode (props: any) {
     const [open, setOpen] = createSignal(false);
@@ -25,17 +25,17 @@ export function DemoCode (props: any) {
     return <Space dir="v" class="cm-demo-code">
         <Space dir="h" justify="end" size={20}>
             <Tooltip content="拷贝" align="top">
-                <Icon name="copy" size={16} onClick={onCopy}/>
+                <FeatherCopy size={16} onClick={onCopy}/>
             </Tooltip>
             <Tooltip content={open() ? '收起代码' : '显示代码'} align="top">
-                <Icon name="code" size={16} onClick={() => setOpen(!open())}/>
+                <FeatherCode size={16} onClick={() => setOpen(!open())}/>
             </Tooltip>
         </Space>
         <Space classList={classList()} dir="v" justify="center">
             <pre>
                 <code class="language-js">{props.data}</code>
             </pre>
-            <Button type="dashed" onClick={() => setOpen(false)}>收 起 代 码</Button>
+            <Button theme="dashed" onClick={() => setOpen(false)}>收 起 代 码</Button>
         </Space>
     </Space>
 }

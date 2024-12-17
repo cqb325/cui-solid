@@ -6,7 +6,7 @@ import { List } from "./List";
 import { PictureList } from "./PictureList";
 import { ImagePreview } from "../../ImagePreview";
 
-type UploadProps = {
+export interface UploadProps {
     multiple?: boolean,
     webkitdirectory?: boolean,
     accept?: string,
@@ -34,9 +34,11 @@ type UploadProps = {
     defaultFileList?: any[],
     type?: 'select'|'drag',
     paste?: boolean,
+    asFormField?: boolean
     getFileUrl?: (res: any, file: any) => void,
     ref?: any,
     listType?: 'picture'
+    customRequest?: (option: any) => void
 }
 
 export function Upload (props: UploadProps) {
@@ -124,23 +126,38 @@ export function Upload (props: UploadProps) {
             }
         }
         handleStart(file);
-        ajax({
-            headers: props.headers,
-            withCredentials: props.withCredentials,
-            file: file,
-            data: props.data,
-            filename: name,
-            action: props.action,
-            onProgress: (e: any) => {
-                handleProgress(e, file);
-            },
-            onSuccess: (res: any) => {
-                handleSuccess(res, file);
-            },
-            onError: (err: any, response: any) => {
-                handleError(err, response, file);
-            }
-        });
+        if (props.customRequest) {
+            props.customRequest({
+                file: file,
+                onProgress: (e: any) => {
+                    handleProgress(e, file);
+                },
+                onSuccess: (res: any) => {
+                    handleSuccess(res, file);
+                },
+                onError: (err: any, response: any) => {
+                    handleError(err, response, file);
+                }
+            });
+        } else {
+            ajax({
+                headers: props.headers,
+                withCredentials: props.withCredentials,
+                file: file,
+                data: props.data,
+                filename: name,
+                action: props.action,
+                onProgress: (e: any) => {
+                    handleProgress(e, file);
+                },
+                onSuccess: (res: any) => {
+                    handleSuccess(res, file);
+                },
+                onError: (err: any, response: any) => {
+                    handleError(err, response, file);
+                }
+            });
+        }
     }
 
     const handleStart = (file: any) => {

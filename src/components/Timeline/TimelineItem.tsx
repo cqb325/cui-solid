@@ -2,7 +2,7 @@ import type { JSXElement} from "solid-js";
 import { Show } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
-type TimelineItemProps = {
+export interface TimelineItemProps {
     children?: any,
     classList?: any,
     class?: string,

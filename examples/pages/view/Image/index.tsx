@@ -6,7 +6,6 @@ import { Button } from "@/components/Button";
 import type { Accessor} from "solid-js";
 import { For, createSignal } from "solid-js";
 import { Spin } from "@/components/Spin";
-import { Icon } from "@/components/Icon";
 
 import './style.less'
 import { Title } from "@/components/Typography/Title";
@@ -32,6 +31,7 @@ import { anchorData, codes, eventsData, previewData, previewEventsData, propsDat
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
+import { FeatherImage } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 export default function ImagePage () {
@@ -124,7 +124,7 @@ export default function ImagePage () {
                                     <div>默认</div>
                                 </Col>
                                 <Col grid={0.5}>
-                                    <Image width={200} height={100} fit="cover" src={src2()} failInfo={<Icon name="image"/>}/>
+                                    <Image width={200} height={100} fit="cover" src={src2()} failInfo={<FeatherImage />}/>
                                     <div>自定义</div>
                                 </Col>
                             </Row>

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { Show, createSignal, onCleanup, onMount } from "solid-js";
 import { useClassList } from "../utils/useProps";
 
-interface CountDownProps {
+export interface CountDownProps {
     classList?: any,
     class?: string,
     style?: any,

@@ -12,6 +12,7 @@ export interface VirtualListProps {
     onScroll?: (scrollTop: number) => void;
     itemComponent: CustomComponentProps;
     ref?: any;
+    displayDelay?: number;
 }
 export interface MeasuredData {
     size: number;

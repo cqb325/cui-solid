@@ -9,7 +9,7 @@ export * from "./MenuGroup";
 
 const MenuContext = createContext();
 
-type MenuProps = {
+export interface MenuProps {
     classList?: any,
     class?: string,
     style?: any,

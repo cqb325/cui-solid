@@ -1,6 +1,5 @@
 import { Input } from "@/components/FormElements/Input";
 import { Space } from "@/components/Layout";
-import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { createSignal } from "solid-js";
 import { Title } from "@/components/Typography/Title";
@@ -14,8 +13,9 @@ import { anchorData, codes, eventsData, propsData } from "./config";
 import { CompAnchor } from "../../common/CompAnchor";
 import { hljs, useDirective } from "../../common/hljs";
 import { DemoCode } from "../../common/code";
-import { Datepicker, Option, Select, Spinner, Textarea, Tooltip } from "@/components";
+import { Datepicker, Option, Search, Select, Spinner } from "@/components";
 import { InputGroup } from "@/components/FormElements/InputGroup";
+import { FeatherSearch, FeatherCopy, FeatherUser } from "cui-solid-icons/feather";
 useDirective(hljs);
 
 function InputDemo () {
@@ -36,9 +36,22 @@ function InputDemo () {
                 <Space id="input_base" dir="v">
                     <Card bordered>
                         <Input />
+                        <Search />
                         <Divider align="left"><Text type="primary">基础用法</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             Input的基础用法
+                        </Paragraph>
+                        <DemoCode data={codes['input_base']}/>
+                    </Card>
+                </Space>
+
+                <Space dir="v">
+                    <Card bordered>
+                        <Input type="password" />
+                        <Input type="password" password/>
+                        <Divider align="left"><Text type="primary">密码</Text></Divider>
+                        <Paragraph type="secondary" spacing="extended">
+                            密码
                         </Paragraph>
                         <DemoCode data={codes['input_base']}/>
                     </Card>
@@ -58,6 +71,7 @@ function InputDemo () {
                 <Space id="input_disabled" dir="v">
                     <Card bordered>
                         <Input disabled value="disabled"/>
+                        <Input readOnly value="disabled"/>
                         <Divider align="left"><Text type="primary">禁用</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             使用 disabled 可以禁用 Input
@@ -121,9 +135,9 @@ function InputDemo () {
 
                 <Space id="input_append" dir="v">
                     <Card bordered>
-                        <Input prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
-                        <Input size="small" prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
-                        <Input size="large" prepend={<Icon name="user"/>} append={<Icon name="search1"/>}/>
+                        <Input prepend={<FeatherUser />} append={<FeatherSearch />}/>
+                        <Input size="small" prepend={<FeatherUser />} append={<FeatherSearch />}/>
+                        <Input size="large" prepend={<FeatherUser />} append={<FeatherSearch />}/>
                         <Divider align="left"><Text type="primary">追加</Text></Divider>
                         <Paragraph type="secondary" spacing="extended">
                             使用<Text code>prepend</Text> 可添加前追加， 使用<Text code>append</Text>属性可添加后追加
@@ -212,7 +226,7 @@ function InputDemo () {
                             <InputGroup compact>
                                 <Datepicker style={{"width": "120px"}}/>
                                 <Input style={{"width": "150px"}}/>
-                                <Button icon={<Icon name="copy"/>} />
+                                <Button icon={<FeatherCopy color="#999"/>} />
                             </InputGroup>
                         </Space>
                         <Divider align="left"><Text type="primary">输入框组合</Text></Divider>

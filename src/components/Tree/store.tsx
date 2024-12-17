@@ -1,5 +1,5 @@
-import type { Accessor, Setter} from "solid-js";
-import { createEffect, createSignal, type JSXElement } from "solid-js";
+import type { Accessor, Setter, JSXElement} from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import type { TreeProps } from ".";
 import createModel from "../utils/createModel";
@@ -50,6 +50,7 @@ export class TreeStore {
     setSelectedKey: Setter<NodeKeyType>;
     setSelected: Setter<NodeKeyType>;
     setValue: Setter<NodeKeyType[]>;
+    value: Accessor<NodeKeyType[]>;
     checkable: boolean;
     draggable: boolean;
     checkRelation: string;
@@ -77,6 +78,7 @@ export class TreeStore {
         this.setSelectedKey = setSelectedKey;
         this.setSelected = setSelected;
         this.setValue = setValue;
+        this.value = value;
 
         // 外部修改selected值进行同步
         createEffect(() => {
@@ -98,6 +100,13 @@ export class TreeStore {
         this.setStore('nodeList', []);
         this.buildRelation(this.data, null, 0);
         this.setRootFlatNodes();
+        if (this.checkable) {
+            const val = this.value();
+            this.setCheckedByMod(val);
+        } else {
+            const nodeId = this.selectedKey();
+            this.selectNode(nodeId, true);
+        }
     }
 
     /**
@@ -176,7 +185,7 @@ export class TreeStore {
     selectNode = (nodeId: NodeKeyType | TreeNode, silence?: boolean) => {
         const node = this._getNode(nodeId);
 
-        if (node && this.selectedKey() !== node[this.keyField]) {
+        if (node) {
             this.setStore('nodeMap', this.selectedKey(), produce((node: TreeNode) => {
                 node._selected = false;
             }));

@@ -22,6 +22,18 @@
         min-width: 100%;
         max-width: 100%;
     }
+
+    &.cm-select-status-error {
+        .cm-field-value {
+            border-color: var(--cui-theme-color-error);
+        }
+    }
+
+    &.cm-select-status-warning {
+        .cm-field-value {
+            border-color: var(--cui-theme-color-warning);
+        }
+    }
 }
 
 .cm-select-filter {
@@ -173,6 +185,14 @@
     flex-direction: column;
     overflow: auto;
     max-height: 250px;
+
+    .cm-exception-empty .cm-image-img {
+        width: 100%;
+    }
+    .cm-text-large {
+        font-size: 12px;
+        color: var(--cui-color-text-2);
+    }
 }
 
 .cm-select-option-list {

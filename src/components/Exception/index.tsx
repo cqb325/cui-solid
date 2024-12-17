@@ -1,33 +1,38 @@
+import type { JSX} from "solid-js";
 import { Match, Show, Switch } from "solid-js";
 import { Image } from "../Image";
 import { typeImages } from "./typeImages";
 import { useClassList } from "../utils/useProps"
 import { Text } from "../Typography/Text";
-import { Button } from "../Button";
+import NO_DATA from './NoData.svg';
 
-type ExceptionProps = {
+export interface ExceptionProps {
     classList?: any,
     class?: string,
     type?: '404'|'403'|'500'|'empty'|'fail'|'deny',
     typeImage?: any,
     desc?: string,
+    width?: number,
+    height?: number,
     showDesc?: boolean,
     link?: string,
-    showAction?: boolean,
+    action?: JSX.Element,
 }
+
+export const NO_DATA_IMAGE = NO_DATA;
+
 export function Exception (props: ExceptionProps) {
     const classList = () => useClassList(props, 'cm-exception', {
         [`cm-exception-${props.type}`]: !!props.type
     });
     const showDesc = props.showDesc ?? true;
-    const showAction = props.showAction ?? true;
 
     return <div classList={classList()}>
         <div class="cm-exception-img">
             <Show when={props.typeImage} fallback={
-                <Image src={typeImages(props.type)} />
+                <Image src={typeImages(props.type)} width={props.width} height={props.height}/>
             }>
-                <Image src={props.typeImage} />
+                <Image src={props.typeImage} width={props.width} height={props.height}/>
             </Show>
         </div>
         <div class="cm-exception-info">
@@ -58,9 +63,9 @@ export function Exception (props: ExceptionProps) {
                     </Switch>
                 </div>
             </Show>
-            <Show when={showAction}>
+            <Show when={props.action}>
                 <div class="cm-exception-action">
-                    <Button link={props.link} type="primary">返回首页</Button>
+                    {props.action}
                 </div>
             </Show>
         </div>

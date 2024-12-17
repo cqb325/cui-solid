@@ -94,6 +94,18 @@ export default function MessagePage () {
                                     closeable: true,
                                     duration: 0
                                 })
+                                message.warning({
+                                    content: '可关闭message',
+                                    background: true,
+                                    closeable: true,
+                                    duration: 0
+                                })
+                                message.error({
+                                    content: '可关闭message',
+                                    background: true,
+                                    closeable: true,
+                                    duration: 0
+                                })
                             }}>可关闭</Button>
                         </Space>
                         <Divider align="left"><Text type="primary">可关闭</Text></Divider>
